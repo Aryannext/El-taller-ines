@@ -82,15 +82,18 @@ Todas las pantallas usan el mismo conjunto de datos, tomado de los ejemplos de l
 | Orden | Cliente | Situación | Debe |
 | --- | --- | --- | --- |
 | #0030 | Carmen Díaz | Lista desde el sábado 1 de agosto: 46 días sin reclamar, 2 camisas | $16.000 |
+| #0039 | María Gómez | Entregada el 25 de agosto | Pagada |
 | #0040 | Marta Rincón | Entregada | $12.000 |
 | #0041 | Marta Rincón | Cancelada | No suma |
-| #0042 | Marta Rincón | En proceso: pantalón y camisa terminados, otra camisa pendiente. Valor $31.000, abono $10.000. Tuvo un aviso descartado | $21.000 |
+| #0042 | Marta Rincón | Recibida el lunes 7 de septiembre. En proceso: pantalón y camisa terminados, otra camisa pendiente. Valor $31.000, abono $10.000. Tuvo un aviso descartado | $21.000 |
 | #0044 | Luis Pardo | En proceso, entrega el sábado 12 de septiembre: 4 días de atraso. Abono de $5.000 | $18.000 |
-| #0045 | Sandra Ruiz | En proceso, entrega el martes 15 de septiembre: 1 día de atraso | Pagada |
+| #0045 | Sandra Ruiz | En proceso, entrega el martes 15 de septiembre: 1 día de atraso. Tiene un pago anulado y se pagó hoy | Pagada |
 | #0046 | Ana Beltrán | Lista hoy; su aviso espera envío asistido | $9.000 |
 | #0047 | Rosa Vargas | Se registra en PT-06 | $33.000 |
 
-**Total por cobrar en el panel:** $76.000, de las órdenes #0030, #0040, #0042, #0044 y #0046. La #0047 aparece solo en el flujo de registro.
+**Total por cobrar en el panel:** $76.000, de las órdenes #0030, #0040, #0042, #0044 y #0046. **Recibido en septiembre:** $54.000 en 5 pagos. La #0047 aparece solo en el flujo de registro.
+
+Estos datos están también en la base de datos de ejemplo ([datos-de-ejemplo.sql](../modelo-de-datos/datos-de-ejemplo.sql)), y `scripts/verificar_modelo.py` comprueba que las consultas den estas mismas cifras.
 
 ## Qué no son
 
