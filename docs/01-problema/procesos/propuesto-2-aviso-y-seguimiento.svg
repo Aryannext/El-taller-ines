@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 572" width="2000" height="572" font-family="'Source Sans 3', 'Segoe UI', Arial, sans-serif" role="img" aria-label="Taller de costura · con El-taller-ines · Aviso y seguimiento">
+<title>Taller de costura · con El-taller-ines · Aviso y seguimiento</title>
+<defs><marker id="flecha-propuesto-2-aviso-y-seguimiento" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6f685d" /></marker></defs>
+<rect x="0" y="0" width="2000" height="572" fill="#fffdf8" />
+<rect x="10" y="10" width="1980" height="552" fill="#fffdf8" stroke="#23211d" stroke-width="1.5" />
+<rect x="10" y="10" width="30" height="552" fill="#23211d" />
+<text x="29.0" y="286.0" font-size="12" font-weight="600" fill="#fffdf8" text-anchor="middle" transform="rotate(-90 29.0 286.0)">Taller de costura · con El-taller-ines</text>
+<rect x="40" y="10" width="1950" height="184" fill="none" stroke="#23211d" stroke-width="1" />
+<rect x="40" y="10" width="30" height="184" fill="#efe9dd" stroke="#23211d" stroke-width="1" />
+<text x="59.0" y="102.0" font-size="11.5" font-weight="600" fill="#23211d" text-anchor="middle" transform="rotate(-90 59.0 102.0)">Cliente del taller</text>
+<rect x="40" y="194" width="1950" height="184" fill="none" stroke="#23211d" stroke-width="1" />
+<rect x="40" y="194" width="30" height="184" fill="#efe9dd" stroke="#23211d" stroke-width="1" />
+<text x="59.0" y="286.0" font-size="11.5" font-weight="600" fill="#23211d" text-anchor="middle" transform="rotate(-90 59.0 286.0)">Dueña del taller</text>
+<rect x="40" y="378" width="1950" height="184" fill="none" stroke="#23211d" stroke-width="1" />
+<rect x="40" y="378" width="30" height="184" fill="#efe9dd" stroke="#23211d" stroke-width="1" />
+<text x="59.0" y="470.0" font-size="11.5" font-weight="600" fill="#23211d" text-anchor="middle" transform="rotate(-90 59.0 470.0)">El-taller-ines</text>
+<polyline points="168.0,470.0 245.0,470.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-2-aviso-y-seguimiento)" />
+<polyline points="375.0,470.0 445.0,470.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-2-aviso-y-seguimiento)" />
+<polyline points="495.0,470.0 765.0,470.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-2-aviso-y-seguimiento)" />
+<text x="503.0" y="464.0" font-size="11" font-weight="600" fill="#5d5850" text-anchor="start">Sí</text>
+<polyline points="470.0,445.0 470.0,286.0 565.0,286.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-2-aviso-y-seguimiento)" />
+<text x="477.0" y="437.0" font-size="11" font-weight="600" fill="#5d5850" text-anchor="start">No</text>
+<polyline points="695.0,286.0 790.0,286.0 790.0,445.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-2-aviso-y-seguimiento)" />
+<polyline points="815.0,470.0 873.5,470.0 873.5,102.0 932.0,102.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-2-aviso-y-seguimiento)" />
+<polyline points="968.0,102.0 1085.0,102.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-2-aviso-y-seguimiento)" />
+<polyline points="1135.0,102.0 1725.0,102.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-2-aviso-y-seguimiento)" />
+<text x="1143.0" y="96.0" font-size="11" font-weight="600" fill="#5d5850" text-anchor="start">Sí</text>
+<polyline points="1110.0,127.0 1110.0,470.0 1205.0,470.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-2-aviso-y-seguimiento)" />
+<text x="1117.0" y="145.0" font-size="11" font-weight="600" fill="#5d5850" text-anchor="start">No</text>
+<polyline points="1335.0,470.0 1350.0,470.0 1350.0,286.0 1365.0,286.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-2-aviso-y-seguimiento)" />
+<polyline points="1495.0,286.0 1565.0,286.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-2-aviso-y-seguimiento)" />
+<polyline points="1590.0,261.0 1590.0,208.0 1750.0,208.0 1750.0,127.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-2-aviso-y-seguimiento)" />
+<text x="1597.0" y="253.0" font-size="11" font-weight="600" fill="#5d5850" text-anchor="start">Sí</text>
+<polyline points="1615.0,286.0 1685.0,286.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-2-aviso-y-seguimiento)" />
+<text x="1623.0" y="280.0" font-size="11" font-weight="600" fill="#5d5850" text-anchor="start">No</text>
+<polyline points="1815.0,286.0 1892.0,286.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-2-aviso-y-seguimiento)" />
+<polyline points="1775.0,102.0 1892.0,102.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-2-aviso-y-seguimiento)" />
+<circle cx="150.0" cy="470.0" r="18.0" fill="#fffdf8" stroke="#23211d" stroke-width="1.5" />
+<text x="150.0" y="503.0" font-size="11.5" font-weight="400" fill="#23211d" text-anchor="middle">La orden queda lista</text>
+<text x="150.0" y="516.0" font-size="11.5" font-weight="400" fill="#23211d" text-anchor="middle">para entregar</text>
+<rect x="245.0" y="422.0" width="130" height="96" rx="10" fill="#edf0e2" stroke="#4b6130" stroke-width="1.8" />
+<rect x="252.0" y="430.0" width="15" height="10" fill="#23211d" /><path d="M252.0 430.0 l7.5 5.5 l7.5 -5.5" stroke="#fffdf8" stroke-width="1.2" fill="none" />
+<text x="310.0" y="457.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">Enviar el aviso</text>
+<text x="310.0" y="470.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">automático por</text>
+<text x="310.0" y="483.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">WhatsApp</text>
+<text x="310.0" y="496.0" font-size="10.5" font-weight="700" fill="#4b6130" text-anchor="middle">HU-28 · RN-37 · RN-40</text>
+<path d="M470.0 445.0 L495.0 470.0 L470.0 495.0 L445.0 470.0 z" fill="#fffdf8" stroke="#23211d" stroke-width="1.5" />
+<path d="M462.0 462.0 L478.0 478.0 M478.0 462.0 L462.0 478.0" stroke="#23211d" stroke-width="3" />
+<text x="470.0" y="510.0" font-size="11.5" font-weight="600" fill="#23211d" text-anchor="middle">¿WhatsApp aceptó el</text>
+<text x="470.0" y="523.0" font-size="11.5" font-weight="600" fill="#23211d" text-anchor="middle">mensaje?</text>
+<rect x="565.0" y="238.0" width="130" height="96" rx="10" fill="#edf0e2" stroke="#4b6130" stroke-width="1.8" />
+<circle cx="579.0" cy="248.5" r="3.2" stroke="#23211d" stroke-width="1.3" fill="none" /><path d="M573.0 258.0 q0 -6 6 -6 q6 0 6 6 z" stroke="#23211d" stroke-width="1.3" fill="none" />
+<text x="630.0" y="273.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">Enviar el aviso</text>
+<text x="630.0" y="286.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">asistido con un</text>
+<text x="630.0" y="299.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">toque</text>
+<text x="630.0" y="312.0" font-size="10.5" font-weight="700" fill="#4b6130" text-anchor="middle">HU-29</text>
+<path d="M790.0 445.0 L815.0 470.0 L790.0 495.0 L765.0 470.0 z" fill="#fffdf8" stroke="#23211d" stroke-width="1.5" />
+<path d="M782.0 462.0 L798.0 478.0 M798.0 462.0 L782.0 478.0" stroke="#23211d" stroke-width="3" />
+<circle cx="950.0" cy="102.0" r="18.0" fill="#fffdf8" stroke="#23211d" stroke-width="1.5" />
+<circle cx="950.0" cy="102.0" r="14.5" fill="none" stroke="#23211d" stroke-width="1.2" />
+<rect x="943.0" y="97.0" width="14" height="10" fill="none" stroke="#23211d" stroke-width="1.2" /><path d="M943.0 97.0 l7 5 l7 -5" stroke="#23211d" stroke-width="1.2" fill="none" />
+<text x="950.0" y="135.0" font-size="11.5" font-weight="400" fill="#23211d" text-anchor="middle">Recibe el aviso</text>
+<path d="M1110.0 77.0 L1135.0 102.0 L1110.0 127.0 L1085.0 102.0 z" fill="#fffdf8" stroke="#23211d" stroke-width="1.5" />
+<path d="M1102.0 94.0 L1118.0 110.0 M1118.0 94.0 L1102.0 110.0" stroke="#23211d" stroke-width="3" />
+<text x="1110.0" y="56.0" font-size="11.5" font-weight="600" fill="#23211d" text-anchor="middle">¿Viene en la fecha</text>
+<text x="1110.0" y="69.0" font-size="11.5" font-weight="600" fill="#23211d" text-anchor="middle">acordada?</text>
+<rect x="1205.0" y="422.0" width="130" height="96" rx="10" fill="#edf0e2" stroke="#4b6130" stroke-width="1.8" />
+<line x1="1223.2" y1="435.0" x2="1225.6" y2="435.0" stroke="#23211d" stroke-width="1.3" fill="none" /><line x1="1219.0" y1="439.2" x2="1219.0" y2="441.6" stroke="#23211d" stroke-width="1.3" fill="none" /><line x1="1214.8" y1="435.0" x2="1212.4" y2="435.0" stroke="#23211d" stroke-width="1.3" fill="none" /><line x1="1219.0" y1="430.8" x2="1219.0" y2="428.4" stroke="#23211d" stroke-width="1.3" fill="none" /><line x1="1222.0" y1="438.0" x2="1223.7" y2="439.7" stroke="#23211d" stroke-width="1.3" fill="none" /><line x1="1216.0" y1="438.0" x2="1214.3" y2="439.7" stroke="#23211d" stroke-width="1.3" fill="none" /><line x1="1222.0" y1="432.0" x2="1223.7" y2="430.3" stroke="#23211d" stroke-width="1.3" fill="none" /><line x1="1216.0" y1="432.0" x2="1214.3" y2="430.3" stroke="#23211d" stroke-width="1.3" fill="none" /><circle cx="1219.0" cy="435.0" r="4.2" stroke="#23211d" stroke-width="1.3" fill="none" /><circle cx="1219.0" cy="435.0" r="1.6" stroke="#23211d" stroke-width="1.3" fill="none" />
+<text x="1270.0" y="457.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">Mostrar la orden en</text>
+<text x="1270.0" y="470.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">el panel con sus</text>
+<text x="1270.0" y="483.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">días de espera</text>
+<text x="1270.0" y="496.0" font-size="10.5" font-weight="700" fill="#4b6130" text-anchor="middle">HU-32 · HU-34 · RN-35</text>
+<text x="1270.0" y="509.0" font-size="10.5" font-weight="700" fill="#4b6130" text-anchor="middle">RN-36</text>
+<rect x="1365.0" y="238.0" width="130" height="96" rx="10" fill="#f4f0e7" stroke="#8f877a" stroke-width="1.3" />
+<path d="M1373.0 252.0 h8 M1375.0 249.0 h8 M1376.0 255.0 h7 M1373.0 252.0 v5 h9 q3 0 3 -3 v-5 q0 -3 -3 -3 h-6" stroke="#23211d" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+<text x="1430.0" y="277.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">Escribirle por</text>
+<text x="1430.0" y="290.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">WhatsApp para</text>
+<text x="1430.0" y="303.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">acordar otro día</text>
+<path d="M1590.0 261.0 L1615.0 286.0 L1590.0 311.0 L1565.0 286.0 z" fill="#fffdf8" stroke="#23211d" stroke-width="1.5" />
+<path d="M1582.0 278.0 L1598.0 294.0 M1598.0 278.0 L1582.0 294.0" stroke="#23211d" stroke-width="3" />
+<text x="1590.0" y="326.0" font-size="11.5" font-weight="600" fill="#23211d" text-anchor="middle">¿El cliente viene?</text>
+<rect x="1685.0" y="238.0" width="130" height="96" rx="10" fill="#f4f0e7" stroke="#8f877a" stroke-width="1.3" />
+<path d="M1693.0 252.0 h8 M1695.0 249.0 h8 M1696.0 255.0 h7 M1693.0 252.0 v5 h9 q3 0 3 -3 v-5 q0 -3 -3 -3 h-6" stroke="#23211d" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+<text x="1750.0" y="277.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">Decidir qué hacer</text>
+<text x="1750.0" y="290.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">con las prendas,</text>
+<text x="1750.0" y="303.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">fuera del sistema</text>
+<circle cx="1910.0" cy="286.0" r="18.0" fill="#fffdf8" stroke="#23211d" stroke-width="3.5" />
+<text x="1910.0" y="319.0" font-size="11.5" font-weight="400" fill="#23211d" text-anchor="middle">Orden sin reclamar,</text>
+<text x="1910.0" y="332.0" font-size="11.5" font-weight="400" fill="#23211d" text-anchor="middle">contada en el panel</text>
+<path d="M1750.0 77.0 L1775.0 102.0 L1750.0 127.0 L1725.0 102.0 z" fill="#fffdf8" stroke="#23211d" stroke-width="1.5" />
+<path d="M1742.0 94.0 L1758.0 110.0 M1758.0 94.0 L1742.0 110.0" stroke="#23211d" stroke-width="3" />
+<circle cx="1910.0" cy="102.0" r="18.0" fill="#fffdf8" stroke="#23211d" stroke-width="3.5" />
+<text x="1910.0" y="135.0" font-size="11.5" font-weight="400" fill="#23211d" text-anchor="middle">Sigue en entrega y</text>
+<text x="1910.0" y="148.0" font-size="11.5" font-weight="400" fill="#23211d" text-anchor="middle">cobro</text>
+</svg>

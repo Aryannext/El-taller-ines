@@ -64,3 +64,7 @@ Hechos registrados de F-05:
 | 13 sep 2026 | Al elegir «Otro» como tipo de prenda, la usuaria debe poder escribir cuál es | Reglas de negocio · RN-43 · RF-16 |
 | 13 sep 2026 | La prueba de usabilidad se hace con compañeros de formación | Requisitos no funcionales · RNF-12 |
 | 13 sep 2026 | La copia de respaldo fuera del servidor se guarda en Google Drive | Requisitos no funcionales · RNF-15 |
+| 14 sep 2026 | Al recibir las prendas se acuerdan el precio y la fecha de entrega | Proceso actual · fase 1 |
+| 14 sep 2026 | El cliente vuelve en la fecha acordada. Si no viene, la dueña le escribe por WhatsApp y acuerdan otro día, o el cliente avisa que pasará después a medirse las prendas | Proceso actual · fase 2 · C-03 |
+| 14 sep 2026 | La forma de pago varía: unos clientes abonan al dejar la ropa, otros pagan al recoger y otros quedan debiendo | Proceso actual · fases 1 y 3 |
+| 14 sep 2026 | La dueña se queda con las prendas que nadie reclama, para venderlas, usarlas ella o aprovecharlas como tela de repuesto | Proceso actual · fase 2 · E-04 |

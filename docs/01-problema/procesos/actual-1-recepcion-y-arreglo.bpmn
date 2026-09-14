@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definiciones_actual_1_recepcion_y_arreglo" targetNamespace="https://github.com/Aryannext/El-taller-ines" exporter="scripts/generar_procesos.py" exporterVersion="1.0">
+  <bpmn:collaboration id="Colaboracion">
+    <bpmn:participant id="Participante" name="Taller de costura · hoy · Recepción y arreglo" processRef="Proceso" />
+  </bpmn:collaboration>
+  <bpmn:process id="Proceso" name="Recepción y arreglo" isExecutable="false">
+    <bpmn:laneSet id="Carriles">
+      <bpmn:lane id="Carril_cliente" name="Cliente del taller">
+        <bpmn:flowNodeRef>llega</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>explica</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Carril_duena" name="Dueña del taller">
+        <bpmn:flowNodeRef>acuerda</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>abona</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>abono</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>une_abono</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>guarda</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>arregla</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>fin</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="llega" name="Llega con prendas para arreglar">
+      <bpmn:outgoing>Flujo_0</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:manualTask id="explica" name="Entregar las prendas y explicar cada arreglo">
+      <bpmn:incoming>Flujo_0</bpmn:incoming>
+      <bpmn:outgoing>Flujo_1</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:manualTask id="acuerda" name="Acordar precio y fecha de entrega, sin anotarlos&#10;C-01 · C-01.1">
+      <bpmn:documentation>C-01 · C-01.1</bpmn:documentation>
+      <bpmn:incoming>Flujo_1</bpmn:incoming>
+      <bpmn:outgoing>Flujo_2</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:exclusiveGateway id="abona" name="¿Abona al dejar la ropa?">
+      <bpmn:incoming>Flujo_2</bpmn:incoming>
+      <bpmn:outgoing>Flujo_3</bpmn:outgoing>
+      <bpmn:outgoing>Flujo_4</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:manualTask id="abono" name="Recibir el abono y recordarlo&#10;C-04">
+      <bpmn:documentation>C-04</bpmn:documentation>
+      <bpmn:incoming>Flujo_3</bpmn:incoming>
+      <bpmn:outgoing>Flujo_5</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:exclusiveGateway id="une_abono">
+      <bpmn:incoming>Flujo_4</bpmn:incoming>
+      <bpmn:incoming>Flujo_5</bpmn:incoming>
+      <bpmn:outgoing>Flujo_6</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:manualTask id="guarda" name="Guardar las prendas en el rincón, junto con las demás&#10;C-06">
+      <bpmn:documentation>C-06</bpmn:documentation>
+      <bpmn:incoming>Flujo_6</bpmn:incoming>
+      <bpmn:outgoing>Flujo_7</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:manualTask id="arregla" name="Arreglar las prendas sin registrar el avance&#10;C-02">
+      <bpmn:documentation>C-02</bpmn:documentation>
+      <bpmn:incoming>Flujo_7</bpmn:incoming>
+      <bpmn:outgoing>Flujo_8</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:endEvent id="fin" name="Sigue en aviso y seguimiento">
+      <bpmn:incoming>Flujo_8</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flujo_0" sourceRef="llega" targetRef="explica" />
+    <bpmn:sequenceFlow id="Flujo_1" sourceRef="explica" targetRef="acuerda" />
+    <bpmn:sequenceFlow id="Flujo_2" sourceRef="acuerda" targetRef="abona" />
+    <bpmn:sequenceFlow id="Flujo_3" name="Sí" sourceRef="abona" targetRef="abono" />
+    <bpmn:sequenceFlow id="Flujo_4" name="No" sourceRef="abona" targetRef="une_abono" />
+    <bpmn:sequenceFlow id="Flujo_5" sourceRef="abono" targetRef="une_abono" />
+    <bpmn:sequenceFlow id="Flujo_6" sourceRef="une_abono" targetRef="guarda" />
+    <bpmn:sequenceFlow id="Flujo_7" sourceRef="guarda" targetRef="arregla" />
+    <bpmn:sequenceFlow id="Flujo_8" sourceRef="arregla" targetRef="fin" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagrama">
+    <bpmndi:BPMNPlane id="Plano" bpmnElement="Colaboracion">
+      <bpmndi:BPMNShape id="Participante_di" bpmnElement="Participante" isHorizontal="true">
+        <dc:Bounds x="10" y="10" width="1500" height="368" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Carril_cliente_di" bpmnElement="Carril_cliente" isHorizontal="true">
+        <dc:Bounds x="40" y="10" width="1470" height="184" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Carril_duena_di" bpmnElement="Carril_duena" isHorizontal="true">
+        <dc:Bounds x="40" y="194" width="1470" height="184" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="llega_di" bpmnElement="llega">
+        <dc:Bounds x="132" y="84" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="explica_di" bpmnElement="explica">
+        <dc:Bounds x="245" y="54" width="130" height="96" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="acuerda_di" bpmnElement="acuerda">
+        <dc:Bounds x="405" y="238" width="130" height="96" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="abona_di" bpmnElement="abona" isMarkerVisible="true">
+        <dc:Bounds x="605" y="261" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="abono_di" bpmnElement="abono">
+        <dc:Bounds x="725" y="238" width="130" height="96" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="une_abono_di" bpmnElement="une_abono" isMarkerVisible="true">
+        <dc:Bounds x="925" y="261" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="guarda_di" bpmnElement="guarda">
+        <dc:Bounds x="1045" y="238" width="130" height="96" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="arregla_di" bpmnElement="arregla">
+        <dc:Bounds x="1205" y="238" width="130" height="96" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="fin_di" bpmnElement="fin">
+        <dc:Bounds x="1412" y="268" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flujo_0_di" bpmnElement="Flujo_0">
+        <di:waypoint x="168" y="102" />
+        <di:waypoint x="245" y="102" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flujo_1_di" bpmnElement="Flujo_1">
+        <di:waypoint x="375" y="102" />
+        <di:waypoint x="390" y="102" />
+        <di:waypoint x="390" y="286" />
+        <di:waypoint x="405" y="286" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flujo_2_di" bpmnElement="Flujo_2">
+        <di:waypoint x="535" y="286" />
+        <di:waypoint x="605" y="286" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flujo_3_di" bpmnElement="Flujo_3">
+        <di:waypoint x="655" y="286" />
+        <di:waypoint x="725" y="286" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="663" y="268" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flujo_4_di" bpmnElement="Flujo_4">
+        <di:waypoint x="630" y="311" />
+        <di:waypoint x="630" y="341" />
+        <di:waypoint x="950" y="341" />
+        <di:waypoint x="950" y="311" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="637" y="317" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flujo_5_di" bpmnElement="Flujo_5">
+        <di:waypoint x="855" y="286" />
+        <di:waypoint x="925" y="286" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flujo_6_di" bpmnElement="Flujo_6">
+        <di:waypoint x="975" y="286" />
+        <di:waypoint x="1045" y="286" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flujo_7_di" bpmnElement="Flujo_7">
+        <di:waypoint x="1175" y="286" />
+        <di:waypoint x="1205" y="286" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flujo_8_di" bpmnElement="Flujo_8">
+        <di:waypoint x="1335" y="286" />
+        <di:waypoint x="1412" y="286" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

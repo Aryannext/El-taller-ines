@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1520 524" width="1520" height="524" font-family="'Source Sans 3', 'Segoe UI', Arial, sans-serif" role="img" aria-label="Taller de costura · hoy · Entrega y cobro">
+<title>Taller de costura · hoy · Entrega y cobro</title>
+<defs><marker id="flecha-actual-3-entrega-y-cobro" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6f685d" /></marker></defs>
+<rect x="0" y="0" width="1520" height="524" fill="#fffdf8" />
+<rect x="10" y="10" width="1500" height="504" fill="#fffdf8" stroke="#23211d" stroke-width="1.5" />
+<rect x="10" y="10" width="30" height="504" fill="#23211d" />
+<text x="29.0" y="262.0" font-size="12" font-weight="600" fill="#fffdf8" text-anchor="middle" transform="rotate(-90 29.0 262.0)">Taller de costura · hoy</text>
+<rect x="40" y="10" width="1470" height="184" fill="none" stroke="#23211d" stroke-width="1" />
+<rect x="40" y="10" width="30" height="184" fill="#efe9dd" stroke="#23211d" stroke-width="1" />
+<text x="59.0" y="102.0" font-size="11.5" font-weight="600" fill="#23211d" text-anchor="middle" transform="rotate(-90 59.0 102.0)">Cliente del taller</text>
+<rect x="40" y="194" width="1470" height="320" fill="none" stroke="#23211d" stroke-width="1" />
+<rect x="40" y="194" width="30" height="320" fill="#efe9dd" stroke="#23211d" stroke-width="1" />
+<text x="59.0" y="354.0" font-size="11.5" font-weight="600" fill="#23211d" text-anchor="middle" transform="rotate(-90 59.0 354.0)">Dueña del taller</text>
+<polyline points="168.0,102.0 206.5,102.0 206.5,286.0 245.0,286.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-actual-3-entrega-y-cobro)" />
+<polyline points="375.0,286.0 390.0,286.0 390.0,102.0 405.0,102.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-actual-3-entrega-y-cobro)" />
+<polyline points="535.0,102.0 605.0,102.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-actual-3-entrega-y-cobro)" />
+<polyline points="630.0,127.0 630.0,238.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-actual-3-entrega-y-cobro)" />
+<text x="637.0" y="145.0" font-size="11" font-weight="600" fill="#5d5850" text-anchor="start">Sí</text>
+<polyline points="565.0,286.0 470.0,286.0 470.0,150.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-actual-3-entrega-y-cobro)" />
+<polyline points="655.0,102.0 770.0,102.0 770.0,286.0 885.0,286.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-actual-3-entrega-y-cobro)" />
+<text x="663.0" y="96.0" font-size="11" font-weight="600" fill="#5d5850" text-anchor="start">No</text>
+<polyline points="1015.0,286.0 1085.0,286.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-actual-3-entrega-y-cobro)" />
+<polyline points="1135.0,286.0 1412.0,286.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-actual-3-entrega-y-cobro)" />
+<text x="1143.0" y="280.0" font-size="11" font-weight="600" fill="#5d5850" text-anchor="start">Sí</text>
+<polyline points="1110.0,311.0 1110.0,422.0 1205.0,422.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-actual-3-entrega-y-cobro)" />
+<text x="1117.0" y="329.0" font-size="11" font-weight="600" fill="#5d5850" text-anchor="start">No</text>
+<polyline points="1335.0,422.0 1412.0,422.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-actual-3-entrega-y-cobro)" />
+<circle cx="150.0" cy="102.0" r="18.0" fill="#fffdf8" stroke="#23211d" stroke-width="1.5" />
+<text x="150.0" y="135.0" font-size="11.5" font-weight="400" fill="#23211d" text-anchor="middle">Llega a recoger sus</text>
+<text x="150.0" y="148.0" font-size="11.5" font-weight="400" fill="#23211d" text-anchor="middle">prendas</text>
+<rect x="245.0" y="238.0" width="130" height="96" rx="10" fill="#f8e9e4" stroke="#9c3d2e" stroke-width="1.8" />
+<path d="M253.0 252.0 h8 M255.0 249.0 h8 M256.0 255.0 h7 M253.0 252.0 v5 h9 q3 0 3 -3 v-5 q0 -3 -3 -3 h-6" stroke="#23211d" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+<text x="310.0" y="273.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">Buscar sus prendas</text>
+<text x="310.0" y="286.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">en el rincón, sin</text>
+<text x="310.0" y="299.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">saber con certeza</text>
+<text x="310.0" y="312.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">cuáles son</text>
+<text x="310.0" y="325.0" font-size="10.5" font-weight="700" fill="#9c3d2e" text-anchor="middle">C-06.1 · E-06</text>
+<rect x="405.0" y="54.0" width="130" height="96" rx="10" fill="#f4f0e7" stroke="#8f877a" stroke-width="1.3" />
+<path d="M413.0 68.0 h8 M415.0 65.0 h8 M416.0 71.0 h7 M413.0 68.0 v5 h9 q3 0 3 -3 v-5 q0 -3 -3 -3 h-6" stroke="#23211d" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+<text x="470.0" y="106.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">Medirse las prendas</text>
+<path d="M630.0 77.0 L655.0 102.0 L630.0 127.0 L605.0 102.0 z" fill="#fffdf8" stroke="#23211d" stroke-width="1.5" />
+<path d="M622.0 94.0 L638.0 110.0 M638.0 94.0 L622.0 110.0" stroke="#23211d" stroke-width="3" />
+<text x="630.0" y="56.0" font-size="11.5" font-weight="600" fill="#23211d" text-anchor="middle">¿Le falta algo al</text>
+<text x="630.0" y="69.0" font-size="11.5" font-weight="600" fill="#23211d" text-anchor="middle">arreglo?</text>
+<rect x="565.0" y="238.0" width="130" height="96" rx="10" fill="#f4f0e7" stroke="#8f877a" stroke-width="1.3" />
+<path d="M573.0 252.0 h8 M575.0 249.0 h8 M576.0 255.0 h7 M573.0 252.0 v5 h9 q3 0 3 -3 v-5 q0 -3 -3 -3 h-6" stroke="#23211d" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+<text x="630.0" y="290.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">Terminar el retoque</text>
+<rect x="885.0" y="238.0" width="130" height="96" rx="10" fill="#f8e9e4" stroke="#9c3d2e" stroke-width="1.8" />
+<path d="M893.0 252.0 h8 M895.0 249.0 h8 M896.0 255.0 h7 M893.0 252.0 v5 h9 q3 0 3 -3 v-5 q0 -3 -3 -3 h-6" stroke="#23211d" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+<text x="950.0" y="273.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">Cobrar lo que</text>
+<text x="950.0" y="286.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">recuerda que se</text>
+<text x="950.0" y="299.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">debe</text>
+<text x="950.0" y="312.0" font-size="10.5" font-weight="700" fill="#9c3d2e" text-anchor="middle">C-04 · E-02</text>
+<path d="M1110.0 261.0 L1135.0 286.0 L1110.0 311.0 L1085.0 286.0 z" fill="#fffdf8" stroke="#23211d" stroke-width="1.5" />
+<path d="M1102.0 278.0 L1118.0 294.0 M1118.0 278.0 L1102.0 294.0" stroke="#23211d" stroke-width="3" />
+<text x="1110.0" y="253.0" font-size="11.5" font-weight="600" fill="#23211d" text-anchor="middle">¿Paga todo?</text>
+<circle cx="1430.0" cy="286.0" r="18.0" fill="#fffdf8" stroke="#23211d" stroke-width="3.5" />
+<text x="1430.0" y="319.0" font-size="11.5" font-weight="400" fill="#23211d" text-anchor="middle">Entregada y pagada</text>
+<rect x="1205.0" y="374.0" width="130" height="96" rx="10" fill="#f8e9e4" stroke="#9c3d2e" stroke-width="1.8" />
+<path d="M1213.0 388.0 h8 M1215.0 385.0 h8 M1216.0 391.0 h7 M1213.0 388.0 v5 h9 q3 0 3 -3 v-5 q0 -3 -3 -3 h-6" stroke="#23211d" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+<text x="1270.0" y="413.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">Entregar y recordar</text>
+<text x="1270.0" y="426.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">la deuda de memoria</text>
+<text x="1270.0" y="439.0" font-size="10.5" font-weight="700" fill="#9c3d2e" text-anchor="middle">C-04 · E-03</text>
+<circle cx="1430.0" cy="422.0" r="18.0" fill="#fffdf8" stroke="#23211d" stroke-width="3.5" />
+<text x="1430.0" y="455.0" font-size="11.5" font-weight="400" fill="#23211d" text-anchor="middle">Entregada con una</text>
+<text x="1430.0" y="468.0" font-size="11.5" font-weight="400" fill="#23211d" text-anchor="middle">deuda sin registrar</text>
+</svg>

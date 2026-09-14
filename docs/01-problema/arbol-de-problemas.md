@@ -24,7 +24,7 @@ Este árbol es el origen de todo lo demás. Cada causa se convierte en un objeti
 | C-01.2 | No existe un lugar donde consultar qué prendas hay, de quién son, qué arreglo llevan y cuánto deben | F-01 · Necesidad del negocio |
 | **C-02** | No se lleva el estado de avance de cada prenda ni de cada orden | F-01 · Objetivos específicos |
 | C-02.1 | Una orden puede darse por lista con prendas sin terminar | F-02 · hallazgo de la versión 1 |
-| **C-03** | La comunicación con el cliente sobre el estado de su prenda es informal y no avisa cuando está lista | F-01 · Contexto y necesidad |
+| **C-03** | La comunicación con el cliente sobre el estado de su prenda es informal y no avisa cuando está lista | F-01 · Contexto y necesidad · F-05 |
 | **C-04** | Lo que debe cada cliente se lleva de memoria: no hay registro de pagos ni abonos | F-01 · Contexto · F-05 |
 | C-04.1 | Un saldo llevado a mano, sumando y restando, se descuadra | F-02 · hallazgo de la versión 1 |
 | **C-05** | No hay seguimiento de las órdenes vencidas ni de las prendas sin reclamar: no se sabe cuántas hay | F-01 · Objetivos específicos · F-05 |

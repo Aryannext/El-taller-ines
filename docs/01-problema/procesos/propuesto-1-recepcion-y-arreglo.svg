@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2160 572" width="2160" height="572" font-family="'Source Sans 3', 'Segoe UI', Arial, sans-serif" role="img" aria-label="Taller de costura · con El-taller-ines · Recepción y arreglo">
+<title>Taller de costura · con El-taller-ines · Recepción y arreglo</title>
+<defs><marker id="flecha-propuesto-1-recepcion-y-arreglo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6f685d" /></marker></defs>
+<rect x="0" y="0" width="2160" height="572" fill="#fffdf8" />
+<rect x="10" y="10" width="2140" height="552" fill="#fffdf8" stroke="#23211d" stroke-width="1.5" />
+<rect x="10" y="10" width="30" height="552" fill="#23211d" />
+<text x="29.0" y="286.0" font-size="12" font-weight="600" fill="#fffdf8" text-anchor="middle" transform="rotate(-90 29.0 286.0)">Taller de costura · con El-taller-ines</text>
+<rect x="40" y="10" width="2110" height="184" fill="none" stroke="#23211d" stroke-width="1" />
+<rect x="40" y="10" width="30" height="184" fill="#efe9dd" stroke="#23211d" stroke-width="1" />
+<text x="59.0" y="102.0" font-size="11.5" font-weight="600" fill="#23211d" text-anchor="middle" transform="rotate(-90 59.0 102.0)">Cliente del taller</text>
+<rect x="40" y="194" width="2110" height="184" fill="none" stroke="#23211d" stroke-width="1" />
+<rect x="40" y="194" width="30" height="184" fill="#efe9dd" stroke="#23211d" stroke-width="1" />
+<text x="59.0" y="286.0" font-size="11.5" font-weight="600" fill="#23211d" text-anchor="middle" transform="rotate(-90 59.0 286.0)">Dueña del taller</text>
+<rect x="40" y="378" width="2110" height="184" fill="none" stroke="#23211d" stroke-width="1" />
+<rect x="40" y="378" width="30" height="184" fill="#efe9dd" stroke="#23211d" stroke-width="1" />
+<text x="59.0" y="470.0" font-size="11.5" font-weight="600" fill="#23211d" text-anchor="middle" transform="rotate(-90 59.0 470.0)">El-taller-ines</text>
+<polyline points="168.0,102.0 245.0,102.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-1-recepcion-y-arreglo)" />
+<polyline points="375.0,102.0 390.0,102.0 390.0,286.0 405.0,286.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-1-recepcion-y-arreglo)" />
+<polyline points="535.0,286.0 565.0,286.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-1-recepcion-y-arreglo)" />
+<polyline points="695.0,286.0 765.0,286.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-1-recepcion-y-arreglo)" />
+<polyline points="815.0,286.0 885.0,286.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-1-recepcion-y-arreglo)" />
+<text x="823.0" y="280.0" font-size="11" font-weight="600" fill="#5d5850" text-anchor="start">Sí</text>
+<polyline points="790.0,311.0 790.0,341.0 1110.0,341.0 1110.0,311.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-1-recepcion-y-arreglo)" />
+<text x="797.0" y="329.0" font-size="11" font-weight="600" fill="#5d5850" text-anchor="start">No</text>
+<polyline points="1015.0,286.0 1085.0,286.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-1-recepcion-y-arreglo)" />
+<polyline points="1135.0,286.0 1170.0,286.0 1170.0,470.0 1205.0,470.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-1-recepcion-y-arreglo)" />
+<polyline points="1335.0,470.0 1350.0,470.0 1350.0,286.0 1365.0,286.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-1-recepcion-y-arreglo)" />
+<polyline points="1495.0,286.0 1525.0,286.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-1-recepcion-y-arreglo)" />
+<polyline points="1655.0,286.0 1670.0,286.0 1670.0,470.0 1685.0,470.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-1-recepcion-y-arreglo)" />
+<polyline points="1815.0,470.0 1885.0,470.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-1-recepcion-y-arreglo)" />
+<polyline points="1935.0,470.0 2052.0,470.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-1-recepcion-y-arreglo)" />
+<text x="1943.0" y="464.0" font-size="11" font-weight="600" fill="#5d5850" text-anchor="start">Sí</text>
+<polyline points="1910.0,495.0 1910.0,525.0 1590.0,525.0 1590.0,334.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-1-recepcion-y-arreglo)" />
+<text x="1917.0" y="513.0" font-size="11" font-weight="600" fill="#5d5850" text-anchor="start">No</text>
+<circle cx="150.0" cy="102.0" r="18.0" fill="#fffdf8" stroke="#23211d" stroke-width="1.5" />
+<text x="150.0" y="135.0" font-size="11.5" font-weight="400" fill="#23211d" text-anchor="middle">Llega con prendas para</text>
+<text x="150.0" y="148.0" font-size="11.5" font-weight="400" fill="#23211d" text-anchor="middle">arreglar</text>
+<rect x="245.0" y="54.0" width="130" height="96" rx="10" fill="#f4f0e7" stroke="#8f877a" stroke-width="1.3" />
+<path d="M253.0 68.0 h8 M255.0 65.0 h8 M256.0 71.0 h7 M253.0 68.0 v5 h9 q3 0 3 -3 v-5 q0 -3 -3 -3 h-6" stroke="#23211d" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+<text x="310.0" y="93.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">Entregar las</text>
+<text x="310.0" y="106.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">prendas y explicar</text>
+<text x="310.0" y="119.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">cada arreglo</text>
+<rect x="405.0" y="238.0" width="130" height="96" rx="10" fill="#edf0e2" stroke="#4b6130" stroke-width="1.8" />
+<circle cx="419.0" cy="248.5" r="3.2" stroke="#23211d" stroke-width="1.3" fill="none" /><path d="M413.0 258.0 q0 -6 6 -6 q6 0 6 6 z" stroke="#23211d" stroke-width="1.3" fill="none" />
+<text x="470.0" y="277.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">Buscar al cliente o</text>
+<text x="470.0" y="290.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">registrarlo</text>
+<text x="470.0" y="303.0" font-size="10.5" font-weight="700" fill="#4b6130" text-anchor="middle">HU-04 · HU-03 · HU-10</text>
+<rect x="565.0" y="238.0" width="130" height="96" rx="10" fill="#edf0e2" stroke="#4b6130" stroke-width="1.8" />
+<circle cx="579.0" cy="248.5" r="3.2" stroke="#23211d" stroke-width="1.3" fill="none" /><path d="M573.0 258.0 q0 -6 6 -6 q6 0 6 6 z" stroke="#23211d" stroke-width="1.3" fill="none" />
+<text x="630.0" y="273.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">Registrar la orden:</text>
+<text x="630.0" y="286.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">tipo, arreglo,</text>
+<text x="630.0" y="299.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">precio, fecha y</text>
+<text x="630.0" y="312.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">fotos</text>
+<text x="630.0" y="325.0" font-size="10.5" font-weight="700" fill="#4b6130" text-anchor="middle">HU-07 · HU-09 · HU-17</text>
+<path d="M790.0 261.0 L815.0 286.0 L790.0 311.0 L765.0 286.0 z" fill="#fffdf8" stroke="#23211d" stroke-width="1.5" />
+<path d="M782.0 278.0 L798.0 294.0 M798.0 278.0 L782.0 294.0" stroke="#23211d" stroke-width="3" />
+<text x="790.0" y="240.0" font-size="11.5" font-weight="600" fill="#23211d" text-anchor="middle">¿Abona al dejar la</text>
+<text x="790.0" y="253.0" font-size="11.5" font-weight="600" fill="#23211d" text-anchor="middle">ropa?</text>
+<rect x="885.0" y="238.0" width="130" height="96" rx="10" fill="#edf0e2" stroke="#4b6130" stroke-width="1.8" />
+<circle cx="899.0" cy="248.5" r="3.2" stroke="#23211d" stroke-width="1.3" fill="none" /><path d="M893.0 258.0 q0 -6 6 -6 q6 0 6 6 z" stroke="#23211d" stroke-width="1.3" fill="none" />
+<text x="950.0" y="283.5" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">Registrar el abono</text>
+<text x="950.0" y="296.5" font-size="10.5" font-weight="700" fill="#4b6130" text-anchor="middle">HU-24</text>
+<path d="M1110.0 261.0 L1135.0 286.0 L1110.0 311.0 L1085.0 286.0 z" fill="#fffdf8" stroke="#23211d" stroke-width="1.5" />
+<path d="M1102.0 278.0 L1118.0 294.0 M1118.0 278.0 L1102.0 294.0" stroke="#23211d" stroke-width="3" />
+<rect x="1205.0" y="422.0" width="130" height="96" rx="10" fill="#edf0e2" stroke="#4b6130" stroke-width="1.8" />
+<line x1="1223.2" y1="435.0" x2="1225.6" y2="435.0" stroke="#23211d" stroke-width="1.3" fill="none" /><line x1="1219.0" y1="439.2" x2="1219.0" y2="441.6" stroke="#23211d" stroke-width="1.3" fill="none" /><line x1="1214.8" y1="435.0" x2="1212.4" y2="435.0" stroke="#23211d" stroke-width="1.3" fill="none" /><line x1="1219.0" y1="430.8" x2="1219.0" y2="428.4" stroke="#23211d" stroke-width="1.3" fill="none" /><line x1="1222.0" y1="438.0" x2="1223.7" y2="439.7" stroke="#23211d" stroke-width="1.3" fill="none" /><line x1="1216.0" y1="438.0" x2="1214.3" y2="439.7" stroke="#23211d" stroke-width="1.3" fill="none" /><line x1="1222.0" y1="432.0" x2="1223.7" y2="430.3" stroke="#23211d" stroke-width="1.3" fill="none" /><line x1="1216.0" y1="432.0" x2="1214.3" y2="430.3" stroke="#23211d" stroke-width="1.3" fill="none" /><circle cx="1219.0" cy="435.0" r="4.2" stroke="#23211d" stroke-width="1.3" fill="none" /><circle cx="1219.0" cy="435.0" r="1.6" stroke="#23211d" stroke-width="1.3" fill="none" />
+<text x="1270.0" y="457.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">Guardar la orden,</text>
+<text x="1270.0" y="470.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">darle número y</text>
+<text x="1270.0" y="483.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">calcular valor y</text>
+<text x="1270.0" y="496.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">saldo</text>
+<text x="1270.0" y="509.0" font-size="10.5" font-weight="700" fill="#4b6130" text-anchor="middle">RN-08 · RN-26 · RN-27</text>
+<rect x="1365.0" y="238.0" width="130" height="96" rx="10" fill="#edf0e2" stroke="#4b6130" stroke-width="1.8" />
+<path d="M1373.0 252.0 h8 M1375.0 249.0 h8 M1376.0 255.0 h7 M1373.0 252.0 v5 h9 q3 0 3 -3 v-5 q0 -3 -3 -3 h-6" stroke="#23211d" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+<text x="1430.0" y="273.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">Escribir el número</text>
+<text x="1430.0" y="286.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">en la bolsa y</text>
+<text x="1430.0" y="299.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">guardar las prendas</text>
+<text x="1430.0" y="312.0" font-size="10.5" font-weight="700" fill="#4b6130" text-anchor="middle">HU-08</text>
+<rect x="1525.0" y="238.0" width="130" height="96" rx="10" fill="#edf0e2" stroke="#4b6130" stroke-width="1.8" />
+<circle cx="1539.0" cy="248.5" r="3.2" stroke="#23211d" stroke-width="1.3" fill="none" /><path d="M1533.0 258.0 q0 -6 6 -6 q6 0 6 6 z" stroke="#23211d" stroke-width="1.3" fill="none" />
+<text x="1590.0" y="277.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">Arreglar una prenda</text>
+<text x="1590.0" y="290.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">y marcar su avance</text>
+<text x="1590.0" y="303.0" font-size="10.5" font-weight="700" fill="#4b6130" text-anchor="middle">HU-20</text>
+<rect x="1685.0" y="422.0" width="130" height="96" rx="10" fill="#edf0e2" stroke="#4b6130" stroke-width="1.8" />
+<line x1="1703.2" y1="435.0" x2="1705.6" y2="435.0" stroke="#23211d" stroke-width="1.3" fill="none" /><line x1="1699.0" y1="439.2" x2="1699.0" y2="441.6" stroke="#23211d" stroke-width="1.3" fill="none" /><line x1="1694.8" y1="435.0" x2="1692.4" y2="435.0" stroke="#23211d" stroke-width="1.3" fill="none" /><line x1="1699.0" y1="430.8" x2="1699.0" y2="428.4" stroke="#23211d" stroke-width="1.3" fill="none" /><line x1="1702.0" y1="438.0" x2="1703.7" y2="439.7" stroke="#23211d" stroke-width="1.3" fill="none" /><line x1="1696.0" y1="438.0" x2="1694.3" y2="439.7" stroke="#23211d" stroke-width="1.3" fill="none" /><line x1="1702.0" y1="432.0" x2="1703.7" y2="430.3" stroke="#23211d" stroke-width="1.3" fill="none" /><line x1="1696.0" y1="432.0" x2="1694.3" y2="430.3" stroke="#23211d" stroke-width="1.3" fill="none" /><circle cx="1699.0" cy="435.0" r="4.2" stroke="#23211d" stroke-width="1.3" fill="none" /><circle cx="1699.0" cy="435.0" r="1.6" stroke="#23211d" stroke-width="1.3" fill="none" />
+<text x="1750.0" y="461.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">Recalcular el</text>
+<text x="1750.0" y="474.0" font-size="12" font-weight="400" fill="#23211d" text-anchor="middle">estado de la orden</text>
+<text x="1750.0" y="487.0" font-size="10.5" font-weight="700" fill="#4b6130" text-anchor="middle">RN-18 · RN-22</text>
+<path d="M1910.0 445.0 L1935.0 470.0 L1910.0 495.0 L1885.0 470.0 z" fill="#fffdf8" stroke="#23211d" stroke-width="1.5" />
+<path d="M1902.0 462.0 L1918.0 478.0 M1918.0 462.0 L1902.0 478.0" stroke="#23211d" stroke-width="3" />
+<text x="1910.0" y="424.0" font-size="11.5" font-weight="600" fill="#23211d" text-anchor="middle">¿Todas las prendas</text>
+<text x="1910.0" y="437.0" font-size="11.5" font-weight="600" fill="#23211d" text-anchor="middle">terminadas?</text>
+<circle cx="2070.0" cy="470.0" r="18.0" fill="#fffdf8" stroke="#23211d" stroke-width="3.5" />
+<text x="2070.0" y="503.0" font-size="11.5" font-weight="400" fill="#23211d" text-anchor="middle">Orden lista: sigue en</text>
+<text x="2070.0" y="516.0" font-size="11.5" font-weight="400" fill="#23211d" text-anchor="middle">aviso y seguimiento</text>
+</svg>

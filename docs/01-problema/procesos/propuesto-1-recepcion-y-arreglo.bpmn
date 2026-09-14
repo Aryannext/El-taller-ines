@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definiciones_propuesto_1_recepcion_y_arreglo" targetNamespace="https://github.com/Aryannext/El-taller-ines" exporter="scripts/generar_procesos.py" exporterVersion="1.0">
+  <bpmn:collaboration id="Colaboracion">
+    <bpmn:participant id="Participante" name="Taller de costura · con El-taller-ines · Recepción y arreglo" processRef="Proceso" />
+  </bpmn:collaboration>
+  <bpmn:process id="Proceso" name="Recepción y arreglo" isExecutable="false">
+    <bpmn:laneSet id="Carriles">
+      <bpmn:lane id="Carril_cliente" name="Cliente del taller">
+        <bpmn:flowNodeRef>llega</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>explica</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Carril_duena" name="Dueña del taller">
+        <bpmn:flowNodeRef>cliente</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>orden</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>abona</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>abono</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>une_abono</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>bolsa</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>arregla</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Carril_sistema" name="El-taller-ines">
+        <bpmn:flowNodeRef>guarda</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>estado</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>terminadas</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>lista</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="llega" name="Llega con prendas para arreglar">
+      <bpmn:outgoing>Flujo_0</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:manualTask id="explica" name="Entregar las prendas y explicar cada arreglo">
+      <bpmn:incoming>Flujo_0</bpmn:incoming>
+      <bpmn:outgoing>Flujo_1</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:userTask id="cliente" name="Buscar al cliente o registrarlo&#10;HU-04 · HU-03 · HU-10">
+      <bpmn:documentation>HU-04 · HU-03 · HU-10</bpmn:documentation>
+      <bpmn:incoming>Flujo_1</bpmn:incoming>
+      <bpmn:outgoing>Flujo_2</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="orden" name="Registrar la orden: tipo, arreglo, precio, fecha y fotos&#10;HU-07 · HU-09 · HU-17">
+      <bpmn:documentation>HU-07 · HU-09 · HU-17</bpmn:documentation>
+      <bpmn:incoming>Flujo_2</bpmn:incoming>
+      <bpmn:outgoing>Flujo_3</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="abona" name="¿Abona al dejar la ropa?">
+      <bpmn:incoming>Flujo_3</bpmn:incoming>
+      <bpmn:outgoing>Flujo_4</bpmn:outgoing>
+      <bpmn:outgoing>Flujo_5</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="abono" name="Registrar el abono&#10;HU-24">
+      <bpmn:documentation>HU-24</bpmn:documentation>
+      <bpmn:incoming>Flujo_4</bpmn:incoming>
+      <bpmn:outgoing>Flujo_6</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="une_abono">
+      <bpmn:incoming>Flujo_5</bpmn:incoming>
+      <bpmn:incoming>Flujo_6</bpmn:incoming>
+      <bpmn:outgoing>Flujo_7</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="guarda" name="Guardar la orden, darle número y calcular valor y saldo&#10;RN-08 · RN-26 · RN-27">
+      <bpmn:documentation>RN-08 · RN-26 · RN-27</bpmn:documentation>
+      <bpmn:incoming>Flujo_7</bpmn:incoming>
+      <bpmn:outgoing>Flujo_8</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:manualTask id="bolsa" name="Escribir el número en la bolsa y guardar las prendas&#10;HU-08">
+      <bpmn:documentation>HU-08</bpmn:documentation>
+      <bpmn:incoming>Flujo_8</bpmn:incoming>
+      <bpmn:outgoing>Flujo_9</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:userTask id="arregla" name="Arreglar una prenda y marcar su avance&#10;HU-20">
+      <bpmn:documentation>HU-20</bpmn:documentation>
+      <bpmn:incoming>Flujo_9</bpmn:incoming>
+      <bpmn:incoming>Flujo_13</bpmn:incoming>
+      <bpmn:outgoing>Flujo_10</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="estado" name="Recalcular el estado de la orden&#10;RN-18 · RN-22">
+      <bpmn:documentation>RN-18 · RN-22</bpmn:documentation>
+      <bpmn:incoming>Flujo_10</bpmn:incoming>
+      <bpmn:outgoing>Flujo_11</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="terminadas" name="¿Todas las prendas terminadas?">
+      <bpmn:incoming>Flujo_11</bpmn:incoming>
+      <bpmn:outgoing>Flujo_12</bpmn:outgoing>
+      <bpmn:outgoing>Flujo_13</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="lista" name="Orden lista: sigue en aviso y seguimiento">
+      <bpmn:incoming>Flujo_12</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flujo_0" sourceRef="llega" targetRef="explica" />
+    <bpmn:sequenceFlow id="Flujo_1" sourceRef="explica" targetRef="cliente" />
+    <bpmn:sequenceFlow id="Flujo_2" sourceRef="cliente" targetRef="orden" />
+    <bpmn:sequenceFlow id="Flujo_3" sourceRef="orden" targetRef="abona" />
+    <bpmn:sequenceFlow id="Flujo_4" name="Sí" sourceRef="abona" targetRef="abono" />
+    <bpmn:sequenceFlow id="Flujo_5" name="No" sourceRef="abona" targetRef="une_abono" />
+    <bpmn:sequenceFlow id="Flujo_6" sourceRef="abono" targetRef="une_abono" />
+    <bpmn:sequenceFlow id="Flujo_7" sourceRef="une_abono" targetRef="guarda" />
+    <bpmn:sequenceFlow id="Flujo_8" sourceRef="guarda" targetRef="bolsa" />
+    <bpmn:sequenceFlow id="Flujo_9" sourceRef="bolsa" targetRef="arregla" />
+    <bpmn:sequenceFlow id="Flujo_10" sourceRef="arregla" targetRef="estado" />
+    <bpmn:sequenceFlow id="Flujo_11" sourceRef="estado" targetRef="terminadas" />
+    <bpmn:sequenceFlow id="Flujo_12" name="Sí" sourceRef="terminadas" targetRef="lista" />
+    <bpmn:sequenceFlow id="Flujo_13" name="No" sourceRef="terminadas" targetRef="arregla" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagrama">
+    <bpmndi:BPMNPlane id="Plano" bpmnElement="Colaboracion">
+      <bpmndi:BPMNShape id="Participante_di" bpmnElement="Participante" isHorizontal="true">
+        <dc:Bounds x="10" y="10" width="2140" height="552" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Carril_cliente_di" bpmnElement="Carril_cliente" isHorizontal="true">
+        <dc:Bounds x="40" y="10" width="2110" height="184" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Carril_duena_di" bpmnElement="Carril_duena" isHorizontal="true">
+        <dc:Bounds x="40" y="194" width="2110" height="184" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Carril_sistema_di" bpmnElement="Carril_sistema" isHorizontal="true">
+        <dc:Bounds x="40" y="378" width="2110" height="184" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="llega_di" bpmnElement="llega">
+        <dc:Bounds x="132" y="84" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="explica_di" bpmnElement="explica">
+        <dc:Bounds x="245" y="54" width="130" height="96" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="cliente_di" bpmnElement="cliente">
+        <dc:Bounds x="405" y="238" width="130" height="96" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="orden_di" bpmnElement="orden">
+        <dc:Bounds x="565" y="238" width="130" height="96" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="abona_di" bpmnElement="abona" isMarkerVisible="true">
+        <dc:Bounds x="765" y="261" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="abono_di" bpmnElement="abono">
+        <dc:Bounds x="885" y="238" width="130" height="96" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="une_abono_di" bpmnElement="une_abono" isMarkerVisible="true">
+        <dc:Bounds x="1085" y="261" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="guarda_di" bpmnElement="guarda">
+        <dc:Bounds x="1205" y="422" width="130" height="96" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="bolsa_di" bpmnElement="bolsa">
+        <dc:Bounds x="1365" y="238" width="130" height="96" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="arregla_di" bpmnElement="arregla">
+        <dc:Bounds x="1525" y="238" width="130" height="96" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="estado_di" bpmnElement="estado">
+        <dc:Bounds x="1685" y="422" width="130" height="96" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="terminadas_di" bpmnElement="terminadas" isMarkerVisible="true">
+        <dc:Bounds x="1885" y="445" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="lista_di" bpmnElement="lista">
+        <dc:Bounds x="2052" y="452" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flujo_0_di" bpmnElement="Flujo_0">
+        <di:waypoint x="168" y="102" />
+        <di:waypoint x="245" y="102" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flujo_1_di" bpmnElement="Flujo_1">
+        <di:waypoint x="375" y="102" />
+        <di:waypoint x="390" y="102" />
+        <di:waypoint x="390" y="286" />
+        <di:waypoint x="405" y="286" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flujo_2_di" bpmnElement="Flujo_2">
+        <di:waypoint x="535" y="286" />
+        <di:waypoint x="565" y="286" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flujo_3_di" bpmnElement="Flujo_3">
+        <di:waypoint x="695" y="286" />
+        <di:waypoint x="765" y="286" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flujo_4_di" bpmnElement="Flujo_4">
+        <di:waypoint x="815" y="286" />
+        <di:waypoint x="885" y="286" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="823" y="268" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flujo_5_di" bpmnElement="Flujo_5">
+        <di:waypoint x="790" y="311" />
+        <di:waypoint x="790" y="341" />
+        <di:waypoint x="1110" y="341" />
+        <di:waypoint x="1110" y="311" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="797" y="317" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flujo_6_di" bpmnElement="Flujo_6">
+        <di:waypoint x="1015" y="286" />
+        <di:waypoint x="1085" y="286" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flujo_7_di" bpmnElement="Flujo_7">
+        <di:waypoint x="1135" y="286" />
+        <di:waypoint x="1170" y="286" />
+        <di:waypoint x="1170" y="470" />
+        <di:waypoint x="1205" y="470" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flujo_8_di" bpmnElement="Flujo_8">
+        <di:waypoint x="1335" y="470" />
+        <di:waypoint x="1350" y="470" />
+        <di:waypoint x="1350" y="286" />
+        <di:waypoint x="1365" y="286" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flujo_9_di" bpmnElement="Flujo_9">
+        <di:waypoint x="1495" y="286" />
+        <di:waypoint x="1525" y="286" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flujo_10_di" bpmnElement="Flujo_10">
+        <di:waypoint x="1655" y="286" />
+        <di:waypoint x="1670" y="286" />
+        <di:waypoint x="1670" y="470" />
+        <di:waypoint x="1685" y="470" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flujo_11_di" bpmnElement="Flujo_11">
+        <di:waypoint x="1815" y="470" />
+        <di:waypoint x="1885" y="470" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flujo_12_di" bpmnElement="Flujo_12">
+        <di:waypoint x="1935" y="470" />
+        <di:waypoint x="2052" y="470" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1943" y="452" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flujo_13_di" bpmnElement="Flujo_13">
+        <di:waypoint x="1910" y="495" />
+        <di:waypoint x="1910" y="525" />
+        <di:waypoint x="1590" y="525" />
+        <di:waypoint x="1590" y="334" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1917" y="501" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
