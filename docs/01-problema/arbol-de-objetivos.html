@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Árbol de objetivos · El-taller-ines</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap">
+<style>
+  :root {
+    --fondo: #f6f4ef;
+    --papel: #fffdf8;
+    --tinta: #23211d;
+    --tinta-suave: #5d5850;
+    --linea: #b9b1a3;
+    --fin: #2e5f7a;
+    --fin-fondo: #e4eef3;
+    --objetivo: #23392c;
+    --medio: #5a6b3a;
+    --medio-fondo: #edf0e2;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--fondo);
+    color: var(--tinta);
+    font: 15px/1.45 "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  .pagina { max-width: 1180px; margin: 0 auto; padding: 32px 24px 48px; display: flex; flex-direction: column; gap: 24px; }
+
+  header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--tinta-suave); }
+  h1 { margin: 2px 0 0; font: 700 34px/1.1 "Source Serif 4", Georgia, serif; letter-spacing: -.01em; }
+  .leyenda { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 13px; color: var(--tinta-suave); }
+  .leyenda span { display: inline-flex; align-items: center; gap: 6px; }
+  .muestra { width: 14px; height: 14px; border-radius: 3px; border: 2px solid; }
+
+  .lienzo { overflow-x: auto; background: var(--papel); border: 1px solid #e3ddd1; border-radius: 12px; padding: 24px 20px; }
+  .arbol { min-width: 940px; display: grid; grid-template-columns: 110px repeat(5, minmax(0, 1fr)); column-gap: 14px; }
+
+  .nivel { grid-column: 1; align-self: center; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--tinta-suave); }
+  .celda { display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; position: relative; }
+  .celda.abajo { justify-content: flex-start; }
+
+  .nodo { background: var(--papel); border: 2px solid; border-radius: 8px; padding: 8px 10px; font-size: 13.5px; line-height: 1.35; position: relative; z-index: 1; }
+  .nodo b { display: block; font-size: 11.5px; letter-spacing: .03em; margin-bottom: 2px; }
+  .nodo small { display: block; margin-top: 4px; font-size: 11.5px; color: var(--tinta-suave); }
+  .fin { border-color: var(--fin); background: var(--fin-fondo); }
+  .fin b { color: var(--fin); }
+  .medio { border-color: var(--medio); background: var(--medio-fondo); }
+  .medio b { color: var(--medio); }
+  .secundario { border-width: 1px; }
+
+  .con { height: 22px; position: relative; }
+  .con::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; border-left: 2px solid var(--linea); }
+  .con.vacio::before { display: none; }
+  .barra { grid-column: 2 / span 5; height: 2px; background: var(--linea); margin: 0 10%; }
+  .barra.corta { margin-right: 30%; }
+
+  .objetivo {
+    grid-column: 2 / span 5;
+    background: var(--objetivo); color: #f3f7ee;
+    border-radius: 10px; padding: 16px 20px; text-align: center;
+  }
+  .objetivo b { display: block; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #c4d4bf; }
+  .objetivo p { margin: 4px 0 0; font: 600 21px/1.3 "Source Serif 4", Georgia, serif; text-wrap: balance; }
+
+  .notas { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .nota { background: var(--papel); border: 1px solid #e3ddd1; border-radius: 10px; padding: 14px 16px; }
+  .nota h2 { margin: 0 0 6px; font: 600 16px/1.3 "Source Serif 4", Georgia, serif; }
+  .nota p, .nota li { margin: 0; font-size: 14px; color: var(--tinta-suave); }
+  .nota ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; }
+
+  @media (max-width: 860px) {
+    .pagina { padding: 20px 14px 32px; }
+    h1 { font-size: 28px; }
+    .lienzo { padding: 16px 14px; }
+    .arbol { min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+    .arbol > div:empty, .con, .barra { display: none; }
+    .nivel { margin-top: 14px; }
+    .nivel:first-child { margin-top: 0; }
+    .objetivo { margin: 6px 0; }
+    .objetivo p { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="pagina">
+  <header>
+    <div>
+      <div class="eyebrow">El-taller-ines · Sprint 1 · Borrador</div>
+      <h1>Árbol de objetivos</h1>
+    </div>
+    <div class="leyenda">
+      <span><i class="muestra" style="border-color:var(--fin);background:var(--fin-fondo)"></i>Fin</span>
+      <span><i class="muestra" style="border-color:var(--medio);background:var(--medio-fondo)"></i>Medio</span>
+      <span>Cada caja indica de qué causa o efecto nace</span>
+    </div>
+  </header>
+
+  <div class="lienzo">
+    <div class="arbol">
+      <!-- Fines indirectos -->
+      <div class="nivel">Fines indirectos</div>
+      <div class="celda"><div class="nodo fin secundario"><b>FN-01.1</b>Clientes satisfechos con la atención<small>Nace de E-01.1</small></div></div>
+      <div class="celda"><div class="nodo fin secundario"><b>FN-02.1</b>Se reducen las pérdidas económicas del negocio<small>Nace de E-02.1</small></div></div>
+      <div class="celda"><div class="nodo fin secundario"><b>FN-03.1</b>Decisiones del negocio con información confiable<small>Nace de E-03.1</small></div></div>
+      <div class="celda"></div>
+      <div class="celda"></div>
+
+      <div></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con vacio"></div><div class="con vacio"></div>
+
+      <!-- Fines -->
+      <div class="nivel">Fines</div>
+      <div class="celda"><div class="nodo fin"><b>FN-01</b>Las entregas se cumplen a tiempo, sin olvidos<small>Nace de E-01</small></div></div>
+      <div class="celda"><div class="nodo fin"><b>FN-02</b>Ninguna prenda se entrega sin cobrar o sin dejar su saldo registrado<small>Nace de E-02</small></div></div>
+      <div class="celda"><div class="nodo fin"><b>FN-03</b>Se sabe con certeza cuánto se ha recibido y cuánto falta por cobrar<small>Nace de E-03</small></div></div>
+      <div class="celda"><div class="nodo fin"><b>FN-04</b>Se sabe cuántas prendas están sin reclamar y desde cuándo<small>Nace de E-04</small></div></div>
+      <div class="celda"></div>
+
+      <div></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con vacio"></div>
+      <div></div><div class="barra corta"></div>
+      <div></div><div class="con" style="grid-column: 4"></div>
+
+      <!-- Objetivo general -->
+      <div class="nivel">Objetivo general</div>
+      <div class="objetivo"><b>OG · Nace de P-01</b><p>Lograr un control confiable de las órdenes de arreglo, las entregas y los cobros en el taller de costura</p></div>
+
+      <div></div><div class="con" style="grid-column: 4"></div>
+      <div></div><div class="barra"></div>
+      <div></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con"></div>
+
+      <!-- Medios -->
+      <div class="nivel">Medios</div>
+      <div class="celda abajo"><div class="nodo medio"><b>M-01</b>La información del taller queda registrada y deja de depender de la memoria<small>Nace de C-01</small></div></div>
+      <div class="celda abajo"><div class="nodo medio"><b>M-02</b>Se conoce el estado de avance de cada prenda y de cada orden<small>Nace de C-02</small></div></div>
+      <div class="celda abajo"><div class="nodo medio"><b>M-03</b>El cliente recibe aviso cuando su prenda está lista para recoger<small>Nace de C-03</small></div></div>
+      <div class="celda abajo"><div class="nodo medio"><b>M-04</b>Cada pago y abono queda registrado y el saldo se consulta al instante<small>Nace de C-04</small></div></div>
+      <div class="celda abajo"><div class="nodo medio"><b>M-05</b>Seguimiento de órdenes vencidas y prendas sin reclamar, con cantidad y antigüedad<small>Nace de C-05</small></div></div>
+
+      <div></div><div class="con"></div><div class="con"></div><div class="con vacio"></div><div class="con"></div><div class="con vacio"></div>
+
+      <!-- Medios específicos -->
+      <div class="nivel">Medios específicos</div>
+      <div class="celda abajo">
+        <div class="nodo medio secundario"><b>M-01.1</b>Cada prenda se registra con cliente, arreglo, precio y fecha de entrega<small>Nace de C-01.1</small></div>
+        <div class="nodo medio secundario"><b>M-01.2</b>Un único lugar para consultar qué prendas hay, de quién son y cuánto deben<small>Nace de C-01.2</small></div>
+      </div>
+      <div class="celda abajo"><div class="nodo medio secundario"><b>M-02.1</b>Una orden solo se considera lista cuando todas sus prendas están terminadas<small>Nace de C-02.1</small></div></div>
+      <div class="celda abajo"></div>
+      <div class="celda abajo"><div class="nodo medio secundario"><b>M-04.1</b>El saldo se obtiene de lo cobrado y lo pagado, sin sumas a mano<small>Nace de C-04.1</small></div></div>
+      <div class="celda abajo"></div>
+    </div>
+  </div>
+
+  <div class="notas">
+    <div class="nota">
+      <h2>Cómo se lee</h2>
+      <p>Si se logran los medios, de abajo, se alcanza el objetivo general; y con él, los fines de arriba: lo que gana el taller. Es el mismo árbol de problemas escrito en positivo.</p>
+    </div>
+    <div class="nota">
+      <h2>De aquí salen los requisitos</h2>
+      <p>Cada medio se convierte en un objetivo específico con meta y plazo, y cada objetivo en requisitos y reglas de negocio. Por eso cada caja conserva el código de la causa de la que nace.</p>
+    </div>
+    <div class="nota">
+      <h2>Pendiente para cerrarlo</h2>
+      <ul>
+        <li>Validar con el instructor</li>
+        <li>Redactar los objetivos específicos (SMART)</li>
+        <li>Definir qué medios entran en esta entrega</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>
