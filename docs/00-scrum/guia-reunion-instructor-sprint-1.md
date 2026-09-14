@@ -48,7 +48,7 @@ La definición de terminado del proyecto exige que puedas explicar cada document
 - **La solución:** un sistema web donde cada orden queda registrada con fotos y número, el estado de la orden se calcula de sus prendas, el saldo se calcula de los pagos y el aviso por WhatsApp sale solo.
 - **Por qué construirlo:** ninguna de las 9 alternativas revisadas es gratuita, pensada para Colombia, con aviso automático por WhatsApp y con seguimiento de lo que el taller hoy no puede medir.
 - **Cómo se sabe que cada historia sirve:** cada una dice de qué causa nació, y un script genera la matriz de trazabilidad y falla si algo queda sin cubrir.
-- **Cómo se van a cumplir los 30 días:** los Sprints 3 y 4 comprometen 40 puntos Must cada uno, con un punto de control el 1 de octubre y un orden de recorte acordado.
+- **Cómo se van a cumplir los 30 días:** los Sprints 3 y 4 comprometen 40 y 43 puntos Must, con un punto de control el 1 de octubre y un orden de recorte acordado.
 
 ## Agenda
 
@@ -93,15 +93,16 @@ Explícale que el rol es liviano. Consiste en:
 
 ### Requisitos
 
-- **En cifras:** 44 reglas de negocio, 41 requisitos funcionales (31 Must, 8 Should y 2 Could) y 34 no funcionales, cada uno con métrica y forma de verificarlo.
+- **En cifras:** 44 reglas de negocio, 41 requisitos funcionales (31 Must, 8 Should y 2 Could) y 35 no funcionales, cada uno con métrica y forma de verificarlo.
 - **Un requisito que salió del proceso:** al reconstruir el proceso actual apareció que a veces el cliente se lleva una prenda sin arreglar. Eso generó RN-44 y HU-36 (Should), para no cobrar un arreglo que no se hizo.
 - **Una historia completa:** abre HU-07 y muéstrale en orden «Como / quiero / para», «Nació de», los requisitos y reglas que cumple, los puntos y los criterios Dado / Cuando / Entonces con datos concretos.
 - **La matriz:** busca «C-06» en el buscador de la matriz y muéstrale la cadena completa hasta sus historias.
 
 ### Plan
 
-- **Backlog:** 24 documentos, 36 historias y 6 habilitadores técnicos, publicados como 66 issues en GitHub.
-- **Capacidad:** los Sprints 3 y 4 comprometen 40 puntos cada uno, solo con lo Must. El Sprint 4 tiene menos días; es un riesgo aceptado y escrito.
+- **Backlog:** 24 documentos, 36 historias y 7 habilitadores técnicos, publicados como 67 issues en GitHub.
+- **Capacidad:** los Sprints 3 y 4 comprometen 40 y 43 puntos, solo con lo Must. El Sprint 4 tiene menos días y además el APK; es un riesgo aceptado y escrito.
+- **App en el celular:** las usuarias trabajan desde el celular, así que el sistema se entrega también como APK para Android que abre el mismo sistema web ([ADR-006](../03-diseno/adr/ADR-006-instalacion-en-el-celular.md)).
 - **Punto de control el 1 de octubre:** si van menos de 15 puntos terminados, se decide el recorte ese mismo día.
 
 ## Preguntas que le tienes que hacer
@@ -133,7 +134,7 @@ Anota cada respuesta en el acta con el mismo código.
 | ¿Cómo sabes que las historias están bien? | Cada una dice de qué causa nace, y un script genera la matriz y falla si falta cobertura | Matriz de trazabilidad |
 | ¿Por qué WhatsApp oficial si cuesta? | Las APIs no oficiales violan los términos y pueden bloquear el número. Hay envío asistido de respaldo, y la demostración usa el número de prueba gratuito | ADR-003 |
 | ¿Por qué preparar varios negocios si es un solo taller? | Agregarlo después obligaría a cambiar casi todas las tablas. Solo las tablas raíz llevan el negocio, así el modelo sigue en tercera forma normal | ADR-002 |
-| ¿Te alcanza el tiempo? | 40 puntos Must por sprint, punto de control el 1 de octubre y un orden de recorte escrito | [Product backlog](product-backlog.md) |
+| ¿Te alcanza el tiempo? | 40 y 43 puntos Must en los sprints de desarrollo, punto de control el 1 de octubre y un orden de recorte escrito | [Product backlog](product-backlog.md) |
 | ¿Qué hizo la inteligencia artificial? | Es una herramienta de apoyo declarada en el plan. Las decisiones del problema y del alcance salieron de tus respuestas, y cada decisión técnica tiene un ADR que puedes explicar | [Plan de sprints](plan-de-sprints.md) |
 
 Si te pregunta algo que no sabes, no improvises. Anótalo en el acta como pendiente y respóndelo por escrito después.

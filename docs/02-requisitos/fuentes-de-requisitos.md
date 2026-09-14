@@ -69,3 +69,4 @@ Hechos registrados de F-05:
 | 14 sep 2026 | La forma de pago varía: unos clientes abonan al dejar la ropa, otros pagan al recoger y otros quedan debiendo | Proceso actual · fases 1 y 3 |
 | 14 sep 2026 | La dueña se queda con las prendas que nadie reclama, para venderlas, usarlas ella o aprovecharlas como tela de repuesto | Proceso actual · fase 2 · E-04 |
 | 14 sep 2026 | A veces el cliente llega en la fecha acordada y la prenda no está terminada porque a la dueña se le olvidó. Si el arreglo es rápido, el cliente espera; si no, vuelve otro día o se lleva la prenda sin arreglar, según lo que prefiera | Proceso actual · fase 3 · E-01 · RN-44 · HU-36 |
+| 14 sep 2026 | La mayoría de mujeres con talleres pequeños de arreglos trabajan desde el celular, no desde un computador de escritorio; se prefiere entregar el sistema como APK. Es una percepción del aprendiz, no un dato medido | ADR-006 · RNF-35 · HT-07 |

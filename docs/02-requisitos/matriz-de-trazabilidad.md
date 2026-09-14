@@ -14,7 +14,7 @@ La columna **Prueba** se completa en el Sprint 3, cuando cada criterio de acepta
 
 | Causas | Medios | Objetivos | Requisitos funcionales | Reglas | Historias | Criterios | Requisitos no funcionales |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 11 | 11 | 6 | 41 | 44 | 36 | 125 | 34 |
+| 11 | 11 | 6 | 41 | 44 | 36 | 125 | 35 |
 
 ## Verificación
 
@@ -30,7 +30,7 @@ La columna **Prueba** se completa en el Sprint 3, cuando cada criterio de acepta
 | Reglas de negocio citadas por una historia | Cumple | — |
 | Historias con criterios de aceptación | Cumple | — |
 | Historias que nombran la causa o el efecto del que nacen | Cumple | — |
-| Requisitos no funcionales exigidos en alguna historia | Informativo | RNF-01, RNF-02, RNF-05, RNF-06, RNF-07, RNF-08, RNF-09, RNF-11, RNF-12, RNF-15, RNF-16, RNF-18, RNF-23, RNF-24, RNF-26, RNF-27, RNF-28, RNF-29, RNF-30, RNF-31, RNF-32, RNF-33, RNF-34 |
+| Requisitos no funcionales exigidos en alguna historia | Informativo | RNF-01, RNF-02, RNF-05, RNF-06, RNF-07, RNF-08, RNF-09, RNF-11, RNF-12, RNF-15, RNF-16, RNF-18, RNF-23, RNF-24, RNF-26, RNF-27, RNF-28, RNF-29, RNF-30, RNF-31, RNF-32, RNF-33, RNF-34, RNF-35 |
 
 ## 1. Del problema a los objetivos
 
@@ -232,6 +232,7 @@ Los que aparecen en historias se prueban con ellas; los demás se verifican sobr
 | RNF-32 | La base de datos está normalizada | Mantenibilidad | — | Documento de normalización del modelo de datos |
 | RNF-33 | El sistema se instala siguiendo el manual | Portabilidad | — | Instalación de prueba en una máquina distinta a la de desarrollo, con su registro |
 | RNF-34 | La configuración cambia sin tocar el código | Portabilidad | — | Despliegue en el VPS usando el mismo código del repositorio |
+| RNF-35 | El sistema se instala en el celular como una app | Portabilidad | — | Instalación del APK en un celular Android real, toma de una foto y apertura de WhatsApp desde el APK, e instalación desde el navegador en otro celular, con su registro |
 
 ## 6. Efectos y fines
 

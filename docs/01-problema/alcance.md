@@ -24,6 +24,7 @@ Lo que no cumple alguna de las dos queda fuera con su motivo, aunque estuviera e
 | **Avisos** | Aviso automático por WhatsApp cuando la orden queda lista, mediante la API oficial; si el canal automático no está disponible, envío asistido con el mensaje redactado; registro de cada aviso con su canal y resultado | OE-03 | M-03 · [ADR-003](../03-diseno/adr/ADR-003-canal-de-avisos-whatsapp.md) |
 | **Seguimiento** | Panel con órdenes vencidas, prendas sin reclamar con días de espera y total por cobrar | OE-05 | M-05 |
 | **Base preparada para varios negocios** | Tabla de negocio y filtro por negocio en las tablas raíz, con un solo taller registrado | — | [ADR-002](../03-diseno/adr/ADR-002-un-taller-preparado-para-varios.md) |
+| **Instalación en el celular** | APK para Android que abre el sistema a pantalla completa, e instalación desde el navegador en otros celulares | Soporte de todos | F-05 · RNF-35 · [ADR-006](../03-diseno/adr/ADR-006-instalacion-en-el-celular.md) |
 
 ## Fuera del alcance
 
@@ -38,7 +39,8 @@ Lo que no cumple alguna de las dos queda fuera con su motivo, aunque estuviera e
 | **Impresora de etiquetas o códigos para las bolsas** | No hay presupuesto para el equipo (F-05). La foto de cada prenda y el número de orden cumplen el medio M-06 | F-05 |
 | **Notas adicionales por prenda, aparte de la descripción** | La descripción del arreglo se escribe al registrar la prenda y se puede corregir; notas aparte no nacen de una causa del árbol. Se reconsidera si el instructor lo pide | F-01, F-02 |
 | **Historial detallado de actividad** | El efecto que lo justificaba (E-05, desacuerdos con clientes) se descartó. Sí se conserva el rastro de pagos anulados y avisos enviados | F-01, F-02 |
-| **App móvil nativa y trabajo sin conexión** | El taller tiene internet estable; el sistema web funciona en el navegador del teléfono (ADR-001) | F-02 |
+| **App nativa y trabajo sin conexión** | El APK abre el mismo sistema web (ADR-006); una app nativa exigiría otra aplicación y una API. El taller tiene internet estable, así que no se trabaja sin conexión | F-02 |
+| **Publicar el APK en Google Play** | Requiere una cuenta de desarrollador con pago y la revisión de Google; para la dueña basta con instalar el APK directamente. Se evalúa con la idea de negocio | ADR-006 |
 | **Bot de Telegram y respaldos por Telegram** | Los respaldos se hacen en el servidor; no nace de una causa del árbol | F-02 |
 | **Reportes financieros con gráficos** | El medio M-04 se cumple con el total por cobrar y lo recibido; los gráficos no atacan una causa | F-02 |
 | **Conexión con Nequi u otras pasarelas de pago** | Los pagos por Nequi llegan a la cuenta personal de la dueña, no a una cuenta de negocio; el sistema solo registra el método del pago (RN-25) | F-05 |
@@ -50,6 +52,7 @@ Lo que no cumple alguna de las dos queda fuera con su motivo, aunque estuviera e
 - El taller tiene conexión a internet estable durante el horario de atención (según el aprendiz).
 - La usuaria tiene un teléfono con navegador y WhatsApp.
 - El servidor (VPS) estará disponible para el despliegue durante el Sprint 4.
+- Habrá un dominio propio con HTTPS apuntando al VPS; el APK lo necesita para verificar el sitio (ADR-006).
 - Meta aprueba la plantilla del aviso de "orden lista" a tiempo para el Sprint 4; si no, la demostración usa el envío asistido.
 
 ## Restricciones

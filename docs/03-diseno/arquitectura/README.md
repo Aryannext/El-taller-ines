@@ -49,6 +49,7 @@ Qué se ejecuta y dónde (nivel 2 del modelo C4). Todo corre en el VPS; el detal
 ```mermaid
 flowchart TB
     subgraph dispositivo["Celular o computador de la dueña"]
+        apk["APK para Android<br/>abre el sistema en Chrome, sin barra"]
         navegador["Navegador<br/>páginas HTML generadas en el servidor"]
     end
     subgraph vps["VPS"]
@@ -61,6 +62,7 @@ flowchart TB
     api["WhatsApp Cloud API"]
     drive["Google Drive"]
     navegador -- "HTTPS" --> web
+    apk -- "HTTPS" --> web
     web --> mysql
     web --> disco
     cola --> mysql
@@ -72,6 +74,7 @@ flowchart TB
 
 | Contenedor | Por qué existe | Requisito |
 | --- | --- | --- |
+| **APK para Android** | La usuaria trabaja desde el celular: el APK abre el mismo sistema a pantalla completa. No contiene lógica ni datos; en otros celulares se instala desde el navegador | RNF-35 · ADR-006 |
 | **Aplicación Laravel** | Atiende todas las pantallas; genera el HTML en el servidor con los estilos de los mockups | ADR-001 |
 | **Trabajador de la cola** | La pantalla no espera a WhatsApp, y un envío que falla se reintenta | RNF-04 · RNF-17 · ADR-003 |
 | **Programador de tareas** | Respaldo diario en el VPS y copia semanal fuera del servidor | RNF-15 |
@@ -223,6 +226,10 @@ sistema/
 ├── resources/
 │   ├── css/estilos.css                     La hoja de estilos de los mockups
 │   └── views/                              Una vista por pantalla PT-xx
+├── public/
+│   ├── manifest.webmanifest                Nombre, íconos y colores para instalar el sistema (ADR-006)
+│   ├── sw.js                               Service worker: página sin conexión
+│   └── .well-known/assetlinks.json         Prueba que el APK y el sitio son del mismo dueño
 ├── routes/web.php
 ├── database/
 │   ├── migrations/                         Producen el esquema del modelo de datos
@@ -231,6 +238,8 @@ sistema/
     ├── Unit/Dominio/                       Reglas sin base de datos
     ├── Feature/                            Casos de uso y pantallas con base de datos
     └── Arquitectura/                       Regla de dependencias entre capas
+
+movil/                                      Proyecto del APK generado con Bubblewrap; la llave de firma no se versiona
 ```
 
 <!-- estructura:fin -->
@@ -416,6 +425,7 @@ sequenceDiagram
 | **RNF-25** Fotos privadas | `FotoController` entrega cada foto desde el disco privado solo con sesión y del propio negocio |
 | **RNF-27** Reglas separadas | Capas con regla de dependencias y pruebas de arquitectura |
 | **RNF-28** Reglas probadas | Las reglas del dominio se prueban sin base de datos |
+| **RNF-35** App en el celular | Manifiesto y service worker en `public/`; APK con Trusted Web Activity que abre el mismo sistema (ADR-006) |
 | **RNF-29 · RNF-30 · RNF-31** Calidad continua | Pint, Larastan y pruebas en GitHub Actions; esquema solo por migraciones (HT-02) |
 
 ## Principios SOLID en este diseño

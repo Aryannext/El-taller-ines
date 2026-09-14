@@ -103,16 +103,17 @@ Una historia entra a un sprint solo si cumple la definición de "lista para desa
 | 30 | **HU-34** | Ver las órdenes sin reclamar | Must | 2 | Sprint 4 | HU-20 |
 | 31 | **HT-05** | Respaldos y restauración probada | Must | 2 | Sprint 4 | HT-04 |
 | 32 | **HT-06** | Datos de volumen y medición de rendimiento | Must | 2 | Sprint 4 | HT-04, HU-32 |
-| 33 | **HU-26** | Ver quién me debe | Should | 2 | — | HU-23 |
-| 34 | **HU-24** | Registrar un abono al recibir la orden | Should | 2 | — | HU-07, HU-23 |
-| 35 | **HU-13** | Eliminar una prenda registrada por error | Should | 2 | — | HU-12 |
-| 36 | **HU-36** | Devolver una prenda sin arreglar | Should | 2 | — | HU-20, HU-23 |
-| 37 | **HU-10** | Registrar un cliente nuevo mientras registro su orden | Should | 3 | — | HU-07 |
-| 38 | **HU-11** | Agregar una prenda a una orden que ya existe | Should | 2 | — | HU-20 |
-| 39 | **HU-27** | Ver cuánto dinero he recibido | Should | 2 | — | HU-25 |
-| 40 | **HU-19** | Eliminar una foto | Should | 1 | — | HU-17 |
-| 41 | **HU-35** | Cambiar el plazo para considerar una orden sin reclamar | Could | 1 | — | HU-34 |
-| 42 | **HU-16** | Renombrar o desactivar tipos de prenda | Could | 2 | — | HU-09 |
+| 33 | **HT-07** | Instalación en el celular: PWA y APK para Android | Must | 3 | Sprint 4 | HT-04, HU-17, HU-29 |
+| 34 | **HU-26** | Ver quién me debe | Should | 2 | — | HU-23 |
+| 35 | **HU-24** | Registrar un abono al recibir la orden | Should | 2 | — | HU-07, HU-23 |
+| 36 | **HU-13** | Eliminar una prenda registrada por error | Should | 2 | — | HU-12 |
+| 37 | **HU-36** | Devolver una prenda sin arreglar | Should | 2 | — | HU-20, HU-23 |
+| 38 | **HU-10** | Registrar un cliente nuevo mientras registro su orden | Should | 3 | — | HU-07 |
+| 39 | **HU-11** | Agregar una prenda a una orden que ya existe | Should | 2 | — | HU-20 |
+| 40 | **HU-27** | Ver cuánto dinero he recibido | Should | 2 | — | HU-25 |
+| 41 | **HU-19** | Eliminar una foto | Should | 1 | — | HU-17 |
+| 42 | **HU-35** | Cambiar el plazo para considerar una orden sin reclamar | Could | 1 | — | HU-34 |
+| 43 | **HU-16** | Renombrar o desactivar tipos de prenda | Could | 2 | — | HU-09 |
 
 ### Por qué este orden
 
@@ -121,6 +122,7 @@ Una historia entra a un sprint solo si cumple la definición de "lista para desa
 - **HU-05 va al final del Sprint 3** porque la ficha del cliente muestra sus órdenes; su saldo se completa cuando existan los pagos (HU-23) y sus criterios se vuelven a probar entonces.
 - **HT-04 abre el Sprint 4:** desplegar temprano descubre los problemas del servidor cuando todavía quedan días. Desde ahí, cada historia terminada se despliega el mismo día.
 - **Los pagos (HU-23) van antes de entregar (HU-21)** porque entregar con saldo pide confirmación (RN-21), y el saldo necesita los pagos.
+- **HT-07 cierra el Sprint 4:** el APK abre el sistema desplegado, así que necesita el dominio con HTTPS (HT-04) y las pantallas de fotos y avisos ya construidas.
 - **HU-26 encabeza lo Should:** ataca el efecto E-03, no saber cuánto falta por cobrar, y reutiliza el saldo ya construido.
 - **HU-36 va junto a HU-13:** las dos corrigen qué prendas cuentan en el valor de la orden. Se agregó el 14 de septiembre, al analizar el proceso actual.
 
@@ -131,9 +133,9 @@ Todavía no hay velocidad medida, así que el compromiso de cada sprint de desar
 | Sprint | Fechas | Días | Puntos | De historias | De habilitadores |
 | --- | --- | --- | --- | --- | --- |
 | **Sprint 3** | 29 sep – 5 oct | 7 | 40 | 33 | 7 |
-| **Sprint 4** | 6 – 10 oct | 5 | 40 | 33 | 7 |
+| **Sprint 4** | 6 – 10 oct | 5 | 43 | 33 | 10 |
 
-- **El Sprint 4 tiene menos días y los mismos puntos.** Es un riesgo aceptado a propósito: el Sprint 3 carga el aprendizaje de Laravel y crea los patrones (formularios, validaciones, pruebas, filtro por negocio) que el Sprint 4 repite.
+- **El Sprint 4 tiene menos días y más puntos.** Es un riesgo aceptado a propósito: el Sprint 3 carga el aprendizaje de Laravel y crea los patrones (formularios, validaciones, pruebas, filtro por negocio) que el Sprint 4 repite. El 14 de septiembre se agregó HT-07 (APK), que subió el Sprint 4 de 40 a 43 puntos, porque las usuarias trabajan desde el celular (ADR-006).
 - **Punto de control el jueves 1 de octubre.** Al terminar el tercer día del Sprint 3 se cuentan los puntos terminados. Si son menos de 15, a ese ritmo el sprint cerraría con unos 35 de 40, y el recorte se decide ese mismo día, no al cierre.
 - **Orden del recorte:** primero no entra nada Should ni Could; después se renegocia con el instructor qué Must sale, empezando por lo que no rompe el flujo principal (por ejemplo, HU-33 se ve parcialmente en el panel de HU-32, y HU-31 solo consulta). Nunca se recortan pruebas ni documentación.
 - **Burndown:** el registro diario anota los puntos que faltan del sprint. Con esos datos se dibuja la gráfica en la revisión.
@@ -206,6 +208,21 @@ Todavía no hay velocidad medida, así que el compromiso de cada sprint de desar
 - [ ] Un generador de datos crea el volumen de referencia de 3 años: 500 clientes, 750 órdenes, 2.200 prendas y 1.500 pagos.
 - [ ] El panel, el detalle de orden, la búsqueda de clientes y las listas de seguimiento responden en 500 ms o menos en el percentil 95, medido en el VPS.
 - [ ] Ninguna de esas páginas pasa de 15 consultas, con órdenes de 1 y de 10 prendas.
+
+### HT-07 · Instalación en el celular: PWA y APK para Android
+
+**Nace de:** ADR-006 · RNF-35 · F-05.
+
+**Terminado cuando:**
+
+- [ ] El sistema tiene manifiesto con nombre, íconos y los colores de los mockups, y Chrome en Android ofrece instalarlo.
+- [ ] Sin conexión se abre una página que explica que se necesita internet, en vez del error del navegador.
+- [ ] `assetlinks.json` está publicado en el dominio del VPS.
+- [ ] Un APK firmado se genera con Bubblewrap; la llave de firma queda fuera del repositorio (RNF-24) y respaldada.
+- [ ] El APK se instala en un celular Android real, abre a pantalla completa sin barra del navegador, toma una foto (HU-17) y abre WhatsApp desde el envío asistido (HU-29).
+- [ ] El manual de usuario explica cómo instalarlo (DOC-22).
+
+**Qué necesita de afuera:** un dominio propio con HTTPS apuntando al VPS (HT-04).
 
 ## Tablero
 

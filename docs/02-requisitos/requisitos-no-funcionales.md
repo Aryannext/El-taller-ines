@@ -24,7 +24,7 @@ Las metas de desempeño se fijan con el volumen que tendría un negocio después
 | Fotos | Hasta 3 por prenda | 6.600 |
 | Pagos | 2 por orden en promedio | 1.500 |
 
-**Resumen:** 34 requisitos · desempeño 4 · compatibilidad 2 · usabilidad 6 · fiabilidad 5 · seguridad 9 · mantenibilidad 6 · portabilidad 2.
+**Resumen:** 35 requisitos · desempeño 4 · compatibilidad 2 · usabilidad 6 · fiabilidad 5 · seguridad 9 · mantenibilidad 6 · portabilidad 3.
 
 ---
 
@@ -98,3 +98,4 @@ Las metas de desempeño se fijan con el volumen que tendría un negocio después
 | --- | --- | --- | --- | --- |
 | **RNF-33** | El sistema se instala siguiendo el manual | Tiempo para instalarlo desde el repositorio en una máquina con PHP 8.4, Composer y MySQL 8.4 | ≤ 30 minutos siguiendo solo el manual técnico | Instalación de prueba en una máquina distinta a la de desarrollo, con su registro |
 | **RNF-34** | La configuración cambia sin tocar el código | Cambios de código necesarios para pasar de desarrollo a producción | Cero; todo se configura por variables de entorno | Despliegue en el VPS usando el mismo código del repositorio |
+| **RNF-35** | El sistema se instala en el celular como una app | Formas de instalarlo y cómo se abre | Un APK firmado se instala en Android y abre el sistema a pantalla completa, sin barra del navegador; en otros celulares se instala desde el navegador; sin conexión muestra una página que lo explica (ADR-006) | Instalación del APK en un celular Android real, toma de una foto y apertura de WhatsApp desde el APK, e instalación desde el navegador en otro celular, con su registro |
