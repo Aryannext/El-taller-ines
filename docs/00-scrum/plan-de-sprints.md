@@ -33,9 +33,11 @@ Las evidencias de cada evento quedan en esta carpeta, con su fecha real.
 | **0 · Arranque** | 13–14 sep | Organizar el proyecto | Repositorio, estructura de documentación, tablero, backlog inicial, definición de terminado |
 | **1 · Problema y requisitos** | 15–21 sep | Entender y especificar el problema | Árbol de problemas, proceso actual y propuesto, objetivos y alcance, reglas de negocio, RF y RNF medibles, historias de usuario con origen y criterios, matriz de trazabilidad |
 | **2 · Diseño** | 22–28 sep | Diseñar antes de programar | Wireframes y mockups, casos de uso, arquitectura con ADR, modelo de datos normalizado con diccionario, diagramas de clases, secuencia y despliegue, plan de pruebas |
-| **3 · Desarrollo I** | 29 sep – 5 oct | Núcleo del sistema | Autenticación, clientes, órdenes y prendas, con pruebas |
-| **4 · Desarrollo II** | 6–10 oct | Completar y desplegar | Pagos, estados, avisos, reportes, despliegue en VPS, informe de pruebas |
+| **3 · Desarrollo I** | 29 sep – 5 oct | Núcleo del sistema | Acceso, clientes, órdenes, prendas y fotos, con pruebas |
+| **4 · Desarrollo II** | 6–10 oct | Completar y desplegar | Estados, entrega, pagos, avisos, seguimiento, despliegue en VPS con respaldos, informe de pruebas |
 | **Cierre** | 11–13 oct | Entregar y sustentar | Manuales en español e inglés, ensayo de sustentación |
+
+Qué elemento entra en cada sprint, en qué orden y con cuántos puntos está en el [product backlog](product-backlog.md).
 
 ## Definición de terminado
 

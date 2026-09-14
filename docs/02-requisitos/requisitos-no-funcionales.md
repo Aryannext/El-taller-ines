@@ -86,7 +86,7 @@ Las metas de desempeño se fijan con el volumen que tendría un negocio después
 | Código | Requisito | Métrica | Meta | Verificación |
 | --- | --- | --- | --- | --- |
 | **RNF-27** | Las reglas de negocio están separadas de la interfaz y de la base de datos | Controladores o vistas que contienen reglas de negocio o consultas directas | Cero; las reglas viven en la capa definida en la arquitectura del diseño | Pruebas automáticas de arquitectura y revisión de código |
-| **RNF-28** | Las reglas de negocio están probadas | Reglas con al menos una prueba automática y cobertura de líneas de la lógica de negocio | 42 de 42 reglas; cobertura ≥ 80 % en la lógica de negocio | Reporte de cobertura y matriz regla → prueba |
+| **RNF-28** | Las reglas de negocio están probadas | Reglas con al menos una prueba automática y cobertura de líneas de la lógica de negocio | 43 de 43 reglas; cobertura ≥ 80 % en la lógica de negocio | Reporte de cobertura y matriz regla → prueba |
 | **RNF-29** | El código sigue un estilo único y no tiene errores detectables sin ejecutarlo | Errores de estilo (PSR-12 con Laravel Pint) y de análisis estático (Larastan) | Cero errores; Larastan en nivel 5 o superior | Ejecución de las herramientas en cada integración |
 | **RNF-30** | Cada cambio se valida automáticamente | Cambios integrados a `main` sin pasar pruebas, estilo y análisis estático | Cero; se ejecutan en GitHub Actions en cada envío | Historial de ejecuciones de GitHub Actions |
 | **RNF-31** | La estructura de la base de datos está versionada | Cambios a la base de datos hechos a mano fuera de las migraciones | Cero | Revisión: la base se reconstruye completa solo con las migraciones |
