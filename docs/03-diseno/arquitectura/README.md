@@ -451,4 +451,4 @@ sequenceDiagram
 ## Pendiente
 
 - Validar con el instructor, en especial la respuesta a «¿MVC o Clean Architecture?».
-- Diagramas de clases, secuencia, estados, componentes y despliegue en detalle (DOC-18).
+- Los diagramas de clases, secuencia, estados, componentes y despliegue están en [diagramas de diseño](../diagramas/README.md) (DOC-18).
