@@ -341,7 +341,7 @@ Un pago registrado no se elimina. Si fue un error, se anula indicando el motivo;
 
 **Tipo:** Restricción · **Origen:** M-04 · FN-03 · F-02
 
-**Ejemplo:** Se registró por error un abono de $50.000 en vez de $5.000. Se anula con el motivo "valor mal digitado" y se registra el de $5.000. Ambos quedan visibles; solo el segundo cuenta.
+**Ejemplo:** Orden de $31.000 sin pagos. Se registró por error un abono de $15.000 en vez de $5.000. Se anula con el motivo "valor mal digitado" y se registra el de $5.000: el saldo queda en $26.000. Ambos pagos quedan visibles; solo el segundo cuenta.
 
 ### RN-32 · Total por cobrar del negocio
 
@@ -357,7 +357,7 @@ El dinero recibido en un período es la suma de los pagos no anulados cuya fecha
 
 **Tipo:** Derivación · **Origen:** FN-03 · M-04
 
-**Ejemplo:** En septiembre hay pagos de $10.000, $21.000 y $50.000 (anulado): lo recibido en septiembre es $31.000.
+**Ejemplo:** En septiembre hay pagos de $10.000, $21.000 y $15.000 (anulado): lo recibido en septiembre es $31.000.
 
 ## Seguimiento
 
