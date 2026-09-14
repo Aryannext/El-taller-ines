@@ -679,4 +679,4 @@ flowchart TB
 ## Pendiente
 
 - Validar los diagramas con el instructor, en especial la propuesta de esperar antes de enviar el aviso.
-- Diagrama y especificación de casos de uso (DOC-15).
+- Los diagramas y la especificación de los casos de uso están en [casos de uso](../casos-de-uso/README.md) (DOC-15).

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 440" width="940" height="440" font-family="'Source Sans 3', 'Segoe UI', Arial, sans-serif" role="img" aria-label="Casos de uso · Seguimiento">
+<title>Casos de uso · Seguimiento</title>
+<defs><marker id="abierta-08-duena-seguimiento" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="11" markerHeight="11" orient="auto"><path d="M1 1 L11 6 L1 11" fill="none" stroke="#4a453d" stroke-width="1.5"/></marker><marker id="triangulo-08-duena-seguimiento" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" orient="auto"><path d="M1 1 L13 7 L1 13 z" fill="#fffdf8" stroke="#4a453d" stroke-width="1.5"/></marker></defs>
+<rect width="940" height="440" fill="#fffdf8"/>
+<rect x="190" y="36" width="720" height="382" rx="8" fill="#faf7f0" stroke="#23211d" stroke-width="1.5"/>
+<text x="208.0" y="64.0" font-size="15" font-weight="700" fill="#23211d" text-anchor="start">El-taller-ines · Seguimiento</text>
+<line x1="122.0" y1="230.0" x2="276.0" y2="230.0" stroke="#4a453d" stroke-width="1.4"/>
+<line x1="661.2" y1="147.9" x2="488.8" y2="202.1" stroke="#4a453d" stroke-width="1.4" stroke-dasharray="7 5" marker-end="url(#abierta-08-duena-seguimiento)"/>
+<rect x="545.0" y="163.0" width="60" height="17" rx="3" fill="#faf7f0"/>
+<text x="575.0" y="176.0" font-size="11.5" font-weight="600" fill="#5d5850" text-anchor="middle">«extend»</text>
+<line x1="626.0" y1="230.0" x2="524.0" y2="230.0" stroke="#4a453d" stroke-width="1.4" stroke-dasharray="7 5" marker-end="url(#abierta-08-duena-seguimiento)"/>
+<rect x="545.0" y="218.0" width="60" height="17" rx="3" fill="#faf7f0"/>
+<text x="575.0" y="231.0" font-size="11.5" font-weight="600" fill="#5d5850" text-anchor="middle">«extend»</text>
+<line x1="661.2" y1="312.1" x2="488.8" y2="257.9" stroke="#4a453d" stroke-width="1.4" stroke-dasharray="7 5" marker-end="url(#abierta-08-duena-seguimiento)"/>
+<rect x="545.0" y="273.0" width="60" height="17" rx="3" fill="#faf7f0"/>
+<text x="575.0" y="286.0" font-size="11.5" font-weight="600" fill="#5d5850" text-anchor="middle">«extend»</text>
+<circle cx="90" cy="194" r="11" fill="#ffffff" stroke="#23211d" stroke-width="1.8"/><line x1="90" y1="205" x2="90" y2="236" stroke="#23211d" stroke-width="1.8" fill="none" stroke-linecap="round"/><line x1="71" y1="217" x2="109" y2="217" stroke="#23211d" stroke-width="1.8" fill="none" stroke-linecap="round"/><polyline points="75,260 90,236 105,260" stroke="#23211d" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<text x="90.0" y="278.0" font-size="13" font-weight="700" fill="#23211d" text-anchor="middle">Dueña del</text>
+<text x="90.0" y="293.0" font-size="13" font-weight="700" fill="#23211d" text-anchor="middle">taller</text>
+<ellipse cx="400" cy="230" rx="124" ry="40" fill="#ffffff" stroke="#23211d" stroke-width="1.5"/>
+<text x="400.0" y="226.5" font-size="11.5" font-weight="700" fill="#2a44a8" text-anchor="middle">CU-33</text><text x="400.0" y="241.5" font-size="13" font-weight="400" fill="#23211d" text-anchor="middle">Ver el panel del día</text>
+<ellipse cx="750" cy="120" rx="124" ry="40" fill="#ffffff" stroke="#23211d" stroke-width="1.5"/>
+<text x="750.0" y="116.5" font-size="11.5" font-weight="700" fill="#2a44a8" text-anchor="middle">CU-34</text><text x="750.0" y="131.5" font-size="13" font-weight="400" fill="#23211d" text-anchor="middle">Ver órdenes atrasadas</text>
+<ellipse cx="750" cy="230" rx="124" ry="40" fill="#ffffff" stroke="#23211d" stroke-width="1.5"/>
+<text x="750.0" y="226.5" font-size="11.5" font-weight="700" fill="#2a44a8" text-anchor="middle">CU-35</text><text x="750.0" y="241.5" font-size="13" font-weight="400" fill="#23211d" text-anchor="middle">Ver órdenes sin reclamar</text>
+<ellipse cx="750" cy="340" rx="124" ry="40" fill="#f1ede4" stroke="#8f877a" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="750.0" y="329.0" font-size="11.5" font-weight="700" fill="#2a44a8" text-anchor="middle">CU-28</text><text x="750.0" y="344.0" font-size="13" font-weight="400" fill="#5d5850" text-anchor="middle">Ver quién me debe</text><text x="750.0" y="359.0" font-size="10.5" font-weight="400" fill="#5d5850" text-anchor="middle" font-style="italic">ver diagrama 06</text>
+</svg>
