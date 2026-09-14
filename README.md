@@ -1,4 +1,6 @@
-# Atelier Manager
+# El-taller-ines
+
+> Nombre temporal del proyecto, mientras se define el definitivo.
 
 Sistema de gestión para un taller de arreglos de costura en Florencia, Caquetá: clientes, órdenes de trabajo, prendas, pagos y avisos de entrega.
 
