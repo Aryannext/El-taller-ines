@@ -8,7 +8,7 @@ Scrum supone un equipo de tres a nueve personas. Este proyecto es individual, as
 
 | Rol | Quién lo asume | Nota |
 | --- | --- | --- |
-| **Product Owner** | Instructor, como representante del cliente | La dueña del taller no está disponible durante el proyecto (ver [fuentes de requisitos](../02-requisitos/fuentes-de-requisitos.md)). **Pendiente de acordar con el instructor.** |
+| **Product Owner** | Aprendiz, con su conocimiento del taller (F-05) | La dueña del taller no está disponible durante el proyecto (ver [fuentes de requisitos](../02-requisitos/fuentes-de-requisitos.md)). El instructor aprueba el producto terminado al final (F-04), según lo acordado el 14 de septiembre de 2026 |
 | **Scrum Master** | Aprendiz | Vela por que se cumplan los eventos y se retiren los impedimentos |
 | **Equipo de desarrollo** | Aprendiz | Analiza, diseña, programa y prueba |
 
@@ -51,6 +51,7 @@ Un elemento del backlog está terminado cuando:
 
 | Riesgo | Impacto | Mitigación |
 | --- | --- | --- |
-| La dueña no puede validar requisitos, mockups ni recibir capacitación | Alto | Acordar con el instructor que actúe como Product Owner y valide; declarar la limitación |
+| La dueña no puede validar requisitos, mockups ni recibir capacitación | Alto | El aprendiz prioriza como Product Owner con lo que conoce del taller (F-05) y declara esa limitación; el instructor aprueba el producto terminado |
+| El instructor solo revisa el producto terminado, así que un cambio grande pedido al final no cabría en el plazo | Alto | Cada decisión queda documentada con sus alternativas y su trazabilidad, para poder defenderla; los ajustes pequeños se hacen en el cierre (11 – 13 oct) |
 | Conocimiento básico de Laravel | Medio | Aprender por módulo durante el Sprint 3, con el diseño ya cerrado |
 | El desarrollo se come el tiempo de documentación | Alto | Sprints 1 y 2 sin código; el alcance de desarrollo se recorta antes que la documentación |

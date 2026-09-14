@@ -74,4 +74,4 @@ Escribir esta especificación obligó a ajustar tres detalles del diseño:
 ## Pendiente
 
 - Anotar las versiones exactas al crear el proyecto (HT-02) y al preparar el VPS (HT-04).
-- Validar con el instructor.
+- El instructor la aprueba junto con el producto terminado (DOC-14).

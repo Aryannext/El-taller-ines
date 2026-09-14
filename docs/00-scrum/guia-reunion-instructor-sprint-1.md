@@ -1,5 +1,7 @@
 # Guía para la reunión con el instructor · Sprint 1
 
+> **Ya no se usa para validar por etapas.** El 14 de septiembre de 2026 se supo que el instructor aprueba el producto terminado al final (F-04, DOC-14). Las preguntas y respuestas de defensa sirven para preparar la sustentación (DOC-24).
+
 **Para:** DOC-12 · validación de requisitos y acuerdo del rol de Product Owner · **Cuándo:** entre el 15 y el 21 de septiembre de 2026, idealmente antes del viernes 18 · **Duración:** 40 minutos
 
 ## Qué tienes que conseguir

@@ -673,11 +673,11 @@ flowchart TB
 
 | Hallazgo | Diagrama | Propuesta |
 | --- | --- | --- |
-| **Aviso con el cliente presente.** Si al devolver una prenda sin arreglar la orden queda lista, se genera un aviso aunque el cliente esté en el taller y se lleve todo enseguida | 10 | Esperar unos minutos antes de enviar el aviso automático. Si en ese tiempo la orden se entrega, el aviso se descarta solo (RN-39). No contradice ninguna regla; queda **por confirmar con el instructor** y, si se aprueba, se agrega a HU-28 |
+| **Aviso con el cliente presente.** Si al devolver una prenda sin arreglar la orden queda lista, se genera un aviso aunque el cliente esté en el taller y se lleve todo enseguida | 10 | Esperar unos minutos antes de enviar el aviso automático. Si en ese tiempo la orden se entrega, el aviso se descarta solo (RN-39). No contradice ninguna regla; queda **por decidir antes de construir HU-28** (Sprint 4) y, si se acepta, se agrega a sus criterios |
 | **La foto se busca por su orden.** `Foto` no tiene `negocio_id`, así que no puede usar el filtro global | 11 | `FotosDeOrden` busca la foto a través de su prenda y su orden, que sí filtran por negocio. Queda cubierto por la prueba de aislamiento (RNF-22) |
 | **Pendiente no vuelve de En proceso.** Ninguna regla lo pide, y no cambia el estado de la orden | 4 | No se permite; si la dueña marca En proceso por error, no afecta ningún cálculo |
 
 ## Pendiente
 
-- Validar los diagramas con el instructor, en especial la propuesta de esperar antes de enviar el aviso.
+- Decidir, antes de construir HU-28, si el aviso automático espera unos minutos antes de enviarse.
 - Los diagramas y la especificación de los casos de uso están en [casos de uso](../casos-de-uso/README.md) (DOC-15).

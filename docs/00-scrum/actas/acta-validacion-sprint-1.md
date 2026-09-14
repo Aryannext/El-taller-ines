@@ -1,5 +1,7 @@
 # Acta de validación · Sprint 1
 
+> **No se usa.** El instructor aprueba el producto terminado al final (F-04); esa aprobación se registra en DOC-14.
+
 **Para:** DOC-12 · **Guía:** [guía para la reunión](../guia-reunion-instructor-sprint-1.md)
 
 > Esta acta registra solo lo que ocurrió en la reunión. Lo que no se revisó se marca como **No revisado**; no se completa con suposiciones.

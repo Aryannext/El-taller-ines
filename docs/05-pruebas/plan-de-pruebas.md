@@ -110,7 +110,7 @@ Se sigue la pirámide de pruebas: muchas pruebas pequeñas y rápidas en la base
 | **Arquitectura** | La regla de dependencias entre capas (RNF-27) | PHPat dentro de Larastan | `tests/Arquitectura/` | No |
 | **Aislamiento** | Que ningún negocio vea datos de otro (RN-01, RNF-22) | Recorre todas las rutas con datos de otro negocio | `tests/Feature/Aislamiento/` | Sí |
 | **Sistema** | Lo que solo se ve en el sistema desplegado, en un navegador o en un celular real | Protocolos de prueba manual con hoja de registro | VPS y dispositivos reales | La del VPS |
-| **Aceptación** | Que el sistema sirva a quien lo usa | Prueba de usabilidad (PM-01) y revisión del instructor como Product Owner en cada revisión de sprint | — | — |
+| **Aceptación** | Que el sistema sirva a quien lo usa | Prueba de usabilidad (PM-01) y aprobación del producto terminado por el instructor (DOC-14) | — | — |
 
 Las rutas de las pruebas son relativas a `sistema/`, donde vive el código desde el Sprint 3.
 
@@ -300,7 +300,7 @@ El canal falso devuelve el mismo `ResultadoDeEnvio` que los canales reales. Es e
 
 ### Para empezar a probar una historia
 
-- La historia cumple la definición de «lista para desarrollar», que incluye su mockup aprobado (DOC-14).
+- La historia cumple la definición de «lista para desarrollar», que incluye su mockup verificado contra sus criterios (DOC-13).
 - HT-02 está terminado: GitHub Actions ya corre las pruebas.
 - Si la historia agrega rutas, HT-03 está terminado.
 
@@ -366,9 +366,9 @@ Un defecto es cualquier diferencia entre lo que hace el sistema y lo que dice un
 | Pruebas que pasan sin probar nada | Alto | Cada prueba se ve fallar antes de escribir el código; los errores conocidos están en la tabla de dobles de prueba |
 | El sistema se comporta distinto en local, en GitHub Actions y en el VPS | Medio | PHP 8.4 y MySQL 8.4 en los tres, y zona horaria fija en la aplicación |
 | Dependencias de terceros: Meta, el dominio y los compañeros | Medio | Se piden lo antes posible y cada una tiene su plan B en «Cuándo se suspenden las pruebas» |
-| El aprendiz prueba su propio trabajo | Medio | Los criterios se escribieron antes que el código, PM-01 lo hacen otras personas y el instructor revisa cada incremento |
+| El aprendiz prueba su propio trabajo | Medio | Los criterios se escribieron antes que el código, los scripts contrastan cada documento con los demás, PM-01 lo hacen otras personas y el instructor aprueba el producto terminado |
 
 ## Pendiente
 
-- Validar el plan con el instructor, junto con los requisitos (DOC-12) y los mockups (DOC-14).
+- El instructor aprueba el plan junto con el producto terminado (DOC-14).
 - Los resultados van en el informe de pruebas (DOC-21).

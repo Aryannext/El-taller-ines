@@ -49,7 +49,7 @@ Cada historia se revisó contra estos criterios; la que no los cumplía se divid
 
 ### Definición de "lista para desarrollar"
 
-Una historia entra a un sprint de desarrollo cuando tiene: formato completo, origen, requisitos y reglas, criterios de aceptación verificables, estimación y su mockup aprobado (Sprint 2).
+Una historia entra a un sprint de desarrollo cuando tiene: formato completo, origen, requisitos y reglas, criterios de aceptación verificables, estimación y su mockup, verificado contra sus criterios de aceptación con `generar_mockups.mjs` (Sprint 2).
 
 ## Resumen
 

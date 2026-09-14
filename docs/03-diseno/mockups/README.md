@@ -1,10 +1,10 @@
 # Mockups
 
-**Estado:** borrador · DOC-13 · adelantado del Sprint 2 · pendiente de validación con el instructor (DOC-14)
+**Estado:** borrador · DOC-13 · adelantado del Sprint 2 · el instructor lo aprueba con el producto terminado (DOC-14)
 
 ## Para qué sirven
 
-Muestran cómo se verá cada pantalla antes de programarla. Cada pantalla declara qué historias de usuario y qué criterios de aceptación muestra, así que el instructor puede validarla contra los requisitos y no contra gustos.
+Muestran cómo se verá cada pantalla antes de programarla. Cada pantalla declara qué historias de usuario y qué criterios de aceptación muestra, así que se puede revisar contra los requisitos y no contra gustos.
 
 ## Cómo verlos
 
@@ -104,7 +104,7 @@ Estos datos están también en la base de datos de ejemplo ([datos-de-ejemplo.sq
 
 ## Limitaciones
 
-- **Sin validación con la usuaria final.** La dueña no está disponible; los valida el instructor (DOC-14). La prueba de usabilidad con 3 compañeros (RNF-12) se hace sobre el sistema construido.
+- **Sin validación con la usuaria final.** La dueña no está disponible, y el instructor aprueba el producto terminado, no los mockups por separado (DOC-14). Por eso cada pantalla se contrasta con sus criterios con `generar_mockups.mjs`, y la prueba de usabilidad con 3 compañeros (RNF-12) se hace sobre el sistema construido.
 - **Sin wireframes separados.** Se pasó directo a mockups de alta fidelidad, porque el plazo es corto y un HTML navegable permite validar el flujo y el aspecto en una sola revisión.
 - **Formato HTML.** Lo eligió el aprendiz el 14 de septiembre de 2026, porque queda versionado y es la base directa de las vistas. Si el instructor pide Figma, las pantallas se trasladan.
 - **Apoyo de IA.** Se diseñaron con apoyo de un asistente de IA, como se declara en el plan de sprints; cada decisión está justificada arriba.

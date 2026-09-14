@@ -59,6 +59,6 @@ Lo que no cumple alguna de las dos queda fuera con su motivo, aunque estuviera e
 
 - **Plazo:** entrega el 13 de octubre de 2026.
 - **Equipo:** una persona, con conocimientos básicos de Laravel.
-- **Validación:** la dueña no está disponible; valida el instructor como representante del cliente (F-04).
+- **Validación:** la dueña no está disponible; el instructor aprueba el producto terminado como representante del cliente (F-04).
 - **Costo:** sin servicios de pago para las usuarias, en coherencia con la idea de negocio. El costo por mensaje de la API oficial en producción no lo asumen las usuarias; su financiación se define en el plan de negocio.
 - **Equipo físico:** sin presupuesto para impresora de etiquetas; la identificación se hace con fotos y el número de orden escrito a mano.
