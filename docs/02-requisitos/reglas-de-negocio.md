@@ -1,6 +1,6 @@
 # Reglas de negocio
 
-**Estado:** borrador · Sprint 1 · las marcadas **por confirmar** esperan la decisión del aprendiz (F-05); el documento completo se valida con el instructor (F-04)
+**Estado:** borrador · Sprint 1 · se valida con el instructor (F-04)
 
 ## Cómo están escritas
 
@@ -66,7 +66,7 @@ Un cliente debe tener nombre y teléfono.
 
 El teléfono del cliente debe ser un celular colombiano: 10 dígitos que empiezan por 3. Es el número al que llegan los avisos.
 
-**Tipo:** Restricción · **Origen:** M-03 · ADR-003 · **Por confirmar (F-05):** si el taller atiende clientes con número de otro país o solo con teléfono fijo
+**Tipo:** Restricción · **Origen:** M-03 · ADR-003 · F-05
 
 **Ejemplo:** `3104567890` se acepta. `6014567890` (fijo) y `310456789` (9 dígitos) se rechazan.
 
@@ -426,16 +426,11 @@ El contenido del aviso se arma con los datos de la orden en el momento de enviar
 
 ---
 
-## Decisiones por confirmar
-
-| Regla | Pregunta | Propuesta mientras tanto |
-| --- | --- | --- |
-| RN-03 | ¿Hay clientes con número de otro país o solo con teléfono fijo? | Solo celular colombiano de 10 dígitos |
-
 ## Decisiones confirmadas
 
 | Regla | Decisión | Fecha · fuente |
 | --- | --- | --- |
+| RN-03 | Solo se aceptan celulares colombianos; no hay clientes con número de otro país ni solo con teléfono fijo | 13 sep 2026 · F-05 |
 | RN-17 | Fotos opcionales, máximo 3 por prenda | 13 sep 2026 · F-05 |
 | RN-21 | Se puede entregar una orden con saldo pendiente, con confirmación | 13 sep 2026 · F-05 |
 | RN-25 | Métodos de pago del taller: efectivo y Nequi (cuenta personal de la dueña) | 13 sep 2026 · F-05 |

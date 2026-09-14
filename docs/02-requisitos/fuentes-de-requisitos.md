@@ -60,3 +60,4 @@ Hechos registrados de F-05:
 | 13 sep 2026 | Se puede entregar una orden que el cliente todavía debe, confirmándolo | Reglas de negocio · RN-21 |
 | 13 sep 2026 | Las fotos de las prendas son opcionales, hasta 3 por prenda | Reglas de negocio · RN-17 |
 | 13 sep 2026 | El taller recibe pagos en efectivo y por Nequi, en la cuenta personal de la dueña | Reglas de negocio · RN-25 · Alcance |
+| 13 sep 2026 | Los clientes tienen celular colombiano; no hay números de otro país ni solo teléfono fijo | Reglas de negocio · RN-03 |
