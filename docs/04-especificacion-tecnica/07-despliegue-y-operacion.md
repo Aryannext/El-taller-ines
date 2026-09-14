@@ -33,7 +33,7 @@ Detalla el [diagrama de despliegue](../03-diseno/diagramas/README.md#13-desplieg
 | `DB_CONNECTION` | `mysql` | `mysql` | Motor |
 | `DB_HOST` | `127.0.0.1` | `127.0.0.1` | Servidor de MySQL |
 | `DB_PORT` | El puerto de MySQL 8.4 en WAMP | `3306` | Puerto |
-| `DB_DATABASE` | `taller` | `taller` | Base de datos; las pruebas usan `taller_pruebas` en `.env.testing` |
+| `DB_DATABASE` | `taller` | `taller` | Base de datos; las pruebas usan `taller_pruebas`, fijada en `phpunit.xml` |
 | `DB_USERNAME` | `taller` | `taller` | Usuario de MySQL |
 | `DB_PASSWORD` | Local | Secreta | Contraseña de MySQL |
 | `SESSION_DRIVER` | `file` | `file` | [Seguridad](06-seguridad.md#sesión) |
