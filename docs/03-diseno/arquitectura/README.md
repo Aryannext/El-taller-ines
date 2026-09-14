@@ -224,13 +224,17 @@ sistema/
 │   └── Providers/
 │       └── AppServiceProvider.php          Enlaza cada interfaz con su implementación
 ├── resources/
-│   ├── css/estilos.css                     La hoja de estilos de los mockups
 │   └── views/                              Una vista por pantalla PT-xx
 ├── public/
+│   ├── css/estilos.css                     La hoja de estilos de los mockups, sin compilar
+│   ├── js/app.js                           Confirmaciones, «Otro», fotos y doble toque
+│   ├── fuentes/                            Atkinson Hyperlegible, servida por el propio sistema
 │   ├── manifest.webmanifest                Nombre, íconos y colores para instalar el sistema (ADR-006)
 │   ├── sw.js                               Service worker: página sin conexión
+│   ├── sin-conexion.html                   Lo que se muestra sin internet
 │   └── .well-known/assetlinks.json         Prueba que el APK y el sitio son del mismo dueño
 ├── routes/web.php
+├── routes/console.php                      Tareas programadas: respaldos
 ├── database/
 │   ├── migrations/                         Producen el esquema del modelo de datos
 │   └── seeders/                            Negocio, tipos de prenda y métodos de pago iniciales
@@ -240,6 +244,7 @@ sistema/
     └── Arquitectura/                       Regla de dependencias entre capas
 
 movil/                                      Proyecto del APK generado con Bubblewrap; la llave de firma no se versiona
+despliegue/                                 Nginx, servicio de la cola y scripts de respaldo y despliegue (DOC-19)
 ```
 
 <!-- estructura:fin -->
@@ -329,7 +334,7 @@ Complementa la tabla del [modelo de datos](../modelo-de-datos/README.md#dónde-s
 | **RN-36** | Dominio | `ReglasDeSeguimiento` | Días calendario desde que quedó lista |
 | **RN-37** | Aplicación | `SincronizarEstadoDeOrden`, `OrdenQuedoLista`, `GenerarAviso` | Al quedar lista se emite el evento después de confirmar la transacción, y el oyente crea el aviso |
 | **RN-38** | Aplicación | `GenerarAviso` | Si ya existe el aviso de esa vez, la clave única lo impide y el oyente no crea otro |
-| **RN-39** | Aplicación | `EnviarAviso` | Antes de enviar, vuelve a calcular el estado; si ya no está lista, lo descarta |
+| **RN-39** | Aplicación | `EnviarAviso`, `SincronizarEstadoDeOrden` | Si la orden deja de estar lista, `SincronizarEstadoDeOrden` descarta sus avisos sin enviar; antes de enviar, `EnviarAviso` vuelve a calcular el estado y, si ya no está lista, lo descarta |
 | **RN-40** | Aplicación | `EnviarAviso`, `CanalDeAviso` | Intenta la API oficial si está configurada; si no, o si falla tres veces, lo deja para envío asistido |
 | **RN-41** | Aplicación | `EnviarAviso`, `ConfirmarEnvioAsistido` | Registra canal, mensaje y resultado |
 | **RN-42** | Dominio | `MensajeDeAviso` | Arma el texto con el número, las prendas listas y el saldo del momento |

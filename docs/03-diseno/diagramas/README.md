@@ -109,6 +109,7 @@ classDiagram
     class MensajeDeAviso {
         +construir(string cliente, NumeroDeOrden numero, int prendasListas, Dinero saldo)$ MensajeDeAviso
         +texto() string
+        +parametros() array
     }
     class CanalDeAviso {
         <<interface>>
