@@ -4,6 +4,7 @@
 
 ## Contexto
 
+- **Requisito original:** la especificación de la versión 1 (F-01) pedía "un sistema web" disponible desde el navegador. La versión 1 se apartó de eso y terminó como app móvil sin conexión; esta decisión vuelve al requisito original.
 - **Conexión:** según el aprendiz, el taller tiene internet estable. Ya no es necesario trabajar sin conexión, que fue lo que llevó a la versión 1 a una app solo local.
 - **Conocimientos:** el aprendiz tiene bases de PHP, JavaScript y Python, sin experiencia previa en frameworks.
 - **Evaluación:** el proyecto evalúa arquitectura MVC o Clean Architecture, SOLID, normalización de la base de datos y despliegue.
