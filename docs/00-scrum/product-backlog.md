@@ -49,7 +49,7 @@ Los documentos del Sprint 1 se adelantaron: se terminaron el 13 y el 14 de septi
 | **DOC-07** | Historias de usuario con criterios de aceptación | Sprint 1 | Terminado | dad6951 |
 | **DOC-08** | Matriz de trazabilidad | Sprint 1 | Terminado | f19470b |
 | **DOC-09** | Análisis de alternativas | Sprint 1 | Terminado | 5923187 |
-| **DOC-10** | Product backlog y tablero | Sprint 1 | En curso | — |
+| **DOC-10** | Product backlog y tablero | Sprint 1 | Terminado | 1df92bb, 0178975, https://github.com/users/Aryannext/projects/1 |
 | **DOC-11** | Proceso actual y proceso propuesto | Sprint 1 | Pendiente | — |
 | **DOC-12** | Validación de requisitos con el instructor y acuerdo del rol de Product Owner | Sprint 1 | Pendiente | — |
 | **DOC-13** | Wireframes y mockups | Sprint 2 | Pendiente | — |
@@ -218,7 +218,15 @@ El backlog vive en GitHub como issues del repositorio, uno por elemento, con est
 | **Etiqueta de épica** | EP-01 a EP-08, solo en historias |
 | **Casillas** | Cada criterio de aceptación o condición de terminado; se marcan al cumplirse |
 
-El tablero de GitHub Projects muestra esos issues en columnas:
+El [tablero de GitHub Projects](https://github.com/users/Aryannext/projects/1) (privado) reúne esos issues con cuatro campos propios: **Sprint** (una iteración por hito, con sus fechas reales), **Prioridad**, **Puntos** y **Orden**. Tiene tres vistas:
+
+| Vista | Qué muestra |
+| --- | --- |
+| **Backlog** | Tabla con todos los elementos en el orden de este documento |
+| **Sprint actual** | Tablero por columnas filtrado al sprint en curso; es la vista del día a día |
+| **Todo el proyecto** | Tablero por columnas con todos los elementos |
+
+Las columnas son:
 
 | Columna | Entra cuando |
 | --- | --- |

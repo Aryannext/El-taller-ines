@@ -3,6 +3,10 @@
 Uso:
     python scripts/publicar_backlog.py              # solo valida y muestra el resumen
     python scripts/publicar_backlog.py --publicar   # además crea o actualiza etiquetas, hitos e issues
+    python scripts/publicar_backlog.py --tablero    # además crea o actualiza el tablero de GitHub Projects
+
+En el tablero, la columna solo se asigna a las tarjetas nuevas y a los elementos terminados:
+lo que se movió a mano durante un sprint no se pisa.
 
 Al actualizar un issue existente solo cambia título, etiquetas e hito: el cuerpo no se toca
 para no borrar las casillas de criterios que ya se marcaron en GitHub.
@@ -15,7 +19,9 @@ import json
 import re
 import subprocess
 import sys
+import time
 from dataclasses import dataclass, field
+from datetime import date, timedelta
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
@@ -361,11 +367,247 @@ def publicar(historias, elementos, hitos, rehacer_cuerpos: bool = False) -> None
     print(f"Issues creados: {creados} · actualizados: {actualizados} · cerrados: {cerrados}")
 
 
+# --- Tablero de GitHub Projects -----------------------------------------------------------
+
+PROYECTO = "El-taller-ines · Scrum"
+INICIO_DEL_PROYECTO = date(2026, 9, 13)  # plan-de-sprints.md
+# (columna, color, descripción, opción por defecto de GitHub que reemplaza conservando su id)
+COLUMNAS = [
+    ("Backlog", "GRAY", "Existe y no está en el sprint actual", None),
+    ("Por hacer", "BLUE", "La planificación del sprint lo incluye", "Todo"),
+    ("En curso", "YELLOW", "Se está trabajando; máximo un elemento a la vez", "In Progress"),
+    ("Terminado", "GREEN", "Cumple la definición de terminado", "Done"),
+]
+COLORES_PRIORIDAD = {"Must": "RED", "Should": "ORANGE", "Could": "YELLOW"}
+VISTAS = [  # (nombre, disposición, filtro)
+    ("Backlog", "TABLE_LAYOUT", ""),
+    ("Sprint actual", "BOARD_LAYOUT", "sprint:@current"),
+    ("Todo el proyecto", "BOARD_LAYOUT", ""),
+]
+CAMPOS_VISIBLES = ["Title", "Status", "Sprint", "Prioridad", "Puntos", "Orden", "Labels"]
+README_TABLERO = """Tablero Scrum del proyecto formativo SENA ADSO **El-taller-ines**.
+
+- **Backlog:** el orden de las filas es el del [product backlog](https://github.com/{repo}/blob/main/docs/00-scrum/product-backlog.md).
+- **Sprint actual:** el tablero de la semana. Máximo una tarjeta en *En curso*.
+- **Columnas:** Backlog → Por hacer (planificación) → En curso → Terminado (definición de terminado).
+- **Daily:** cada sprint tiene un issue de registro diario con qué hice, qué haré, qué me bloquea y los puntos que faltan.
+
+Se genera con `scripts/publicar_backlog.py --tablero`."""
+
+
+def q(texto: str) -> str:
+    return json.dumps(texto, ensure_ascii=False)
+
+
+def graphql(consulta: str, **variables) -> dict:
+    """Llama a la API GraphQL; reintenta los errores 5xx de GitHub con espera creciente."""
+    cuerpo_solicitud = json.dumps({"query": consulta, "variables": variables})
+    for intento in range(4):
+        r = subprocess.run(["gh", "api", "graphql", "--input", "-"], input=cuerpo_solicitud,
+                           capture_output=True, text=True, encoding="utf-8")
+        if r.returncode == 0:
+            return json.loads(r.stdout)["data"]
+        if not re.search(r"HTTP 5\d\d", r.stderr) or intento == 3:
+            break
+        time.sleep(2 ** (intento + 1))
+    inicio = " ".join(consulta.split())[:160]
+    raise SystemExit(f"Falló la consulta GraphQL «{inicio}…»:\n{r.stderr.strip()}")
+
+
+def mutar_en_lotes(mutaciones: list[str], tamano: int = 10) -> dict:
+    """Envía varias mutaciones por solicitud; GitHub las ejecuta en orden dentro de cada una."""
+    datos: dict = {}
+    for inicio in range(0, len(mutaciones), tamano):
+        lote = mutaciones[inicio:inicio + tamano]
+        datos |= graphql("mutation {" + " ".join(f"m{inicio + i}: {m}" for i, m in enumerate(lote)) + "}")
+    return datos
+
+
+def iteraciones(hitos: dict[str, str]) -> list[dict]:
+    resultado, inicio = [], INICIO_DEL_PROYECTO
+    for titulo, fin in hitos.items():
+        fin_fecha = date.fromisoformat(fin)
+        resultado.append({"title": titulo, "startDate": inicio.isoformat(), "duration": (fin_fecha - inicio).days + 1})
+        inicio = fin_fecha + timedelta(days=1)
+    return resultado
+
+
+CONSULTA_PROYECTO = """
+query($id: ID!) { node(id: $id) { ... on ProjectV2 {
+  url
+  fields(first: 50) { nodes {
+    ... on ProjectV2FieldCommon { id name dataType }
+    ... on ProjectV2SingleSelectField { options { id name } }
+    ... on ProjectV2IterationField { configuration {
+      iterations { id title } completedIterations { id title } } }
+  } }
+  views(first: 20) { nodes { id name layout } }
+  items(first: 100) { pageInfo { hasNextPage } nodes { id content { ... on Issue { number } }
+    Status: fieldValueByName(name: "Status") { ... on ProjectV2ItemFieldSingleSelectValue { valor: optionId } }
+    Prioridad: fieldValueByName(name: "Prioridad") { ... on ProjectV2ItemFieldSingleSelectValue { valor: optionId } }
+    Puntos: fieldValueByName(name: "Puntos") { ... on ProjectV2ItemFieldNumberValue { valor: number } }
+    Orden: fieldValueByName(name: "Orden") { ... on ProjectV2ItemFieldNumberValue { valor: number } }
+    Sprint: fieldValueByName(name: "Sprint") { ... on ProjectV2ItemFieldIterationValue { valor: iterationId } }
+  } }
+} } }"""
+
+
+def asegurar_campos(proyecto_id: str, campos: dict, hitos: dict[str, str]) -> bool:
+    """Crea o ajusta las columnas y los campos propios. Devuelve True si cambió algo."""
+    cambio = False
+    estado = campos["Status"]
+    por_nombre = {o["name"]: o["id"] for o in estado["options"]}
+    if [o["name"] for o in estado["options"]] != [c[0] for c in COLUMNAS]:
+        opciones = []
+        for nombre, color, descripcion, reemplaza in COLUMNAS:
+            opcion = {"name": nombre, "color": color, "description": descripcion}
+            if (existente := por_nombre.get(nombre) or por_nombre.get(reemplaza)) is not None:
+                opcion["id"] = existente
+            opciones.append(opcion)
+        graphql("mutation($f: ID!, $o: [ProjectV2SingleSelectFieldOptionInput!]) {"
+                " updateProjectV2Field(input: {fieldId: $f, singleSelectOptions: $o}) { clientMutationId } }",
+                f=estado["id"], o=opciones)
+        cambio = True
+
+    crear = "mutation($p: ID!, $t: ProjectV2CustomFieldType!, $n: String!, $o: [ProjectV2SingleSelectFieldOptionInput!]," \
+            " $i: ProjectV2IterationFieldConfigurationInput) { createProjectV2Field(input: {projectId: $p, dataType: $t," \
+            " name: $n, singleSelectOptions: $o, iterationConfiguration: $i}) { clientMutationId } }"
+    if "Prioridad" not in campos:
+        opciones = [{"name": p, "color": c, "description": PRIORIDADES[p][1]} for p, c in COLORES_PRIORIDAD.items()]
+        graphql(crear, p=proyecto_id, t="SINGLE_SELECT", n="Prioridad", o=opciones)
+        cambio = True
+    for nombre in ("Puntos", "Orden"):
+        if nombre not in campos:
+            graphql(crear, p=proyecto_id, t="NUMBER", n=nombre)
+            cambio = True
+    if "Sprint" not in campos:
+        sprints = iteraciones(hitos)
+        configuracion = {"startDate": sprints[0]["startDate"], "duration": 7, "iterations": sprints}
+        graphql(crear, p=proyecto_id, t="ITERATION", n="Sprint", i=configuracion)
+        cambio = True
+    return cambio
+
+
+def asegurar_vistas(proyecto_id: str, vistas: list[dict], campos: dict) -> None:
+    visibles = [campos[n]["id"] for n in CAMPOS_VISIBLES if n in campos]
+    existentes = {v["name"]: v["id"] for v in vistas}
+    sin_usar = [v["id"] for v in vistas if v["name"] not in {n for n, _, _ in VISTAS}]
+    for nombre, disposicion, filtro in VISTAS:
+        vista_id = existentes.get(nombre)
+        if vista_id is None and sin_usar:
+            vista_id = sin_usar.pop(0)  # la vista por defecto «View 1» se reutiliza como Backlog
+        if vista_id is None:
+            vista_id = graphql("mutation($p: ID!, $n: String!, $l: ProjectV2ViewLayout!) { createProjectV2View("
+                               "input: {projectId: $p, name: $n, layout: $l}) { projectV2View { id } } }",
+                               p=proyecto_id, n=nombre, l=disposicion)["createProjectV2View"]["projectV2View"]["id"]
+        graphql("mutation($v: ID!, $n: String!, $l: ProjectV2ViewLayout!, $f: String!, $c: [ID!]) { updateProjectV2View("
+                "input: {viewId: $v, name: $n, layout: $l, filter: $f, configuration: {visibleFieldIds: $c}})"
+                " { clientMutationId } }", v=vista_id, n=nombre, l=disposicion, f=filtro, c=visibles)
+
+
+def publicar_tablero(elementos: dict[str, Elemento], hitos: dict[str, str]) -> None:
+    repo_info = json.loads(gh("repo", "view", "--json", "nameWithOwner,id,owner"))
+    repo, dueno = repo_info["nameWithOwner"], repo_info["owner"]["login"]
+
+    datos = graphql("query($l: String!) { user(login: $l) { id projectsV2(first: 50) { nodes { id title } } } }", l=dueno)
+    proyecto_id = next((p["id"] for p in datos["user"]["projectsV2"]["nodes"] if p["title"] == PROYECTO), None)
+    if proyecto_id is None:
+        proyecto_id = graphql("mutation($o: ID!, $t: String!, $r: ID!) { createProjectV2(input: {ownerId: $o,"
+                              " title: $t, repositoryId: $r}) { projectV2 { id } } }",
+                              o=datos["user"]["id"], t=PROYECTO, r=repo_info["id"])["createProjectV2"]["projectV2"]["id"]
+        print(f"Proyecto creado: {PROYECTO}")
+    graphql("mutation($p: ID!, $d: String!, $r: String!) { updateProjectV2(input: {projectId: $p,"
+            " shortDescription: $d, readme: $r, public: false}) { clientMutationId } }",
+            p=proyecto_id, d="Product backlog y sprints del proyecto formativo SENA ADSO",
+            r=README_TABLERO.format(repo=repo))
+
+    def cargar() -> dict:
+        nodo = graphql(CONSULTA_PROYECTO, id=proyecto_id)["node"]
+        if nodo["items"]["pageInfo"]["hasNextPage"]:
+            raise SystemExit("El tablero tiene más de 100 tarjetas: hay que paginar la consulta")
+        return nodo
+
+    proyecto = cargar()
+    campos = {c["name"]: c for c in proyecto["fields"]["nodes"] if c}
+    if asegurar_campos(proyecto_id, campos, hitos):
+        proyecto = cargar()
+        campos = {c["name"]: c for c in proyecto["fields"]["nodes"] if c}
+
+    issues = {i["title"].split(" · ")[0]: i for i in json.loads(
+        gh("issue", "list", "-R", repo, "--state", "all", "--limit", "500", "--json", "id,number,title,state"))}
+    actuales = {n["content"]["number"]: n for n in proyecto["items"]["nodes"] if n["content"]}
+    tarjetas = {numero: n["id"] for numero, n in actuales.items()}
+
+    orden = sorted((e for e in elementos.values() if e.tipo == "DOC"), key=lambda e: int(e.codigo[4:]))
+    orden += sorted((e for e in elementos.values() if e.orden is not None), key=lambda e: e.orden)
+    faltan = [e for e in orden if e.codigo not in issues]
+    if faltan:
+        raise SystemExit("Faltan issues; corre primero --publicar: " + ", ".join(e.codigo for e in faltan))
+
+    nuevos = [e for e in orden if issues[e.codigo]["number"] not in tarjetas]
+    agregados = mutar_en_lotes([
+        f"addProjectV2ItemById(input: {{projectId: {q(proyecto_id)}, contentId: {q(issues[e.codigo]['id'])}}}) {{ item {{ id }} }}"
+        for e in nuevos
+    ])
+    for i, e in enumerate(nuevos):
+        tarjetas[issues[e.codigo]["number"]] = agregados[f"m{i}"]["item"]["id"]
+    codigos_nuevos = {e.codigo for e in nuevos}
+
+    columnas = {o["name"]: o["id"] for o in campos["Status"]["options"]}
+    prioridades = {o["name"]: o["id"] for o in campos["Prioridad"]["options"]}
+    configuracion = campos["Sprint"]["configuration"]
+    sprints = {it["title"]: it["id"] for it in configuracion["iterations"] + configuracion["completedIterations"]}
+
+    def valor(tarjeta: str, campo: str, contenido: str) -> str:
+        return (f"updateProjectV2ItemFieldValue(input: {{projectId: {q(proyecto_id)}, itemId: {q(tarjeta)},"
+                f" fieldId: {q(campos[campo]['id'])}, value: {{{contenido}}}}}) {{ clientMutationId }}")
+
+    # Solo se envía lo que difiere del tablero: GitHub responde 502 a lotes grandes de cambios repetidos.
+    mutaciones = []
+    for e in orden:
+        numero = issues[e.codigo]["number"]
+        tarjeta, actual = tarjetas[numero], actuales.get(numero, {})
+
+        def fijar(campo: str, deseado, contenido: str) -> None:
+            if (actual.get(campo) or {}).get("valor") != deseado:
+                mutaciones.append(valor(tarjeta, campo, contenido))
+
+        if e.estado == "Terminado" or issues[e.codigo]["state"] == "CLOSED":
+            fijar("Status", columnas["Terminado"], f"singleSelectOptionId: {q(columnas['Terminado'])}")
+        elif e.codigo in codigos_nuevos:
+            columna = columnas["En curso" if e.estado == "En curso" else "Backlog"]
+            fijar("Status", columna, f"singleSelectOptionId: {q(columna)}")
+        if e.prioridad:
+            fijar("Prioridad", prioridades[e.prioridad], f"singleSelectOptionId: {q(prioridades[e.prioridad])}")
+        if e.puntos:
+            fijar("Puntos", float(e.puntos), f"number: {e.puntos}")
+        if e.orden:
+            fijar("Orden", float(e.orden), f"number: {e.orden}")
+        if (hito := hito_de(e.sprint, hitos)) in sprints:
+            fijar("Sprint", sprints[hito], f"iterationId: {q(sprints[hito])}")
+
+    deseado = [issues[e.codigo]["number"] for e in orden]
+    if nuevos or list(actuales) != deseado:
+        anterior = None
+        for numero in deseado:
+            despues = f", afterId: {q(anterior)}" if anterior else ""
+            mutaciones.append(f"updateProjectV2ItemPosition(input: {{projectId: {q(proyecto_id)},"
+                              f" itemId: {q(tarjetas[numero])}{despues}}}) {{ clientMutationId }}")
+            anterior = tarjetas[numero]
+    mutar_en_lotes(mutaciones)
+    print(f"Cambios enviados al tablero: {len(mutaciones)}")
+
+    asegurar_vistas(proyecto_id, proyecto["views"]["nodes"], campos)
+    print(f"Tarjetas agregadas: {len(nuevos)} · en el tablero: {len(orden)}")
+    print(f"Tablero: {proyecto['url']}")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--publicar", action="store_true", help="crea o actualiza etiquetas, hitos e issues en GitHub")
     parser.add_argument("--rehacer-cuerpos", action="store_true",
                         help="con --publicar, reescribe también el cuerpo de los issues existentes (desmarca las casillas)")
+    parser.add_argument("--tablero", action="store_true", help="crea o actualiza el tablero de GitHub Projects")
     opciones = parser.parse_args()
 
     historias = cargar_historias()
@@ -381,6 +623,8 @@ def main() -> int:
 
     if opciones.publicar:
         publicar(historias, elementos, hitos, opciones.rehacer_cuerpos)
+    if opciones.tablero:
+        publicar_tablero(elementos, hitos)
     return 0
 
 
