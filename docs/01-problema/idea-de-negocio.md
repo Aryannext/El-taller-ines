@@ -10,7 +10,7 @@ El sistema será **gratuito** para mujeres que tienen un negocio pequeño de arr
 
 | Tema | Pregunta abierta | Dónde se resuelve |
 | --- | --- | --- |
-| **Alcance** | ¿La versión que se entrega sirve a un solo taller o ya permite que varios negocios la usen? | Alcance del proyecto · Sprint 1 |
-| **Arquitectura y datos** | Si la usan varios negocios, cada uno debe ver solo su información (multi-inquilino). Cambia el modelo de datos y la seguridad | Diseño · Sprint 2 |
+| **Alcance** | ~~¿La versión que se entrega sirve a un solo taller o ya permite que varios negocios la usen?~~ **Resuelto:** un solo taller, con los datos preparados para varios | [ADR-002](../03-diseno/adr/ADR-002-un-taller-preparado-para-varios.md) |
+| **Arquitectura y datos** | Qué catálogos personaliza cada negocio y cómo se prueba el aislamiento entre negocios | Modelo de datos · Sprint 2 |
 | **Sostenibilidad** | Sin cobrar a las usuarias, ¿cómo se cubren el servidor y el mantenimiento? (alianzas, programas de apoyo a emprendedoras, patrocinio) | Plan de negocio |
 | **Impacto social** | Apoyo a mujeres emprendedoras del sector servicios en Florencia, en línea con el impacto social que pide la ficha del proyecto formativo | Plan de negocio |
