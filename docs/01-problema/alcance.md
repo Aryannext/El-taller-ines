@@ -17,10 +17,11 @@ Lo que no cumple alguna de las dos queda fuera con su motivo, aunque estuviera e
 | --- | --- | --- | --- |
 | **Acceso** | Inicio y cierre de sesión de la usuaria del taller, cambio de contraseña | Soporte de todos | Seguridad de la información del negocio |
 | **Clientes** | Registrar, consultar, editar y buscar clientes por nombre o teléfono | OE-01 | M-01, M-01.2 |
-| **Órdenes y prendas** | Crear una orden para un cliente con una o varias prendas: arreglo, tipo, precio y fecha de entrega; editar y eliminar prendas no entregadas | OE-01 | M-01.1 |
+| **Órdenes y prendas** | Crear una orden para un cliente con una o varias prendas: tipo, descripción del arreglo, precio y fecha de entrega; editar la descripción y el precio, y eliminar prendas, mientras no se hayan entregado | OE-01 | M-01.1 |
+| **Identificación de prendas** | Tomar o subir fotos de cada prenda al registrarla; ver las fotos de todas las prendas de una orden; número de orden corto y fácil de copiar (por ejemplo, #0042) para escribirlo a mano en la bolsa | OE-06 | M-06, M-06.1 |
 | **Estados** | Cambiar el estado de cada prenda; estado de la orden calculado a partir de sus prendas; entrega y cancelación de la orden | OE-02 | M-02, M-02.1 |
 | **Pagos** | Registrar pagos y abonos por orden, anular un pago mal registrado sin borrarlo, saldo calculado, total por cobrar | OE-04 | M-04, M-04.1 |
-| **Avisos** | Botón para avisar por WhatsApp cuando la orden está lista, con el mensaje redactado, y registro de cada aviso | OE-03 | M-03 |
+| **Avisos** | Aviso automático por WhatsApp cuando la orden queda lista, mediante la API oficial; si el canal automático no está disponible, envío asistido con el mensaje redactado; registro de cada aviso con su canal y resultado | OE-03 | M-03 · [ADR-003](../03-diseno/adr/ADR-003-canal-de-avisos-whatsapp.md) |
 | **Seguimiento** | Panel con órdenes vencidas, prendas sin reclamar con días de espera y total por cobrar | OE-05 | M-05 |
 | **Base preparada para varios negocios** | Tabla de negocio y filtro por negocio en las tablas raíz, con un solo taller registrado | — | [ADR-002](../03-diseno/adr/ADR-002-un-taller-preparado-para-varios.md) |
 
@@ -29,9 +30,11 @@ Lo que no cumple alguna de las dos queda fuera con su motivo, aunque estuviera e
 | Función | Motivo | Estaba en |
 | --- | --- | --- |
 | **Varios negocios con registro propio** | No cabe en 30 días; los datos quedan preparados (ADR-002) | Idea de negocio |
-| **Envío automático de avisos por WhatsApp** | La API oficial de WhatsApp cobra por mensaje y exige verificar el negocio ante Meta; choca con un sistema gratuito para las usuarias. El aviso asistido cumple el medio M-03 | F-01 |
-| **Fotografías de las prendas** | No nace de ninguna causa del árbol de problemas | F-01, F-02 |
-| **Observaciones o notas por prenda** | No nace de ninguna causa del árbol; la descripción del arreglo cubre lo necesario. Se reconsidera si el instructor lo pide | F-01, F-02 |
+| **APIs no oficiales de WhatsApp (Evolution API y similares)** | Violan los términos de WhatsApp y exponen el número de la usuaria a bloqueo ([ADR-003](../03-diseno/adr/ADR-003-canal-de-avisos-whatsapp.md)) | F-05 |
+| **Envío automático en producción con el número real del taller** | Requiere verificar el negocio ante Meta y cubrir el costo por mensaje; se resuelve en el plan de negocio. En la entrega se demuestra con el número de prueba de Meta, y en uso real opera el envío asistido hasta activarlo | ADR-003 |
+| **Confirmación de entrega o lectura del aviso** | Requiere recibir notificaciones de estado de Meta (webhooks); el resultado registrado es la aceptación del mensaje | ADR-003 |
+| **Impresora de etiquetas o códigos para las bolsas** | No hay presupuesto para el equipo (F-05). La foto de cada prenda y el número de orden cumplen el medio M-06 | F-05 |
+| **Notas adicionales por prenda, aparte de la descripción** | La descripción del arreglo se escribe al registrar la prenda y se puede corregir; notas aparte no nacen de una causa del árbol. Se reconsidera si el instructor lo pide | F-01, F-02 |
 | **Historial detallado de actividad** | El efecto que lo justificaba (E-05, desacuerdos con clientes) se descartó. Sí se conserva el rastro de pagos anulados y avisos enviados | F-01, F-02 |
 | **App móvil nativa y trabajo sin conexión** | El taller tiene internet estable; el sistema web funciona en el navegador del teléfono (ADR-001) | F-02 |
 | **Bot de Telegram y respaldos por Telegram** | Los respaldos se hacen en el servidor; no nace de una causa del árbol | F-02 |
@@ -44,10 +47,12 @@ Lo que no cumple alguna de las dos queda fuera con su motivo, aunque estuviera e
 - El taller tiene conexión a internet estable durante el horario de atención (según el aprendiz).
 - La usuaria tiene un teléfono con navegador y WhatsApp.
 - El servidor (VPS) estará disponible para el despliegue durante el Sprint 4.
+- Meta aprueba la plantilla del aviso de "orden lista" a tiempo para el Sprint 4; si no, la demostración usa el envío asistido.
 
 ## Restricciones
 
 - **Plazo:** entrega el 13 de octubre de 2026.
 - **Equipo:** una persona, con conocimientos básicos de Laravel.
 - **Validación:** la dueña no está disponible; valida el instructor como representante del cliente (F-04).
-- **Costo:** sin servicios de pago para las usuarias, en coherencia con la idea de negocio.
+- **Costo:** sin servicios de pago para las usuarias, en coherencia con la idea de negocio. El costo por mensaje de la API oficial en producción no lo asumen las usuarias; su financiación se define en el plan de negocio.
+- **Equipo físico:** sin presupuesto para impresora de etiquetas; la identificación se hace con fotos y el número de orden escrito a mano.

@@ -18,8 +18,6 @@
     --problema: #2f2a24;
     --causa: #5a6b3a;
     --causa-fondo: #edf0e2;
-    --confirmar: #8a6d1f;
-    --confirmar-fondo: #fbf3dc;
   }
   * { box-sizing: border-box; }
   body {
@@ -28,7 +26,7 @@
     color: var(--tinta);
     font: 15px/1.45 "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
   }
-  .pagina { max-width: 1180px; margin: 0 auto; padding: 32px 24px 48px; display: flex; flex-direction: column; gap: 24px; }
+  .pagina { max-width: 1280px; margin: 0 auto; padding: 32px 24px 48px; display: flex; flex-direction: column; gap: 24px; }
 
   header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; }
   .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--tinta-suave); }
@@ -38,7 +36,7 @@
   .muestra { width: 14px; height: 14px; border-radius: 3px; border: 2px solid; }
 
   .lienzo { overflow-x: auto; background: var(--papel); border: 1px solid #e3ddd1; border-radius: 12px; padding: 24px 20px; }
-  .arbol { min-width: 940px; display: grid; grid-template-columns: 110px repeat(5, minmax(0, 1fr)); column-gap: 14px; }
+  .arbol { min-width: 1080px; display: grid; grid-template-columns: 110px repeat(6, minmax(0, 1fr)); column-gap: 14px; }
 
   .nivel { grid-column: 1; align-self: center; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--tinta-suave); }
   .celda { display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; position: relative; }
@@ -52,33 +50,29 @@
   .causa { border-color: var(--causa); background: var(--causa-fondo); }
   .causa b { color: var(--causa); }
   .secundario { border-width: 1px; }
-  .por-confirmar { border-style: dashed; border-color: var(--confirmar); background: var(--confirmar-fondo); }
-  .por-confirmar b, .por-confirmar small { color: var(--confirmar); }
 
-  /* Conectores verticales entre niveles */
-  .con { height: 22px; grid-column: span 1; position: relative; }
+  /* Conectores: seis columnas, centros al 8,33 %, 25 %, 41,67 %… del ancho */
+  .con { height: 22px; position: relative; }
   .con::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; border-left: 2px solid var(--linea); }
   .con.vacio::before { display: none; }
-  .barra { grid-column: 2 / span 5; height: 2px; background: var(--linea); margin: 0 10%; }
-  .barra.corta { margin-right: 30%; }
+  .con.centro { grid-column: 4 / span 2; }
+  .barra { grid-column: 2 / span 6; height: 2px; background: var(--linea); margin: 0 8.33%; }
+  .barra.cinco { margin-right: 25%; }
 
   .problema {
-    grid-column: 2 / span 5;
+    grid-column: 2 / span 6;
     background: var(--problema); color: #fdf8ee;
     border-radius: 10px; padding: 16px 20px; text-align: center;
   }
   .problema b { display: block; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #d9cdb6; }
   .problema p { margin: 4px 0 0; font: 600 21px/1.3 "Source Serif 4", Georgia, serif; text-wrap: balance; }
 
-  .notas { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .notas { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
   .nota { background: var(--papel); border: 1px solid #e3ddd1; border-radius: 10px; padding: 14px 16px; }
   .nota h2 { margin: 0 0 6px; font: 600 16px/1.3 "Source Serif 4", Georgia, serif; }
   .nota p, .nota li { margin: 0; font-size: 14px; color: var(--tinta-suave); }
   .nota ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; }
-  code { font-size: 13px; background: #efe9dd; padding: 1px 5px; border-radius: 4px; }
 
-  /* En pantallas angostas el árbol no cabe a lo ancho: se lee de arriba abajo,
-     efectos → problema → causas, sin conectores. */
   @media (max-width: 860px) {
     .pagina { padding: 20px 14px 32px; }
     h1 { font-size: 28px; }
@@ -115,38 +109,41 @@
       <div class="celda"><div class="nodo efecto secundario"><b>E-03.1</b>Decisiones del negocio sin información confiable<small>F-01 · Objetivos</small></div></div>
       <div class="celda"></div>
       <div class="celda"></div>
+      <div class="celda"></div>
 
-      <div></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con vacio"></div><div class="con vacio"></div>
+      <div></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con vacio"></div><div class="con vacio"></div><div class="con vacio"></div>
 
-      <!-- Efectos directos -->
+      <!-- Efectos -->
       <div class="nivel">Efectos</div>
       <div class="celda"><div class="nodo efecto"><b>E-01</b>Olvidos y retrasos en las entregas<small>F-01 · Contexto</small></div></div>
       <div class="celda"><div class="nodo efecto"><b>E-02</b>Prendas terminadas o entregadas sin cobrarse correctamente<small>F-01 · Contexto</small></div></div>
       <div class="celda"><div class="nodo efecto"><b>E-03</b>Confusión en la información financiera: cuánto se recibió y cuánto falta<small>F-01 · Contexto y objetivos</small></div></div>
       <div class="celda"><div class="nodo efecto"><b>E-04</b>Prendas sin reclamar por dos meses o más, o nunca, sin saber cuántas<small>F-05 · Conocimiento directo</small></div></div>
+      <div class="celda"><div class="nodo efecto"><b>E-06</b>No se sabe con certeza qué prendas son de cada cliente<small>F-05 · Conocimiento directo</small></div></div>
       <div class="celda"></div>
 
-      <div></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con vacio"></div>
-      <div></div><div class="barra corta"></div>
-      <div></div><div class="con" style="grid-column: 4"></div>
+      <div></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con vacio"></div>
+      <div></div><div class="barra cinco"></div>
+      <div></div><div class="con centro"></div>
 
       <!-- Problema central -->
       <div class="nivel">Problema central</div>
       <div class="problema"><b>P-01</b><p>Deficiente control de las órdenes de arreglo, las entregas y los cobros en el taller de costura</p></div>
 
-      <div></div><div class="con" style="grid-column: 4"></div>
+      <div></div><div class="con centro"></div>
       <div></div><div class="barra"></div>
-      <div></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con"></div>
+      <div></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con"></div>
 
-      <!-- Causas directas -->
+      <!-- Causas -->
       <div class="nivel">Causas</div>
       <div class="celda abajo"><div class="nodo causa"><b>C-01</b>La información del taller vive solo en la memoria de la dueña<small>F-01 · Contexto · F-05</small></div></div>
       <div class="celda abajo"><div class="nodo causa"><b>C-02</b>Sin estado de avance por prenda ni por orden<small>F-01 · Objetivos</small></div></div>
       <div class="celda abajo"><div class="nodo causa"><b>C-03</b>Comunicación informal: no se avisa cuando la prenda está lista<small>F-01 · Contexto y necesidad</small></div></div>
       <div class="celda abajo"><div class="nodo causa"><b>C-04</b>Lo que debe cada cliente se lleva de memoria: sin registro de pagos ni abonos<small>F-01 · Contexto · F-05</small></div></div>
       <div class="celda abajo"><div class="nodo causa"><b>C-05</b>Sin seguimiento de órdenes vencidas ni prendas sin reclamar<small>F-01 · Objetivos · F-05</small></div></div>
+      <div class="celda abajo"><div class="nodo causa"><b>C-06</b>Prendas por arreglar y arregladas juntas en un rincón, sin identificar<small>F-05 · Conocimiento directo</small></div></div>
 
-      <div></div><div class="con"></div><div class="con"></div><div class="con vacio"></div><div class="con"></div><div class="con vacio"></div>
+      <div></div><div class="con"></div><div class="con"></div><div class="con vacio"></div><div class="con"></div><div class="con vacio"></div><div class="con"></div>
 
       <!-- Causas raíz -->
       <div class="nivel">Causas raíz</div>
@@ -158,22 +155,20 @@
       <div class="celda abajo"></div>
       <div class="celda abajo"><div class="nodo causa secundario"><b>C-04.1</b>El saldo llevado a mano, sumando y restando, se descuadra<small>F-02 · Prototipo v1</small></div></div>
       <div class="celda abajo"></div>
+      <div class="celda abajo"><div class="nodo causa secundario"><b>C-06.1</b>Un cliente trae de 3 a 5 prendas y la dueña olvida cuáles son suyas<small>F-05 · Conocimiento directo</small></div></div>
     </div>
   </div>
 
   <div class="notas">
     <div class="nota">
       <h2>Cómo se lee</h2>
-      <p>Las causas, abajo, explican por qué ocurre el problema. Los efectos, arriba, muestran lo que le cuesta al taller. Cada causa se convertirá en un objetivo, y cada objetivo en requisitos e historias de usuario.</p>
-    </div>
-    <div class="nota">
-      <h2>Por qué el problema no es "falta un software"</h2>
-      <p>"No hay un sistema" describe una solución, no un problema. El problema es lo que le pasa al negocio: pierde control de las órdenes, las entregas y los cobros.</p>
+      <p>Las causas, abajo, explican por qué ocurre el problema. Los efectos, arriba, muestran lo que le cuesta al taller. Cada causa se convierte en un objetivo, y cada objetivo en requisitos e historias de usuario.</p>
     </div>
     <div class="nota">
       <h2>Magnitud</h2>
       <ul>
         <li>10 a 15 prendas por semana, entre 40 y 60 al mes</li>
+        <li>Un cliente trae a veces de 3 a 5 prendas</li>
         <li>Prendas registradas por escrito: ninguna</li>
         <li>Prendas sin reclamar: nadie sabe cuántas</li>
       </ul>
@@ -186,7 +181,6 @@
       <h2>Pendiente para cerrarlo</h2>
       <ul>
         <li>Validar con el instructor</li>
-        <li>Derivar el árbol de objetivos</li>
       </ul>
     </div>
   </div>

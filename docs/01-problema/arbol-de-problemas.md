@@ -28,6 +28,8 @@ Este árbol es el origen de todo lo demás. Cada causa se convierte en un objeti
 | **C-04** | Lo que debe cada cliente se lleva de memoria: no hay registro de pagos ni abonos | F-01 · Contexto · F-05 |
 | C-04.1 | Un saldo llevado a mano, sumando y restando, se descuadra | F-02 · hallazgo de la versión 1 |
 | **C-05** | No hay seguimiento de las órdenes vencidas ni de las prendas sin reclamar: no se sabe cuántas hay | F-01 · Objetivos específicos · F-05 |
+| **C-06** | Las prendas por arreglar y las ya arregladas se guardan juntas en un rincón, sin nada que las identifique | F-05 |
+| C-06.1 | Un cliente puede traer varias prendas a la vez (entre 3 y 5) y la dueña olvida cuáles son suyas | F-05 |
 
 ## Efectos
 
@@ -40,6 +42,7 @@ Este árbol es el origen de todo lo demás. Cada causa se convierte en un objeti
 | **E-03** | Confusión en la información financiera: no se sabe con certeza cuánto se ha recibido y cuánto falta por cobrar | F-01 · Contexto y objetivos |
 | E-03.1 | Decisiones del negocio sin información confiable | F-01 · Objetivos específicos |
 | **E-04** | Prendas que no se recogen durante dos meses o más, o nunca, sin que se sepa cuántas son | F-05 |
+| **E-06** | No se sabe con certeza qué prendas pertenecen a cada cliente | F-05 |
 
 ## Descartados
 
@@ -55,6 +58,7 @@ Se registran para dejar constancia de que se evaluaron y por qué no entran.
 | --- | --- | --- |
 | Prendas recibidas por semana | Entre 10 y 15, variable | F-05 |
 | Prendas recibidas por mes (estimado) | Entre 40 y 60 | Derivado del anterior |
+| Prendas que trae un mismo cliente | A veces entre 3 y 5 | F-05 |
 | Prendas que se registran por escrito | Ninguna | F-05 |
 | Prendas sin reclamar | Desconocido: algunas pasan dos meses o más, otras nunca se recogen | F-05 |
 
@@ -77,6 +81,7 @@ flowchart BT
     C03["C-03 · Comunicación informal,<br/>sin aviso de prenda lista"]
     C04["C-04 · Pagos y abonos<br/>sin saldo confiable"]
     C05["C-05 · Sin seguimiento de vencidas<br/>y sin reclamar"]
+    C06["C-06 · Prendas juntas en un rincón,<br/>sin identificar"]
 
     P01(["P-01 · Deficiente control de las órdenes de arreglo,<br/>las entregas y los cobros en el taller"])
 
@@ -84,6 +89,7 @@ flowchart BT
     E02["E-02 · Prendas entregadas<br/>sin cobrar"]
     E03["E-03 · Confusión en la<br/>información financiera"]
     E04["E-04 · Prendas sin reclamar<br/>por meses, sin saber cuántas"]
+    E06["E-06 · No se sabe qué prendas<br/>son de cada cliente"]
 
     E011["E-01.1 · Clientes insatisfechos"]
     E021["E-02.1 · Pérdidas económicas"]
@@ -94,11 +100,13 @@ flowchart BT
     C03 --> P01
     C04 --> P01
     C05 --> P01
+    C06 --> P01
 
     P01 --> E01
     P01 --> E02
     P01 --> E03
     P01 --> E04
+    P01 --> E06
 
     E01 --> E011
     E02 --> E021

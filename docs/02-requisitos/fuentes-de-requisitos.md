@@ -50,3 +50,9 @@ Hechos registrados de F-05:
 | 13 sep 2026 | No hay desacuerdos con los clientes: al recoger se mide el arreglo y, si falta algo, se termina | Árbol de problemas · E-05 descartado |
 | 13 sep 2026 | El taller recibe entre 10 y 15 prendas por semana, sin un número fijo | Árbol de problemas · Magnitud |
 | 13 sep 2026 | Los clientes suelen decir que la dueña cobra muy barato | Árbol de problemas · Observaciones por analizar |
+| 13 sep 2026 | Las prendas por arreglar y las arregladas se guardan juntas en un rincón | Árbol de problemas · C-06 |
+| 13 sep 2026 | Un cliente puede traer entre 3 y 5 prendas, y la dueña olvida cuáles son de quién | Árbol de problemas · C-06.1, E-06 |
+| 13 sep 2026 | No hay presupuesto para una impresora de etiquetas; la foto de cada prenda sirve para identificarla | Alcance · identificación de prendas |
+| 13 sep 2026 | La descripción del arreglo se escribe al registrar la prenda | Alcance · órdenes y prendas |
+| 13 sep 2026 | Enviar los avisos a mano contradice el propósito de facilitar el trabajo: se busca automatizarlos | Alcance · avisos · ADR-003 |
+| 13 sep 2026 | Sin impresora, el número de orden se escribe a mano en la bolsa donde van las prendas del cliente | Alcance · identificación de prendas |

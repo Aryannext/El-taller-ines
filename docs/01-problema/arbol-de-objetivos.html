@@ -26,7 +26,7 @@
     color: var(--tinta);
     font: 15px/1.45 "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
   }
-  .pagina { max-width: 1180px; margin: 0 auto; padding: 32px 24px 48px; display: flex; flex-direction: column; gap: 24px; }
+  .pagina { max-width: 1280px; margin: 0 auto; padding: 32px 24px 48px; display: flex; flex-direction: column; gap: 24px; }
 
   header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; }
   .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--tinta-suave); }
@@ -36,7 +36,7 @@
   .muestra { width: 14px; height: 14px; border-radius: 3px; border: 2px solid; }
 
   .lienzo { overflow-x: auto; background: var(--papel); border: 1px solid #e3ddd1; border-radius: 12px; padding: 24px 20px; }
-  .arbol { min-width: 940px; display: grid; grid-template-columns: 110px repeat(5, minmax(0, 1fr)); column-gap: 14px; }
+  .arbol { min-width: 1080px; display: grid; grid-template-columns: 110px repeat(6, minmax(0, 1fr)); column-gap: 14px; }
 
   .nivel { grid-column: 1; align-self: center; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--tinta-suave); }
   .celda { display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; position: relative; }
@@ -54,11 +54,12 @@
   .con { height: 22px; position: relative; }
   .con::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; border-left: 2px solid var(--linea); }
   .con.vacio::before { display: none; }
-  .barra { grid-column: 2 / span 5; height: 2px; background: var(--linea); margin: 0 10%; }
-  .barra.corta { margin-right: 30%; }
+  .con.centro { grid-column: 4 / span 2; }
+  .barra { grid-column: 2 / span 6; height: 2px; background: var(--linea); margin: 0 8.33%; }
+  .barra.cinco { margin-right: 25%; }
 
   .objetivo {
-    grid-column: 2 / span 5;
+    grid-column: 2 / span 6;
     background: var(--objetivo); color: #f3f7ee;
     border-radius: 10px; padding: 16px 20px; text-align: center;
   }
@@ -88,7 +89,7 @@
 <div class="pagina">
   <header>
     <div>
-      <div class="eyebrow">El-taller-ines · Sprint 1 · Borrador</div>
+      <div class="eyebrow">El-taller-ines · Sprint 1 · Pendiente de validación</div>
       <h1>Árbol de objetivos</h1>
     </div>
     <div class="leyenda">
@@ -107,8 +108,9 @@
       <div class="celda"><div class="nodo fin secundario"><b>FN-03.1</b>Decisiones del negocio con información confiable<small>Nace de E-03.1</small></div></div>
       <div class="celda"></div>
       <div class="celda"></div>
+      <div class="celda"></div>
 
-      <div></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con vacio"></div><div class="con vacio"></div>
+      <div></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con vacio"></div><div class="con vacio"></div><div class="con vacio"></div>
 
       <!-- Fines -->
       <div class="nivel">Fines</div>
@@ -116,19 +118,20 @@
       <div class="celda"><div class="nodo fin"><b>FN-02</b>Ninguna prenda se entrega sin cobrar o sin dejar su saldo registrado<small>Nace de E-02</small></div></div>
       <div class="celda"><div class="nodo fin"><b>FN-03</b>Se sabe con certeza cuánto se ha recibido y cuánto falta por cobrar<small>Nace de E-03</small></div></div>
       <div class="celda"><div class="nodo fin"><b>FN-04</b>Se sabe cuántas prendas están sin reclamar y desde cuándo<small>Nace de E-04</small></div></div>
+      <div class="celda"><div class="nodo fin"><b>FN-06</b>Se identifican sin dudas las prendas de cada cliente<small>Nace de E-06</small></div></div>
       <div class="celda"></div>
 
-      <div></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con vacio"></div>
-      <div></div><div class="barra corta"></div>
-      <div></div><div class="con" style="grid-column: 4"></div>
+      <div></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con vacio"></div>
+      <div></div><div class="barra cinco"></div>
+      <div></div><div class="con centro"></div>
 
       <!-- Objetivo general -->
       <div class="nivel">Objetivo general</div>
       <div class="objetivo"><b>OG · Nace de P-01</b><p>Lograr un control confiable de las órdenes de arreglo, las entregas y los cobros en el taller de costura</p></div>
 
-      <div></div><div class="con" style="grid-column: 4"></div>
+      <div></div><div class="con centro"></div>
       <div></div><div class="barra"></div>
-      <div></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con"></div>
+      <div></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con"></div>
 
       <!-- Medios -->
       <div class="nivel">Medios</div>
@@ -137,8 +140,9 @@
       <div class="celda abajo"><div class="nodo medio"><b>M-03</b>El cliente recibe aviso cuando su prenda está lista para recoger<small>Nace de C-03</small></div></div>
       <div class="celda abajo"><div class="nodo medio"><b>M-04</b>Cada pago y abono queda registrado y el saldo se consulta al instante<small>Nace de C-04</small></div></div>
       <div class="celda abajo"><div class="nodo medio"><b>M-05</b>Seguimiento de órdenes vencidas y prendas sin reclamar, con cantidad y antigüedad<small>Nace de C-05</small></div></div>
+      <div class="celda abajo"><div class="nodo medio"><b>M-06</b>Cada prenda queda identificada con su cliente y su orden desde que se recibe<small>Nace de C-06</small></div></div>
 
-      <div></div><div class="con"></div><div class="con"></div><div class="con vacio"></div><div class="con"></div><div class="con vacio"></div>
+      <div></div><div class="con"></div><div class="con"></div><div class="con vacio"></div><div class="con"></div><div class="con vacio"></div><div class="con"></div>
 
       <!-- Medios específicos -->
       <div class="nivel">Medios específicos</div>
@@ -150,6 +154,7 @@
       <div class="celda abajo"></div>
       <div class="celda abajo"><div class="nodo medio secundario"><b>M-04.1</b>El saldo se obtiene de lo cobrado y lo pagado, sin sumas a mano<small>Nace de C-04.1</small></div></div>
       <div class="celda abajo"></div>
+      <div class="celda abajo"><div class="nodo medio secundario"><b>M-06.1</b>Una foto de cada prenda al recibirla permite reconocer las de cada cliente<small>Nace de C-06.1</small></div></div>
     </div>
   </div>
 
@@ -160,14 +165,12 @@
     </div>
     <div class="nota">
       <h2>De aquí salen los requisitos</h2>
-      <p>Cada medio se convierte en un objetivo específico con meta y plazo, y cada objetivo en requisitos y reglas de negocio. Por eso cada caja conserva el código de la causa de la que nace.</p>
+      <p>Cada medio se convirtió en un objetivo específico con meta y plazo (OE-01 a OE-06), y cada objetivo se convertirá en requisitos y reglas de negocio.</p>
     </div>
     <div class="nota">
       <h2>Pendiente para cerrarlo</h2>
       <ul>
         <li>Validar con el instructor</li>
-        <li>Redactar los objetivos específicos (SMART)</li>
-        <li>Definir qué medios entran en esta entrega</li>
       </ul>
     </div>
   </div>

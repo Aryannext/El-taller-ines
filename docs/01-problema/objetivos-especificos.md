@@ -43,14 +43,16 @@ Cada objetivo específico nace de un medio del árbol de objetivos y cumple el c
 
 ### OE-03 · Aviso al cliente
 
-**Al 13 de octubre de 2026, el sistema preparará el aviso al cliente cuando todas las prendas de su orden estén terminadas y dejará constancia de cada aviso enviado.**
+**Al 13 de octubre de 2026, el sistema enviará automáticamente un aviso por WhatsApp al cliente cuando todas las prendas de su orden estén terminadas, usando la API oficial; si el envío automático no está disponible, ofrecerá el envío asistido con el mensaje redactado. Dejará constancia de cada aviso, su canal y su resultado.**
 
 | Nace de | Indicador | Meta | Cómo se verifica |
 | --- | --- | --- | --- |
-| M-03 | Órdenes listas que ofrecen el aviso | Todas | Prueba de aceptación del flujo "orden lista" |
-| | Avisos enviados con fecha registrada | Todos | Prueba de la constancia del aviso |
+| M-03 | Órdenes que pasan a lista y generan su aviso sin intervención de la usuaria | Todas | Prueba automática del flujo "orden lista" con un canal simulado |
+| | Avisos aceptados por la API oficial en el entorno de prueba de Meta | Todos los de la demostración | Prueba de integración con el número de prueba |
+| | Avisos que pasan al envío asistido cuando el canal automático falla | Todos | Prueba automática con el canal automático no disponible |
+| | Avisos con fecha, canal y resultado registrados | Todos | Prueba de la constancia del aviso |
 
-El aviso se envía por WhatsApp con un mensaje ya redactado que la usuaria confirma; el sistema no lo envía solo. El motivo está en el [alcance](alcance.md).
+El diseño del canal de avisos y sus alternativas están en [ADR-003](../03-diseno/adr/ADR-003-canal-de-avisos-whatsapp.md).
 
 ### OE-04 · Pagos, abonos y saldo
 
@@ -69,6 +71,15 @@ El aviso se envía por WhatsApp con un mensaje ya redactado que la usuaria confi
 | --- | --- | --- | --- |
 | M-05 | Consulta de prendas sin reclamar con cantidad y días de espera | Disponible y coincide con los datos de prueba | Prueba de aceptación con datos preparados |
 
+### OE-06 · Identificación de prendas
+
+**Al 13 de octubre de 2026, el sistema permitirá asociar fotografías a cada prenda al recibirla y mostrará las fotos de todas las prendas de una orden, para reconocer qué prendas pertenecen a cada cliente.**
+
+| Nace de | Indicador | Meta | Cómo se verifica |
+| --- | --- | --- | --- |
+| M-06, M-06.1 | Prendas que admiten fotografía al registrarse | Todas | Prueba de aceptación del registro de una prenda con foto |
+| | Fotos visibles al consultar una orden | Las de todas sus prendas | Prueba de aceptación de la consulta de la orden |
+
 ## Indicadores de impacto (después de la implantación)
 
 Miden los fines del árbol de objetivos. No forman parte de la entrega del 13 de octubre porque requieren uso real del sistema.
@@ -79,5 +90,6 @@ Miden los fines del árbol de objetivos. No forman parte de la entrega del 13 de
 | FN-02 · Nada entregado sin cobrar | Prendas entregadas con saldo no registrado | Desconocida: los saldos se llevan de memoria |
 | FN-03 · Certeza del dinero | Total por cobrar consultable al instante | No existe |
 | FN-04 · Prendas sin reclamar conocidas | Cantidad de prendas sin reclamar y su antigüedad | Desconocida: "dos meses o más, o nunca" |
+| FN-06 · Prendas identificadas | Veces que no se sabe de quién es una prenda al entregarla | Desconocida: depende de la memoria de la dueña |
 
 Que la línea base sea "desconocida" es parte del problema: el sistema es el que empezará a producir esas cifras.
