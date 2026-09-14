@@ -10,6 +10,7 @@ Cada requisito, regla de negocio e historia de usuario cita la fuente de la que 
 | **F-02** | Prototipo versión 1 ([Costura-app](https://github.com/Aryannext/Costura-app)) y su auditoría de septiembre de 2026 | Prototipado evolutivo y revisión | Disponible |
 | **F-03** | Aplicaciones existentes de gestión de talleres y órdenes de servicio | Análisis de competencia (benchmarking) | Por hacer en el Sprint 1 |
 | **F-04** | Validación con el instructor como representante del cliente | Revisión y aceptación | Por acordar |
+| **F-05** | Conocimiento directo del aprendiz, familiar de la dueña, sobre cómo funciona el taller | Observación informal del dominio | Disponible · ver limitaciones |
 
 ## Qué aporta el prototipo (F-02)
 
@@ -31,3 +32,16 @@ La dueña del taller no está disponible durante los 30 días del proyecto. En c
 - **La implantación y la capacitación** con la usuaria final quedan fuera del periodo y se registran como trabajo posterior.
 
 No se presentarán como entrevistas u observaciones actividades que no ocurrieron.
+
+## Alcance de F-05
+
+El aprendiz es familiar de la dueña y conoce el funcionamiento del taller de primera mano. Lo que aporta se registra como F-05 con dos reservas:
+
+- **No es una entrevista estructurada.** Son hechos que el aprendiz conoce, no respuestas de la dueña a un guion.
+- **Puede tener sesgo** por el vínculo familiar. Por eso todo lo que nace de F-05 pasa por la validación del instructor (F-04).
+
+Hechos registrados de F-05:
+
+| Fecha | Hecho | Usado en |
+| --- | --- | --- |
+| 13 sep 2026 | No se anota nada: clientes, prendas, arreglos, precios y abonos quedan solo en la memoria de la dueña | Árbol de problemas · C-01, C-01.1 |

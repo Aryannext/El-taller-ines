@@ -19,9 +19,9 @@ Este árbol es el origen de todo lo demás. Cada causa se convierte en un objeti
 
 | Código | Causa | Fuente |
 | --- | --- | --- |
-| **C-01** | El registro de clientes, prendas y trabajos es manual y depende de la memoria de quien atiende | F-01 · Contexto |
-| C-01.1 | No existe un registro único donde consultar qué prendas hay, de quién son y qué arreglo llevan | F-01 · Necesidad del negocio |
-| C-01.2 | Medio en el que se anota hoy (cuaderno, recibo en papel, mensajes…) | **Por confirmar** |
+| **C-01** | La información del taller (clientes, prendas, arreglos, precios y abonos) vive solo en la memoria de la dueña | F-01 · Contexto · F-05 |
+| C-01.1 | No se anota nada: no hay cuaderno, recibo ni ningún otro registro | F-05 |
+| C-01.2 | No existe un lugar donde consultar qué prendas hay, de quién son, qué arreglo llevan y cuánto deben | F-01 · Necesidad del negocio |
 | **C-02** | No se lleva el estado de avance de cada prenda ni de cada orden | F-01 · Objetivos específicos |
 | C-02.1 | Una orden puede darse por lista con prendas sin terminar | F-02 · hallazgo de la versión 1 |
 | **C-03** | La comunicación con el cliente sobre el estado de su prenda es informal y no avisa cuando está lista | F-01 · Contexto y necesidad |
@@ -46,7 +46,7 @@ Este árbol es el origen de todo lo demás. Cada causa se convierte en un objeti
 
 ```mermaid
 flowchart BT
-    C01["C-01 · Registro manual y<br/>dependiente de la memoria"]
+    C01["C-01 · Información solo en la<br/>memoria de la dueña"]
     C02["C-02 · Sin estado de avance<br/>por prenda y por orden"]
     C03["C-03 · Comunicación informal,<br/>sin aviso de prenda lista"]
     C04["C-04 · Pagos y abonos<br/>sin saldo confiable"]
@@ -83,7 +83,7 @@ flowchart BT
 
 ## Pendiente para cerrar este documento
 
-- Confirmar o descartar C-01.2, E-04 y E-05 con las respuestas del aprendiz.
+- Confirmar o descartar E-04 y E-05 con las respuestas del aprendiz.
 - Cuantificar al menos un efecto (por ejemplo, cuántas órdenes por semana o cuántas entregas se atrasan) para que el problema sea medible y los objetivos tengan una meta.
 - Validar el árbol con el instructor.
 - Derivar el árbol de objetivos: cada causa pasa a ser un medio y cada efecto un fin.
