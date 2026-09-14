@@ -95,7 +95,7 @@ Una historia entra a un sprint de desarrollo cuando tiene: formato completo, ori
 
 > **Como** dueña del taller, **quiero** cambiar mi contraseña, **para** protegerme si alguien más llegó a conocerla.
 
-**Nació de:** la especificación original, que incluía el cambio de contraseña (F-01), y la protección de las contraseñas (RNF-19).
+**Nació de:** C-01. La información que hoy vive en la memoria de la dueña pasa a un sistema en internet y hay que protegerla (F-05, ADR-001). La especificación original incluía el cambio de contraseña (F-01).
 
 **Requisitos:** RF-03 · **Reglas:** — · **Calidad:** RNF-19
 
@@ -164,7 +164,7 @@ Una historia entra a un sprint de desarrollo cuando tiene: formato completo, ori
 
 > **Como** dueña del taller, **quiero** corregir el nombre o el celular de un cliente, **para** que los avisos le lleguen al número correcto.
 
-**Nació de:** M-03. Si el celular está mal, el aviso no llega. Fuente: F-01.
+**Nació de:** C-03. Hoy no se le avisa al cliente cuando su prenda está lista, y si su celular está mal registrado el aviso tampoco le llegará (M-03). Fuente: F-01.
 
 **Requisitos:** RF-07 · **Reglas:** RN-02, RN-03
 
@@ -217,7 +217,7 @@ Una historia entra a un sprint de desarrollo cuando tiene: formato completo, ori
 
 > **Como** dueña del taller, **quiero** escribir el tipo de prenda cuando no está en la lista, **para** registrar cualquier prenda que me traigan.
 
-**Nació de:** la decisión del aprendiz de que, al elegir «Otro», se pueda escribir el tipo (F-05).
+**Nació de:** C-01.1. Para que ninguna prenda quede sin registrar, cualquier tipo de prenda debe poder anotarse: al elegir «Otro», se escribe el tipo (F-05).
 
 **Requisitos:** RF-16 · **Reglas:** RN-10, RN-43
 
@@ -233,7 +233,7 @@ Una historia entra a un sprint de desarrollo cuando tiene: formato completo, ori
 
 > **Como** dueña del taller, **quiero** registrar a un cliente nuevo sin salir de la orden que estoy llenando, **para** no perder lo que ya escribí mientras el cliente espera.
 
-**Nació de:** la especificación original, que permitía crear el cliente desde el formulario de la orden (F-01). La orden se registra con el cliente enfrente.
+**Nació de:** C-01. La orden se registra con el cliente enfrente, y que sea nuevo no debe obligar a empezar de cero. La especificación original permitía crearlo desde el formulario de la orden (F-01).
 
 **Requisitos:** RF-10 · **Reglas:** RN-02, RN-03
 
@@ -248,7 +248,7 @@ Una historia entra a un sprint de desarrollo cuando tiene: formato completo, ori
 
 > **Como** dueña del taller, **quiero** agregar a una orden una prenda que olvidé registrar al recibirla, **para** no tener que crear otra orden.
 
-**Nació de:** la especificación original (F-01). La versión 1 permitía agregar prendas a órdenes entregadas, que quedaban entregadas con trabajo pendiente (F-02).
+**Nació de:** C-01.1. Una prenda que no quedó anotada vuelve a depender de la memoria. Estaba en la especificación original (F-01); la versión 1 permitía agregar prendas a órdenes entregadas, que quedaban entregadas con trabajo pendiente (F-02).
 
 **Requisitos:** RF-11 · **Reglas:** RN-10, RN-11, RN-18, RN-22, RN-24
 
@@ -264,7 +264,7 @@ Una historia entra a un sprint de desarrollo cuando tiene: formato completo, ori
 
 > **Como** dueña del taller, **quiero** corregir la descripción o el precio de una prenda, **para** arreglar un error sin rehacer la orden.
 
-**Nació de:** la descripción se escribe al registrar la prenda y a veces hay que corregirla (F-05). La versión 1 permitía bajar un precio por debajo de lo pagado y dejaba el saldo negativo (F-02).
+**Nació de:** C-01.1 y C-04.1. La descripción se escribe al registrar la prenda y a veces hay que corregirla (F-05); en la versión 1, bajar un precio por debajo de lo pagado dejaba el saldo negativo (F-02).
 
 **Requisitos:** RF-12 · **Reglas:** RN-11, RN-15, RN-16, RN-26, RN-27
 
@@ -280,7 +280,7 @@ Una historia entra a un sprint de desarrollo cuando tiene: formato completo, ori
 
 > **Como** dueña del taller, **quiero** eliminar una prenda que registré por error, **para** que la orden refleje lo que el cliente realmente dejó.
 
-**Nació de:** la versión 1, donde eliminar una prenda podía dejar el saldo negativo o una orden vacía (F-02).
+**Nació de:** C-04.1. Un saldo que se descuadra deja de ser confiable: en la versión 1, eliminar una prenda podía dejar el saldo negativo o una orden vacía (F-02).
 
 **Requisitos:** RF-13 · **Reglas:** RN-06, RN-15, RN-16 · **Calidad:** RNF-10
 
@@ -329,7 +329,7 @@ Una historia entra a un sprint de desarrollo cuando tiene: formato completo, ori
 
 > **Como** dueña del taller, **quiero** renombrar o dejar de usar un tipo de prenda, **para** mantener ordenada la lista.
 
-**Nació de:** la lista de tipos es propia de cada negocio (ADR-002) y crece con lo que se escribe en «Otro» (RN-43, F-05).
+**Nació de:** C-01.1. La lista de tipos con la que se registra cada prenda es propia de cada negocio (ADR-002) y crece con lo que se escribe en «Otro» (RN-43, F-05).
 
 **Requisitos:** RF-17 · **Reglas:** RN-01, RN-10, RN-43
 
@@ -380,7 +380,7 @@ Una historia entra a un sprint de desarrollo cuando tiene: formato completo, ori
 
 > **Como** dueña del taller, **quiero** borrar una foto borrosa o equivocada, **para** que solo queden fotos que sirvan para reconocer la prenda.
 
-**Nació de:** la especificación original (F-01).
+**Nació de:** C-06. Las fotos existen para reconocer las prendas guardadas juntas en un rincón (F-05); una foto equivocada no cumple ese propósito. Estaba en la especificación original (F-01).
 
 **Requisitos:** RF-20 · **Reglas:** RN-17 · **Calidad:** RNF-10
 
@@ -434,7 +434,7 @@ Una historia entra a un sprint de desarrollo cuando tiene: formato completo, ori
 
 > **Como** dueña del taller, **quiero** cancelar la orden de un cliente que desiste, **para** que no aparezca como trabajo pendiente ni como deuda.
 
-**Nació de:** la especificación original (F-01, v1 RN-11 a RN-14).
+**Nació de:** C-02 y C-04. Si un cliente desiste, su orden seguiría contando como trabajo pendiente y como deuda. Fuente: F-01 (v1 RN-11 a RN-14).
 
 **Requisitos:** RF-25 · **Reglas:** RN-08, RN-24, RN-32 · **Calidad:** RNF-10
 
@@ -472,7 +472,7 @@ Una historia entra a un sprint de desarrollo cuando tiene: formato completo, ori
 
 > **Como** dueña del taller, **quiero** anotar el abono que me dan al dejar la ropa en el mismo registro de la orden, **para** no hacer dos pasos con el cliente enfrente.
 
-**Nació de:** el abono inicial de la especificación original (F-01).
+**Nació de:** C-04. Lo que cada cliente debe, incluido lo que abonó al dejar la ropa, hoy se lleva de memoria (F-05). El abono inicial estaba en la especificación original (F-01).
 
 **Requisitos:** RF-27 · **Reglas:** RN-25, RN-28 · **Calidad:** RNF-13
 
@@ -487,7 +487,7 @@ Una historia entra a un sprint de desarrollo cuando tiene: formato completo, ori
 
 > **Como** dueña del taller, **quiero** anular un pago que registré mal, **para** corregir el saldo sin perder el rastro del dinero.
 
-**Nació de:** la versión 1, donde un pago equivocado no se podía corregir sin perder su rastro (F-02), y el fin FN-03, tener certeza de cuánto se ha recibido.
+**Nació de:** C-04.1 y E-03. Un saldo corregido a mano se descuadra y deja de saberse cuánto se ha recibido (F-01); en la versión 1, un pago equivocado no se podía corregir sin perder su rastro (F-02).
 
 **Requisitos:** RF-29 · **Reglas:** RN-27, RN-31 · **Calidad:** RNF-10
 
@@ -571,7 +571,7 @@ Una historia entra a un sprint de desarrollo cuando tiene: formato completo, ori
 
 > **Como** dueña del taller, **quiero** que no se le avise a un cliente cuya orden dejó de estar lista, **para** no hacerlo venir por ropa que todavía no está.
 
-**Nació de:** la versión 1 permitía enviar el aviso con la orden en cualquier estado (F-02), y una prenda terminada puede volver a En proceso al medírsela el cliente (F-05).
+**Nació de:** C-03 y C-02.1. El aviso solo sirve si la orden de verdad está lista: la versión 1 permitía enviarlo con la orden en cualquier estado (F-02), y una prenda terminada puede volver a En proceso al medírsela el cliente (F-05).
 
 **Requisitos:** RF-35 · **Reglas:** RN-38, RN-39
 
@@ -587,7 +587,7 @@ Una historia entra a un sprint de desarrollo cuando tiene: formato completo, ori
 
 > **Como** dueña del taller, **quiero** ver qué avisos se enviaron de una orden, **para** responder con seguridad si un cliente dice que no le avisaron.
 
-**Nació de:** el historial de notificaciones de la especificación original (F-01) y el objetivo OE-03.
+**Nació de:** C-03. La comunicación con el cliente es informal y no deja constancia de si se le avisó; la especificación original pedía un historial de notificaciones (F-01).
 
 **Requisitos:** RF-36 · **Reglas:** RN-41
 
@@ -651,7 +651,7 @@ Una historia entra a un sprint de desarrollo cuando tiene: formato completo, ori
 
 > **Como** dueña del taller, **quiero** ajustar después de cuántos días una orden lista se considera sin reclamar, **para** que la alerta se adapte a mis clientes.
 
-**Nació de:** la decisión de usar 30 días por defecto, configurable por negocio (F-05).
+**Nació de:** C-05. El seguimiento de las prendas sin reclamar necesita un plazo; se decidió usar 30 días por defecto, configurable por negocio (F-05).
 
 **Requisitos:** RF-40 · **Reglas:** RN-35
 
