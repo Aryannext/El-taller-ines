@@ -60,6 +60,7 @@
   .con::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; border-left: 2px solid var(--linea); }
   .con.vacio::before { display: none; }
   .barra { grid-column: 2 / span 5; height: 2px; background: var(--linea); margin: 0 10%; }
+  .barra.corta { margin-right: 30%; }
 
   .problema {
     grid-column: 2 / span 5;
@@ -95,13 +96,12 @@
 <div class="pagina">
   <header>
     <div>
-      <div class="eyebrow">El-taller-ines · Sprint 1 · Borrador</div>
+      <div class="eyebrow">El-taller-ines · Sprint 1 · Pendiente de validación</div>
       <h1>Árbol de problemas</h1>
     </div>
     <div class="leyenda">
       <span><i class="muestra" style="border-color:var(--efecto);background:var(--efecto-fondo)"></i>Efecto</span>
       <span><i class="muestra" style="border-color:var(--causa);background:var(--causa-fondo)"></i>Causa</span>
-      <span><i class="muestra" style="border-color:var(--confirmar);background:var(--confirmar-fondo);border-style:dashed"></i>Por confirmar</span>
       <span><b>F-01</b> documento original · <b>F-02</b> prototipo v1 · <b>F-05</b> conocimiento directo</span>
     </div>
   </header>
@@ -123,11 +123,11 @@
       <div class="celda"><div class="nodo efecto"><b>E-01</b>Olvidos y retrasos en las entregas<small>F-01 · Contexto</small></div></div>
       <div class="celda"><div class="nodo efecto"><b>E-02</b>Prendas terminadas o entregadas sin cobrarse correctamente<small>F-01 · Contexto</small></div></div>
       <div class="celda"><div class="nodo efecto"><b>E-03</b>Confusión en la información financiera: cuánto se recibió y cuánto falta<small>F-01 · Contexto y objetivos</small></div></div>
-      <div class="celda"><div class="nodo efecto por-confirmar"><b>E-04</b>Prendas sin reclamar ocupan espacio y quedan sin cobrar<small>Por confirmar</small></div></div>
-      <div class="celda"><div class="nodo efecto por-confirmar"><b>E-05</b>Sin historial para aclarar una diferencia con un cliente<small>Por confirmar</small></div></div>
+      <div class="celda"><div class="nodo efecto"><b>E-04</b>Prendas sin reclamar por dos meses o más, o nunca, sin saber cuántas<small>F-05 · Conocimiento directo</small></div></div>
+      <div class="celda"></div>
 
-      <div></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con"></div>
-      <div></div><div class="barra"></div>
+      <div></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con"></div><div class="con vacio"></div>
+      <div></div><div class="barra corta"></div>
       <div></div><div class="con" style="grid-column: 4"></div>
 
       <!-- Problema central -->
@@ -143,8 +143,8 @@
       <div class="celda abajo"><div class="nodo causa"><b>C-01</b>La información del taller vive solo en la memoria de la dueña<small>F-01 · Contexto · F-05</small></div></div>
       <div class="celda abajo"><div class="nodo causa"><b>C-02</b>Sin estado de avance por prenda ni por orden<small>F-01 · Objetivos</small></div></div>
       <div class="celda abajo"><div class="nodo causa"><b>C-03</b>Comunicación informal: no se avisa cuando la prenda está lista<small>F-01 · Contexto y necesidad</small></div></div>
-      <div class="celda abajo"><div class="nodo causa"><b>C-04</b>Pagos y abonos sin un saldo pendiente confiable<small>F-01 · Contexto</small></div></div>
-      <div class="celda abajo"><div class="nodo causa"><b>C-05</b>Sin seguimiento de órdenes vencidas ni prendas sin reclamar<small>F-01 · Objetivos</small></div></div>
+      <div class="celda abajo"><div class="nodo causa"><b>C-04</b>Lo que debe cada cliente se lleva de memoria: sin registro de pagos ni abonos<small>F-01 · Contexto · F-05</small></div></div>
+      <div class="celda abajo"><div class="nodo causa"><b>C-05</b>Sin seguimiento de órdenes vencidas ni prendas sin reclamar<small>F-01 · Objetivos · F-05</small></div></div>
 
       <div></div><div class="con"></div><div class="con"></div><div class="con vacio"></div><div class="con"></div><div class="con vacio"></div>
 
@@ -171,11 +171,22 @@
       <p>"No hay un sistema" describe una solución, no un problema. El problema es lo que le pasa al negocio: pierde control de las órdenes, las entregas y los cobros.</p>
     </div>
     <div class="nota">
+      <h2>Magnitud</h2>
+      <ul>
+        <li>10 a 15 prendas por semana, entre 40 y 60 al mes</li>
+        <li>Prendas registradas por escrito: ninguna</li>
+        <li>Prendas sin reclamar: nadie sabe cuántas</li>
+      </ul>
+    </div>
+    <div class="nota">
+      <h2>Descartado</h2>
+      <p><b>E-05 · Falta de historial para aclarar diferencias.</b> No ocurren desacuerdos: si al recoger le falta algo al arreglo, se termina. Fuente: F-05.</p>
+    </div>
+    <div class="nota">
       <h2>Pendiente para cerrarlo</h2>
       <ul>
-        <li>Confirmar o descartar E-04 y E-05</li>
-        <li>Cuantificar al menos un efecto (órdenes por semana, entregas atrasadas)</li>
         <li>Validar con el instructor</li>
+        <li>Derivar el árbol de objetivos</li>
       </ul>
     </div>
   </div>

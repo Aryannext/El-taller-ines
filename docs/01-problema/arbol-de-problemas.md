@@ -1,6 +1,6 @@
 # Árbol de problemas
 
-**Estado:** borrador · Sprint 1 · se completa con las respuestas del aprendiz y se valida con el instructor (F-04)
+**Estado:** completo, pendiente de validación con el instructor (F-04) · Sprint 1
 
 ## Cómo se construyó
 
@@ -25,9 +25,9 @@ Este árbol es el origen de todo lo demás. Cada causa se convierte en un objeti
 | **C-02** | No se lleva el estado de avance de cada prenda ni de cada orden | F-01 · Objetivos específicos |
 | C-02.1 | Una orden puede darse por lista con prendas sin terminar | F-02 · hallazgo de la versión 1 |
 | **C-03** | La comunicación con el cliente sobre el estado de su prenda es informal y no avisa cuando está lista | F-01 · Contexto y necesidad |
-| **C-04** | Los pagos y abonos no se registran de forma que el saldo pendiente sea confiable | F-01 · Contexto |
+| **C-04** | Lo que debe cada cliente se lleva de memoria: no hay registro de pagos ni abonos | F-01 · Contexto · F-05 |
 | C-04.1 | Un saldo llevado a mano, sumando y restando, se descuadra | F-02 · hallazgo de la versión 1 |
-| **C-05** | No hay seguimiento de las órdenes vencidas ni de las prendas sin reclamar | F-01 · Objetivos específicos |
+| **C-05** | No hay seguimiento de las órdenes vencidas ni de las prendas sin reclamar: no se sabe cuántas hay | F-01 · Objetivos específicos · F-05 |
 
 ## Efectos
 
@@ -39,8 +39,34 @@ Este árbol es el origen de todo lo demás. Cada causa se convierte en un objeti
 | E-02.1 | Pérdidas económicas para el negocio | F-01 · Contexto |
 | **E-03** | Confusión en la información financiera: no se sabe con certeza cuánto se ha recibido y cuánto falta por cobrar | F-01 · Contexto y objetivos |
 | E-03.1 | Decisiones del negocio sin información confiable | F-01 · Objetivos específicos |
-| **E-04** | Prendas que nadie reclama ocupan espacio y dejan el trabajo sin cobrar | **Por confirmar** |
-| **E-05** | Sin un historial de lo hecho en cada orden, no hay forma de aclarar una diferencia con un cliente | **Por confirmar** |
+| **E-04** | Prendas que no se recogen durante dos meses o más, o nunca, sin que se sepa cuántas son | F-05 |
+
+## Descartados
+
+Se registran para dejar constancia de que se evaluaron y por qué no entran.
+
+| Código | Efecto propuesto | Motivo del descarte | Fuente |
+| --- | --- | --- | --- |
+| E-05 | Sin un historial de cada orden no hay forma de aclarar una diferencia con un cliente | No ocurren desacuerdos: cuando el cliente recoge, se mide el arreglo y, si le falta algo, se termina | F-05 |
+
+## Magnitud del problema
+
+| Indicador | Valor | Fuente |
+| --- | --- | --- |
+| Prendas recibidas por semana | Entre 10 y 15, variable | F-05 |
+| Prendas recibidas por mes (estimado) | Entre 40 y 60 | Derivado del anterior |
+| Prendas que se registran por escrito | Ninguna | F-05 |
+| Prendas sin reclamar | Desconocido: algunas pasan dos meses o más, otras nunca se recogen | F-05 |
+
+Que no se pueda saber cuántas prendas están sin reclamar ni cuánto se debe en total es, en sí mismo, una medida del problema. Los objetivos deberán convertir estos "desconocido" en cifras que el sistema entregue.
+
+## Observaciones por analizar
+
+Hechos conocidos que todavía no entran al árbol porque no está claro que sean parte de este problema ni que el software pueda atenderlos.
+
+| Observación | Por qué no entra todavía | Fuente |
+| --- | --- | --- |
+| Los clientes suelen decir que la dueña cobra muy barato | Es una opinión de los clientes, y fijar precios es una decisión del negocio, no algo que el sistema controle. Un registro de lo cobrado por tipo de arreglo sí permitiría a la dueña revisar sus precios: se evaluará al definir el alcance | F-05 |
 
 ## Diagrama
 
@@ -57,8 +83,7 @@ flowchart BT
     E01["E-01 · Olvidos y retrasos<br/>en las entregas"]
     E02["E-02 · Prendas entregadas<br/>sin cobrar"]
     E03["E-03 · Confusión en la<br/>información financiera"]
-    E04["E-04 · Prendas sin reclamar<br/>(por confirmar)"]
-    E05["E-05 · Sin historial para aclarar<br/>diferencias (por confirmar)"]
+    E04["E-04 · Prendas sin reclamar<br/>por meses, sin saber cuántas"]
 
     E011["E-01.1 · Clientes insatisfechos"]
     E021["E-02.1 · Pérdidas económicas"]
@@ -74,7 +99,6 @@ flowchart BT
     P01 --> E02
     P01 --> E03
     P01 --> E04
-    P01 --> E05
 
     E01 --> E011
     E02 --> E021
@@ -83,7 +107,5 @@ flowchart BT
 
 ## Pendiente para cerrar este documento
 
-- Confirmar o descartar E-04 y E-05 con las respuestas del aprendiz.
-- Cuantificar al menos un efecto (por ejemplo, cuántas órdenes por semana o cuántas entregas se atrasan) para que el problema sea medible y los objetivos tengan una meta.
 - Validar el árbol con el instructor.
 - Derivar el árbol de objetivos: cada causa pasa a ser un medio y cada efecto un fin.

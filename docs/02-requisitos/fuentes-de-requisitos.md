@@ -45,3 +45,8 @@ Hechos registrados de F-05:
 | Fecha | Hecho | Usado en |
 | --- | --- | --- |
 | 13 sep 2026 | No se anota nada: clientes, prendas, arreglos, precios y abonos quedan solo en la memoria de la dueña | Árbol de problemas · C-01, C-01.1 |
+| 13 sep 2026 | La dueña recuerda de memoria cuánto le debe cada cliente | Árbol de problemas · C-04 |
+| 13 sep 2026 | Hay prendas que no se recogen durante dos meses o más, o nunca; no se sabe cuántas | Árbol de problemas · C-05, E-04 |
+| 13 sep 2026 | No hay desacuerdos con los clientes: al recoger se mide el arreglo y, si falta algo, se termina | Árbol de problemas · E-05 descartado |
+| 13 sep 2026 | El taller recibe entre 10 y 15 prendas por semana, sin un número fijo | Árbol de problemas · Magnitud |
+| 13 sep 2026 | Los clientes suelen decir que la dueña cobra muy barato | Árbol de problemas · Observaciones por analizar |
