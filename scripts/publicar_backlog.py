@@ -407,7 +407,7 @@ def graphql(consulta: str, **variables) -> dict:
                            capture_output=True, text=True, encoding="utf-8")
         if r.returncode == 0:
             return json.loads(r.stdout)["data"]
-        if not re.search(r"HTTP 5\d\d", r.stderr) or intento == 3:
+        if not re.search(r"HTTP 5\d\d|unexpected end of JSON input", r.stderr) or intento == 3:
             break
         time.sleep(2 ** (intento + 1))
     inicio = " ".join(consulta.split())[:160]
@@ -586,14 +586,17 @@ def publicar_tablero(elementos: dict[str, Elemento], hitos: dict[str, str]) -> N
         if (hito := hito_de(e.sprint, hitos)) in sprints:
             fijar("Sprint", sprints[hito], f"iterationId: {q(sprints[hito])}")
 
+    # Solo se mueven las tarjetas fuera de lugar: se simula la lista y se corrige posición por posición.
     deseado = [issues[e.codigo]["number"] for e in orden]
-    if nuevos or list(actuales) != deseado:
-        anterior = None
-        for numero in deseado:
-            despues = f", afterId: {q(anterior)}" if anterior else ""
-            mutaciones.append(f"updateProjectV2ItemPosition(input: {{projectId: {q(proyecto_id)},"
-                              f" itemId: {q(tarjetas[numero])}{despues}}}) {{ clientMutationId }}")
-            anterior = tarjetas[numero]
+    simulado = list(actuales) + [issues[e.codigo]["number"] for e in nuevos]
+    for i, numero in enumerate(deseado):
+        if simulado[i] == numero:
+            continue
+        simulado.remove(numero)
+        simulado.insert(i, numero)
+        despues = f", afterId: {q(tarjetas[deseado[i - 1]])}" if i else ""
+        mutaciones.append(f"updateProjectV2ItemPosition(input: {{projectId: {q(proyecto_id)},"
+                          f" itemId: {q(tarjetas[numero])}{despues}}}) {{ clientMutationId }}")
     mutar_en_lotes(mutaciones)
     print(f"Cambios enviados al tablero: {len(mutaciones)}")
 
