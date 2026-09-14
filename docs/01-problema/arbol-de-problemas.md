@@ -35,7 +35,7 @@ Este árbol es el origen de todo lo demás. Cada causa se convierte en un objeti
 
 | Código | Efecto | Fuente |
 | --- | --- | --- |
-| **E-01** | Olvidos y retrasos en las entregas | F-01 · Contexto |
+| **E-01** | Olvidos y retrasos en las entregas | F-01 · Contexto · F-05 |
 | E-01.1 | Clientes insatisfechos y deterioro de la atención | F-01 · Necesidad del negocio |
 | **E-02** | Prendas terminadas o entregadas sin haberse cobrado correctamente | F-01 · Contexto |
 | E-02.1 | Pérdidas económicas para el negocio | F-01 · Contexto |

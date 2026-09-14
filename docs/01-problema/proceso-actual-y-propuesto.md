@@ -18,7 +18,7 @@ El [árbol de problemas](arbol-de-problemas.md) dice **por qué** falla el contr
 ### Limitaciones
 
 - **No hubo observación estructurada ni validación con la dueña**, que no está disponible. El proceso actual puede tener variaciones que el aprendiz no conoce; por eso pasa por la validación del instructor.
-- **Por confirmar:** qué ocurre cuando el cliente llega en la fecha acordada y la prenda todavía no está terminada. No se representa en el proceso actual porque no se tiene el dato.
+- **Un requisito salió de este análisis:** al reconstruir la entrega apareció que el cliente a veces se lleva una prenda sin arreglar. Eso generó la regla RN-44 y la historia HU-36 (Should).
 
 ### Cómo leer los diagramas
 
@@ -116,11 +116,13 @@ Si la orden deja de estar lista antes de que salga el aviso (por ejemplo, una pr
 
 | Paso | Quién | Qué pasa | Causa o efecto |
 | --- | --- | --- | --- |
-| 1 | Cliente | Llega a recoger sus prendas | — |
+| 1 | Cliente | Llega a recoger sus prendas, normalmente en la fecha acordada | — |
 | 2 | Dueña | Busca las prendas en el rincón, entre las de todos, sin saber con certeza cuáles son | C-06.1, E-06 |
-| 3 | Cliente | Se mide las prendas. Si le falta algo, la dueña termina el retoque y se vuelve a medir | — |
-| 4 | Dueña | Cobra lo que recuerda que se debe | C-04, E-02 |
-| 5 | Dueña | Si el cliente no paga todo, entrega igual y recuerda la deuda de memoria | C-04, E-03 |
+| 3 | Dueña | A veces no están terminadas porque se le olvidó. Si el arreglo es rápido, lo termina mientras el cliente espera | E-01 |
+| 4 | Dueña | Si no es rápido, acuerdan otro día o el cliente se lleva la prenda sin arreglar, según lo que prefiera | E-01, E-01.1 |
+| 5 | Cliente | Se mide las prendas. Si le falta algo, la dueña termina el retoque y se vuelve a medir | — |
+| 6 | Dueña | Cobra lo que recuerda que se debe | C-04, E-02 |
+| 7 | Dueña | Si el cliente no paga todo, entrega igual y recuerda la deuda de memoria | C-04, E-03 |
 
 El retoque no se marca como problema: al medirse, lo que falta se termina y no genera desacuerdos (E-05 descartado en el árbol de problemas).
 
@@ -132,10 +134,16 @@ El retoque no se marca como problema: al medirse, lo que falta se termina y no g
 | --- | --- | --- | --- |
 | 1 | Cliente | Llega a recoger sus prendas | — |
 | 2 | Dueña | Busca la orden por número o por cliente y reconoce las prendas por sus fotos | HU-15, HU-18 |
-| 3 | Cliente y dueña | Se mide las prendas; si falta algo, la prenda vuelve a En proceso y se termina | HU-20 · RN-14 |
-| 4 | Dueña | Si el cliente paga algo, registra el pago. El sistema no deja registrar más que el saldo | HU-23 · RN-28 |
-| 5 | Dueña | Entrega la orden. Si queda saldo, lo confirma después de ver cuánto se debe | HU-21 · RN-20, RN-21 |
-| 6 | Sistema | Registra la fecha de entrega; lo que falta queda en el total por cobrar | RN-23, RN-27, RN-32 |
+| 3 | Dueña | Si alguna prenda no está terminada y el arreglo es rápido, la termina mientras el cliente espera y la marca Terminada | HU-20 |
+| 4 | Dueña | Si no es rápido, acuerdan otro día, o registra que el cliente se lleva la prenda sin arreglar y ese arreglo deja de cobrarse | HU-36 · RN-44, RN-26 |
+| 5 | Cliente y dueña | Se mide las prendas; si falta algo, la prenda vuelve a En proceso y se termina | HU-20 · RN-14 |
+| 6 | Dueña | Si el cliente paga algo, registra el pago. El sistema no deja registrar más que el saldo | HU-23 · RN-28 |
+| 7 | Dueña | Entrega la orden. Si queda saldo, lo confirma después de ver cuánto se debe | HU-21 · RN-20, RN-21 |
+| 8 | Sistema | Registra la fecha de entrega; lo que falta queda en el total por cobrar | RN-23, RN-27, RN-32 |
+
+Si el cliente se lleva una prenda sin arreglar y las demás están listas, la entrega de esas sigue desde el paso 5.
+
+El sistema no evita del todo el olvido: una orden aparece como atrasada en el panel cuando su fecha ya pasó (HU-33, RN-34). Avisar antes de la fecha exigiría mostrar las órdenes próximas a vencer, que quedó aplazado (v1 RN-38 en las [reglas de negocio](../02-requisitos/reglas-de-negocio.md)).
 
 ## Qué cambia
 
@@ -165,4 +173,3 @@ Hoy la dueña se queda con las prendas que nadie reclama. No se sabe si al recib
 ## Pendiente para cerrar este documento
 
 - Validar ambos procesos con el instructor (DOC-12).
-- Confirmar qué pasa cuando el cliente llega en la fecha acordada y la prenda no está terminada.

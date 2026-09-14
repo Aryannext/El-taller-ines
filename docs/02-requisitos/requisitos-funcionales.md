@@ -26,7 +26,7 @@ Todos se redactan como "El sistema debe permitir…" o "El sistema debe…", y l
 | **Could** · Podría | Deseable. Es lo primero que se recorta |
 | **Won't** · No esta vez | Fuera de esta entrega; está en el alcance con su motivo |
 
-**Resumen:** 40 requisitos · 31 Must · 7 Should · 2 Could.
+**Resumen:** 41 requisitos · 31 Must · 8 Should · 2 Could.
 
 ---
 
@@ -79,6 +79,7 @@ Todos se redactan como "El sistema debe permitir…" o "El sistema debe…", y l
 | **RF-23** | El sistema debe permitir a la usuaria entregar una orden, total o parcialmente, registrando la fecha de entrega. | Must | OE-02 | RN-20, RN-23 | F-01 |
 | **RF-24** | El sistema debe pedir confirmación, mostrando el saldo pendiente, antes de entregar una orden que tenga saldo. | Must | OE-04 | RN-21 | F-05 |
 | **RF-25** | El sistema debe permitir a la usuaria cancelar una orden que no esté Entregada, previa confirmación. | Must | OE-02 | RN-24 | F-01 |
+| **RF-41** | El sistema debe permitir a la usuaria devolver al cliente sin arreglar una prenda Pendiente o En proceso, previa confirmación, dejando de contar su precio en el valor de la orden. | Should | OE-02 · OE-04 | RN-12, RN-16, RN-26, RN-44 | F-05 |
 
 ## Pagos
 

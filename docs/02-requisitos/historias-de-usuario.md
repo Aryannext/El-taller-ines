@@ -59,13 +59,13 @@ Una historia entra a un sprint de desarrollo cuando tiene: formato completo, ori
 | **EP-02 · Clientes** | HU-03 a HU-06 | 4 | — | — | 8 |
 | **EP-03 · Órdenes y prendas** | HU-07 a HU-16 | 6 | 3 | 1 | 24 |
 | **EP-04 · Identificación de prendas** | HU-17 a HU-19 | 2 | 1 | — | 6 |
-| **EP-05 · Estados y entrega** | HU-20 a HU-22 | 3 | — | — | 10 |
+| **EP-05 · Estados y entrega** | HU-20 a HU-22 y HU-36 | 3 | 1 | — | 12 |
 | **EP-06 · Pagos** | HU-23 a HU-27 | 2 | 3 | — | 11 |
 | **EP-07 · Avisos** | HU-28 a HU-31 | 4 | — | — | 11 |
 | **EP-08 · Seguimiento** | HU-32 a HU-35 | 3 | — | 1 | 8 |
-| **Total** | **35** | **26** | **7** | **2** | **83** |
+| **Total** | **36** | **26** | **8** | **2** | **85** |
 
-**Puntos por prioridad:** Must 66 · Should 14 · Could 3.
+**Puntos por prioridad:** Must 66 · Should 16 · Could 3.
 
 > **Riesgo de capacidad.** Los 66 puntos Must se desarrollan en los Sprints 3 y 4 (12 días). Aún no se conoce la velocidad real. Si al cerrar el Sprint 3 no alcanza, se recorta primero lo Could, después lo Should y, si aun así no alcanza, se renegocia el alcance con el instructor antes de sacrificar pruebas o documentación.
 
@@ -446,6 +446,24 @@ Una historia entra a un sprint de desarrollo cuando tiene: formato completo, ori
 | **CA-22.2** Orden entregada | que la #0040 está Entregada | intento cancelarla | no se permite |
 | **CA-22.3** Orden ya cancelada | que la #0043 está Cancelada | intento registrarle un pago o agregarle una prenda | no se permite |
 
+### HU-36 · Devolver una prenda sin arreglar
+
+> **Como** dueña del taller, **quiero** registrar que el cliente se llevó una prenda sin arreglar, **para** no cobrarle ese arreglo y seguir con las demás prendas de la orden.
+
+**Nació de:** E-01. A veces el cliente llega en la fecha acordada y la prenda no está terminada porque se olvidó; si el arreglo no es rápido, el cliente vuelve otro día o se lleva la prenda sin arreglar (F-05). Sin esta historia, el saldo le cobraría un arreglo que no se hizo (C-04.1).
+
+**Requisitos:** RF-41 · **Reglas:** RN-12, RN-16, RN-26, RN-44 · **Calidad:** RNF-10
+
+**Prioridad:** Should · **Puntos:** 2
+
+| Criterio | Dado | Cuando | Entonces |
+| --- | --- | --- | --- |
+| **CA-36.1** Devolución | que la #0042 vale $31.000, sin pagos, con un pantalón Terminado de $15.000 y dos camisas Pendientes de $8.000 | devuelvo una camisa sin arreglar y lo confirmo | la camisa queda Devuelta, el valor y el saldo quedan en $23.000 y la orden sigue En proceso |
+| **CA-36.2** Me arrepiento | que pedí devolver una camisa sin arreglar | respondo que no en la confirmación | nada cambia |
+| **CA-36.3** Prenda terminada | que el pantalón de la #0042 está Terminado | reviso sus opciones | la opción de devolver sin arreglar no aparece |
+| **CA-36.4** Única prenda por resolver | que la #0043 tiene una sola prenda y está Pendiente | intento devolverla sin arreglar | no se permite y el sistema sugiere cancelar la orden |
+| **CA-36.5** Lo pagado supera el valor | que la #0042 vale $31.000 y tiene $30.000 pagados | intento devolver una camisa de $8.000 | no se permite y veo que primero debo anular el pago que sobra |
+
 ## EP-06 · Pagos
 
 ### HU-23 · Registrar un pago o abono
@@ -680,3 +698,4 @@ Todo requisito funcional está en al menos una historia.
 | RF-08 | HU-07 | RF-18 | HU-17 | RF-28 | HU-23 | RF-38 | HU-33 |
 | RF-09 | HU-08 | RF-19 | HU-18 | RF-29 | HU-25 | RF-39 | HU-34 |
 | RF-10 | HU-10 | RF-20 | HU-19 | RF-30 | HU-26 | RF-40 | HU-35 |
+| | | | | | | RF-41 | HU-36 |

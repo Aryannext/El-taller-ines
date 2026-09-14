@@ -40,11 +40,7 @@ Recomendación: muéstraselos desde tu computador en la reunión y pregúntale s
 6. [Product backlog](product-backlog.md) y el [tablero](https://github.com/users/Aryannext/projects/1)
 7. [Acta de validación](actas/acta-validacion-sprint-1.md)
 
-### 4. Resuelve el dato que falta del proceso actual
-
-El [proceso actual](../01-problema/proceso-actual-y-propuesto.md) no dice **qué pasa cuando el cliente llega en la fecha acordada y la prenda todavía no está terminada.** Tú lo sabes por ser familiar de la dueña: dímelo antes de la reunión y lo agrego, así no llegas con un hueco.
-
-### 5. Repasa hasta poder explicarlo sin leer
+### 4. Repasa hasta poder explicarlo sin leer
 
 La definición de terminado del proyecto exige que puedas explicar cada documento sin leerlo. Si puedes decir estas cinco frases con tus palabras, estás listo:
 
@@ -97,13 +93,14 @@ Explícale que el rol es liviano. Consiste en:
 
 ### Requisitos
 
-- **En cifras:** 43 reglas de negocio, 40 requisitos funcionales (31 Must, 7 Should y 2 Could) y 34 no funcionales, cada uno con métrica y forma de verificarlo.
+- **En cifras:** 44 reglas de negocio, 41 requisitos funcionales (31 Must, 8 Should y 2 Could) y 34 no funcionales, cada uno con métrica y forma de verificarlo.
+- **Un requisito que salió del proceso:** al reconstruir el proceso actual apareció que a veces el cliente se lleva una prenda sin arreglar. Eso generó RN-44 y HU-36 (Should), para no cobrar un arreglo que no se hizo.
 - **Una historia completa:** abre HU-07 y muéstrale en orden «Como / quiero / para», «Nació de», los requisitos y reglas que cumple, los puntos y los criterios Dado / Cuando / Entonces con datos concretos.
 - **La matriz:** busca «C-06» en el buscador de la matriz y muéstrale la cadena completa hasta sus historias.
 
 ### Plan
 
-- **Backlog:** 24 documentos, 35 historias y 6 habilitadores técnicos, publicados como 65 issues en GitHub.
+- **Backlog:** 24 documentos, 36 historias y 6 habilitadores técnicos, publicados como 66 issues en GitHub.
 - **Capacidad:** los Sprints 3 y 4 comprometen 40 puntos cada uno, solo con lo Must. El Sprint 4 tiene menos días; es un riesgo aceptado y escrito.
 - **Punto de control el 1 de octubre:** si van menos de 15 puntos terminados, se decide el recorte ese mismo día.
 

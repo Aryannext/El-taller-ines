@@ -14,7 +14,7 @@ La columna **Prueba** se completa en el Sprint 3, cuando cada criterio de acepta
 
 | Causas | Medios | Objetivos | Requisitos funcionales | Reglas | Historias | Criterios | Requisitos no funcionales |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 11 | 11 | 6 | 40 | 43 | 35 | 120 | 34 |
+| 11 | 11 | 6 | 41 | 44 | 36 | 125 | 34 |
 
 ## Verificación
 
@@ -41,11 +41,11 @@ Cada causa del árbol de problemas, el medio que la resuelve, el objetivo espec�
 | C-01 | La información del taller (clientes, prendas, arreglos, precios y abonos) vive solo en la memoria de la dueña | M-01 | OE-01 | 13 | 13 |
 | C-01.1 | No se anota nada: no hay cuaderno, recibo ni ningún otro registro | M-01.1 | OE-01 | 13 | 13 |
 | C-01.2 | No existe un lugar donde consultar qué prendas hay, de quién son, qué arreglo llevan y cuánto deben | M-01.2 | OE-01 | 13 | 13 |
-| C-02 | No se lleva el estado de avance de cada prenda ni de cada orden | M-02 | OE-02 | 5 | 4 |
-| C-02.1 | Una orden puede darse por lista con prendas sin terminar | M-02.1 | OE-02 | 5 | 4 |
+| C-02 | No se lleva el estado de avance de cada prenda ni de cada orden | M-02 | OE-02 | 6 | 5 |
+| C-02.1 | Una orden puede darse por lista con prendas sin terminar | M-02.1 | OE-02 | 6 | 5 |
 | C-03 | La comunicación con el cliente sobre el estado de su prenda es informal y no avisa cuando está lista | M-03 | OE-03 | 7 | 6 |
-| C-04 | Lo que debe cada cliente se lleva de memoria: no hay registro de pagos ni abonos | M-04 | OE-04 | 9 | 8 |
-| C-04.1 | Un saldo llevado a mano, sumando y restando, se descuadra | M-04.1 | OE-04 | 9 | 8 |
+| C-04 | Lo que debe cada cliente se lleva de memoria: no hay registro de pagos ni abonos | M-04 | OE-04 | 10 | 9 |
+| C-04.1 | Un saldo llevado a mano, sumando y restando, se descuadra | M-04.1 | OE-04 | 10 | 9 |
 | C-05 | No hay seguimiento de las órdenes vencidas ni de las prendas sin reclamar: no se sabe cuántas hay | M-05 | OE-05 | 5 | 5 |
 | C-06 | Las prendas por arreglar y las ya arregladas se guardan juntas en un rincón, sin nada que las identifique | M-06 | OE-06 | 5 | 5 |
 | C-06.1 | Un cliente puede traer varias prendas a la vez (entre 3 y 5) y la dueña olvida cuáles son suyas | M-06.1 | OE-06 | 5 | 5 |
@@ -96,6 +96,7 @@ De qué causa, medio y objetivo nace cada requisito, qué reglas debe cumplir y 
 | RF-38 | Must | C-05 | M-05 | OE-05 | RN-09, RN-34 | HU-33 | 3 | Sprint 3 |
 | RF-39 | Must | C-05 | M-05 | OE-05 | RN-35, RN-36 | HU-34 | 3 | Sprint 3 |
 | RF-40 | Could | C-05 | M-05 | OE-05 | RN-35 | HU-35 | 2 | Sprint 3 |
+| RF-41 | Should | C-02, C-02.1, C-04, C-04.1 | M-02, M-02.1, M-04, M-04.1 | OE-02, OE-04 | RN-12, RN-16, RN-26, RN-44 | HU-36 | 5 | Sprint 3 |
 
 ## 3. Historias de usuario
 
@@ -138,6 +139,7 @@ De qué causa o efecto nace cada historia y qué requisitos, reglas y requisitos
 | HU-33 | Ver las órdenes atrasadas | EP-08 | Dueña del taller | C-05, E-01 | RF-38 | RN-09, RN-34 | — | Must | 2 | 3 | Sprint 3 |
 | HU-34 | Ver las órdenes sin reclamar | EP-08 | Dueña del taller | E-04 | RF-39 | RN-35, RN-36 | — | Must | 2 | 3 | Sprint 3 |
 | HU-35 | Cambiar el plazo para considerar una orden sin reclamar | EP-08 | Dueña del taller | C-05 | RF-40 | RN-35 | — | Could | 1 | 2 | Sprint 3 |
+| HU-36 | Devolver una prenda sin arreglar | EP-05 | Dueña del taller | C-04.1, E-01 | RF-41 | RN-12, RN-16, RN-26, RN-44 | RNF-10 | Should | 2 | 5 | Sprint 3 |
 
 ## 4. Reglas de negocio
 
@@ -156,11 +158,11 @@ Origen de cada regla y qué requisitos e historias la hacen cumplir.
 | RN-09 | Las fechas se interpretan en hora de Colombia | Restricción | F-02, M-05 | RF-31, RF-38 | HU-27, HU-33 | Sprint 3 |
 | RN-10 | Datos obligatorios de una prenda | Restricción | F-01, F-05, M-01.1 | RF-08, RF-11, RF-16, RF-17 | HU-07, HU-09, HU-11, HU-16 | Sprint 3 |
 | RN-11 | El precio es un valor entero en pesos | Restricción | F-01, F-02, M-04.1 | RF-08, RF-11, RF-12 | HU-07, HU-11, HU-12 | Sprint 3 |
-| RN-12 | Estados de una prenda | Estructural | F-01, M-02 | RF-08, RF-21 | HU-07, HU-20 | Sprint 3 |
+| RN-12 | Estados de una prenda | Estructural | F-01, M-02 | RF-08, RF-21, RF-41 | HU-07, HU-20, HU-36 | Sprint 3 |
 | RN-13 | Solo se entrega lo terminado | Restricción | F-02, M-02.1 | RF-21 | HU-20 | Sprint 3 |
 | RN-14 | Un retoque devuelve la prenda a En proceso | Restricción | F-05, M-02 | RF-21 | HU-20 | Sprint 3 |
 | RN-15 | Una prenda entregada no se modifica | Restricción | F-02, M-04 | RF-12, RF-13, RF-21 | HU-12, HU-13, HU-20 | Sprint 3 |
-| RN-16 | Lo pagado no puede quedar por encima del valor | Restricción | F-02, M-04.1 | RF-12, RF-13 | HU-12, HU-13 | Sprint 3 |
+| RN-16 | Lo pagado no puede quedar por encima del valor | Restricción | F-02, M-04.1 | RF-12, RF-13, RF-41 | HU-12, HU-13, HU-36 | Sprint 3 |
 | RN-17 | Fotos de una prenda | Restricción | F-01, F-05, M-06.1 | RF-18, RF-19, RF-20 | HU-17, HU-18, HU-19 | Sprint 3 |
 | RN-18 | El estado de la orden se calcula de sus prendas | Derivación | C-02.1, F-01, F-02, M-02, M-02.1 | RF-11, RF-14, RF-15, RF-22 | HU-07, HU-11, HU-14, HU-15, HU-20 | Sprint 3 |
 | RN-19 | El estado de avance no se cambia a mano | Restricción | F-02, M-02.1 | RF-22 | HU-20 | Sprint 3 |
@@ -170,7 +172,7 @@ Origen de cada regla y qué requisitos e historias la hacen cumplir.
 | RN-23 | Fecha de entrega real | Desencadenador | F-01, FN-01 | RF-14, RF-23 | HU-14, HU-21 | Sprint 3 |
 | RN-24 | Cancelar una orden | Restricción | F-01, M-02 | RF-11, RF-21, RF-25 | HU-11, HU-20, HU-22 | Sprint 3 |
 | RN-25 | Datos de un pago | Estructural | F-01, F-05, M-04 | RF-26, RF-27 | HU-23, HU-24 | Sprint 3 |
-| RN-26 | Valor de la orden | Derivación | F-02, M-04.1 | RF-14, RF-28 | HU-07, HU-12, HU-14, HU-23 | Sprint 3 |
+| RN-26 | Valor de la orden | Derivación | F-02, M-04.1 | RF-14, RF-28, RF-41 | HU-07, HU-12, HU-14, HU-23, HU-36 | Sprint 3 |
 | RN-27 | Saldo pendiente | Derivación | C-04.1, F-02, M-04.1 | RF-06, RF-14, RF-28 | HU-05, HU-12, HU-14, HU-23, HU-25 | Sprint 3 |
 | RN-28 | El abono no puede superar el saldo | Restricción | F-01, F-02, M-04 | RF-26, RF-27 | HU-23, HU-24 | Sprint 3 |
 | RN-29 | Estado de pago | Derivación | F-01, F-02, FN-03, M-04 | RF-06, RF-14, RF-28, RF-30 | HU-05, HU-14, HU-21, HU-23, HU-26 | Sprint 3 |
@@ -188,6 +190,7 @@ Origen de cada regla y qué requisitos e historias la hacen cumplir.
 | RN-41 | Constancia de cada aviso | Estructural | F-01, M-03, OE-03 | RF-14, RF-34, RF-36 | HU-14, HU-28, HU-29, HU-31 | Sprint 3 |
 | RN-42 | El aviso usa los datos del momento del envío | Restricción | F-01, F-02, M-03 | RF-33, RF-34 | HU-28, HU-29 | Sprint 3 |
 | RN-43 | Tipo de prenda escrito por la usuaria | Desencadenador | F-05, M-01.1 | RF-16, RF-17 | HU-09, HU-16 | Sprint 3 |
+| RN-44 | Devolver una prenda sin arreglar | Restricción | E-01, F-05, M-04.1 | RF-41 | HU-36 | Sprint 3 |
 
 ## 5. Requisitos no funcionales
 
@@ -204,7 +207,7 @@ Los que aparecen en historias se prueban con ellas; los demás se verifican sobr
 | RNF-07 | El diseño es primero para el celular | Usabilidad | — | Revisión de cada pantalla a 360 px |
 | RNF-08 | Los datos se muestran como se leen en Colombia | Usabilidad | — | Pruebas automáticas de formato |
 | RNF-09 | Los errores dicen qué pasó y cómo corregirlo | Usabilidad | — | Revisión de todos los mensajes contra una lista de chequeo |
-| RNF-10 | Las acciones que no se pueden deshacer piden confirmación | Usabilidad | HU-13, HU-19, HU-22, HU-25 | Pruebas automáticas de cada acción |
+| RNF-10 | Las acciones que no se pueden deshacer piden confirmación | Usabilidad | HU-13, HU-19, HU-22, HU-25, HU-36 | Pruebas automáticas de cada acción |
 | RNF-11 | El sistema es accesible | Usabilidad | — | Auditoría con Lighthouse en cada pantalla |
 | RNF-12 | Registrar una orden es rápido para alguien que no conoce el sistema | Usabilidad | — | Prueba de usabilidad con 3 compañeros de formación, con su registro |
 | RNF-13 | Las operaciones que tocan varios datos se hacen completas o no se hacen | Fiabilidad | HU-07, HU-24 | Pruebas automáticas que fuerzan un error a mitad de la operación y revisan la base |

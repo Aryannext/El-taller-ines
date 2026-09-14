@@ -35,7 +35,7 @@ Cada objetivo específico nace de un medio del árbol de objetivos y cumple el c
 
 ### OE-02 · Estado de avance
 
-**Al 13 de octubre de 2026, el sistema permitirá registrar el estado de cada prenda (pendiente, en proceso, terminada, entregada) y calculará el estado de la orden a partir del estado de sus prendas.**
+**Al 13 de octubre de 2026, el sistema permitirá registrar el estado de cada prenda (pendiente, en proceso, terminada, entregada o devuelta sin arreglar) y calculará el estado de la orden a partir del estado de sus prendas.**
 
 | Nace de | Indicador | Meta | Cómo se verifica |
 | --- | --- | --- | --- |

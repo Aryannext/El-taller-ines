@@ -146,18 +146,27 @@ DIAGRAMAS = [
         N("llega", "inicio", "Llega a recoger sus prendas", "cliente", 0),
         N("busca", "manual", "Buscar sus prendas en el rincón, sin saber con certeza cuáles son", "duena", 1,
           codigos=("C-06.1", "E-06")),
-        N("mide", "manual", "Medirse las prendas", "cliente", 2),
-        N("falta", "decision", "¿Le falta algo al arreglo?", "cliente", 3),
-        N("retoque", "manual", "Terminar el retoque", "duena", 3),
-        N("cobra", "manual", "Cobrar lo que recuerda que se debe", "duena", 5, codigos=("C-04", "E-02")),
-        N("paga", "decision", "¿Paga todo?", "duena", 6),
-        N("pagada", "fin", "Entregada y pagada", "duena", 8),
-        N("deuda", "manual", "Entregar y recordar la deuda de memoria", "duena", 7, fila=1, codigos=("C-04", "E-03")),
-        N("con_deuda", "fin", "Entregada con una deuda sin registrar", "duena", 8, fila=1),
+        N("terminadas", "decision", "¿Están terminadas?", "duena", 2),
+        N("rapido", "decision", "¿El arreglo es rápido?", "duena", 2, fila=1),
+        N("espera", "manual", "Terminarlo mientras el cliente espera", "duena", 3, fila=1, codigos=("E-01",)),
+        N("otro_dia", "manual", "Acordar otro día o devolver la prenda sin arreglar", "duena", 3, fila=2,
+          codigos=("E-01", "E-01.1")),
+        N("sin_prenda", "fin", "El cliente se va sin su arreglo", "duena", 4, fila=2),
+        N("une", "decision", "", "duena", 4),
+        N("mide", "manual", "Medirse las prendas", "cliente", 5),
+        N("falta", "decision", "¿Le falta algo al arreglo?", "cliente", 6),
+        N("retoque", "manual", "Terminar el retoque", "duena", 6),
+        N("cobra", "manual", "Cobrar lo que recuerda que se debe", "duena", 8, codigos=("C-04", "E-02")),
+        N("paga", "decision", "¿Paga todo?", "duena", 9),
+        N("pagada", "fin", "Entregada y pagada", "duena", 11),
+        N("deuda", "manual", "Entregar y recordar la deuda de memoria", "duena", 10, fila=1, codigos=("C-04", "E-03")),
+        N("con_deuda", "fin", "Entregada con una deuda sin registrar", "duena", 11, fila=1),
     ], [
-        F("llega", "busca"), F("busca", "mide"), F("mide", "falta"), F("falta", "retoque", "Sí"),
-        F("retoque", "mide", ruta="volver"), F("falta", "cobra", "No", "codo"), F("cobra", "paga"),
-        F("paga", "pagada", "Sí"), F("paga", "deuda", "No"), F("deuda", "con_deuda"),
+        F("llega", "busca"), F("busca", "terminadas"), F("terminadas", "une", "Sí"), F("terminadas", "rapido", "No"),
+        F("rapido", "espera", "Sí"), F("rapido", "otro_dia", "No"), F("espera", "une"), F("otro_dia", "sin_prenda"),
+        F("une", "mide"), F("mide", "falta"), F("falta", "retoque", "Sí"), F("retoque", "mide", ruta="volver"),
+        F("falta", "cobra", "No", "codo"), F("cobra", "paga"), F("paga", "pagada", "Sí"), F("paga", "deuda", "No"),
+        F("deuda", "con_deuda"),
     ]),
     Diagrama("propuesto-1-recepcion-y-arreglo", "propuesto", "Recepción y arreglo", [CLIENTE, DUENA, SISTEMA], [
         N("llega", "inicio", "Llega con prendas para arreglar", "cliente", 0),
@@ -206,21 +215,30 @@ DIAGRAMAS = [
     Diagrama("propuesto-3-entrega-y-cobro", "propuesto", "Entrega y cobro", [CLIENTE, DUENA, SISTEMA], [
         N("llega", "inicio", "Llega a recoger sus prendas", "cliente", 0),
         N("busca", "usuario", "Buscar la orden y reconocer las prendas por sus fotos", "duena", 1, codigos=("HU-15", "HU-18")),
-        N("mide", "manual", "Medirse las prendas", "cliente", 2),
-        N("falta", "decision", "¿Le falta algo al arreglo?", "cliente", 3),
-        N("retoque", "usuario", "Devolver la prenda a En proceso y terminar el retoque", "duena", 3, codigos=("HU-20", "RN-14")),
-        N("paga", "decision", "¿Paga algo ahora?", "duena", 5),
-        N("pago", "usuario", "Registrar el pago", "duena", 6, codigos=("HU-23", "RN-28")),
-        N("une_pago", "decision", "", "duena", 7),
-        N("entrega", "usuario", "Entregar la orden y confirmar si queda saldo", "duena", 8, codigos=("HU-21", "RN-20", "RN-21")),
-        N("registra", "servicio", "Registrar la entrega y dejar el saldo por cobrar", "sistema", 9,
+        N("terminadas", "decision", "¿Están terminadas?", "duena", 2),
+        N("rapido", "decision", "¿El arreglo es rápido?", "duena", 2, fila=1),
+        N("espera", "usuario", "Terminarlo mientras el cliente espera y marcarlo Terminada", "duena", 3, fila=1,
+          codigos=("HU-20",)),
+        N("otro_dia", "usuario", "Acordar otro día o devolver la prenda sin arreglar", "duena", 3, fila=2,
+          codigos=("HU-36", "RN-44")),
+        N("sin_prenda", "fin", "Vuelve otro día o se lleva la prenda sin arreglar", "duena", 4, fila=2),
+        N("une", "decision", "", "duena", 4),
+        N("mide", "manual", "Medirse las prendas", "cliente", 5),
+        N("falta", "decision", "¿Le falta algo al arreglo?", "cliente", 6),
+        N("retoque", "usuario", "Devolver la prenda a En proceso y terminar el retoque", "duena", 6, codigos=("HU-20", "RN-14")),
+        N("paga", "decision", "¿Paga algo ahora?", "duena", 8),
+        N("pago", "usuario", "Registrar el pago", "duena", 9, codigos=("HU-23", "RN-28")),
+        N("une_pago", "decision", "", "duena", 10),
+        N("entrega", "usuario", "Entregar la orden y confirmar si queda saldo", "duena", 11, codigos=("HU-21", "RN-20", "RN-21")),
+        N("registra", "servicio", "Registrar la entrega y dejar el saldo por cobrar", "sistema", 12,
           codigos=("RN-23", "RN-27", "RN-32")),
-        N("fin", "fin", "Orden entregada", "sistema", 10),
+        N("fin", "fin", "Orden entregada", "sistema", 13),
     ], [
-        F("llega", "busca"), F("busca", "mide"), F("mide", "falta"), F("falta", "retoque", "Sí"),
-        F("retoque", "mide", ruta="volver"), F("falta", "paga", "No", "codo"), F("paga", "pago", "Sí"),
-        F("paga", "une_pago", "No", "abajo"), F("pago", "une_pago"), F("une_pago", "entrega"),
-        F("entrega", "registra"), F("registra", "fin"),
+        F("llega", "busca"), F("busca", "terminadas"), F("terminadas", "une", "Sí"), F("terminadas", "rapido", "No"),
+        F("rapido", "espera", "Sí"), F("rapido", "otro_dia", "No"), F("espera", "une"), F("otro_dia", "sin_prenda"),
+        F("une", "mide"), F("mide", "falta"), F("falta", "retoque", "Sí"), F("retoque", "mide", ruta="volver"),
+        F("falta", "paga", "No", "codo"), F("paga", "pago", "Sí"), F("paga", "une_pago", "No", "abajo"),
+        F("pago", "une_pago"), F("une_pago", "entrega"), F("entrega", "registra"), F("registra", "fin"),
     ]),
 ]
 
@@ -588,6 +606,13 @@ def generar_svg(d: Diagrama, plano: Plano) -> str:
 
         if n.texto:
             lineas = partir(n.texto, 22)
+            if n.tipo == "decision" and {"arriba", "abajo"} <= usados[n.id]:
+                # Arriba y abajo tienen flujos: la pregunta va a la izquierda del rombo.
+                lineas = partir(n.texto, 14)
+                inicio = cy - (len(lineas) - 1) * 13 / 2 + 4
+                partes += [texto_svg(cx - w / 2 - 8, inicio + k * 13, linea, 11.5, COLORES["tinta"], 600, "end")
+                           for k, linea in enumerate(lineas)]
+                continue
             if n.tipo == "decision" and "arriba" in usados[n.id] and "abajo" not in usados[n.id]:
                 inicio = cy + h / 2 + 15
             elif n.tipo == "decision":

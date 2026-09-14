@@ -19,7 +19,7 @@ Lo que no cumple alguna de las dos queda fuera con su motivo, aunque estuviera e
 | **Clientes** | Registrar, consultar, editar y buscar clientes por nombre o teléfono | OE-01 | M-01, M-01.2 |
 | **Órdenes y prendas** | Crear una orden para un cliente con una o varias prendas: tipo, descripción del arreglo, precio y fecha de entrega; editar la descripción y el precio, y eliminar prendas, mientras no se hayan entregado | OE-01 | M-01.1 |
 | **Identificación de prendas** | Tomar o subir fotos de cada prenda al registrarla; ver las fotos de todas las prendas de una orden; número de orden corto y fácil de copiar (por ejemplo, #0042) para escribirlo a mano en la bolsa | OE-06 | M-06, M-06.1 |
-| **Estados** | Cambiar el estado de cada prenda; estado de la orden calculado a partir de sus prendas; entrega y cancelación de la orden | OE-02 | M-02, M-02.1 |
+| **Estados** | Cambiar el estado de cada prenda; estado de la orden calculado a partir de sus prendas; entrega y cancelación de la orden; devolución de una prenda que el cliente se lleva sin arreglar | OE-02 | M-02, M-02.1 |
 | **Pagos** | Registrar pagos y abonos por orden, anular un pago mal registrado sin borrarlo, saldo calculado, total por cobrar | OE-04 | M-04, M-04.1 |
 | **Avisos** | Aviso automático por WhatsApp cuando la orden queda lista, mediante la API oficial; si el canal automático no está disponible, envío asistido con el mensaje redactado; registro de cada aviso con su canal y resultado | OE-03 | M-03 · [ADR-003](../03-diseno/adr/ADR-003-canal-de-avisos-whatsapp.md) |
 | **Seguimiento** | Panel con órdenes vencidas, prendas sin reclamar con días de espera y total por cobrar | OE-05 | M-05 |

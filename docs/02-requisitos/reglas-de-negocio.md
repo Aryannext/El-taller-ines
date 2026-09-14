@@ -17,7 +17,7 @@
 - **Cada regla dice de dónde nace:** el medio o la causa del [árbol de objetivos](../01-problema/arbol-de-objetivos.md) y la [fuente](fuentes-de-requisitos.md). Las que vienen de la especificación original citan su código anterior (por ejemplo, `v1 RN-06`).
 - **Cada regla trae un ejemplo con datos concretos.** Cada ejemplo se convertirá en al menos una prueba automática.
 
-**Resumen:** 43 reglas · 5 estructurales · 23 restricciones · 10 derivaciones · 5 desencadenadores.
+**Resumen:** 44 reglas · 5 estructurales · 24 restricciones · 10 derivaciones · 5 desencadenadores.
 
 Los códigos no se reordenan: una regla agregada después recibe el siguiente número y se ubica en su sección.
 
@@ -34,7 +34,8 @@ Los términos tienen el mismo significado en todos los documentos, el código y 
 | **Número de orden** | Identificador corto de la orden dentro del negocio (por ejemplo, #0042) que se escribe a mano en la bolsa |
 | **Prenda** | Pieza de ropa de una orden, con su tipo, la descripción del arreglo y su precio |
 | **Tipo de prenda** | Categoría de la prenda (pantalón, vestido…) tomada de la lista del negocio; la usuaria puede agregar tipos nuevos escribiéndolos con la opción «Otro» |
-| **Valor de la orden** | Suma de los precios de sus prendas |
+| **Prenda devuelta** | Prenda que el cliente se lleva sin arreglar; no se cobra |
+| **Valor de la orden** | Suma de los precios de sus prendas, sin contar las devueltas |
 | **Pago** | Dinero que el cliente entrega por una orden, sea el total o una parte (abono) |
 | **Pago anulado** | Pago registrado por error que deja de contar, pero se conserva con su motivo |
 | **Saldo pendiente** | Lo que el cliente todavía debe de una orden |
@@ -149,7 +150,7 @@ El precio de una prenda es un número entero de pesos colombianos mayor que cero
 
 ### RN-12 · Estados de una prenda
 
-Una prenda está siempre en uno solo de estos estados: **Pendiente**, **En proceso**, **Terminada** o **Entregada**. Toda prenda nueva empieza en Pendiente.
+Una prenda está siempre en uno solo de estos estados: **Pendiente**, **En proceso**, **Terminada**, **Entregada** o **Devuelta** (el cliente se la llevó sin arreglar, RN-44). Toda prenda nueva empieza en Pendiente.
 
 **Tipo:** Estructural · **Origen:** M-02 · F-01 (v1 RN-21)
 
@@ -173,7 +174,7 @@ Una prenda Terminada puede volver a En proceso cuando, al medírsela el cliente,
 
 ### RN-15 · Una prenda entregada no se modifica
 
-Una prenda Entregada no se edita, no se elimina y no cambia de estado.
+Una prenda Entregada o Devuelta no se edita, no se elimina y no cambia de estado.
 
 **Tipo:** Restricción · **Origen:** M-04 · F-02
 
@@ -181,7 +182,7 @@ Una prenda Entregada no se edita, no se elimina y no cambia de estado.
 
 ### RN-16 · Lo pagado no puede quedar por encima del valor
 
-No se puede bajar el precio de una prenda ni eliminarla si con eso el valor de la orden queda por debajo de lo ya pagado.
+No se puede bajar el precio de una prenda, eliminarla ni devolverla sin arreglar si con eso el valor de la orden queda por debajo de lo ya pagado.
 
 **Tipo:** Restricción · **Origen:** M-04.1 · F-02
 
@@ -205,6 +206,16 @@ Si el tipo de prenda no está en la lista, la usuaria elige «Otro» y lo escrib
 
 > El tipo escrito se guarda en la lista del negocio y no en un campo de texto suelto de cada prenda. Así no aparece la misma prenda escrita de formas distintas y el modelo de datos sigue normalizado.
 
+### RN-44 · Devolver una prenda sin arreglar
+
+Una prenda Pendiente o En proceso se puede devolver al cliente sin arreglar, con confirmación. Queda **Devuelta**, se registra la fecha de la devolución y su precio deja de contar en el valor de la orden (RN-26). No se permite si todas las prendas de la orden quedarían Devueltas, porque en ese caso lo que corresponde es cancelar la orden (RN-24), ni si lo pagado quedaría por encima del valor (RN-16).
+
+**Tipo:** Restricción · **Origen:** E-01 · M-04.1 · F-05
+
+**Ejemplo:** La #0042 tiene un pantalón Terminado de $15.000 y dos camisas Pendientes de $8.000, sin pagos. Marta llega en la fecha acordada y prefiere llevarse una camisa sin arreglar: la camisa queda Devuelta y el valor de la orden baja a $23.000. El pantalón Terminado no se puede devolver sin arreglar.
+
+> Nace del proceso actual: a veces la prenda no está lista en la fecha porque se olvidó, y si el arreglo no es rápido el cliente puede llevársela sin arreglar. Sin esta regla, el saldo le cobraría un arreglo que no se hizo.
+
 ## Estado de la orden
 
 ### RN-18 · El estado de la orden se calcula de sus prendas
@@ -215,8 +226,10 @@ El estado de avance de una orden no se escribe: se obtiene del estado de sus pre
 | --- | --- |
 | **En proceso** | Al menos una prenda está Pendiente o En proceso |
 | **Lista para entregar** | Ninguna prenda está Pendiente ni En proceso, y al menos una está Terminada |
-| **Entregada** | Todas las prendas están Entregadas |
+| **Entregada** | Ninguna prenda está Pendiente, En proceso ni Terminada, y al menos una está Entregada |
 | **Cancelada** | La usuaria canceló la orden (RN-24); no depende de las prendas |
+
+Las prendas Devueltas (RN-44) no hacen que la orden esté en proceso ni lista: solo cuentan las demás.
 
 **Tipo:** Derivación · **Origen:** M-02, M-02.1 · C-02.1 · F-01 (v1 RN-06, RN-09, RN-10, RN-17) · F-02
 
@@ -228,6 +241,8 @@ El estado de avance de una orden no se escribe: se obtiene del estado de sus pre
 | Terminada, Terminada, Terminada | Lista para entregar |
 | Entregada, Terminada | Lista para entregar |
 | Entregada, Entregada | Entregada |
+| Terminada, Devuelta | Lista para entregar |
+| Entregada, Devuelta | Entregada |
 
 ### RN-19 · El estado de avance no se cambia a mano
 
@@ -295,11 +310,11 @@ Un pago pertenece a una orden y tiene valor, fecha y método de pago. Su valor e
 
 ### RN-26 · Valor de la orden
 
-El valor de una orden es la suma de los precios de sus prendas. No se escribe a mano.
+El valor de una orden es la suma de los precios de sus prendas, sin contar las Devueltas (RN-44). No se escribe a mano.
 
 **Tipo:** Derivación · **Origen:** M-04.1 · F-02
 
-**Ejemplo:** Pantalón $15.000 + camisa $8.000 + camisa $8.000 = valor de la orden $31.000.
+**Ejemplo:** Pantalón $15.000 + camisa $8.000 + camisa $8.000 = valor de la orden $31.000. Si una camisa se devuelve sin arreglar, el valor queda en $23.000.
 
 ### RN-27 · Saldo pendiente
 
@@ -449,6 +464,7 @@ El contenido del aviso se arma con los datos de la orden en el momento de enviar
 | RN-25 | Métodos de pago del taller: efectivo y Nequi (cuenta personal de la dueña) | 13 sep 2026 · F-05 |
 | RN-35 | Una orden lista se considera sin reclamar a los 30 días, configurable por negocio | 13 sep 2026 · F-05 |
 | RN-43 | Con «Otro», la usuaria escribe el tipo de prenda y queda en la lista del negocio | 13 sep 2026 · F-05 |
+| RN-44 | Una prenda que el cliente se lleva sin arreglar queda Devuelta y no se cobra; se entrega como historia Should | 14 sep 2026 · F-05 |
 
 ## Qué pasó con las reglas de la versión 1
 

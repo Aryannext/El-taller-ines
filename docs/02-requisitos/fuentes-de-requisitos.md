@@ -68,3 +68,4 @@ Hechos registrados de F-05:
 | 14 sep 2026 | El cliente vuelve en la fecha acordada. Si no viene, la dueña le escribe por WhatsApp y acuerdan otro día, o el cliente avisa que pasará después a medirse las prendas | Proceso actual · fase 2 · C-03 |
 | 14 sep 2026 | La forma de pago varía: unos clientes abonan al dejar la ropa, otros pagan al recoger y otros quedan debiendo | Proceso actual · fases 1 y 3 |
 | 14 sep 2026 | La dueña se queda con las prendas que nadie reclama, para venderlas, usarlas ella o aprovecharlas como tela de repuesto | Proceso actual · fase 2 · E-04 |
+| 14 sep 2026 | A veces el cliente llega en la fecha acordada y la prenda no está terminada porque a la dueña se le olvidó. Si el arreglo es rápido, el cliente espera; si no, vuelve otro día o se lleva la prenda sin arreglar, según lo que prefiera | Proceso actual · fase 3 · E-01 · RN-44 · HU-36 |

@@ -106,12 +106,13 @@ Una historia entra a un sprint solo si cumple la definición de "lista para desa
 | 33 | **HU-26** | Ver quién me debe | Should | 2 | — | HU-23 |
 | 34 | **HU-24** | Registrar un abono al recibir la orden | Should | 2 | — | HU-07, HU-23 |
 | 35 | **HU-13** | Eliminar una prenda registrada por error | Should | 2 | — | HU-12 |
-| 36 | **HU-10** | Registrar un cliente nuevo mientras registro su orden | Should | 3 | — | HU-07 |
-| 37 | **HU-11** | Agregar una prenda a una orden que ya existe | Should | 2 | — | HU-20 |
-| 38 | **HU-27** | Ver cuánto dinero he recibido | Should | 2 | — | HU-25 |
-| 39 | **HU-19** | Eliminar una foto | Should | 1 | — | HU-17 |
-| 40 | **HU-35** | Cambiar el plazo para considerar una orden sin reclamar | Could | 1 | — | HU-34 |
-| 41 | **HU-16** | Renombrar o desactivar tipos de prenda | Could | 2 | — | HU-09 |
+| 36 | **HU-36** | Devolver una prenda sin arreglar | Should | 2 | — | HU-20, HU-23 |
+| 37 | **HU-10** | Registrar un cliente nuevo mientras registro su orden | Should | 3 | — | HU-07 |
+| 38 | **HU-11** | Agregar una prenda a una orden que ya existe | Should | 2 | — | HU-20 |
+| 39 | **HU-27** | Ver cuánto dinero he recibido | Should | 2 | — | HU-25 |
+| 40 | **HU-19** | Eliminar una foto | Should | 1 | — | HU-17 |
+| 41 | **HU-35** | Cambiar el plazo para considerar una orden sin reclamar | Could | 1 | — | HU-34 |
+| 42 | **HU-16** | Renombrar o desactivar tipos de prenda | Could | 2 | — | HU-09 |
 
 ### Por qué este orden
 
@@ -121,6 +122,7 @@ Una historia entra a un sprint solo si cumple la definición de "lista para desa
 - **HT-04 abre el Sprint 4:** desplegar temprano descubre los problemas del servidor cuando todavía quedan días. Desde ahí, cada historia terminada se despliega el mismo día.
 - **Los pagos (HU-23) van antes de entregar (HU-21)** porque entregar con saldo pide confirmación (RN-21), y el saldo necesita los pagos.
 - **HU-26 encabeza lo Should:** ataca el efecto E-03, no saber cuánto falta por cobrar, y reutiliza el saldo ya construido.
+- **HU-36 va junto a HU-13:** las dos corrigen qué prendas cuentan en el valor de la orden. Se agregó el 14 de septiembre, al analizar el proceso actual.
 
 ## Capacidad y compromiso
 
