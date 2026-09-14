@@ -51,7 +51,7 @@ Los documentos del Sprint 1 se adelantaron: se terminaron el 13 y el 14 de septi
 | **DOC-09** | Análisis de alternativas | Sprint 1 | Terminado | 5923187 |
 | **DOC-10** | Product backlog y tablero | Sprint 1 | Terminado | 1df92bb, 0178975, https://github.com/users/Aryannext/projects/1 |
 | **DOC-11** | Proceso actual y proceso propuesto | Sprint 1 | Terminado | c93bde0 |
-| **DOC-12** | Acuerdo con el instructor sobre cómo se valida: aprueba el producto al final | Sprint 1 | Pendiente | — |
+| **DOC-12** | Acuerdo con el instructor sobre cómo se valida: aprueba el producto al final | Sprint 1 | Terminado | 313db91 |
 | **DOC-13** | Wireframes y mockups | Sprint 2 | Terminado | 93cd7ee |
 | **DOC-14** | Aprobación final del producto y su documentación con el instructor | Cierre | Pendiente | — |
 | **DOC-15** | Diagrama y especificación de casos de uso | Sprint 2 | Terminado | b0509b3 |
