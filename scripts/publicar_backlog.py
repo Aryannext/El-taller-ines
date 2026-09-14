@@ -41,6 +41,7 @@ FILA_DOC = re.compile(r"^\| \*\*(DOC-\d+)\*\* \|")
 FILA_DESARROLLO = re.compile(r"^\| (\d+) \| \*\*((?:HU|HT)-\d+)\*\* \|")
 FILA_CAPACIDAD = re.compile(r"^\| \*\*(Sprint \d+)\*\* \|")
 CODIGO = re.compile(r"\b(?:HU|HT|DOC)-\d+\b")
+NUMERO_DE_ORDEN = re.compile(r"(?<![`\w])#(\d{4})\b")
 
 
 @dataclass
@@ -283,10 +284,11 @@ def cuerpo(e: Elemento, historias: dict[str, Historia], numeros: dict[str, int],
 
     fuente = "02-requisitos/historias-de-usuario.md" if e.tipo == "HU" else "00-scrum/product-backlog.md"
     partes += ["", f"Fuente: [{fuente.split('/')[-1]}]({url}/blob/main/docs/{fuente})"]
-    return "\n".join(partes)
+    # Los números de orden de los ejemplos (#0042) van como código para que GitHub no los enlace a issues.
+    return NUMERO_DE_ORDEN.sub(r"`#\1`", "\n".join(partes))
 
 
-def publicar(historias, elementos, hitos) -> None:
+def publicar(historias, elementos, hitos, rehacer_cuerpos: bool = False) -> None:
     repo_info = json.loads(gh("repo", "view", "--json", "nameWithOwner,url"))
     repo, url = repo_info["nameWithOwner"], repo_info["url"]
 
@@ -346,8 +348,10 @@ def publicar(historias, elementos, hitos) -> None:
                 args += ["--remove-label", nombre]
             if hito != hito_actual:
                 args += ["--milestone", hito] if hito else ["--remove-milestone"]
+            if rehacer_cuerpos:
+                args += ["--body-file", "-"]
             if len(args) > 5:
-                gh(*args)
+                gh(*args, entrada=cuerpo(e, historias, numeros, url) if rehacer_cuerpos else None)
                 actualizados += 1
 
         if e.estado == "Terminado" and issue["state"] == "OPEN":
@@ -360,6 +364,8 @@ def publicar(historias, elementos, hitos) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--publicar", action="store_true", help="crea o actualiza etiquetas, hitos e issues en GitHub")
+    parser.add_argument("--rehacer-cuerpos", action="store_true",
+                        help="con --publicar, reescribe también el cuerpo de los issues existentes (desmarca las casillas)")
     opciones = parser.parse_args()
 
     historias = cargar_historias()
@@ -374,7 +380,7 @@ def main() -> int:
     print("El backlog cuadra con las historias de usuario.")
 
     if opciones.publicar:
-        publicar(historias, elementos, hitos)
+        publicar(historias, elementos, hitos, opciones.rehacer_cuerpos)
     return 0
 
 
