@@ -55,7 +55,7 @@ Los documentos del Sprint 1 se adelantaron: se terminaron el 13 y el 14 de septi
 | **DOC-13** | Wireframes y mockups | Sprint 2 | Terminado | 93cd7ee |
 | **DOC-14** | Validación de mockups con el instructor | Sprint 2 | Pendiente | — |
 | **DOC-15** | Diagrama y especificación de casos de uso | Sprint 2 | Pendiente | — |
-| **DOC-16** | Arquitectura del sistema y su ADR | Sprint 2 | Pendiente | — |
+| **DOC-16** | Arquitectura del sistema y su ADR | Sprint 2 | Terminado | ea08f64 |
 | **DOC-17** | Modelo de datos normalizado y diccionario de datos | Sprint 2 | Terminado | 166d0e0 |
 | **DOC-18** | Diagramas de clases, secuencia, estados, componentes y despliegue | Sprint 2 | Pendiente | — |
 | **DOC-19** | Especificación técnica | Sprint 2 | Pendiente | — |
