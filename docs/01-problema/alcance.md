@@ -39,6 +39,7 @@ Lo que no cumple alguna de las dos queda fuera con su motivo, aunque estuviera e
 | **App móvil nativa y trabajo sin conexión** | El taller tiene internet estable; el sistema web funciona en el navegador del teléfono (ADR-001) | F-02 |
 | **Bot de Telegram y respaldos por Telegram** | Los respaldos se hacen en el servidor; no nace de una causa del árbol | F-02 |
 | **Reportes financieros con gráficos** | El medio M-04 se cumple con el total por cobrar y lo recibido; los gráficos no atacan una causa | F-02 |
+| **Conexión con Nequi u otras pasarelas de pago** | Los pagos por Nequi llegan a la cuenta personal de la dueña, no a una cuenta de negocio; el sistema solo registra el método del pago (RN-25) | F-05 |
 | **Gestión de precios por tipo de arreglo** | Queda como observación por analizar ("cobra muy barato"); fijar precios es decisión del negocio | F-05 |
 | **Varias usuarias con roles** | El taller lo atiende una persona | F-01 |
 

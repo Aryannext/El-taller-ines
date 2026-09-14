@@ -56,3 +56,7 @@ Hechos registrados de F-05:
 | 13 sep 2026 | La descripción del arreglo se escribe al registrar la prenda | Alcance · órdenes y prendas |
 | 13 sep 2026 | Enviar los avisos a mano contradice el propósito de facilitar el trabajo: se busca automatizarlos | Alcance · avisos · ADR-003 |
 | 13 sep 2026 | Sin impresora, el número de orden se escribe a mano en la bolsa donde van las prendas del cliente | Alcance · identificación de prendas |
+| 13 sep 2026 | Una orden lista se considera sin reclamar a los 30 días | Reglas de negocio · RN-35 |
+| 13 sep 2026 | Se puede entregar una orden que el cliente todavía debe, confirmándolo | Reglas de negocio · RN-21 |
+| 13 sep 2026 | Las fotos de las prendas son opcionales, hasta 3 por prenda | Reglas de negocio · RN-17 |
+| 13 sep 2026 | El taller recibe pagos en efectivo y por Nequi, en la cuenta personal de la dueña | Reglas de negocio · RN-25 · Alcance |
