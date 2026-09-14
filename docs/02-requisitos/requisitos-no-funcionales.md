@@ -53,7 +53,7 @@ Las metas de desempeño se fijan con el volumen que tendría un negocio después
 | **RNF-09** | Los errores dicen qué pasó y cómo corregirlo | Mensajes de validación junto al campo que los causa, en español y sin términos técnicos | 100 % de los mensajes de validación | Revisión de todos los mensajes contra una lista de chequeo |
 | **RNF-10** | Las acciones que no se pueden deshacer piden confirmación | Acciones de cancelar orden, anular pago, eliminar prenda y eliminar foto con confirmación previa | 100 % | Pruebas automáticas de cada acción |
 | **RNF-11** | El sistema es accesible | Contraste de color y puntaje de accesibilidad | Contraste mínimo de 4,5:1 en textos (WCAG 2.1 nivel AA); puntaje de accesibilidad de Lighthouse ≥ 90 en cada pantalla | Auditoría con Lighthouse en cada pantalla |
-| **RNF-12** | Registrar una orden es rápido para alguien que no conoce el sistema | Tiempo para registrar una orden de 3 prendas, sin fotos, después de una demostración de 5 minutos | ≤ 2 minutos en al menos 2 de 3 personas | Prueba de usabilidad con 3 personas (instructor, compañeros o familiares), con su registro |
+| **RNF-12** | Registrar una orden es rápido para alguien que no conoce el sistema | Tiempo para registrar una orden de 3 prendas, sin fotos, después de una demostración de 5 minutos | ≤ 2 minutos en al menos 2 de 3 personas | Prueba de usabilidad con 3 compañeros de formación, con su registro |
 
 ## Fiabilidad
 
@@ -61,9 +61,11 @@ Las metas de desempeño se fijan con el volumen que tendría un negocio después
 | --- | --- | --- | --- | --- |
 | **RNF-13** | Las operaciones que tocan varios datos se hacen completas o no se hacen | Registros parciales después de un fallo al guardar una orden con prendas, un pago o una entrega | Cero | Pruebas automáticas que fuerzan un error a mitad de la operación y revisan la base |
 | **RNF-14** | Enviar dos veces el mismo formulario no duplica registros | Pagos u órdenes duplicados por doble toque | Cero | Prueba automática que envía dos veces la misma solicitud (F-02) |
-| **RNF-15** | La información se respalda y se puede recuperar | Frecuencia, retención y tiempo de restauración de los respaldos de base de datos y fotos | Respaldo diario automático en el VPS, conservado 14 días; una copia semanal fuera del VPS; restauración completa en ≤ 1 hora | Restauración probada al menos una vez antes de la entrega, con su registro |
+| **RNF-15** | La información se respalda y se puede recuperar | Frecuencia, retención y tiempo de restauración de los respaldos de base de datos y fotos | Respaldo diario automático en el VPS, conservado 14 días; una copia semanal automática en Google Drive; restauración completa en ≤ 1 hora | Restauración probada al menos una vez antes de la entrega, con su registro; copia semanal visible en Google Drive |
 | **RNF-16** | El sistema está disponible en el horario del taller | Disponibilidad mensual entre 7:00 a. m. y 8:00 p. m. | ≥ 99 % | Monitor externo que revisa el sistema cada 5 minutos desde el despliegue |
 | **RNF-17** | Un fallo de WhatsApp no deja al cliente sin aviso | Avisos perdidos cuando la API oficial falla | Cero: 3 reintentos con espera creciente y luego envío asistido (RN-40) | Prueba automática con un canal que siempre falla |
+
+> **Espacio de la copia en Google Drive (RNF-15).** En el peor caso, 60 prendas al mes con 3 fotos de 400 KB suman unos 72 MB de fotos al mes: cerca de 2,6 GB en 3 años, más una base de datos de pocos megabytes. Cabe en los 15 GB gratuitos de Google Drive, que se comparten con el resto de la cuenta donde se guarde.
 
 ## Seguridad
 

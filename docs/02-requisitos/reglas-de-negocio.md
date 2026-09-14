@@ -17,7 +17,9 @@
 - **Cada regla dice de dónde nace:** el medio o la causa del [árbol de objetivos](../01-problema/arbol-de-objetivos.md) y la [fuente](fuentes-de-requisitos.md). Las que vienen de la especificación original citan su código anterior (por ejemplo, `v1 RN-06`).
 - **Cada regla trae un ejemplo con datos concretos.** Cada ejemplo se convertirá en al menos una prueba automática.
 
-**Resumen:** 42 reglas · 5 estructurales · 23 restricciones · 10 derivaciones · 4 desencadenadores.
+**Resumen:** 43 reglas · 5 estructurales · 23 restricciones · 10 derivaciones · 5 desencadenadores.
+
+Los códigos no se reordenan: una regla agregada después recibe el siguiente número y se ubica en su sección.
 
 ## Glosario
 
@@ -31,6 +33,7 @@ Los términos tienen el mismo significado en todos los documentos, el código y 
 | **Orden** | Conjunto de prendas que un cliente deja en una misma visita; en el taller, lo que va en una bolsa |
 | **Número de orden** | Identificador corto de la orden dentro del negocio (por ejemplo, #0042) que se escribe a mano en la bolsa |
 | **Prenda** | Pieza de ropa de una orden, con su tipo, la descripción del arreglo y su precio |
+| **Tipo de prenda** | Categoría de la prenda (pantalón, vestido…) tomada de la lista del negocio; la usuaria puede agregar tipos nuevos escribiéndolos con la opción «Otro» |
 | **Valor de la orden** | Suma de los precios de sus prendas |
 | **Pago** | Dinero que el cliente entrega por una orden, sea el total o una parte (abono) |
 | **Pago anulado** | Pago registrado por error que deja de contar, pero se conserva con su motivo |
@@ -191,6 +194,16 @@ Una prenda puede tener de cero a tres fotos. Tomarlas es opcional: el sistema lo
 **Tipo:** Restricción · **Origen:** M-06.1 · F-01 (v1 RN-22, RN-23, RN-40) · F-05
 
 **Ejemplo:** Se registra un vestido con prisa y sin foto: se guarda. Después se le toman dos fotos. Se intenta agregar una cuarta cuando ya tiene tres: no se permite. Se borra una: el vestido sigue registrado con las otras.
+
+### RN-43 · Tipo de prenda escrito por la usuaria
+
+Si el tipo de prenda no está en la lista, la usuaria elige «Otro» y lo escribe. El tipo escrito se agrega a la lista de su negocio para las próximas prendas. Si coincide con uno que ya existe, sin distinguir mayúsculas ni tildes, se usa el existente y no se crea otro.
+
+**Tipo:** Desencadenador · **Origen:** M-01.1 · F-05
+
+**Ejemplo:** La usuaria elige «Otro» y escribe "Overol": la prenda se registra como overol y "Overol" aparece en la lista desde la siguiente prenda. Otro día elige «Otro» y escribe "overol": se usa el tipo "Overol" que ya existe.
+
+> El tipo escrito se guarda en la lista del negocio y no en un campo de texto suelto de cada prenda. Así no aparece la misma prenda escrita de formas distintas y el modelo de datos sigue normalizado.
 
 ## Estado de la orden
 
@@ -435,6 +448,7 @@ El contenido del aviso se arma con los datos de la orden en el momento de enviar
 | RN-21 | Se puede entregar una orden con saldo pendiente, con confirmación | 13 sep 2026 · F-05 |
 | RN-25 | Métodos de pago del taller: efectivo y Nequi (cuenta personal de la dueña) | 13 sep 2026 · F-05 |
 | RN-35 | Una orden lista se considera sin reclamar a los 30 días, configurable por negocio | 13 sep 2026 · F-05 |
+| RN-43 | Con «Otro», la usuaria escribe el tipo de prenda y queda en la lista del negocio | 13 sep 2026 · F-05 |
 
 ## Qué pasó con las reglas de la versión 1
 

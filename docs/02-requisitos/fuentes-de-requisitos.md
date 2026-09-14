@@ -61,3 +61,6 @@ Hechos registrados de F-05:
 | 13 sep 2026 | Las fotos de las prendas son opcionales, hasta 3 por prenda | Reglas de negocio · RN-17 |
 | 13 sep 2026 | El taller recibe pagos en efectivo y por Nequi, en la cuenta personal de la dueña | Reglas de negocio · RN-25 · Alcance |
 | 13 sep 2026 | Los clientes tienen celular colombiano; no hay números de otro país ni solo teléfono fijo | Reglas de negocio · RN-03 |
+| 13 sep 2026 | Al elegir «Otro» como tipo de prenda, la usuaria debe poder escribir cuál es | Reglas de negocio · RN-43 · RF-16 |
+| 13 sep 2026 | La prueba de usabilidad se hace con compañeros de formación | Requisitos no funcionales · RNF-12 |
+| 13 sep 2026 | La copia de respaldo fuera del servidor se guarda en Google Drive | Requisitos no funcionales · RNF-15 |
