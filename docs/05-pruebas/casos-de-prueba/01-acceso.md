@@ -1,0 +1,30 @@
+# Casos de prueba · EP-01 · Acceso
+
+> **Archivo generado** con `python scripts/generar_plan_de_pruebas.py` desde las [historias de usuario](../../02-requisitos/historias-de-usuario.md), la [arquitectura](../../03-diseno/arquitectura/README.md) y el [plan de pruebas](../plan-de-pruebas.md). No se edita a mano: se corrige el documento de origen y se vuelve a generar.
+
+Cada criterio de aceptación es un caso de prueba con su mismo código. La clase de prueba de cada historia es la del caso de uso que la implementa; cuando un criterio usa otra, aparece junto al método. Las rutas son relativas a `sistema/tests/`.
+
+**Resumen:** 2 historias · 9 casos · 8 automáticos · 1 automáticos y manuales · 0 manuales.
+
+## HU-01 · Iniciar y cerrar sesión
+
+**Prioridad:** Must · **Reglas:** RN-01 · **Calidad:** RNF-20, RNF-21 · **Clase de prueba:** `Feature/Http/SesionControllerTest.php`
+
+| Caso | Situación | Resultado esperado | Nivel | Forma | Prueba |
+| --- | --- | --- | --- | --- | --- |
+| **CA-01.1** Acceso correcto | Dado que tengo un usuario con contraseña válida, cuando inicio sesión con esos datos | entro al panel del día de mi negocio | Funcionalidad | Automática | `test_ca_01_1_acceso_correcto` |
+| **CA-01.2** Datos incorrectos | Dado que escribo mal la contraseña, cuando intento iniciar sesión | veo "Usuario o contraseña incorrectos", sin que diga cuál de los dos falló, y no entro | Funcionalidad | Automática | `test_ca_01_2_datos_incorrectos` |
+| **CA-01.3** Intentos repetidos | Dado que fallé 5 veces en el último minuto, cuando lo intento por sexta vez | el sistema me pide esperar antes de volver a intentarlo, aunque esta vez la contraseña sea correcta | Funcionalidad | Automática | `test_ca_01_3_intentos_repetidos` |
+| **CA-01.4** Cerrar sesión | Dado que tengo la sesión iniciada, cuando cierro la sesión y uso el botón Atrás del navegador | veo la pantalla de inicio de sesión y ningún dato del taller | Funcionalidad | Automática y manual | `test_ca_01_4_cerrar_sesion`<br>y [PM-05](../pruebas-manuales/PM-05-pantallas-y-navegadores.md) |
+| **CA-01.5** Sesión abandonada | Dado que dejé la sesión abierta sin usarla durante más de 8 horas, cuando vuelvo a usar el sistema | me pide iniciar sesión de nuevo | Funcionalidad | Automática | `test_ca_01_5_sesion_abandonada` |
+
+## HU-02 · Cambiar mi contraseña
+
+**Prioridad:** Must · **Reglas:** — · **Calidad:** RNF-19 · **Clase de prueba:** `Feature/Configuracion/CambiarContrasenaTest.php`
+
+| Caso | Situación | Resultado esperado | Nivel | Forma | Prueba |
+| --- | --- | --- | --- | --- | --- |
+| **CA-02.1** Cambio correcto | Dado que conozco mi contraseña actual, cuando escribo la actual y una nueva de al menos 8 caracteres dos veces igual | la contraseña cambia y la siguiente vez entro con la nueva | Funcionalidad | Automática | `test_ca_02_1_cambio_correcto` |
+| **CA-02.2** Contraseña actual incorrecta | Dado que escribo mal la contraseña actual, cuando intento cambiarla | no cambia y veo que la contraseña actual no es correcta | Funcionalidad | Automática | `test_ca_02_2_contrasena_actual_incorrecta` |
+| **CA-02.3** Contraseña corta | Dado que la nueva contraseña tiene 6 caracteres, cuando intento guardarla | no cambia y veo que debe tener al menos 8 caracteres | Funcionalidad | Automática | `test_ca_02_3_contrasena_corta` |
+| **CA-02.4** No coinciden | Dado que la confirmación es distinta de la nueva contraseña, cuando intento guardarla | no cambia y veo que las dos contraseñas no coinciden | Funcionalidad | Automática | `test_ca_02_4_no_coinciden` |
