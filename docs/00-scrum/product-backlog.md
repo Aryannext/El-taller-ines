@@ -50,7 +50,7 @@ Los documentos del Sprint 1 se adelantaron: se terminaron el 13 y el 14 de septi
 | **DOC-08** | Matriz de trazabilidad | Sprint 1 | Terminado | f19470b |
 | **DOC-09** | Análisis de alternativas | Sprint 1 | Terminado | 5923187 |
 | **DOC-10** | Product backlog y tablero | Sprint 1 | Terminado | 1df92bb, 0178975, https://github.com/users/Aryannext/projects/1 |
-| **DOC-11** | Proceso actual y proceso propuesto | Sprint 1 | Pendiente | — |
+| **DOC-11** | Proceso actual y proceso propuesto | Sprint 1 | Terminado | c93bde0 |
 | **DOC-12** | Validación de requisitos con el instructor y acuerdo del rol de Product Owner | Sprint 1 | Pendiente | — |
 | **DOC-13** | Wireframes y mockups | Sprint 2 | Pendiente | — |
 | **DOC-14** | Validación de mockups con el instructor | Sprint 2 | Pendiente | — |
