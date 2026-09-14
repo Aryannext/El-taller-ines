@@ -52,7 +52,7 @@ Los documentos del Sprint 1 se adelantaron: se terminaron el 13 y el 14 de septi
 | **DOC-10** | Product backlog y tablero | Sprint 1 | Terminado | 1df92bb, 0178975, https://github.com/users/Aryannext/projects/1 |
 | **DOC-11** | Proceso actual y proceso propuesto | Sprint 1 | Terminado | c93bde0 |
 | **DOC-12** | Validación de requisitos con el instructor y acuerdo del rol de Product Owner | Sprint 1 | Pendiente | — |
-| **DOC-13** | Wireframes y mockups | Sprint 2 | Pendiente | — |
+| **DOC-13** | Wireframes y mockups | Sprint 2 | Terminado | 93cd7ee |
 | **DOC-14** | Validación de mockups con el instructor | Sprint 2 | Pendiente | — |
 | **DOC-15** | Diagrama y especificación de casos de uso | Sprint 2 | Pendiente | — |
 | **DOC-16** | Arquitectura del sistema y su ADR | Sprint 2 | Pendiente | — |
