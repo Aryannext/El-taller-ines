@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="pantalla" content="PT-17">
+<meta name="historias" content="HU-22">
+<meta name="criterios" content="CA-22.1">
+<title>PT-17 · Cancelar la orden</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700;800&family=Atkinson+Hyperlegible+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<div class="app fondo-app" aria-hidden="true">
+  <header class="barra">
+    <span class="boton-icono"><i class="i i-atras"></i></span>
+    <h1><span class="numero-orden numero-chico">#0044</span><span class="sub">Luis Pardo · 300 111 2233</span></h1>
+  </header>
+  <main class="contenido">
+    <div class="prenda"><div class="cabeza"><div class="pila" style="gap:2px"><span class="tipo">Vestido</span><span class="arreglo">Ajustar cintura</span></div><span class="chip chip-proceso">En proceso</span></div></div>
+  </main>
+</div>
+
+<div class="velo"></div>
+<section class="hoja" role="dialog" aria-labelledby="titulo-hoja">
+  <h2 id="titulo-hoja">¿Cancelar la orden <span class="numero-orden">#0044</span>?</h2>
+  <p>Cancélala solo si Luis desistió del arreglo.</p>
+
+  <ul class="pila" style="margin:0; padding-left:20px">
+    <li>Deja de contar como trabajo pendiente y como deuda.</li>
+    <li>El abono de <strong class="dinero">$5.000</strong> sigue registrado.</li>
+    <li>No admite prendas, pagos ni cambios de estado.</li>
+    <li><strong>No se puede reabrir.</strong> Su número no se vuelve a usar.</li>
+  </ul>
+
+  <div class="acciones">
+    <a class="btn btn-peligro" href="pt-09-detalle-orden.html">Sí, cancelar la orden</a>
+    <a class="btn btn-secundario" href="pt-09-detalle-orden.html">No cancelar</a>
+  </div>
+</section>
+</body>
+</html>

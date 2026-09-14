@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="pantalla" content="PT-23">
+<meta name="historias" content="HU-02, HU-35, HU-16, HU-01">
+<meta name="criterios" content="CA-02.1, CA-35.1, CA-16.2, CA-01.4">
+<title>PT-23 · Ajustes</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700;800&family=Atkinson+Hyperlegible+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<div class="app">
+  <header class="barra">
+    <a class="boton-icono" href="pt-02-panel-del-dia.html" aria-label="Volver"><i class="i i-atras"></i></a>
+    <h1>Ajustes</h1>
+  </header>
+
+  <main class="contenido">
+    <section class="seccion">
+      <h2 class="titulo-seccion">Contraseña</h2>
+      <div class="tarjeta">
+        <div class="campo"><label for="actual">Contraseña actual</label><input class="entrada" id="actual" type="password" value="actual-123"></div>
+        <div class="campo"><label for="nueva">Nueva contraseña</label><input class="entrada" id="nueva" type="password" value="nueva-segura"><span class="ayuda">Al menos 8 caracteres.</span></div>
+        <div class="campo"><label for="repetir">Repite la nueva contraseña</label><input class="entrada" id="repetir" type="password" value="nueva-segura"></div>
+        <button class="btn btn-secundario"><i class="i i-candado"></i>Cambiar contraseña</button>
+      </div>
+    </section>
+
+    <section class="seccion">
+      <h2 class="titulo-seccion">Órdenes sin reclamar</h2>
+      <div class="tarjeta">
+        <div class="campo">
+          <label for="plazo">Una orden lista queda sin reclamar después de</label>
+          <div class="entre"><input class="entrada" id="plazo" inputmode="numeric" value="30" style="max-width:110px"><span class="fuerte" style="flex:1">días</span></div>
+          <span class="ayuda">Entre 1 y 365 días.</span>
+        </div>
+        <button class="btn btn-secundario">Guardar plazo</button>
+      </div>
+    </section>
+
+    <section class="seccion">
+      <h2 class="titulo-seccion">Tipos de prenda</h2>
+      <ul class="lista">
+        <li class="fila"><span class="principal"><span class="nombre">Pantalón</span></span><button class="btn btn-texto btn-pequeno">Editar</button></li>
+        <li class="fila"><span class="principal"><span class="nombre">Camisa</span></span><button class="btn btn-texto btn-pequeno">Editar</button></li>
+        <li class="fila"><span class="principal"><span class="nombre">Blusa</span></span><button class="btn btn-texto btn-pequeno">Editar</button></li>
+        <li class="fila"><span class="principal"><span class="nombre">Vestido</span></span><button class="btn btn-texto btn-pequeno">Editar</button></li>
+        <li class="fila"><span class="principal"><span class="nombre">Falda</span></span><button class="btn btn-texto btn-pequeno">Editar</button></li>
+        <li class="fila"><span class="principal"><span class="nombre texto-2">Chaqueta</span><span class="detalle">No aparece al registrar prendas nuevas</span></span><span class="chip chip-descartado">Desactivado</span><button class="btn btn-texto btn-pequeno">Activar</button></li>
+        <li class="fila"><span class="principal"><span class="nombre">Overol</span><span class="detalle">Agregado con «Otro»</span></span><button class="btn btn-texto btn-pequeno">Editar</button></li>
+      </ul>
+    </section>
+
+    <a class="btn btn-peligro-borde" href="pt-01-iniciar-sesion.html"><i class="i i-salir"></i>Cerrar sesión</a>
+  </main>
+</div>
+</body>
+</html>

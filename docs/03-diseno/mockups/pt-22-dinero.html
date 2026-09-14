@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="pantalla" content="PT-22">
+<meta name="historias" content="HU-26, HU-27">
+<meta name="criterios" content="CA-26.1, CA-27.1">
+<title>PT-22 · Dinero</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700;800&family=Atkinson+Hyperlegible+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<div class="app">
+  <header class="barra">
+    <h1>Dinero</h1>
+  </header>
+
+  <main class="contenido">
+    <section class="seccion">
+      <h2 class="titulo-seccion">Recibido</h2>
+      <div class="segmentos">
+        <label><input type="radio" name="periodo">Hoy</label>
+        <label><input type="radio" name="periodo">Semana</label>
+        <label><input type="radio" name="periodo" checked>Mes</label>
+        <label><input type="radio" name="periodo">Fechas</label>
+      </div>
+      <div class="tarjeta">
+        <span class="texto-2">Septiembre de 2026</span>
+        <span class="fuerte dinero" style="font-size:34px; line-height:1">$186.000</span>
+        <span class="texto-2 pequeno">14 pagos · no incluye 1 pago anulado</span>
+      </div>
+    </section>
+
+    <section class="seccion">
+      <h2 class="titulo-seccion">Quién me debe</h2>
+      <div class="cifras">
+        <div class="cifra principal">
+          <span class="encabezado"><i class="i i-dinero"></i>Total por cobrar</span>
+          <span class="valor dinero">$76.000</span>
+          <span class="nota">5 órdenes · de la mayor deuda a la menor</span>
+        </div>
+      </div>
+      <ul class="lista">
+        <li><a class="fila" href="pt-09-detalle-orden.html"><span class="principal"><span class="nombre">Marta Rincón · <span class="numero-orden">#0042</span></span><span class="detalle"><span class="chip chip-proceso">En proceso</span></span></span><span class="fuerte dinero">$21.000</span></a></li>
+        <li><a class="fila" href="pt-09-detalle-orden.html"><span class="principal"><span class="nombre">Luis Pardo · <span class="numero-orden">#0044</span></span><span class="detalle"><span class="chip chip-proceso">En proceso</span></span></span><span class="fuerte dinero">$18.000</span></a></li>
+        <li><a class="fila" href="pt-09-detalle-orden.html"><span class="principal"><span class="nombre">Carmen Díaz · <span class="numero-orden">#0030</span></span><span class="detalle"><span class="chip chip-lista">Lista para entregar</span></span></span><span class="fuerte dinero">$16.000</span></a></li>
+        <li><a class="fila" href="pt-09-detalle-orden.html"><span class="principal"><span class="nombre">Marta Rincón · <span class="numero-orden">#0040</span></span><span class="detalle"><span class="chip chip-entregada">Entregada</span></span></span><span class="fuerte dinero">$12.000</span></a></li>
+        <li><a class="fila" href="pt-09-detalle-orden.html"><span class="principal"><span class="nombre">Ana Beltrán · <span class="numero-orden">#0046</span></span><span class="detalle"><span class="chip chip-lista">Lista para entregar</span></span></span><span class="fuerte dinero">$9.000</span></a></li>
+      </ul>
+    </section>
+  </main>
+
+  <nav class="navegacion" aria-label="Principal">
+    <a href="pt-02-panel-del-dia.html"><i class="i i-inicio"></i>Hoy</a>
+    <a href="pt-08-ordenes.html"><i class="i i-ordenes"></i>Órdenes</a>
+    <a class="nueva" href="pt-06-nueva-orden.html"><i class="i"></i>Nueva</a>
+    <a href="pt-03-clientes.html"><i class="i i-clientes"></i>Clientes</a>
+    <a href="pt-22-dinero.html" aria-current="page"><i class="i i-dinero"></i>Dinero</a>
+  </nav>
+</div>
+</body>
+</html>

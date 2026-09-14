@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="pantalla" content="PT-08">
+<meta name="historias" content="HU-15">
+<meta name="criterios" content="CA-15.1, CA-15.2">
+<title>PT-08 · Órdenes</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700;800&family=Atkinson+Hyperlegible+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<div class="app">
+  <header class="barra">
+    <h1>Órdenes</h1>
+  </header>
+
+  <main class="contenido">
+    <div class="campo">
+      <label class="sr" for="buscar">Buscar orden</label>
+      <div class="buscador"><i class="i i-buscar"></i><input class="entrada" id="buscar" type="search" placeholder="Número de la bolsa, por ejemplo 42"></div>
+    </div>
+
+    <nav class="pestanas" aria-label="Estado de avance">
+      <a href="#" aria-selected="false">En proceso <span class="contador neutro">3</span></a>
+      <a href="#" aria-selected="true">Listas <span class="contador neutro">2</span></a>
+      <a href="#" aria-selected="false">Entregadas</a>
+      <a href="#" aria-selected="false">Canceladas</a>
+    </nav>
+
+    <ul class="lista">
+      <li>
+        <a class="fila" href="pt-09-detalle-orden.html">
+          <span class="principal">
+            <span class="nombre"><span class="numero-orden">#0046</span> · Ana Beltrán</span>
+            <span class="detalle">Chaqueta · lista hoy, 9:40 a. m.</span>
+          </span>
+          <span class="lado"><span class="chip chip-cobrar">Por cobrar</span><span class="fuerte dinero">$9.000</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="fila" href="pt-09-detalle-orden.html">
+          <span class="principal">
+            <span class="nombre"><span class="numero-orden">#0030</span> · Carmen Díaz</span>
+            <span class="detalle">2 camisas · lista desde el sáb 1 ago</span>
+          </span>
+          <span class="lado"><span class="chip chip-cobrar">Por cobrar</span><span class="fuerte dinero">$16.000</span></span>
+        </a>
+      </li>
+    </ul>
+  </main>
+
+  <nav class="navegacion" aria-label="Principal">
+    <a href="pt-02-panel-del-dia.html"><i class="i i-inicio"></i>Hoy</a>
+    <a href="pt-08-ordenes.html" aria-current="page"><i class="i i-ordenes"></i>Órdenes</a>
+    <a class="nueva" href="pt-06-nueva-orden.html"><i class="i"></i>Nueva</a>
+    <a href="pt-03-clientes.html"><i class="i i-clientes"></i>Clientes</a>
+    <a href="pt-22-dinero.html"><i class="i i-dinero"></i>Dinero</a>
+  </nav>
+</div>
+</body>
+</html>

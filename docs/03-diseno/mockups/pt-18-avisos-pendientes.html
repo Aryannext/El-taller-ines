@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="pantalla" content="PT-18">
+<meta name="historias" content="HU-29, HU-30">
+<meta name="criterios" content="CA-29.1, CA-29.2, CA-29.3, CA-30.2">
+<title>PT-18 · Avisos por enviar</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700;800&family=Atkinson+Hyperlegible+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<div class="app">
+  <header class="barra">
+    <a class="boton-icono" href="pt-02-panel-del-dia.html" aria-label="Volver"><i class="i i-atras"></i></a>
+    <h1>Avisos por enviar<span class="sub">1 cliente espera saber que su ropa está lista</span></h1>
+  </header>
+
+  <main class="contenido">
+    <div class="banda banda-info"><i class="i i-mensaje"></i><span>El envío automático por WhatsApp no está configurado. Envía cada aviso con un toque desde tu WhatsApp.</span></div>
+
+    <article class="tarjeta">
+      <div class="entre">
+        <div class="pila" style="gap:2px">
+          <span class="fuerte" style="font-size:18px">Ana Beltrán</span>
+          <span class="texto-2 pequeno"><span class="numero-orden">#0046</span> · 320 555 0101 · lista hoy, 9:40 a. m.</span>
+        </div>
+        <span class="chip chip-asistido">Por enviar</span>
+      </div>
+
+      <div class="pila" style="gap:4px">
+        <span class="titulo-seccion">Mensaje</span>
+        <p style="padding:12px; border-radius:10px; background:var(--superficie-2); border:1px solid var(--borde)">Hola Ana, tu orden #0046 del taller está lista para recoger: 1 prenda. Saldo pendiente: $9.000. Te esperamos.</p>
+      </div>
+
+      <a class="btn btn-exito" href="pt-19-aviso-cliente.html"><i class="i i-enviar"></i>Abrir WhatsApp y enviar</a>
+
+      <div class="entre" style="padding-top:10px; border-top:1px solid var(--borde)">
+        <span class="texto-2 pequeno">¿Ya lo enviaste?</span>
+        <button class="btn btn-secundario btn-pequeno"><i class="i i-check i-sm"></i>Sí, ya lo envié</button>
+      </div>
+    </article>
+
+    <p class="texto-2 pequeno">Si una orden deja de estar lista, por ejemplo porque una prenda vuelve a En proceso, su aviso sale de esta lista.</p>
+  </main>
+</div>
+</body>
+</html>

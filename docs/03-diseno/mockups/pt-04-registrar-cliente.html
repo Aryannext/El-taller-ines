@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="pantalla" content="PT-04">
+<meta name="historias" content="HU-03, HU-06, HU-10">
+<meta name="criterios" content="CA-03.3, CA-06.3, CA-10.2">
+<title>PT-04 · Registrar o corregir un cliente</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700;800&family=Atkinson+Hyperlegible+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<div class="app">
+  <header class="barra">
+    <a class="boton-icono" href="pt-06-nueva-orden.html" aria-label="Volver a la orden"><i class="i i-atras"></i></a>
+    <h1>Registrar cliente<span class="sub">Lo que escribiste en la orden se conserva</span></h1>
+  </header>
+
+  <main class="contenido">
+    <div class="campo">
+      <label for="nombre">Nombre</label>
+      <input class="entrada" id="nombre" autocomplete="name" value="Rosa Vargas">
+    </div>
+
+    <div class="campo con-error">
+      <label for="celular">Celular</label>
+      <input class="entrada" id="celular" inputmode="numeric" value="612 345 6789" aria-describedby="error-celular ayuda-celular" aria-invalid="true">
+      <span class="mensaje-error" id="error-celular"><i class="i i-alerta"></i>Escribe un celular colombiano de 10 dígitos que empiece por 3</span>
+      <span class="ayuda" id="ayuda-celular">A este número le llegan los avisos por WhatsApp.</span>
+    </div>
+
+    <p class="texto-2 pequeno">Varios clientes pueden compartir el mismo celular, por ejemplo una madre y su hija. Solo se piden nombre y celular.</p>
+  </main>
+
+  <div class="acciones-fijas">
+    <a class="btn btn-secundario" href="pt-06-nueva-orden.html">Cancelar</a>
+    <button class="btn btn-primario">Guardar cliente</button>
+  </div>
+</div>
+</body>
+</html>

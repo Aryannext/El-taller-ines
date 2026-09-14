@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="pantalla" content="PT-05">
+<meta name="historias" content="HU-05">
+<meta name="criterios" content="CA-05.1, CA-05.2">
+<title>PT-05 · Ficha del cliente</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700;800&family=Atkinson+Hyperlegible+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<div class="app">
+  <header class="barra">
+    <a class="boton-icono" href="pt-03-clientes.html" aria-label="Volver"><i class="i i-atras"></i></a>
+    <h1>Marta Rincón<span class="sub">310 456 7890</span></h1>
+    <a class="boton-icono" href="pt-04-registrar-cliente.html" aria-label="Corregir datos"><i class="i i-editar"></i></a>
+  </header>
+
+  <main class="contenido">
+    <div class="cifras">
+      <div class="cifra principal">
+        <span class="encabezado"><i class="i i-dinero"></i>Debe en total</span>
+        <span class="valor dinero">$33.000</span>
+        <span class="nota">Órdenes #0042 y #0040</span>
+      </div>
+    </div>
+
+    <a class="btn btn-primario" href="pt-06-nueva-orden.html"><i class="i i-mas"></i>Nueva orden para Marta</a>
+
+    <section class="seccion">
+      <h2 class="titulo-seccion">Órdenes <span class="contador neutro">3</span></h2>
+      <ul class="lista">
+        <li>
+          <a class="fila" href="pt-09-detalle-orden.html">
+            <span class="principal">
+              <span class="nombre"><span class="numero-orden">#0042</span> · lun 14 sep</span>
+              <span class="entre" style="justify-content:flex-start; gap:6px"><span class="chip chip-proceso">En proceso</span><span class="chip chip-cobrar">Por cobrar</span></span>
+            </span>
+            <span class="lado"><span class="fuerte dinero">$21.000</span><span class="texto-2 pequeno">saldo</span></span>
+          </a>
+        </li>
+        <li>
+          <a class="fila" href="pt-09-detalle-orden.html">
+            <span class="principal">
+              <span class="nombre"><span class="numero-orden">#0041</span> · jue 10 sep</span>
+              <span class="entre" style="justify-content:flex-start; gap:6px"><span class="chip chip-cancelada">Cancelada</span></span>
+            </span>
+            <span class="lado"><span class="texto-2 pequeno">No suma a la deuda</span></span>
+          </a>
+        </li>
+        <li>
+          <a class="fila" href="pt-09-detalle-orden.html">
+            <span class="principal">
+              <span class="nombre"><span class="numero-orden">#0040</span> · mié 2 sep</span>
+              <span class="entre" style="justify-content:flex-start; gap:6px"><span class="chip chip-entregada">Entregada</span><span class="chip chip-cobrar">Por cobrar</span></span>
+            </span>
+            <span class="lado"><span class="fuerte dinero">$12.000</span><span class="texto-2 pequeno">saldo</span></span>
+          </a>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <nav class="navegacion" aria-label="Principal">
+    <a href="pt-02-panel-del-dia.html"><i class="i i-inicio"></i>Hoy</a>
+    <a href="pt-08-ordenes.html"><i class="i i-ordenes"></i>Órdenes</a>
+    <a class="nueva" href="pt-06-nueva-orden.html"><i class="i"></i>Nueva</a>
+    <a href="pt-03-clientes.html" aria-current="page"><i class="i i-clientes"></i>Clientes</a>
+    <a href="pt-22-dinero.html"><i class="i i-dinero"></i>Dinero</a>
+  </nav>
+</div>
+</body>
+</html>

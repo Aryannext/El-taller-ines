@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="pantalla" content="PT-12">
+<meta name="historias" content="HU-36">
+<meta name="criterios" content="CA-36.1, CA-36.2">
+<title>PT-12 · Devolver una prenda sin arreglar</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700;800&family=Atkinson+Hyperlegible+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<div class="app fondo-app" aria-hidden="true">
+  <header class="barra">
+    <span class="boton-icono"><i class="i i-atras"></i></span>
+    <h1><span class="numero-orden numero-chico">#0042</span><span class="sub">Marta Rincón · 310 456 7890</span></h1>
+  </header>
+  <main class="contenido">
+    <div class="prenda"><div class="cabeza"><div class="pila" style="gap:2px"><span class="tipo">Pantalón</span><span class="arreglo">Subir basta 3 cm</span></div><span class="chip chip-terminada">Terminada</span></div></div>
+    <div class="prenda"><div class="cabeza"><div class="pila" style="gap:2px"><span class="tipo">Camisa</span><span class="arreglo">Entallar los costados</span></div><span class="chip chip-terminada">Terminada</span></div></div>
+    <div class="prenda"><div class="cabeza"><div class="pila" style="gap:2px"><span class="tipo">Camisa</span><span class="arreglo">Entallar y acortar mangas</span></div><span class="chip chip-pendiente">Pendiente</span></div></div>
+  </main>
+</div>
+
+<div class="velo"></div>
+<section class="hoja" role="dialog" aria-labelledby="titulo-hoja">
+  <h2 id="titulo-hoja">¿Devolver la camisa sin arreglar?</h2>
+  <p>Marta se lleva la camisa sin el arreglo «Entallar y acortar mangas». Queda como <strong>Devuelta</strong> y ese arreglo ya no se cobra.</p>
+
+  <dl class="montos tarjeta" style="display:grid">
+    <dt>Valor de la orden</dt><dd><span class="texto-2" style="text-decoration:line-through">$31.000</span> → $23.000</dd>
+    <dt>Abono</dt><dd>− $10.000</dd>
+    <dt class="total">Saldo</dt><dd class="total">$13.000</dd>
+  </dl>
+
+  <p class="texto-2 pequeno">No se puede deshacer. Si todas las prendas quedaran devueltas, lo que corresponde es cancelar la orden.</p>
+
+  <div class="acciones">
+    <a class="btn btn-primario" href="pt-09-detalle-orden.html"><i class="i i-devolver"></i>Sí, devolver sin arreglar</a>
+    <a class="btn btn-secundario" href="pt-09-detalle-orden.html">No, dejarla en la orden</a>
+  </div>
+</section>
+</body>
+</html>

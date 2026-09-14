@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="pantalla" content="PT-14">
+<meta name="historias" content="HU-23">
+<meta name="criterios" content="CA-23.3">
+<title>PT-14 · Registrar un pago</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700;800&family=Atkinson+Hyperlegible+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<div class="app fondo-app" aria-hidden="true">
+  <header class="barra">
+    <span class="boton-icono"><i class="i i-atras"></i></span>
+    <h1><span class="numero-orden numero-chico">#0042</span><span class="sub">Marta Rincón · 310 456 7890</span></h1>
+  </header>
+  <main class="contenido">
+    <div class="tarjeta"><dl class="montos"><dt>Valor de la orden</dt><dd>$31.000</dd><dt>Abono</dt><dd>− $10.000</dd><dt class="total">Saldo</dt><dd class="total">$21.000</dd></dl></div>
+  </main>
+</div>
+
+<div class="velo"></div>
+<section class="hoja" role="dialog" aria-labelledby="titulo-hoja">
+  <div class="pila" style="gap:2px">
+    <h2 id="titulo-hoja">Registrar pago</h2>
+    <span class="texto-2"><span class="numero-orden">#0042</span> · Marta Rincón · saldo <strong class="dinero">$21.000</strong></span>
+  </div>
+
+  <div class="campo con-error">
+    <label for="valor">Valor</label>
+    <div class="prefijo"><span>$</span><input class="entrada dinero" id="valor" inputmode="numeric" value="25.000" aria-invalid="true" aria-describedby="error-valor"></div>
+    <span class="mensaje-error" id="error-valor"><i class="i i-alerta"></i>El pago no puede superar el saldo pendiente de $21.000</span>
+    <button class="btn btn-texto btn-pequeno" style="align-self:flex-start">Usar el saldo completo: $21.000</button>
+  </div>
+
+  <div class="campo">
+    <span class="etiqueta">Método</span>
+    <div class="segmentos">
+      <label><input type="radio" name="metodo">Efectivo</label>
+      <label><input type="radio" name="metodo" checked>Nequi</label>
+    </div>
+  </div>
+
+  <p class="texto-2 pequeno">La fecha del pago es hoy, miércoles 16 sep 2026.</p>
+
+  <div class="acciones">
+    <button class="btn btn-primario">Guardar pago</button>
+    <a class="btn btn-secundario" href="pt-09-detalle-orden.html">Cancelar</a>
+  </div>
+</section>
+</body>
+</html>

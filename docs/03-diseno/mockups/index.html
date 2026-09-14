@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockups · El-taller-ines</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700;800&family=Atkinson+Hyperlegible+Mono:wght@500;700&display=swap">
+<style>
+  :root { --fondo: #e9ebf2; --papel: #fff; --tinta: #161b2e; --tinta-2: #4b5470; --primario: #2a44a8; --tiza: #f2c23d; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fondo); color: var(--tinta); font: 16px/1.45 "Atkinson Hyperlegible Next", system-ui, sans-serif; }
+  .pagina { max-width: 1400px; margin: 0 auto; padding: 32px 20px 56px; display: flex; flex-direction: column; gap: 28px; }
+  h1 { margin: 0; font-size: 34px; line-height: 1.1; }
+  .intro { margin: 8px 0 0; max-width: 70ch; color: var(--tinta-2); }
+  .rejilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(410px, 1fr)); gap: 28px 24px; }
+  .pantalla { display: flex; flex-direction: column; gap: 10px; }
+  .pantalla header { display: flex; flex-direction: column; gap: 4px; }
+  .codigo { margin: 0; font-family: "Atkinson Hyperlegible Mono", monospace; font-weight: 700; font-size: 14px; }
+  .codigo::before { content: ""; display: inline-block; width: 10px; height: 10px; margin-right: 6px; border-radius: 50%; background: var(--tiza); }
+  .pantalla h2 { margin: 0; font-size: 20px; }
+  .hu { margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .hu span { padding: 1px 8px; border-radius: 999px; background: #dfe4f5; color: var(--primario); font-size: 13px; font-weight: 700; }
+  .enlaces { margin: 0; font-size: 14px; color: var(--tinta-2); }
+  .enlaces a { color: inherit; }
+  .telefono { width: 410px; max-width: 100%; padding: 10px; border-radius: 34px; background: #161b2e; overflow-x: auto; }
+  .telefono iframe { display: block; width: 390px; height: 760px; border: 0; border-radius: 24px; background: #f3f4f8; }
+  a:focus-visible { outline: 3px solid var(--primario); outline-offset: 2px; }
+  @media (max-width: 480px) { .rejilla { grid-template-columns: 1fr; } .telefono { padding: 6px; border-radius: 26px; } }
+</style>
+</head>
+<body>
+<div class="pagina">
+  <header>
+    <h1>Mockups de El-taller-ines</h1>
+    <p class="intro">23 pantallas navegables, cada una con las historias de usuario que muestra. Se generan con <code>node scripts/generar_mockups.mjs</code>; el detalle está en <a href="README.md">README.md</a>.</p>
+  </header>
+  <div class="rejilla">
+    <article class="pantalla">
+      <header>
+        <p class="codigo">PT-01</p>
+        <h2>Iniciar sesión</h2>
+        <p class="hu"><span title="Iniciar y cerrar sesión">HU-01</span></p>
+        <p class="enlaces"><a href="pt-01-iniciar-sesion.html">Abrir sola</a> · <a href="capturas/pt-01-iniciar-sesion.png">Captura</a></p>
+      </header>
+      <div class="telefono"><iframe src="pt-01-iniciar-sesion.html" title="PT-01 · Iniciar sesión" loading="lazy"></iframe></div>
+    </article>
+    <article class="pantalla">
+      <header>
+        <p class="codigo">PT-02</p>
+        <h2>Panel del día</h2>
+        <p class="hu"><span title="Ver el panel del día">HU-32</span></p>
+        <p class="enlaces"><a href="pt-02-panel-del-dia.html">Abrir sola</a> · <a href="capturas/pt-02-panel-del-dia.png">Captura</a></p>
+      </header>
+      <div class="telefono"><iframe src="pt-02-panel-del-dia.html" title="PT-02 · Panel del día" loading="lazy"></iframe></div>
+    </article>
+    <article class="pantalla">
+      <header>
+        <p class="codigo">PT-03</p>
+        <h2>Clientes</h2>
+        <p class="hu"><span title="Buscar un cliente">HU-04</span></p>
+        <p class="enlaces"><a href="pt-03-clientes.html">Abrir sola</a> · <a href="capturas/pt-03-clientes.png">Captura</a></p>
+      </header>
+      <div class="telefono"><iframe src="pt-03-clientes.html" title="PT-03 · Clientes" loading="lazy"></iframe></div>
+    </article>
+    <article class="pantalla">
+      <header>
+        <p class="codigo">PT-04</p>
+        <h2>Registrar o corregir un cliente</h2>
+        <p class="hu"><span title="Registrar un cliente">HU-03</span><span title="Corregir los datos de un cliente">HU-06</span><span title="Registrar un cliente nuevo mientras registro su orden">HU-10</span></p>
+        <p class="enlaces"><a href="pt-04-registrar-cliente.html">Abrir sola</a> · <a href="capturas/pt-04-registrar-cliente.png">Captura</a></p>
+      </header>
+      <div class="telefono"><iframe src="pt-04-registrar-cliente.html" title="PT-04 · Registrar o corregir un cliente" loading="lazy"></iframe></div>
+    </article>
+    <article class="pantalla">
+      <header>
+        <p class="codigo">PT-05</p>
+        <h2>Ficha del cliente</h2>
+        <p class="hu"><span title="Consultar la ficha de un cliente">HU-05</span></p>
+        <p class="enlaces"><a href="pt-05-ficha-cliente.html">Abrir sola</a> · <a href="capturas/pt-05-ficha-cliente.png">Captura</a></p>
+      </header>
+      <div class="telefono"><iframe src="pt-05-ficha-cliente.html" title="PT-05 · Ficha del cliente" loading="lazy"></iframe></div>
+    </article>
+    <article class="pantalla">
+      <header>
+        <p class="codigo">PT-06</p>
+        <h2>Nueva orden</h2>
+        <p class="hu"><span title="Registrar una orden con sus prendas">HU-07</span><span title="Escribir un tipo de prenda que no está en la lista">HU-09</span><span title="Registrar un cliente nuevo mientras registro su orden">HU-10</span><span title="Tomar fotos de las prendas">HU-17</span><span title="Registrar un abono al recibir la orden">HU-24</span></p>
+        <p class="enlaces"><a href="pt-06-nueva-orden.html">Abrir sola</a> · <a href="capturas/pt-06-nueva-orden.png">Captura</a></p>
+      </header>
+      <div class="telefono"><iframe src="pt-06-nueva-orden.html" title="PT-06 · Nueva orden" loading="lazy"></iframe></div>
+    </article>
+    <article class="pantalla">
+      <header>
+        <p class="codigo">PT-07</p>
+        <h2>Número para la bolsa</h2>
+        <p class="hu"><span title="Obtener el número de la orden para marcar la bolsa">HU-08</span></p>
+        <p class="enlaces"><a href="pt-07-orden-guardada.html">Abrir sola</a> · <a href="capturas/pt-07-orden-guardada.png">Captura</a></p>
+      </header>
+      <div class="telefono"><iframe src="pt-07-orden-guardada.html" title="PT-07 · Número para la bolsa" loading="lazy"></iframe></div>
+    </article>
+    <article class="pantalla">
+      <header>
+        <p class="codigo">PT-08</p>
+        <h2>Órdenes</h2>
+        <p class="hu"><span title="Listar y buscar órdenes">HU-15</span></p>
+        <p class="enlaces"><a href="pt-08-ordenes.html">Abrir sola</a> · <a href="capturas/pt-08-ordenes.png">Captura</a></p>
+      </header>
+      <div class="telefono"><iframe src="pt-08-ordenes.html" title="PT-08 · Órdenes" loading="lazy"></iframe></div>
+    </article>
+    <article class="pantalla">
+      <header>
+        <p class="codigo">PT-09</p>
+        <h2>Detalle de la orden</h2>
+        <p class="hu"><span title="Consultar el detalle de una orden">HU-14</span><span title="Consultar los avisos de una orden">HU-31</span><span title="Agregar una prenda a una orden que ya existe">HU-11</span><span title="No avisar una orden que ya no está lista">HU-30</span></p>
+        <p class="enlaces"><a href="pt-09-detalle-orden.html">Abrir sola</a> · <a href="capturas/pt-09-detalle-orden.png">Captura</a></p>
+      </header>
+      <div class="telefono"><iframe src="pt-09-detalle-orden.html" title="PT-09 · Detalle de la orden" loading="lazy"></iframe></div>
+    </article>
+    <article class="pantalla">
+      <header>
+        <p class="codigo">PT-10</p>
+        <h2>Fotos de la orden</h2>
+        <p class="hu"><span title="Ver las fotos de una orden para reconocer las prendas">HU-18</span></p>
+        <p class="enlaces"><a href="pt-10-fotos-orden.html">Abrir sola</a> · <a href="capturas/pt-10-fotos-orden.png">Captura</a></p>
+      </header>
+      <div class="telefono"><iframe src="pt-10-fotos-orden.html" title="PT-10 · Fotos de la orden" loading="lazy"></iframe></div>
+    </article>
+    <article class="pantalla">
+      <header>
+        <p class="codigo">PT-11</p>
+        <h2>Acciones de una prenda</h2>
+        <p class="hu"><span title="Actualizar el estado de una prenda">HU-20</span></p>
+        <p class="enlaces"><a href="pt-11-acciones-prenda.html">Abrir sola</a> · <a href="capturas/pt-11-acciones-prenda.png">Captura</a></p>
+      </header>
+      <div class="telefono"><iframe src="pt-11-acciones-prenda.html" title="PT-11 · Acciones de una prenda" loading="lazy"></iframe></div>
+    </article>
+    <article class="pantalla">
+      <header>
+        <p class="codigo">PT-12</p>
+        <h2>Devolver una prenda sin arreglar</h2>
+        <p class="hu"><span title="Devolver una prenda sin arreglar">HU-36</span></p>
+        <p class="enlaces"><a href="pt-12-devolver-sin-arreglar.html">Abrir sola</a> · <a href="capturas/pt-12-devolver-sin-arreglar.png">Captura</a></p>
+      </header>
+      <div class="telefono"><iframe src="pt-12-devolver-sin-arreglar.html" title="PT-12 · Devolver una prenda sin arreglar" loading="lazy"></iframe></div>
+    </article>
+    <article class="pantalla">
+      <header>
+        <p class="codigo">PT-13</p>
+        <h2>Corregir una prenda</h2>
+        <p class="hu"><span title="Corregir la descripción o el precio de una prenda">HU-12</span><span title="Eliminar una prenda registrada por error">HU-13</span><span title="Eliminar una foto">HU-19</span></p>
+        <p class="enlaces"><a href="pt-13-editar-prenda.html">Abrir sola</a> · <a href="capturas/pt-13-editar-prenda.png">Captura</a></p>
+      </header>
+      <div class="telefono"><iframe src="pt-13-editar-prenda.html" title="PT-13 · Corregir una prenda" loading="lazy"></iframe></div>
+    </article>
+    <article class="pantalla">
+      <header>
+        <p class="codigo">PT-14</p>
+        <h2>Registrar un pago</h2>
+        <p class="hu"><span title="Registrar un pago o abono">HU-23</span></p>
+        <p class="enlaces"><a href="pt-14-registrar-pago.html">Abrir sola</a> · <a href="capturas/pt-14-registrar-pago.png">Captura</a></p>
+      </header>
+      <div class="telefono"><iframe src="pt-14-registrar-pago.html" title="PT-14 · Registrar un pago" loading="lazy"></iframe></div>
+    </article>
+    <article class="pantalla">
+      <header>
+        <p class="codigo">PT-15</p>
+        <h2>Anular un pago</h2>
+        <p class="hu"><span title="Anular un pago mal registrado">HU-25</span></p>
+        <p class="enlaces"><a href="pt-15-anular-pago.html">Abrir sola</a> · <a href="capturas/pt-15-anular-pago.png">Captura</a></p>
+      </header>
+      <div class="telefono"><iframe src="pt-15-anular-pago.html" title="PT-15 · Anular un pago" loading="lazy"></iframe></div>
+    </article>
+    <article class="pantalla">
+      <header>
+        <p class="codigo">PT-16</p>
+        <h2>Entregar la orden</h2>
+        <p class="hu"><span title="Entregar la orden al cliente">HU-21</span></p>
+        <p class="enlaces"><a href="pt-16-entregar-orden.html">Abrir sola</a> · <a href="capturas/pt-16-entregar-orden.png">Captura</a></p>
+      </header>
+      <div class="telefono"><iframe src="pt-16-entregar-orden.html" title="PT-16 · Entregar la orden" loading="lazy"></iframe></div>
+    </article>
+    <article class="pantalla">
+      <header>
+        <p class="codigo">PT-17</p>
+        <h2>Cancelar la orden</h2>
+        <p class="hu"><span title="Cancelar una orden">HU-22</span></p>
+        <p class="enlaces"><a href="pt-17-cancelar-orden.html">Abrir sola</a> · <a href="capturas/pt-17-cancelar-orden.png">Captura</a></p>
+      </header>
+      <div class="telefono"><iframe src="pt-17-cancelar-orden.html" title="PT-17 · Cancelar la orden" loading="lazy"></iframe></div>
+    </article>
+    <article class="pantalla">
+      <header>
+        <p class="codigo">PT-18</p>
+        <h2>Avisos por enviar</h2>
+        <p class="hu"><span title="Enviar con un toque los avisos pendientes">HU-29</span><span title="No avisar una orden que ya no está lista">HU-30</span></p>
+        <p class="enlaces"><a href="pt-18-avisos-pendientes.html">Abrir sola</a> · <a href="capturas/pt-18-avisos-pendientes.png">Captura</a></p>
+      </header>
+      <div class="telefono"><iframe src="pt-18-avisos-pendientes.html" title="PT-18 · Avisos por enviar" loading="lazy"></iframe></div>
+    </article>
+    <article class="pantalla">
+      <header>
+        <p class="codigo">PT-19</p>
+        <h2>Mensaje en el celular del cliente</h2>
+        <p class="hu"><span title="Recibir un aviso cuando mi ropa está lista">HU-28</span></p>
+        <p class="enlaces"><a href="pt-19-aviso-cliente.html">Abrir sola</a> · <a href="capturas/pt-19-aviso-cliente.png">Captura</a></p>
+      </header>
+      <div class="telefono"><iframe src="pt-19-aviso-cliente.html" title="PT-19 · Mensaje en el celular del cliente" loading="lazy"></iframe></div>
+    </article>
+    <article class="pantalla">
+      <header>
+        <p class="codigo">PT-20</p>
+        <h2>Órdenes atrasadas</h2>
+        <p class="hu"><span title="Ver las órdenes atrasadas">HU-33</span></p>
+        <p class="enlaces"><a href="pt-20-atrasadas.html">Abrir sola</a> · <a href="capturas/pt-20-atrasadas.png">Captura</a></p>
+      </header>
+      <div class="telefono"><iframe src="pt-20-atrasadas.html" title="PT-20 · Órdenes atrasadas" loading="lazy"></iframe></div>
+    </article>
+    <article class="pantalla">
+      <header>
+        <p class="codigo">PT-21</p>
+        <h2>Órdenes sin reclamar</h2>
+        <p class="hu"><span title="Ver las órdenes sin reclamar">HU-34</span></p>
+        <p class="enlaces"><a href="pt-21-sin-reclamar.html">Abrir sola</a> · <a href="capturas/pt-21-sin-reclamar.png">Captura</a></p>
+      </header>
+      <div class="telefono"><iframe src="pt-21-sin-reclamar.html" title="PT-21 · Órdenes sin reclamar" loading="lazy"></iframe></div>
+    </article>
+    <article class="pantalla">
+      <header>
+        <p class="codigo">PT-22</p>
+        <h2>Dinero</h2>
+        <p class="hu"><span title="Ver quién me debe">HU-26</span><span title="Ver cuánto dinero he recibido">HU-27</span></p>
+        <p class="enlaces"><a href="pt-22-dinero.html">Abrir sola</a> · <a href="capturas/pt-22-dinero.png">Captura</a></p>
+      </header>
+      <div class="telefono"><iframe src="pt-22-dinero.html" title="PT-22 · Dinero" loading="lazy"></iframe></div>
+    </article>
+    <article class="pantalla">
+      <header>
+        <p class="codigo">PT-23</p>
+        <h2>Ajustes</h2>
+        <p class="hu"><span title="Cambiar mi contraseña">HU-02</span><span title="Cambiar el plazo para considerar una orden sin reclamar">HU-35</span><span title="Renombrar o desactivar tipos de prenda">HU-16</span><span title="Iniciar y cerrar sesión">HU-01</span></p>
+        <p class="enlaces"><a href="pt-23-ajustes.html">Abrir sola</a> · <a href="capturas/pt-23-ajustes.png">Captura</a></p>
+      </header>
+      <div class="telefono"><iframe src="pt-23-ajustes.html" title="PT-23 · Ajustes" loading="lazy"></iframe></div>
+    </article>
+  </div>
+</div>
+</body>
+</html>

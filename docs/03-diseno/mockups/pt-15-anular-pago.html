@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="pantalla" content="PT-15">
+<meta name="historias" content="HU-25">
+<meta name="criterios" content="CA-25.1">
+<title>PT-15 · Anular un pago</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700;800&family=Atkinson+Hyperlegible+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<div class="app fondo-app" aria-hidden="true">
+  <header class="barra">
+    <span class="boton-icono"><i class="i i-atras"></i></span>
+    <h1><span class="numero-orden numero-chico">#0042</span><span class="sub">Marta Rincón · 310 456 7890</span></h1>
+  </header>
+  <main class="contenido">
+    <div class="tarjeta"><dl class="montos"><dt>Valor de la orden</dt><dd>$31.000</dd><dt>Abono</dt><dd>− $10.000</dd><dt class="total">Saldo</dt><dd class="total">$21.000</dd></dl></div>
+  </main>
+</div>
+
+<div class="velo"></div>
+<section class="hoja" role="dialog" aria-labelledby="titulo-hoja">
+  <h2 id="titulo-hoja">¿Anular este pago?</h2>
+
+  <div class="tarjeta entre" style="padding:12px 14px">
+    <span><span class="fuerte">Abono en efectivo</span><br><span class="texto-2 pequeno">Lun 14 sep 2026, 10:25 a. m.</span></span>
+    <span class="fuerte dinero">$10.000</span>
+  </div>
+
+  <p>El pago deja de contar en el saldo, pero <strong>no se borra</strong>: queda visible como anulado, con la fecha y el motivo.</p>
+
+  <div class="campo">
+    <label for="motivo">Motivo</label>
+    <input class="entrada" id="motivo" value="Valor mal digitado: eran $5.000">
+    <span class="ayuda">Es obligatorio.</span>
+  </div>
+
+  <dl class="montos">
+    <dt>Saldo después de anular</dt><dd class="fuerte">$31.000</dd>
+  </dl>
+
+  <div class="acciones">
+    <a class="btn btn-peligro" href="pt-09-detalle-orden.html">Anular pago</a>
+    <a class="btn btn-secundario" href="pt-09-detalle-orden.html">No anular</a>
+  </div>
+</section>
+</body>
+</html>

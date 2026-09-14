@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="pantalla" content="PT-13">
+<meta name="historias" content="HU-12, HU-13, HU-19">
+<meta name="criterios" content="CA-12.1, CA-19.1">
+<title>PT-13 · Corregir una prenda</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700;800&family=Atkinson+Hyperlegible+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<div class="app">
+  <header class="barra">
+    <a class="boton-icono" href="pt-09-detalle-orden.html" aria-label="Volver"><i class="i i-atras"></i></a>
+    <h1>Corregir prenda<span class="sub">#0042 · Marta Rincón</span></h1>
+  </header>
+
+  <main class="contenido">
+    <div class="tarjeta entre" style="padding:12px 14px">
+      <span><span class="texto-2">Tipo de prenda</span><br><span class="fuerte">Pantalón</span></span>
+      <span class="chip chip-terminada">Terminada</span>
+    </div>
+
+    <div class="campo">
+      <label for="arreglo">Qué arreglo lleva</label>
+      <textarea class="entrada" id="arreglo">Subir basta 3 cm y cambiar el botón</textarea>
+    </div>
+
+    <div class="campo">
+      <label for="precio">Precio</label>
+      <div class="prefijo"><span>$</span><input class="entrada dinero" id="precio" inputmode="numeric" value="18.000"></div>
+      <span class="ayuda">La orden no puede valer menos de lo ya pagado ($10.000).</span>
+    </div>
+
+    <div class="banda banda-info"><i class="i i-dinero"></i><span>El valor de la orden pasará de $31.000 a <strong>$34.000</strong> y el saldo a <strong>$24.000</strong>.</span></div>
+
+    <div class="campo">
+      <span class="etiqueta">Fotos <span class="texto-2 pequeno" style="font-weight:400">· 2 de 3</span></span>
+      <div class="fotos">
+        <div class="foto foto-pantalon" role="img" aria-label="Pantalón completo"><span class="quitar" aria-label="Eliminar foto"><i class="i i-cerrar"></i></span></div>
+        <div class="foto foto-pantalon" style="background-size:130%; background-position:50% 95%" role="img" aria-label="Detalle de la basta"><span class="quitar" aria-label="Eliminar foto"><i class="i i-cerrar"></i></span></div>
+        <button class="foto foto-agregar"><i class="i i-camara"></i>Agregar</button>
+      </div>
+      <span class="ayuda">Al eliminar una foto se pide confirmación; la prenda no se elimina.</span>
+    </div>
+
+    <div class="tarjeta">
+      <p class="fuerte">¿Registraste esta prenda por error?</p>
+      <p class="texto-2 pequeno">Elimínala solo si el cliente no la dejó. Si se la lleva sin arreglar, usa «Devolver sin arreglar».</p>
+      <button class="btn btn-peligro-borde"><i class="i i-basura"></i>Eliminar esta prenda</button>
+    </div>
+  </main>
+
+  <div class="acciones-fijas">
+    <a class="btn btn-secundario" href="pt-09-detalle-orden.html">Cancelar</a>
+    <a class="btn btn-primario" href="pt-09-detalle-orden.html">Guardar cambios</a>
+  </div>
+</div>
+</body>
+</html>

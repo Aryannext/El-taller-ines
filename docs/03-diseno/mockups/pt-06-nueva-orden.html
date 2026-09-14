@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="pantalla" content="PT-06">
+<meta name="historias" content="HU-07, HU-09, HU-10, HU-17, HU-24">
+<meta name="criterios" content="CA-07.1, CA-07.6, CA-09.1, CA-17.1, CA-17.2, CA-17.4, CA-24.1">
+<title>PT-06 · Nueva orden</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700;800&family=Atkinson+Hyperlegible+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<div class="app">
+  <header class="barra">
+    <a class="boton-icono" href="pt-02-panel-del-dia.html" aria-label="Volver"><i class="i i-atras"></i></a>
+    <h1>Nueva orden<span class="sub">Recibida hoy, miércoles 16 sep 2026</span></h1>
+  </header>
+
+  <main class="contenido">
+    <section class="seccion">
+      <h2 class="titulo-seccion">Cliente</h2>
+      <div class="tarjeta entre" style="padding:12px 14px">
+        <div class="pila" style="gap:2px">
+          <span class="fuerte">Rosa Vargas</span>
+          <span class="texto-2 pequeno">312 345 6789</span>
+        </div>
+        <a class="btn btn-texto btn-pequeno" href="pt-03-clientes.html">Cambiar</a>
+      </div>
+      <a class="btn btn-texto" href="pt-04-registrar-cliente.html" style="align-self:flex-start"><i class="i i-mas i-sm"></i>El cliente es nuevo</a>
+    </section>
+
+    <div class="campo">
+      <label for="entrega">Fecha de entrega acordada</label>
+      <input class="entrada" id="entrega" type="text" value="Sábado 19 sep 2026">
+      <span class="ayuda">Puede ser hoy, pero no antes.</span>
+    </div>
+
+    <section class="seccion">
+      <h2 class="titulo-seccion">Prendas <span class="contador neutro">2</span></h2>
+
+      <div class="prenda">
+        <div class="entre"><span class="tipo">Prenda 1</span><button class="boton-icono" aria-label="Quitar prenda 1"><i class="i i-basura"></i></button></div>
+        <div class="campo">
+          <label for="tipo1">Tipo de prenda</label>
+          <select class="entrada" id="tipo1">
+            <option>Pantalón</option><option>Camisa</option><option>Blusa</option>
+            <option selected>Vestido</option><option>Falda</option><option>Chaqueta</option><option>Otro…</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="arreglo1">Qué arreglo lleva</label>
+          <textarea class="entrada" id="arreglo1">Ajustar cintura y subir ruedo 4 cm</textarea>
+        </div>
+        <div class="campo">
+          <label for="precio1">Precio</label>
+          <div class="prefijo"><span>$</span><input class="entrada dinero" id="precio1" inputmode="numeric" value="25.000"></div>
+        </div>
+        <div class="campo">
+          <span class="etiqueta">Fotos <span class="texto-2 pequeno" style="font-weight:400">· hasta 3</span></span>
+          <div class="fotos">
+            <div class="foto foto-vestido" role="img" aria-label="Foto del vestido"><span class="quitar" aria-label="Quitar foto"><i class="i i-cerrar"></i></span></div>
+            <div class="foto foto-vestido" style="background-size:80%; background-position:30% 60%" role="img" aria-label="Foto del ruedo del vestido"><span class="quitar" aria-label="Quitar foto"><i class="i i-cerrar"></i></span></div>
+            <button class="foto foto-agregar"><i class="i i-camara"></i>Agregar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="prenda">
+        <div class="entre"><span class="tipo">Prenda 2</span><button class="boton-icono" aria-label="Quitar prenda 2"><i class="i i-basura"></i></button></div>
+        <div class="campo">
+          <label for="tipo2">Tipo de prenda</label>
+          <select class="entrada" id="tipo2">
+            <option>Pantalón</option><option>Camisa</option><option>Blusa</option>
+            <option>Vestido</option><option>Falda</option><option>Chaqueta</option><option selected>Otro…</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="otro2">¿Qué prenda es?</label>
+          <input class="entrada" id="otro2" value="Overol">
+          <span class="ayuda">Quedará en la lista para las próximas prendas.</span>
+        </div>
+        <div class="campo">
+          <label for="arreglo2">Qué arreglo lleva</label>
+          <textarea class="entrada" id="arreglo2">Cambiar la cremallera</textarea>
+        </div>
+        <div class="campo">
+          <label for="precio2">Precio</label>
+          <div class="prefijo"><span>$</span><input class="entrada dinero" id="precio2" inputmode="numeric" value="18.000"></div>
+        </div>
+        <div class="campo">
+          <span class="etiqueta">Fotos <span class="texto-2 pequeno" style="font-weight:400">· hasta 3</span></span>
+          <div class="dos-columnas">
+            <button class="btn btn-secundario"><i class="i i-camara"></i>Tomar foto</button>
+            <button class="btn btn-secundario"><i class="i i-galeria"></i>Galería</button>
+          </div>
+          <span class="aviso-sugerencia"><i class="i i-alerta i-sm"></i>Sin foto: tómale una para reconocerla después.</span>
+        </div>
+      </div>
+
+      <button class="btn btn-secundario btn-bloque"><i class="i i-mas"></i>Agregar otra prenda</button>
+    </section>
+
+    <section class="seccion">
+      <h2 class="titulo-seccion">Abono al dejar la ropa</h2>
+      <div class="tarjeta">
+        <div class="campo">
+          <label for="abono">¿Cuánto abona? <span class="texto-2 pequeno" style="font-weight:400">· opcional</span></label>
+          <div class="prefijo"><span>$</span><input class="entrada dinero" id="abono" inputmode="numeric" value="10.000"></div>
+        </div>
+        <div class="campo">
+          <span class="etiqueta">Método</span>
+          <div class="segmentos">
+            <label><input type="radio" name="metodo" checked>Efectivo</label>
+            <label><input type="radio" name="metodo">Nequi</label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <dl class="montos tarjeta" style="display:grid">
+      <dt>Valor de la orden</dt><dd>$43.000</dd>
+      <dt>Abono</dt><dd>− $10.000</dd>
+      <dt class="total">Saldo</dt><dd class="total">$33.000</dd>
+    </dl>
+  </main>
+
+  <div class="acciones-fijas">
+    <a class="btn btn-primario" href="pt-07-orden-guardada.html"><i class="i i-check"></i>Guardar orden</a>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="pantalla" content="PT-09">
+<meta name="historias" content="HU-14, HU-31, HU-11, HU-30">
+<meta name="criterios" content="CA-14.1, CA-31.1, CA-08.3, CA-17.4">
+<title>PT-09 · Detalle de la orden</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700;800&family=Atkinson+Hyperlegible+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<div class="app">
+  <header class="barra">
+    <a class="boton-icono" href="pt-08-ordenes.html" aria-label="Volver"><i class="i i-atras"></i></a>
+    <h1><span class="numero-orden numero-chico">#0042</span><span class="sub"><a href="pt-05-ficha-cliente.html" style="color:inherit">Marta Rincón</a> · 310 456 7890</span></h1>
+  </header>
+
+  <main class="contenido">
+    <div class="tarjeta">
+      <div class="entre">
+        <span class="chip chip-proceso">En proceso</span>
+        <span class="chip chip-cobrar">Por cobrar</span>
+      </div>
+      <dl class="montos">
+        <dt>Recibida</dt><dd>Lun 14 sep 2026</dd>
+        <dt>Entrega acordada</dt><dd class="fuerte">Sáb 19 sep 2026</dd>
+      </dl>
+    </div>
+
+    <section class="seccion">
+      <h2 class="titulo-seccion">Prendas <a href="pt-10-fotos-orden.html">Ver fotos juntas</a></h2>
+
+      <div class="prenda">
+        <div class="cabeza">
+          <div class="pila" style="gap:2px"><span class="tipo">Pantalón</span><span class="arreglo">Subir basta 3 cm</span></div>
+          <span class="chip chip-terminada">Terminada</span>
+        </div>
+        <div class="entre">
+          <div class="miniaturas"><span class="foto foto-pantalon"></span><span class="foto foto-pantalon" style="background-size:90%; background-position:50% 90%"></span></div>
+          <span class="fuerte dinero">$15.000</span>
+        </div>
+        <a class="btn btn-secundario btn-pequeno" href="pt-11-acciones-prenda.html">Cambiar estado</a>
+      </div>
+
+      <div class="prenda">
+        <div class="cabeza">
+          <div class="pila" style="gap:2px"><span class="tipo">Camisa</span><span class="arreglo">Entallar los costados</span></div>
+          <span class="chip chip-terminada">Terminada</span>
+        </div>
+        <div class="entre">
+          <div class="miniaturas"><span class="foto foto-camisa"></span></div>
+          <span class="fuerte dinero">$8.000</span>
+        </div>
+        <a class="btn btn-secundario btn-pequeno" href="pt-11-acciones-prenda.html">Cambiar estado</a>
+      </div>
+
+      <div class="prenda">
+        <div class="cabeza">
+          <div class="pila" style="gap:2px"><span class="tipo">Camisa</span><span class="arreglo">Entallar y acortar mangas</span></div>
+          <span class="chip chip-pendiente">Pendiente</span>
+        </div>
+        <div class="entre">
+          <span class="aviso-sugerencia"><i class="i i-camara i-sm"></i>Sin foto · tomar una</span>
+          <span class="fuerte dinero">$8.000</span>
+        </div>
+        <a class="btn btn-secundario btn-pequeno" href="pt-11-acciones-prenda.html">Cambiar estado</a>
+      </div>
+
+      <a class="btn btn-texto" href="pt-06-nueva-orden.html" style="align-self:flex-start"><i class="i i-mas i-sm"></i>Agregar una prenda</a>
+    </section>
+
+    <section class="seccion">
+      <h2 class="titulo-seccion">Dinero</h2>
+      <div class="tarjeta">
+        <dl class="montos">
+          <dt>Valor de la orden</dt><dd>$31.000</dd>
+          <dt>Abono · lun 14 sep · efectivo<br><a class="pequeno" href="pt-15-anular-pago.html">Anular este pago</a></dt><dd>− $10.000</dd>
+          <dt class="total">Saldo</dt><dd class="total">$21.000</dd>
+        </dl>
+        <a class="btn btn-secundario" href="pt-14-registrar-pago.html"><i class="i i-dinero"></i>Registrar pago</a>
+      </div>
+    </section>
+
+    <section class="seccion">
+      <h2 class="titulo-seccion">Avisos al cliente</h2>
+      <ul class="lista">
+        <li class="fila" style="align-items:flex-start">
+          <span class="principal">
+            <span class="nombre">Mar 15 sep, 4:12 p. m. · WhatsApp automático</span>
+            <span class="detalle">«Hola Marta, tu orden #0042 del taller está lista: 2 prendas. Saldo pendiente: $13.000.»</span>
+            <span class="detalle">Antes del envío se agregó una camisa que faltaba registrar; la orden dejó de estar lista y el aviso no salió.</span>
+          </span>
+          <span class="chip chip-descartado">Descartado</span>
+        </li>
+      </ul>
+    </section>
+
+    <a class="btn btn-peligro-borde" href="pt-17-cancelar-orden.html">Cancelar la orden</a>
+  </main>
+
+  <div class="acciones-fijas">
+    <a class="btn btn-primario" href="pt-16-entregar-orden.html"><i class="i i-bolsa"></i>Entregar</a>
+  </div>
+</div>
+</body>
+</html>

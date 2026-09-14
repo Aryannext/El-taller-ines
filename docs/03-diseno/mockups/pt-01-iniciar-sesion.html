@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="pantalla" content="PT-01">
+<meta name="historias" content="HU-01">
+<meta name="criterios" content="CA-01.2">
+<title>PT-01 · Iniciar sesión</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700;800&family=Atkinson+Hyperlegible+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<div class="app">
+  <main class="acceso">
+    <div class="marca">
+      <span class="sello"><i class="i i-tijeras"></i></span>
+      <h1>El-taller-ines</h1>
+      <p>Órdenes, entregas y cobros del taller, sin depender de la memoria.</p>
+    </div>
+
+    <div class="banda banda-error" role="alert"><i class="i i-alerta"></i><span>Usuario o contraseña incorrectos.</span></div>
+
+    <form class="pila" style="gap:16px">
+      <div class="campo">
+        <label for="usuario">Usuario</label>
+        <input class="entrada" id="usuario" autocomplete="username" value="taller">
+      </div>
+      <div class="campo">
+        <label for="clave">Contraseña</label>
+        <input class="entrada" id="clave" type="password" autocomplete="current-password" value="clave-equivocada">
+      </div>
+      <a class="btn btn-primario btn-bloque" href="pt-02-panel-del-dia.html">Entrar</a>
+    </form>
+
+    <p class="texto-2 pequeno">Los datos del taller y de sus clientes se tratan según la Ley 1581 de 2012. <a href="#">Política de tratamiento de datos</a></p>
+  </main>
+</div>
+</body>
+</html>

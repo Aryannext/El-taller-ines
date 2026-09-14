@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="pantalla" content="PT-11">
+<meta name="historias" content="HU-20">
+<meta name="criterios" content="CA-20.1, CA-20.2, CA-20.5">
+<title>PT-11 · Acciones de una prenda</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700;800&family=Atkinson+Hyperlegible+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<div class="app fondo-app" aria-hidden="true">
+  <header class="barra">
+    <span class="boton-icono"><i class="i i-atras"></i></span>
+    <h1><span class="numero-orden numero-chico">#0042</span><span class="sub">Marta Rincón · 310 456 7890</span></h1>
+  </header>
+  <main class="contenido">
+    <div class="prenda"><div class="cabeza"><div class="pila" style="gap:2px"><span class="tipo">Pantalón</span><span class="arreglo">Subir basta 3 cm</span></div><span class="chip chip-terminada">Terminada</span></div></div>
+    <div class="prenda"><div class="cabeza"><div class="pila" style="gap:2px"><span class="tipo">Camisa</span><span class="arreglo">Entallar los costados</span></div><span class="chip chip-terminada">Terminada</span></div></div>
+    <div class="prenda"><div class="cabeza"><div class="pila" style="gap:2px"><span class="tipo">Camisa</span><span class="arreglo">Entallar y acortar mangas</span></div><span class="chip chip-pendiente">Pendiente</span></div></div>
+  </main>
+</div>
+
+<div class="velo"></div>
+<section class="hoja" role="dialog" aria-labelledby="titulo-hoja">
+  <div class="entre">
+    <div class="pila" style="gap:2px">
+      <h2 id="titulo-hoja">Camisa</h2>
+      <span class="texto-2">Entallar y acortar mangas · $8.000</span>
+    </div>
+    <span class="chip chip-pendiente">Pendiente</span>
+  </div>
+
+  <div class="pila" style="gap:0">
+    <span class="titulo-seccion">¿En qué va?</span>
+    <span class="opcion-hoja actual"><span class="i" aria-hidden="true" style="background:none"></span><span>Pendiente<span class="explicacion">Estado actual</span></span></span>
+    <a class="opcion-hoja" href="pt-09-detalle-orden.html"><i class="i i-reloj"></i><span>En proceso<span class="explicacion">La estoy arreglando</span></span></a>
+    <a class="opcion-hoja" href="pt-09-detalle-orden.html"><i class="i i-check"></i><span>Terminada<span class="explicacion">Si es la última, la orden queda lista y se avisa a Marta</span></span></a>
+  </div>
+
+  <div class="pila" style="gap:0">
+    <span class="titulo-seccion">Otras acciones</span>
+    <a class="opcion-hoja" href="pt-13-editar-prenda.html"><i class="i i-editar"></i><span>Corregir arreglo, precio o fotos</span></a>
+    <a class="opcion-hoja" href="pt-12-devolver-sin-arreglar.html"><i class="i i-devolver"></i><span>Devolver sin arreglar<span class="explicacion">El cliente se la lleva y no se cobra</span></span></a>
+  </div>
+
+  <p class="texto-2 pequeno">Las prendas terminadas se entregan con el botón Entregar de la orden.</p>
+  <a class="btn btn-secundario" href="pt-09-detalle-orden.html">Cerrar</a>
+</section>
+</body>
+</html>
