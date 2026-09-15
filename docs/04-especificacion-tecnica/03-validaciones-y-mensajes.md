@@ -182,6 +182,7 @@ No son errores: orientan a la usuaria.
 | **PT-08** | El número buscado no existe | No hay una orden con el número {numero}. | HU-15 |
 | **PT-13** | Se elimina una prenda o una foto | ¿Eliminar {que}? No se puede deshacer. | HU-13, HU-19 |
 | **PT-18** | No hay avisos por enviar | No hay avisos por enviar. | HU-29 |
+| **PT-23** | La contraseña cambió | Tu contraseña cambió. Se cerró la sesión en los demás dispositivos. | HU-02 |
 
 ## Páginas de error
 

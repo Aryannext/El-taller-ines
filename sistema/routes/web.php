@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controladores\AjustesController;
 use App\Http\Controladores\PanelController;
 use App\Http\Controladores\SesionController;
 use Illuminate\Support\Facades\Route;
@@ -18,4 +19,7 @@ Route::middleware(['auth', 'auth.session', 'cache.headers:no_store;private'])->g
     Route::post('/salir', [SesionController::class, 'salir'])->name('sesion.salir');
 
     Route::get('/', [PanelController::class, 'mostrar'])->name('panel');
+
+    Route::get('/ajustes', [AjustesController::class, 'mostrar'])->name('ajustes');
+    Route::put('/ajustes/contrasena', [AjustesController::class, 'cambiarContrasena'])->name('ajustes.contrasena');
 });

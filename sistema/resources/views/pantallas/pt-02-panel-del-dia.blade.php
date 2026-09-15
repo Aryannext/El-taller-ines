@@ -5,6 +5,7 @@
 @section('contenido')
   <header class="barra">
     <h1>Hoy<span class="sub">{{ $negocio }}</span></h1>
+    <a class="boton-icono" href="{{ route('ajustes') }}" aria-label="Ajustes"><i class="i i-ajustes"></i></a>
   </header>
 
   <main class="contenido">
@@ -12,11 +13,5 @@
       <span class="fuerte">Hola, {{ $usuaria }}</span>
       <span class="texto-2 pequeno">Aquí verás lo que necesita tu atención hoy: cobros, entregas atrasadas y avisos.</span>
     </div>
-
-    {{-- Cerrar sesión se mueve a Ajustes (PT-23) cuando exista con HU-02 --}}
-    <form method="POST" action="{{ route('sesion.salir') }}">
-      @csrf
-      <button class="btn btn-peligro-borde btn-bloque" type="submit"><i class="i i-salir"></i>Cerrar sesión</button>
-    </form>
   </main>
 @endsection
