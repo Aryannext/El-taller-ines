@@ -117,6 +117,8 @@ class AislamientoEntreNegociosTest extends TestCase
      */
     private function casos(): array
     {
-        return [];
+        return [
+            'clientes.ficha' => ['GET', route('clientes.ficha', $this->martaDelNegocioA)],
+        ];
     }
 }

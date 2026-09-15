@@ -32,7 +32,7 @@ Un valor con centavos, como `15.000,50`, queda `15000,50` y no pasa la regla `in
 
 | Campo | Reglas | Mensajes | Columna | Regla de negocio |
 | --- | --- | --- | --- | --- |
-| `nombre` | `required`, `string`, `max:120` | `required`: Escribe el nombre del cliente.<br>`max`: El nombre puede tener hasta 120 caracteres. | `clientes.nombre` | RN-02 |
+| `nombre` | `required`, `string`, `max:120` | `required`, `string`: Escribe el nombre del cliente.<br>`max`: El nombre puede tener hasta 120 caracteres. | `clientes.nombre` | RN-02 |
 | `celular` | `required`, y una regla que usa `Celular::desde` | `required`: Escribe el celular del cliente.<br>`Celular`: Escribe un celular colombiano de 10 dígitos que empiece por 3 | `clientes.celular` | RN-02, RN-03 |
 
 ### OrdenRequest
