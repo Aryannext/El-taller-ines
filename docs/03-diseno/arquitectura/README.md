@@ -130,6 +130,7 @@ sistema/
 │   │   ├── Pagos/
 │   │   │   ├── Dinero.php                  Objeto de valor: pesos enteros y su formato
 │   │   │   ├── CalculadoraDeSaldo.php      Valor, saldo y estado de pago
+│   │   │   ├── EstadoDePago.php            Enumeración: Pagada o Por cobrar
 │   │   │   └── ReglasDeValor.php           Lo pagado no supera el valor
 │   │   ├── Avisos/
 │   │   │   ├── CanalDeAviso.php            Interfaz (ADR-003)
@@ -324,7 +325,7 @@ Complementa la tabla del [modelo de datos](../modelo-de-datos/README.md#dónde-s
 | **RN-26** | Dominio | `CalculadoraDeSaldo` | Suma los precios de las prendas que no están Devueltas |
 | **RN-27** | Dominio | `CalculadoraDeSaldo` | Valor menos pagos no anulados |
 | **RN-28** | Aplicación | `RegistrarPago`, `CalculadoraDeSaldo` | Bloquea la orden y compara con el saldo al guardar |
-| **RN-29** | Dominio | `CalculadoraDeSaldo` | Pagada o Por cobrar |
+| **RN-29** | Dominio | `CalculadoraDeSaldo`, `EstadoDePago` | Pagada o Por cobrar |
 | **RN-30** | Aplicación | `RegistrarPago` | Acepta pagos en órdenes entregadas y los rechaza en canceladas |
 | **RN-31** | Aplicación | `AnularPago`, `AnulacionRequest` | Exige el motivo; no existe caso de uso para borrar un pago |
 | **RN-32** | Aplicación | `QuienMeDebe`, `PanelDelDia`, `CalculadoraDeSaldo` | Suma los saldos de las órdenes no canceladas |

@@ -30,6 +30,18 @@ class Foto extends Model
     }
 
     /**
+     * La foto no guarda su negocio: se busca a través de su orden, que sí lo filtra (RN-01, RNF-25).
+     * Sin esto, /fotos/{id} entregaría la foto de otro taller.
+     *
+     * @param  mixed  $value
+     * @param  string|null  $field
+     */
+    public function resolveRouteBinding($value, $field = null): ?Model
+    {
+        return $this->newQuery()->whereKey($value)->whereHas('prenda.orden')->first();
+    }
+
+    /**
      * @return BelongsTo<Prenda, $this>
      */
     public function prenda(): BelongsTo

@@ -309,6 +309,8 @@ textarea.entrada { min-height: 76px; resize: vertical; }
 .prenda.atenuada .tipo, .prenda.atenuada .precio { color: var(--tinta-2); }
 .miniaturas { display: flex; gap: 6px; }
 .miniaturas .foto { width: 56px; border-radius: 8px; }
+.miniaturas img.foto { height: 56px; object-fit: cover; }
+.fila.alinear-arriba { align-items: flex-start; } /* reemplaza el estilo en línea del mockup de PT-09 */
 
 .aviso-sugerencia { display: flex; align-items: center; gap: 8px; font-size: 14.5px; color: var(--aviso); font-weight: 700; }
 

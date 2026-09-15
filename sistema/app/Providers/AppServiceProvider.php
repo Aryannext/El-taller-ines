@@ -31,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('dinero', fn (string $expresion) => "<?php echo e(\\App\\Dominio\\Pagos\\Dinero::pesos((int) ({$expresion}))->formato()); ?>");
         Blade::directive('fecha', fn (string $expresion) => "<?php echo e(\\App\\Providers\\AppServiceProvider::fecha({$expresion})); ?>");
         Blade::directive('fechaConDia', fn (string $expresion) => "<?php echo e(\\App\\Providers\\AppServiceProvider::fecha({$expresion}, true)); ?>");
+        Blade::directive('hora', fn (string $expresion) => "<?php echo e(\\App\\Providers\\AppServiceProvider::hora({$expresion})); ?>");
 
         // RNF-20: 5 intentos por minuto por usuario y dirección IP, contando también el correcto (CA-01.3)
         RateLimiter::for('inicio-de-sesion', function (Request $request) {
@@ -50,5 +51,13 @@ class AppServiceProvider extends ServiceProvider
         $texto = $fecha->format('j').' '.self::MESES[(int) $fecha->format('n') - 1].' '.$fecha->format('Y');
 
         return $conDia ? self::DIAS[(int) $fecha->format('w')].' '.$texto : $texto;
+    }
+
+    /**
+     * RNF-08: «4:12 p. m.», con doce horas como se dice en Colombia.
+     */
+    public static function hora(DateTimeInterface $momento): string
+    {
+        return $momento->format('g:i').($momento->format('A') === 'AM' ? ' a. m.' : ' p. m.');
     }
 }

@@ -7,7 +7,7 @@ namespace App\Dominio\Pagos;
 use App\Dominio\Ordenes\EstadoDePrenda;
 
 /**
- * Valor de la orden (RN-26). El saldo y el estado de pago se agregan con los pagos (HU-23).
+ * Valor de la orden (RN-26), saldo pendiente (RN-27) y estado de pago (RN-29). Siempre se calculan, nunca se escriben.
  */
 final class CalculadoraDeSaldo
 {
@@ -27,5 +27,28 @@ final class CalculadoraDeSaldo
         }
 
         return $valor;
+    }
+
+    /**
+     * El valor menos los pagos no anulados. Nunca queda negativo: RN-28 impide pagar más que el saldo.
+     *
+     * @param  iterable<array{0: int, 1: bool}>  $pagos  valor y si está anulado
+     */
+    public function saldo(Dinero $valor, iterable $pagos): Dinero
+    {
+        $pagado = Dinero::pesos(0);
+
+        foreach ($pagos as [$pago, $anulado]) {
+            if (! $anulado) {
+                $pagado = $pagado->sumar(Dinero::pesos($pago));
+            }
+        }
+
+        return $valor->restar($pagado);
+    }
+
+    public function estadoDePago(Dinero $saldo): EstadoDePago
+    {
+        return $saldo->esMayorQue(Dinero::pesos(0)) ? EstadoDePago::PorCobrar : EstadoDePago::Pagada;
     }
 }

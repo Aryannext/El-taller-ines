@@ -3,7 +3,9 @@
 namespace Tests\Feature\Aislamiento;
 
 use App\Modelos\Cliente;
+use App\Modelos\Foto;
 use App\Modelos\Orden;
+use App\Modelos\Prenda;
 use App\Modelos\Usuario;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -33,12 +35,15 @@ class AislamientoEntreNegociosTest extends TestCase
 
     private Orden $ordenDelNegocioA;
 
+    private Foto $fotoDelNegocioA;
+
     protected function setUp(): void
     {
         parent::setUp();
 
         $this->martaDelNegocioA = Cliente::factory()->create(['nombre' => 'Marta Rincón', 'celular' => '3104567890']);
         $this->ordenDelNegocioA = Orden::factory()->create(['cliente_id' => $this->martaDelNegocioA->id, 'numero' => 42]);
+        $this->fotoDelNegocioA = Foto::factory()->create(['prenda_id' => Prenda::factory()->create(['orden_id' => $this->ordenDelNegocioA->id])->id]);
         $this->usuariaDelNegocioA = Usuario::factory()->create(['negocio_id' => $this->martaDelNegocioA->negocio_id]);
         $this->usuariaDelNegocioB = Usuario::factory()->create();
         Cliente::factory()->create(['negocio_id' => $this->usuariaDelNegocioB->negocio_id, 'nombre' => 'Luis Pardo']);
@@ -129,6 +134,8 @@ class AislamientoEntreNegociosTest extends TestCase
             'clientes.corregir' => ['PUT', route('clientes.corregir', $this->martaDelNegocioA)],
             'ordenes.guardada' => ['GET', route('ordenes.guardada', $this->ordenDelNegocioA)],
             'ordenes.detalle' => ['GET', route('ordenes.detalle', $this->ordenDelNegocioA)],
+            // RNF-25: la foto no guarda su negocio; se busca a través de su orden
+            'fotos.mostrar' => ['GET', route('fotos.mostrar', $this->fotoDelNegocioA)],
         ];
     }
 }
