@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cda2add6397422fb1a2eb5b9207f1575",
+    "content-hash": "65f8c2670c12668fa4b13e69ad3a990e",
     "packages": [
         {
             "name": "brick/math",
@@ -6231,37 +6231,27 @@
             "time": "2026-03-17T11:56:53+00:00"
         },
         {
-            "name": "laravel/agent-detector",
-            "version": "v2.0.2",
+            "name": "iamcal/sql-parser",
+            "version": "v0.7",
             "source": {
                 "type": "git",
-                "url": "https://github.com/laravel/agent-detector.git",
-                "reference": "90694b9256099591cf9e55d08c18ba7a00bf099f"
+                "url": "https://github.com/iamcal/SQLParser.git",
+                "reference": "610392f38de49a44dab08dc1659960a29874c4b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/agent-detector/zipball/90694b9256099591cf9e55d08c18ba7a00bf099f",
-                "reference": "90694b9256099591cf9e55d08c18ba7a00bf099f",
+                "url": "https://api.github.com/repos/iamcal/SQLParser/zipball/610392f38de49a44dab08dc1659960a29874c4b8",
+                "reference": "610392f38de49a44dab08dc1659960a29874c4b8",
                 "shasum": ""
             },
-            "require": {
-                "php": "^8.2.0"
-            },
             "require-dev": {
-                "laravel/pint": "^1.24.0",
-                "pestphp/pest": "^3.8.5|^4.1.0",
-                "pestphp/pest-plugin-type-coverage": "^3.0|^4.0.2",
-                "phpstan/phpstan": "^2.1.26",
-                "rector/rector": "^2.1.7",
-                "symfony/var-dumper": "^7.3.3"
+                "php-coveralls/php-coveralls": "^1.0",
+                "phpunit/phpunit": "^5|^6|^7|^8|^9"
             },
             "type": "library",
             "autoload": {
-                "files": [
-                    "src/functions.php"
-                ],
                 "psr-4": {
-                    "Laravel\\AgentDetector\\": "src/"
+                    "iamcal\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -6270,27 +6260,105 @@
             ],
             "authors": [
                 {
-                    "name": "Taylor Otwell",
-                    "email": "taylor@laravel.com"
+                    "name": "Cal Henderson",
+                    "email": "cal@iamcal.com"
                 }
             ],
-            "description": "Detect if code is running in an AI agent or automated development environment",
-            "homepage": "https://github.com/laravel/agent-detector",
+            "description": "MySQL schema parser",
+            "support": {
+                "issues": "https://github.com/iamcal/SQLParser/issues",
+                "source": "https://github.com/iamcal/SQLParser/tree/v0.7"
+            },
+            "time": "2026-01-28T22:20:33+00:00"
+        },
+        {
+            "name": "larastan/larastan",
+            "version": "v3.12.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/larastan/larastan.git",
+                "reference": "168fd3b955e723c51dbf81709849b0c3ac4ac5f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/larastan/larastan/zipball/168fd3b955e723c51dbf81709849b0c3ac4ac5f6",
+                "reference": "168fd3b955e723c51dbf81709849b0c3ac4ac5f6",
+                "shasum": ""
+            },
+            "require": {
+                "iamcal/sql-parser": "^0.7.0",
+                "illuminate/console": "^11.44.2 || ^12.4.1 || ^13",
+                "illuminate/container": "^11.44.2 || ^12.4.1 || ^13",
+                "illuminate/contracts": "^11.44.2 || ^12.4.1 || ^13",
+                "illuminate/database": "^11.44.2 || ^12.4.1 || ^13",
+                "illuminate/http": "^11.44.2 || ^12.4.1 || ^13",
+                "illuminate/pipeline": "^11.44.2 || ^12.4.1 || ^13",
+                "illuminate/support": "^11.44.2 || ^12.4.1 || ^13",
+                "php": "^8.2",
+                "phpstan/phpstan": "^2.2.14"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "^14",
+                "laravel/framework": "^11.44.2 || ^12.7.2 || ^13",
+                "mockery/mockery": "^1.6.12",
+                "nikic/php-parser": "^5.4",
+                "orchestra/canvas": "^v9.2.2 || ^10.0.1 || ^11",
+                "orchestra/testbench-core": "^9.12.0 || ^10.1 || ^11",
+                "phpstan/phpstan-deprecation-rules": "^2.0.1",
+                "phpunit/phpunit": "^10.5.35 || ^11.5.15 || ^12.5.8 || ^13.3.0"
+            },
+            "suggest": {
+                "orchestra/testbench": "Using Larastan for analysing a package needs Testbench",
+                "phpmyadmin/sql-parser": "Install to enable Larastan's optional phpMyAdmin-based SQL parser automatically"
+            },
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "extension.neon"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Larastan\\Larastan\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Can Vural",
+                    "email": "can9119@gmail.com"
+                }
+            ],
+            "description": "Larastan - Discover bugs in your code without running it. A phpstan/phpstan extension for Laravel",
             "keywords": [
-                "Agent",
-                "ai",
-                "automation",
-                "claude",
-                "cursor",
-                "detection",
-                "devin",
-                "php"
+                "PHPStan",
+                "code analyse",
+                "code analysis",
+                "larastan",
+                "laravel",
+                "package",
+                "php",
+                "static analysis"
             ],
             "support": {
-                "issues": "https://github.com/laravel/agent-detector/issues",
-                "source": "https://github.com/laravel/agent-detector"
+                "issues": "https://github.com/larastan/larastan/issues",
+                "source": "https://github.com/larastan/larastan/tree/v3.12.1"
             },
-            "time": "2026-04-29T18:32:34+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/canvural",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-09-13T15:17:35+00:00"
         },
         {
             "name": "laravel/pail",
@@ -6371,91 +6439,6 @@
                 "source": "https://github.com/laravel/pail"
             },
             "time": "2026-05-20T22:24:57+00:00"
-        },
-        {
-            "name": "laravel/pao",
-            "version": "v1.1.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/pao.git",
-                "reference": "620424f1ce744d96937fb6be60a94793e79b67ad"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pao/zipball/620424f1ce744d96937fb6be60a94793e79b67ad",
-                "reference": "620424f1ce744d96937fb6be60a94793e79b67ad",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/agent-detector": "^2.0.2",
-                "php": "^8.3"
-            },
-            "conflict": {
-                "laravel/framework": "<12.0.0",
-                "nunomaduro/collision": "<8.9.3",
-                "pestphp/pest": "<4.6.3 || >=6.0.0",
-                "phpunit/phpunit": "<12.5.23 || >=13.0.0 <13.1.7 || >=14.0.0"
-            },
-            "require-dev": {
-                "brianium/paratest": "^7.20.0",
-                "laravel/pint": "^1.30.5",
-                "orchestra/testbench": "^10.11.0 || ^11.2.0",
-                "pestphp/pest": "^4.7.8 || ^5.1.4",
-                "pestphp/pest-plugin-type-coverage": "^4.0.4 || ^5.0.2",
-                "phpstan/phpstan": "^2.2.13",
-                "rector/rector": "^2.6.6",
-                "symfony/process": "^7.4.13 || ^8.1.6",
-                "symfony/var-dumper": "^7.4.15 || ^8.1.6"
-            },
-            "type": "library",
-            "extra": {
-                "pest": {
-                    "plugins": [
-                        "Laravel\\Pao\\Drivers\\Pest\\Plugin"
-                    ]
-                },
-                "laravel": {
-                    "providers": [
-                        "Laravel\\Pao\\Laravel\\ServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/Autoload.php"
-                ],
-                "psr-4": {
-                    "Laravel\\Pao\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylor@laravel.com"
-                }
-            ],
-            "description": "Agent-optimized output for PHP testing tools",
-            "keywords": [
-                "Agent",
-                "PHPStan",
-                "ai",
-                "dev",
-                "paratest",
-                "pest",
-                "php",
-                "phpunit",
-                "rector",
-                "testing"
-            ],
-            "support": {
-                "issues": "https://github.com/laravel/pao/issues",
-                "source": "https://github.com/laravel/pao"
-            },
-            "time": "2026-09-07T14:48:06+00:00"
         },
         {
             "name": "laravel/pint",
@@ -6882,6 +6865,127 @@
                 "source": "https://github.com/phar-io/version/tree/3.2.1"
             },
             "time": "2022-02-21T01:04:05+00:00"
+        },
+        {
+            "name": "phpat/phpat",
+            "version": "0.12.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/carlosas/phpat.git",
+                "reference": "5319264270c335f548451209bb0f32b55aa59924"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/carlosas/phpat/zipball/5319264270c335f548451209bb0f32b55aa59924",
+                "reference": "5319264270c335f548451209bb0f32b55aa59924",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1",
+                "phpstan/phpstan": "^2.1"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.87",
+                "kubawerlos/php-cs-fixer-custom-fixers": "3.32.*",
+                "phpunit/phpunit": "^10.5",
+                "vimeo/psalm": "^6.13"
+            },
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "extension.neon"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "helpers.php"
+                ],
+                "psr-4": {
+                    "PHPat\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Carlos Alandete Sastre",
+                    "email": "carlos.alandete@gmail.com"
+                }
+            ],
+            "description": "PHP Architecture Tester",
+            "support": {
+                "issues": "https://github.com/carlosas/phpat/issues",
+                "source": "https://github.com/carlosas/phpat/tree/0.12.4"
+            },
+            "time": "2026-03-17T16:47:43+00:00"
+        },
+        {
+            "name": "phpstan/phpstan",
+            "version": "2.2.14",
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9c672e7a8e791dfc3d30e55f683e73fc0b63a3ac",
+                "reference": "9c672e7a8e791dfc3d30e55f683e73fc0b63a3ac",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4|^8.0"
+            },
+            "conflict": {
+                "phpstan/phpstan-shim": "*"
+            },
+            "bin": [
+                "phpstan",
+                "phpstan.phar"
+            ],
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ondřej Mirtes"
+                },
+                {
+                    "name": "Markus Staab"
+                },
+                {
+                    "name": "Vincent Langlet"
+                }
+            ],
+            "description": "PHPStan - PHP Static Analysis Tool",
+            "keywords": [
+                "dev",
+                "static analysis"
+            ],
+            "support": {
+                "docs": "https://phpstan.org/user-guide/getting-started",
+                "forum": "https://github.com/phpstan/phpstan/discussions",
+                "issues": "https://github.com/phpstan/phpstan/issues",
+                "security": "https://github.com/phpstan/phpstan/security/policy",
+                "source": "https://github.com/phpstan/phpstan-src"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/ondrejmirtes",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/phpstan",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-09-12T21:39:33+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",

@@ -37,7 +37,7 @@ Si una prueba necesita una situación que ningún documento describe, primero se
 | [Reglas de negocio](casos-de-prueba/09-reglas-de-negocio.md) | 44 | 44 | 0 | 0 |
 | [Requisitos no funcionales](#cómo-se-prueba-cada-requisito-no-funcional) | 35 | 19 | 3 | 13 |
 
-**Pruebas automáticas planeadas:** 167 métodos en 51 clases · **Escritas en `sistema/tests/`:** 0 de 167; el código empieza en el Sprint 3.
+**Pruebas automáticas planeadas:** 167 métodos en 51 clases · **Escritas en `sistema/tests/`:** 1 de 167.
 
 | Épica | Historias | Casos |
 | --- | --- | --- |
@@ -207,7 +207,7 @@ Por defecto, un criterio se prueba con una prueba de funcionalidad automática e
 | **RNF-24** | Automática | gitleaks revisa el repositorio en GitHub Actions en cada envío | Sprint 3, con HT-02 | GitHub Actions |
 | **RNF-25** | Automática | Una foto pedida sin sesión (CA-18.3) y desde otro negocio, en `AislamientoEntreNegociosTest`, no se entrega | Sprint 3, con HU-18 | GitHub Actions |
 | **RNF-26** | Revisión | Los formularios solo piden nombre y celular del cliente y la política de tratamiento de datos está publicada | Sprint 4 | PM-07 |
-| **RNF-27** | Automática | Las reglas de PHPat en `tests/Arquitectura/` impiden que el dominio use Laravel y que los controladores usen los modelos | Sprint 3, con HT-02 | GitHub Actions |
+| **RNF-27** | Automática | Las reglas de PHPat en `tests/Arquitectura/ReglasDeCapas.php` impiden que una capa dependa de otra más externa, como el dominio de Laravel; `ControladoresSinConsultasTest` impide que un controlador consulte la base de datos | Sprint 3, con HT-02 | GitHub Actions |
 | **RNF-28** | Automática | Reporte de cobertura de `app/Dominio` y `app/Aplicacion`; este script cuenta las reglas con prueba escrita | Sprints 3 y 4 | GitHub Actions y resumen de este plan |
 | **RNF-29** | Automática | Pint en modo de revisión y Larastan en nivel 5 | Sprint 3, con HT-02 | GitHub Actions |
 | **RNF-30** | Automática | Pruebas, estilo y análisis estático en cada envío | Sprint 3, con HT-02 | Historial de GitHub Actions |

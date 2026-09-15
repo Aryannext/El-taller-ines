@@ -1,0 +1,88 @@
+# Valida cada envío (RNF-30). Los pasos están en docs/04-especificacion-tecnica/08-convenciones-de-codigo.md
+name: Calidad
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  calidad:
+    runs-on: ubuntu-24.04
+
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ROOT_PASSWORD: solo-para-pruebas
+          MYSQL_DATABASE: taller_pruebas
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -psolo-para-pruebas"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+
+    env:
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3306
+      DB_USERNAME: root
+      DB_PASSWORD: solo-para-pruebas
+
+    defaults:
+      run:
+        working-directory: sistema
+
+    steps:
+      - name: Traer el código con su historial
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Buscar secretos en el repositorio (RNF-24)
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Preparar PHP 8.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: pdo_mysql, mbstring, gd, exif, fileinfo, curl, zip
+          coverage: pcov
+
+      - name: Preparar Python para comparar el esquema
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+
+      - name: Instalar dependencias
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Revisar vulnerabilidades de las dependencias (RNF-23)
+        run: composer audit --abandoned=report
+
+      - name: Estilo de código (RNF-29)
+        run: vendor/bin/pint --test
+
+      - name: Análisis estático y reglas de capas (RNF-27, RNF-29)
+        run: vendor/bin/phpstan analyse --no-progress --memory-limit=1G
+
+      - name: Vistas sin impresión sin escapar (RNF-23)
+        run: "! grep -rn '{!!' resources/views"
+
+      - name: Preparar el entorno
+        run: cp .env.example .env && php artisan key:generate
+
+      - name: Las migraciones producen esquema.sql (RNF-31)
+        run: |
+          pip install pymysql
+          python ../scripts/comparar_migraciones.py --servidor 127.0.0.1:3306 --usuario root --contrasena solo-para-pruebas
+
+      - name: Pruebas y cobertura de la lógica de negocio (RNF-28)
+        run: |
+          if find app/Dominio app/Aplicacion -name '*.php' | grep -q .; then
+            php artisan test --coverage --min=80
+          else
+            php artisan test
+          fi

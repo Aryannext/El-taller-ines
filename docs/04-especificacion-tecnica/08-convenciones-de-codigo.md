@@ -76,4 +76,4 @@ HT-02 crea el flujo de trabajo `.github/workflows/calidad.yml`. Corre en cada en
 | 6 | `vendor/bin/phpstan analyse`, con Larastan y las reglas de PHPat | RNF-27, RNF-29 |
 | 7 | Busca `{!!` en `resources/views` y falla si lo encuentra | RNF-23 |
 | 8 | `php artisan migrate:fresh` y comparación del esquema con `esquema.sql` | RNF-31 |
-| 9 | `php artisan test --coverage --min=80`, con la cobertura limitada a `app/Dominio` y `app/Aplicacion` en `phpunit.xml` | RNF-28 |
+| 9 | `php artisan test --coverage --min=80`, con la cobertura limitada a `app/Dominio` y `app/Aplicacion` en `phpunit.xml`. Mientras esas carpetas no tengan código, corre las pruebas sin exigir cobertura | RNF-28 |

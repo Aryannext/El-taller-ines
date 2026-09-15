@@ -102,7 +102,7 @@ flowchart TB
 
 | Capa | Responsabilidad | No hace |
 | --- | --- | --- |
-| **Http** | Recibe la solicitud, valida el formulario, llama un caso de uso o una consulta y devuelve la vista con los mensajes en español (RNF-09) | No contiene reglas de negocio ni usa modelos directamente |
+| **Http** | Recibe la solicitud, valida el formulario, llama un caso de uso o una consulta y devuelve la vista con los mensajes en español (RNF-09) | No contiene reglas de negocio ni consulta la base de datos: recibe los modelos por el enlace de rutas |
 | **Aplicación** | Coordina cada acción: abre la transacción, carga los modelos, pregunta al dominio, guarda y emite eventos | No decide reglas por su cuenta: se las pregunta al dominio |
 | **Dominio** | Decide: transiciones permitidas, estado de la orden, saldo, días de atraso, formato del número, validez del celular y texto del aviso | No lee ni escribe en la base de datos, no usa Laravel, no conoce HTTP |
 | **Modelos** | Representan las tablas y sus relaciones; aplican el filtro por negocio | No contienen reglas de negocio |
@@ -450,7 +450,7 @@ sequenceDiagram
 | **Dominio** | Unitaria, sin base de datos | Cada regla con los ejemplos de las reglas de negocio | `EstadoDeOrden` con Terminada y Devuelta da Lista para entregar |
 | **Aplicación** | De integración, con base de datos | Transacciones, bloqueos, eventos y cola, con reloj y canal falsos | Dos pagos con el mismo token guardan uno solo |
 | **Http** | De funcionalidad | Criterios de aceptación de principio a fin | CA-23.3 muestra «El pago no puede superar el saldo pendiente de $21.000» |
-| **Toda la aplicación** | De arquitectura | La regla de dependencias | Nada en `App\Dominio` usa `Illuminate`; los controladores no usan `App\Modelos` |
+| **Toda la aplicación** | De arquitectura | La regla de dependencias | Nada en `App\Dominio` usa `Illuminate`; ningún controlador consulta la base de datos |
 | **Modelos** | De aislamiento | RN-01 en todas las rutas | Pedir la orden de otro negocio responde como si no existiera |
 
 ## Pendiente

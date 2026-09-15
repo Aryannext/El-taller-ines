@@ -5,7 +5,7 @@
 | Pieza | Versión | Dónde se usa | Nota |
 | --- | --- | --- | --- |
 | **PHP** | 8.4 | WAMP, GitHub Actions y VPS | La misma en los tres entornos (ADR-001) |
-| **Laravel** | La estable más reciente que admita PHP 8.4 al crear el proyecto | Todo el sistema | La versión exacta queda en `composer.lock` y se anota aquí en HT-02 |
+| **Laravel** | 13.31.0, instalada el 14 de septiembre de 2026 | Todo el sistema | La versión exacta de cada paquete queda en `composer.lock` |
 | **MySQL** | 8.4 | WAMP, GitHub Actions y VPS | La intercalación `utf8mb4_0900_ai_ci` hace las búsquedas sin tildes (RN-43) |
 | **Composer** | 2 | Desarrollo y VPS | — |
 | **Nginx** | La del sistema operativo del VPS | VPS | Se anota en HT-04 |
