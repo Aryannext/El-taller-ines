@@ -33,8 +33,18 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/private'),
-            'serve' => true,
+            // Sin la ruta storage/{path}: ningún archivo se entrega sin pasar por un controlador (RNF-25)
+            'serve' => false,
             'throw' => false,
+            'report' => false,
+        ],
+
+        // Fotos de las prendas, fuera de la carpeta pública (RNF-25)
+        'privado' => [
+            'driver' => 'local',
+            'root' => storage_path('app/privado'),
+            'serve' => false,
+            'throw' => true,
             'report' => false,
         ],
 

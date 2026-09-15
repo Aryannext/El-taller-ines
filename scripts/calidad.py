@@ -54,8 +54,13 @@ def secretos_en_el_historial() -> tuple[bool, str]:
     ok, salida = ejecutar(["git", "log", "-p", "--all"], RAIZ)
     if not ok:
         return False, salida
-    encontrados = [linea.strip() for linea in salida.splitlines()
-                   if linea.startswith("+") and SECRETOS.search(linea)]
+    encontrados, archivo = [], ""
+    for linea in salida.splitlines():
+        if linea.startswith("+++ "):
+            archivo = linea[6:] if linea.startswith("+++ b/") else ""
+        # Este script contiene los patrones que busca: no es un secreto
+        elif linea.startswith("+") and archivo != "scripts/calidad.py" and SECRETOS.search(linea):
+            encontrados.append(f"{archivo}: {linea.strip()}")
     return not encontrados, "\n".join(encontrados[:10]) or "Sin secretos en el historial"
 
 
