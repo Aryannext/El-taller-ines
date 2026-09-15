@@ -4,6 +4,7 @@ name: Calidad
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 jobs:
   calidad:
