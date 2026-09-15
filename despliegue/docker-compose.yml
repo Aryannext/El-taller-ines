@@ -1,0 +1,67 @@
+# El-taller-ines en el VPS compartido (docs/04-especificacion-tecnica/07-despliegue-y-operacion.md).
+# Se usa desde esta carpeta. Los secretos están en despliegue/.env, que no se versiona (RNF-24).
+name: taller
+
+services:
+  web:
+    build:
+      context: ..
+      dockerfile: despliegue/Dockerfile
+    image: el-taller-ines:actual
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      TALLER_ROL: web
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - storage:/var/www/taller/sistema/storage
+    # Solo desde el mismo servidor: Nginx lo publica en https://proyectosena.online/taller
+    ports:
+      - "127.0.0.1:3012:80"
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "-o", "/dev/null", "http://127.0.0.1/up"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
+
+  # Trabajador de la cola de avisos: si se detiene o termina su hora (--max-time), Docker lo vuelve a iniciar (HT-04, RNF-17)
+  cola:
+    image: el-taller-ines:actual
+    pull_policy: never
+    restart: always
+    env_file: .env
+    environment:
+      TALLER_ROL: cola
+    user: www-data
+    depends_on:
+      web:
+        condition: service_healthy
+    volumes:
+      - storage:/var/www/taller/sistema/storage
+    command: ["php", "artisan", "queue:work", "--queue=avisos", "--sleep=3", "--max-time=3600"]
+
+  db:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    # Igual que en las pruebas: búsqueda sin tildes ni mayúsculas (BuscarClientes) y hora de Colombia
+    command: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_0900_ai_ci", "--default-time-zone=-05:00"]
+    volumes:
+      - db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p\"$$MYSQL_ROOT_PASSWORD\" --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+volumes:
+  storage:
+  db:

@@ -622,7 +622,7 @@ flowchart LR
 
 ## 13. Despliegue
 
-La propuesta para el VPS. Las versiones y rutas se confirman al hacer HT-04.
+Cómo corre en el VPS compartido de Hostinger, confirmado en HT-04. El servidor tiene PHP 8.3 y MariaDB para otros proyectos, así que el sistema usa sus propios contenedores con PHP 8.4 y MySQL 8.4 ([despliegue](../../04-especificacion-tecnica/07-despliegue-y-operacion.md#servidor)).
 
 ```mermaid
 flowchart TB
@@ -632,13 +632,15 @@ flowchart TB
     subgraph otro["«dispositivo» Otro celular o computador"]
         navegador["Navegador"]
     end
-    subgraph vps["«servidor» VPS · Linux"]
-        nginx["Nginx<br/>HTTPS 443 · HTTP 80 redirige<br/>certificado Let's Encrypt"]
-        phpfpm["PHP-FPM 8.4<br/>aplicación Laravel · sistema/"]
-        trabajador["Trabajador de la cola<br/>servicio que se reinicia solo"]
-        cron["Programador<br/>schedule:run cada minuto"]
-        mysql[("MySQL 8.4<br/>solo en localhost")]
-        fotos[("storage/app/privado<br/>fotos")]
+    subgraph vps["«servidor» VPS compartido · Ubuntu 24.04"]
+        nginx["Nginx del portafolio<br/>proyectosena.online/taller<br/>HTTPS 443 · HTTP 80 redirige"]
+        subgraph docker["«Docker Compose» taller"]
+            phpfpm["Contenedor web<br/>PHP 8.4 con Apache · 127.0.0.1:3012"]
+            trabajador["Contenedor cola<br/>se reinicia solo"]
+            cron["Contenedor programador<br/>llega con HT-05"]
+            mysql[("Contenedor db<br/>MySQL 8.4 · sin puertos publicados")]
+            fotos[("Volumen taller_storage<br/>fotos")]
+        end
         respaldos[("Respaldos diarios<br/>14 días")]
     end
     dns["DNS del dominio"]
@@ -663,11 +665,11 @@ flowchart TB
 | Nodo | Qué corre | Requisito |
 | --- | --- | --- |
 | **Celular Android** | El APK abre el sistema en Chrome a pantalla completa | RNF-35 · ADR-006 |
-| **Nginx** | Recibe HTTPS con certificado de Let's Encrypt y redirige lo que llegue por HTTP; publica `assetlinks.json` | RNF-18 · ADR-006 |
-| **PHP-FPM 8.4** | La aplicación Laravel, configurada solo con variables de entorno | RNF-34 |
-| **Trabajador de la cola** | `php artisan queue:work` como servicio del sistema, para que se reinicie solo | RNF-17 · HT-04 |
-| **Programador** | Respaldo diario de la base y las fotos; copia semanal a Google Drive | RNF-15 · HT-05 |
-| **MySQL 8.4** | Solo acepta conexiones del mismo servidor | RNF-23 |
+| **Nginx del portafolio** | Recibe HTTPS con el certificado de Let's Encrypt del dominio, redirige lo que llegue por HTTP y pasa `/taller` al contenedor web; publicará `assetlinks.json` en la raíz | RNF-18 · ADR-006 |
+| **Contenedor web** | La aplicación Laravel con PHP 8.4, configurada solo con variables de entorno | RNF-34 |
+| **Contenedor cola** | `php artisan queue:work` con `restart: always`, para que se reinicie solo | RNF-17 · HT-04 |
+| **Contenedor programador** | Respaldo diario de la base y las fotos; copia semanal a Google Drive | RNF-15 · HT-05 |
+| **Contenedor db** | MySQL 8.4 sin puertos publicados: solo lo alcanzan los contenedores del sistema | RNF-23 |
 | **Monitor externo** | Revisa el sistema cada 5 minutos | RNF-16 |
 | **GitHub** | Guarda el código y corre las pruebas; el despliegue trae el código aprobado | RNF-30 |
 

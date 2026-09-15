@@ -1,0 +1,26 @@
+# La imagen de despliegue/Dockerfile solo necesita el sistema y los archivos de despliegue.
+*
+!sistema
+!despliegue
+
+# Se instalan o se generan dentro de la imagen
+sistema/vendor
+sistema/node_modules
+sistema/bootstrap/cache/*.php
+sistema/public/revision-temporal
+
+# storage es un volumen del contenedor: no se copian registros, sesiones ni fotos de este equipo
+sistema/storage/app/*
+sistema/storage/logs/*
+sistema/storage/framework/cache/*
+sistema/storage/framework/sessions/*
+sistema/storage/framework/views/*
+sistema/storage/framework/testing
+
+# Secretos y lo que no va en producción (RNF-24)
+sistema/.env
+sistema/.env.*
+!sistema/.env.example
+despliegue/.env
+sistema/tests
+sistema/.phpunit.cache

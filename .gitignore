@@ -1,1 +1,3 @@
 __pycache__/
+# Secretos de producción en el VPS (RNF-24)
+despliegue/.env

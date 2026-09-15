@@ -1,21 +1,25 @@
 # Despliegue y operación
 
-Detalla el [diagrama de despliegue](../03-diseno/diagramas/README.md#13-despliegue). Los archivos de configuración y los scripts viven en `despliegue/`, en la raíz del repositorio. Las rutas y versiones exactas del VPS se confirman en HT-04.
+Detalla el [diagrama de despliegue](../03-diseno/diagramas/README.md#13-despliegue). Los archivos de configuración y los scripts viven en `despliegue/`, en la raíz del repositorio.
 
 ## Servidor
 
+HT-04 confirmó el servidor: un VPS de Hostinger con Ubuntu 24.04, **compartido** con el portafolio del aprendiz y otros proyectos. El servidor tiene PHP 8.3 y MariaDB 10.11 para esos proyectos, pero el sistema necesita PHP 8.4.1 (lo exige Symfony 8, que usa Laravel 13) y MySQL 8.4 (la intercalación `utf8mb4_0900_ai_ci` de `BuscarClientes` y la validación del celular con expresiones regulares de MySQL 8). Cambiar esas versiones afectaría a los demás proyectos. Por eso el sistema corre en contenedores Docker, igual que el SGPD que ya está en el servidor.
+
 | Pieza | Configuración |
 | --- | --- |
-| **Usuario de despliegue** | `taller`, dueño del código y miembro del grupo `www-data` |
-| **Carpeta del sistema** | `/var/www/taller`, un clon del repositorio; Nginx sirve `sistema/public` |
-| **Escritura** | `www-data` solo escribe en `sistema/storage` y `sistema/bootstrap/cache` |
-| **MySQL** | Escucha solo en `127.0.0.1`. El usuario `taller` tiene permisos solo sobre su base, nunca `root` |
-| **Firewall** | Solo los puertos 22, 80 y 443 abiertos |
-| **Certificado** | Let's Encrypt con certbot, que lo renueva solo |
+| **Dirección** | `https://proyectosena.online/taller`, dentro del sitio del portafolio, como sus otros proyectos |
+| **Carpeta** | `/home/cristian/proyectos/proyectosena.online/el-taller-ines`, un clon del repositorio que maneja el usuario `cristian` |
+| **Contenedores** | `despliegue/docker-compose.yml`: `web` (PHP 8.4 con Apache, sirve `sistema/public`), `cola` (el trabajador de los avisos) y `db` (MySQL 8.4) |
+| **Puertos** | `web` escucha solo en `127.0.0.1:3012`. `db` no publica ningún puerto: solo la alcanzan los otros dos contenedores |
+| **Datos** | Los volúmenes `taller_db` (la base) y `taller_storage` (fotos, sesiones y registros) |
+| **Escritura** | Dentro del contenedor, `www-data` solo escribe en `sistema/storage` y `sistema/bootstrap/cache` |
+| **Certificado** | El de Let's Encrypt que ya tiene `proyectosena.online`, que certbot renueva solo |
+| **Firewall** | No se cambia, porque el servidor atiende otros servicios. El sistema no abre puertos hacia afuera |
 
 ## Variables de entorno
 
-`.env.example` lleva todas estas variables, sin valores secretos. Laravel solo las lee dentro de `config/`; el código usa `config()`, nunca `env()`.
+`sistema/.env.example` lleva las variables de desarrollo y `despliegue/.env.example` las de producción, sin valores secretos. En el VPS, `instalar.sh` copia la segunda a `despliegue/.env`, que no se versiona, y genera ahí mismo la llave y las contraseñas. Laravel solo las lee dentro de `config/`; el código usa `config()`, nunca `env()`.
 
 | Variable | Desarrollo | Producción | Para qué |
 | --- | --- | --- | --- |
@@ -23,7 +27,7 @@ Detalla el [diagrama de despliegue](../03-diseno/diagramas/README.md#13-desplieg
 | `APP_ENV` | `local` | `production` | Entorno |
 | `APP_KEY` | Generada con `php artisan key:generate` | Propia del servidor | Cifra la sesión |
 | `APP_DEBUG` | `true` | `false` | Detalles de los errores; nunca en producción (RNF-23) |
-| `APP_URL` | `http://localhost:8000` | `https://<dominio>` | Direcciones completas |
+| `APP_URL` | `http://localhost:8000` | `https://proyectosena.online/taller` | Direcciones completas fuera de una solicitud, como en la consola |
 | `APP_LOCALE` | `es` | `es` | Idioma de Laravel |
 | `APP_FALLBACK_LOCALE` | `es` | `es` | Idioma de respaldo |
 | `LOG_CHANNEL` | `stack` | `stack` | Canal de registro |
@@ -31,24 +35,27 @@ Detalla el [diagrama de despliegue](../03-diseno/diagramas/README.md#13-desplieg
 | `LOG_DAILY_DAYS` | — | `14` | Días que se conservan los registros |
 | `LOG_LEVEL` | `debug` | `warning` | Qué se registra |
 | `DB_CONNECTION` | `mysql` | `mysql` | Motor |
-| `DB_HOST` | `127.0.0.1` | `127.0.0.1` | Servidor de MySQL |
+| `DB_HOST` | `127.0.0.1` | `db` | Servidor de MySQL; en producción, el contenedor `db` |
 | `DB_PORT` | El puerto de MySQL 8.4 en WAMP | `3306` | Puerto |
 | `DB_DATABASE` | `taller` | `taller` | Base de datos; las pruebas usan `taller_pruebas`, fijada en `phpunit.xml` |
 | `DB_USERNAME` | `taller` | `taller` | Usuario de MySQL |
-| `DB_PASSWORD` | Local | Secreta | Contraseña de MySQL |
+| `DB_PASSWORD` | Local | Secreta, generada por `instalar.sh` | Contraseña de MySQL |
+| `MYSQL_ROOT_PASSWORD` | — | Secreta, generada por `instalar.sh` | Contraseña de `root` dentro del contenedor `db`; el sistema nunca la usa |
 | `SESSION_DRIVER` | `file` | `file` | [Seguridad](06-seguridad.md#sesión) |
 | `SESSION_LIFETIME` | `480` | `480` | 8 horas (RNF-21) |
 | `SESSION_EXPIRE_ON_CLOSE` | `false` | `false` | [Seguridad](06-seguridad.md#sesión) |
 | `SESSION_SECURE_COOKIE` | `false` | `true` | Cookie solo por HTTPS |
+| `SESSION_PATH` | `/` | `/taller` | La cookie de sesión no se comparte con el portafolio ni con los otros proyectos del dominio |
 | `CACHE_STORE` | `file` | `file` | Caché y límite de intentos |
 | `QUEUE_CONNECTION` | `database` | `database` | Cola de avisos; nunca `sync` |
+| `TALLER_ROL` | — | `web` o `cola`, fijado en `docker-compose.yml` | Solo el contenedor `web` aplica las migraciones al arrancar |
 | `WHATSAPP_TOKEN` | Vacía para probar el envío asistido, o el token de prueba | Secreta | Token de la API de Meta |
 | `WHATSAPP_ID_NUMERO` | El del número de prueba | El del número del negocio | Identificador del número que envía |
 | `WHATSAPP_VERSION_API` | La vigente al hacer HT-01 | La misma | Versión de la API de Meta en la dirección |
 | `WHATSAPP_PLANTILLA` | `orden_lista` | `orden_lista` | Nombre de la plantilla |
 | `WHATSAPP_IDIOMA` | `es` | `es` | Idioma de la plantilla |
 | `USUARIA_INICIAL_USUARIO` | `taller` | El que elija la dueña | Solo para `NegocioInicialSeeder` |
-| `USUARIA_INICIAL_CONTRASENA` | Local | Secreta; se borra después de instalar | Solo para `NegocioInicialSeeder` |
+| `USUARIA_INICIAL_CONTRASENA` | Local | No se guarda: `crear-usuaria.sh` la pide sin mostrarla y la pasa a un contenedor temporal | Solo para `NegocioInicialSeeder` |
 | `RESPALDO_CARPETA` | — | `/var/respaldos/taller` | Dónde quedan los respaldos diarios |
 | `RESPALDO_DIAS` | — | `14` | Días que se conservan (RNF-15) |
 | `RESPALDO_REMOTO` | — | `drive:taller-respaldos` | Carpeta de Google Drive configurada en rclone |
@@ -56,87 +63,37 @@ Detalla el [diagrama de despliegue](../03-diseno/diagramas/README.md#13-desplieg
 
 ## Nginx
 
-`despliegue/nginx/taller.conf`:
+El Nginx del servidor ya atiende `proyectosena.online` con HTTPS y redirige HTTP a HTTPS. El sistema no tiene un sitio propio: el bloque `server` 443 del portafolio incluye `despliegue/nginx/taller.conf`, versionado en el repositorio:
 
 ```nginx
-server {
-    listen 80;
-    server_name <dominio>;
-    return 301 https://$host$request_uri;
-}
-
-server {
-    listen 443 ssl;
-    server_name <dominio>;
-    root /var/www/taller/sistema/public;
-    index index.php;
-    client_max_body_size 64m;
-    # certbot agrega aquí las líneas del certificado
-
-    include /var/www/taller/despliegue/nginx/seguridad.conf;
-
-    location / {
-        try_files $uri $uri/ /index.php?$query_string;
-    }
-
-    location ~ \.php$ {
-        include fastcgi_params;
-        fastcgi_pass unix:/run/php/php8.4-fpm.sock;
-        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
-    }
-
-    location = /sw.js {
-        include /var/www/taller/despliegue/nginx/seguridad.conf;
-        add_header Cache-Control "no-cache" always;
-    }
-
-    location = /.well-known/assetlinks.json {
-        include /var/www/taller/despliegue/nginx/seguridad.conf;
-        default_type application/json;
-    }
-
-    location ~ /\.(?!well-known) {
-        deny all;
-    }
-}
+include /home/cristian/proyectos/proyectosena.online/el-taller-ines/despliegue/nginx/taller.conf;
 ```
 
-- **`seguridad.conf`** tiene las cabeceras de [seguridad](06-seguridad.md#cabeceras). Se incluye también dentro de cada `location` que agrega cabeceras, porque en Nginx un `add_header` dentro de un `location` anula todos los del servidor.
-- **`client_max_body_size`** coincide con `post_max_size` de PHP.
-- **La última regla** impide descargar `.env` o `.git`.
+- **`location ^~ /taller/`** pasa las solicitudes a `127.0.0.1:3012` sin el prefijo. `^~` impide que las `location` con expresiones regulares del portafolio atiendan rutas del sistema.
+- **`X-Forwarded-Prefix: /taller`**, junto con el protocolo, el host y el puerto, le dice a Laravel dónde vive. `bootstrap/app.php` confía en esas cabeceras y arma todas las direcciones con el prefijo; una prueba automática lo comprueba.
+- **`X-Forwarded-For`** se reemplaza con la IP real en vez de agregarse, para que nadie la falsee ante el límite de intentos del inicio de sesión (RNF-20).
+- **`client_max_body_size 64M`** coincide con `post_max_size` del contenedor.
+- **`.env` y `.git`** no se pueden descargar: Apache solo sirve `sistema/public`.
+- **Pendiente para HT-07:** Android busca `assetlinks.json` en la raíz del dominio, fuera de `/taller`, así que ese único archivo tendrá su propia `location` en el sitio del portafolio.
+- **Pendiente:** las cabeceras de [seguridad](06-seguridad.md#cabeceras) se envían desde el contenedor, no desde el Nginx compartido, para no cambiar las de los otros proyectos.
 
 ## Servicio de la cola
 
-`despliegue/systemd/taller-cola.service`:
+El contenedor `cola` de `docker-compose.yml` usa la misma imagen que `web` y ejecuta:
 
-```ini
-[Unit]
-Description=Cola de avisos de El-taller-ines
-After=network.target mysql.service
-
-[Service]
-User=www-data
-WorkingDirectory=/var/www/taller/sistema
-ExecStart=/usr/bin/php artisan queue:work --queue=avisos --sleep=3 --max-time=3600
-Restart=always
-RestartSec=5
-
-[Install]
-WantedBy=multi-user.target
+```sh
+php artisan queue:work --queue=avisos --sleep=3 --max-time=3600
 ```
 
-- **`Restart=always`:** si el trabajador se detiene por cualquier motivo, systemd lo vuelve a iniciar a los 5 segundos (HT-04).
-- **`--max-time=3600`:** el trabajador termina cada hora y systemd lo reinicia limpio, lo que evita que acumule memoria.
+- **`restart: always`:** si el trabajador se detiene por cualquier motivo, Docker lo vuelve a iniciar, también cuando se reinicia el servidor (HT-04).
+- **`--max-time=3600`:** el trabajador termina cada hora y Docker lo reinicia limpio, lo que evita que acumule memoria.
+- **`user: www-data`** y espera a que `web` esté sano, para no competir con él al aplicar las migraciones.
 
 ## Tareas programadas
 
-El crontab del usuario `taller` ejecuta el programador de Laravel cada minuto:
+Todavía no hay tareas: llegan con HT-05. Entonces se agrega a `docker-compose.yml` un contenedor `programador` con la misma imagen, que ejecuta `php artisan schedule:work`.
 
-```cron
-* * * * * cd /var/www/taller/sistema && php artisan schedule:run >> /dev/null 2>&1
-```
-
-Las tareas están en `routes/console.php`. Usan la hora de Colombia porque la aplicación está en esa zona.
+Las tareas estarán en `routes/console.php`. Usan la hora de Colombia porque la aplicación está en esa zona.
 
 | Tarea | Cuándo | Qué hace | Requisito |
 | --- | --- | --- | --- |
@@ -147,6 +104,8 @@ Las tareas están en `routes/console.php`. Usan la hora de Colombia porque la ap
 Si una tarea falla, el programador lo anota en el registro de Laravel.
 
 ## Respaldos
+
+> Esta sección se escribió para una instalación sin contenedores. HT-05 la ajusta: `mysqldump` corre dentro del contenedor `db` y las fotos se toman del volumen `taller_storage`.
 
 ### Respaldo diario
 
@@ -172,23 +131,36 @@ Si una tarea falla, el programador lo anota en el registro de Laravel.
 
 ## Despliegue
 
-`despliegue/desplegar.sh` lo ejecuta el usuario `taller` en el VPS. Solo se despliega un commit que esté en verde en GitHub Actions.
+Solo se despliega un commit que esté en verde en GitHub Actions. Mientras Actions siga bloqueado por la facturación de la cuenta (HT-02), vale un commit con `scripts/calidad.py` en 7 de 7.
+
+### Primera instalación
+
+El usuario `cristian`, desde la carpeta del clon:
+
+| Paso | Comando | Qué hace |
+| --- | --- | --- |
+| 1 | `git clone https://github.com/Aryannext/El-taller-ines.git el-taller-ines` | Trae el código |
+| 2 | `sh despliegue/instalar.sh` | Crea `despliegue/.env` con la llave y las contraseñas generadas ahí mismo, construye la imagen, levanta los tres contenedores y espera a que `/up` responda |
+| 3 | `sh despliegue/crear-usuaria.sh` | Crea el negocio inicial y la usuaria; la contraseña la escribe la dueña o el aprendiz, sin que se muestre |
+| 4 | Agregar la línea `include` al sitio del portafolio, `sudo nginx -t` y `sudo systemctl reload nginx` | Publica `/taller`; es el único paso que necesita `sudo` |
+
+### Actualizar
+
+`despliegue/desplegar.sh`:
 
 | Paso | Comando | Por qué |
 | --- | --- | --- |
-| 1 | `php artisan down --retry=60` | Muestra la página de mantenimiento (503) |
-| 2 | `git pull --ff-only origin main` | Trae el código aprobado; falla si el servidor tiene cambios propios (RNF-34) |
-| 3 | `composer install --no-dev --optimize-autoloader --no-interaction` | Instala las dependencias de producción de `composer.lock` |
-| 4 | `php artisan migrate --force` | Aplica las migraciones nuevas (RNF-31) |
-| 5 | `php artisan optimize` | Guarda en caché la configuración, las rutas, las vistas y los eventos |
-| 6 | `php artisan queue:restart` | El trabajador de la cola toma el código nuevo |
-| 7 | `php artisan up` | Vuelve a abrir el sistema |
-| 8 | Prueba de humo | La sección F de PM-07 |
+| 1 | `git pull --ff-only origin main` | Trae el código aprobado; falla si el servidor tiene cambios propios (RNF-34) |
+| 2 | `docker compose build web` | Construye la imagen con las dependencias de producción de `composer.lock` |
+| 3 | `docker compose up -d` | Recrea `web` y `cola`. Al arrancar, `web` aplica las migraciones (RNF-31) y guarda en caché la configuración, las rutas, las vistas y los eventos |
+| 4 | `esperar.sh` | Espera a que `/up` responda |
+| 5 | Prueba de humo | La sección F de PM-07 |
 
-- **Para volver a la versión anterior:** `git checkout <commit anterior>` y los pasos 3, 5, 6 y 7.
+- **Mientras se recrea `web`** el sistema no responde unos segundos; Nginx devuelve 502 en ese momento.
+- **Para volver a la versión anterior:** `git checkout <commit anterior>` y los pasos 2 a 4.
 - **Migraciones compatibles:** una migración nueva no rompe la versión anterior del código. Por ejemplo, una columna se agrega en un despliegue y se deja de usar antes de borrarla en otro.
 
-La primera instalación se explica paso a paso en el manual técnico (DOC-23): clonar el repositorio, `.env`, `key:generate`, migraciones, `NegocioInicialSeeder`, permisos, Nginx, certbot, el servicio de la cola, el crontab y rclone.
+El manual técnico (DOC-23) explica estos pasos con más detalle, junto con rclone.
 
 ## App en el celular
 
@@ -259,7 +231,8 @@ Los íconos se diseñan en HT-07 con la letra del avatar de PT-19 sobre el color
 
 | Qué | Cómo | Requisito |
 | --- | --- | --- |
-| **Disponibilidad** | UptimeRobot consulta `https://<dominio>/up` cada 5 minutos y avisa por correo al aprendiz si falla | RNF-16 |
-| **Errores** | Registro diario de Laravel en `storage/logs`, conservado 14 días | — |
-| **Cola** | `php artisan queue:failed` lista los envíos fallidos | RNF-17 |
+| **Disponibilidad** | UptimeRobot consulta `https://proyectosena.online/taller/up` cada 5 minutos y avisa por correo al aprendiz si falla | RNF-16 |
+| **Errores** | Registro diario de Laravel en `storage/logs`, dentro del volumen `taller_storage`, conservado 14 días; `docker compose logs web` muestra los de Apache y PHP | — |
+| **Contenedores** | `docker compose ps` muestra si `web` está sano y si `cola` y `db` corren | HT-04 |
+| **Cola** | `docker compose exec web php artisan queue:failed` lista los envíos fallidos | RNF-17 |
 | **Respaldos** | El registro de Laravel anota si una tarea programada falló; PM-02 revisa que existan los 14 días | RNF-15 |
