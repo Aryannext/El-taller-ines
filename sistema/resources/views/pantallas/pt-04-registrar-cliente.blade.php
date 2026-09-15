@@ -4,7 +4,7 @@
 
 @section('contenido')
   <header class="barra">
-    <a class="boton-icono" href="{{ route('panel') }}" aria-label="Volver"><i class="i i-atras"></i></a>
+    <a class="boton-icono" href="{{ route('clientes.buscar') }}" aria-label="Volver"><i class="i i-atras"></i></a>
     <h1>Registrar cliente</h1>
   </header>
 
@@ -18,7 +18,7 @@
     </main>
 
     <div class="acciones-fijas">
-      <a class="btn btn-secundario" href="{{ route('panel') }}">Cancelar</a>
+      <a class="btn btn-secundario" href="{{ route('clientes.buscar') }}">Cancelar</a>
       <button class="btn btn-primario" type="submit">Guardar cliente</button>
     </div>
   </form>

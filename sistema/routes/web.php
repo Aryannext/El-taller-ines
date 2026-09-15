@@ -21,6 +21,7 @@ Route::middleware(['auth', 'auth.session', 'cache.headers:no_store;private'])->g
 
     Route::get('/', [PanelController::class, 'mostrar'])->name('panel');
 
+    Route::get('/clientes', [ClienteController::class, 'buscar'])->name('clientes.buscar');
     Route::get('/clientes/nuevo', [ClienteController::class, 'nuevo'])->name('clientes.nuevo');
     Route::post('/clientes', [ClienteController::class, 'guardar'])->name('clientes.guardar');
     Route::get('/clientes/{cliente}', [ClienteController::class, 'ficha'])->whereNumber('cliente')->name('clientes.ficha');

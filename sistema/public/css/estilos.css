@@ -201,6 +201,11 @@ textarea.entrada { min-height: 76px; resize: vertical; }
 .pila-amplia { gap: 16px; } /* reemplaza el estilo en línea de los mockups, que la política de seguridad no permite */
 /* Un formulario que envuelve el contenido y las acciones fijas conserva la columna de .app */
 .formulario-pantalla { flex: 1; display: flex; flex-direction: column; }
+/* Destino de la navegación que todavía no existe: se ve, pero no se puede tocar */
+.navegacion .pendiente {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  min-height: 52px; font-size: 12.5px; color: var(--tinta-2); opacity: .45;
+}
 .texto-2 { color: var(--tinta-2); }
 .pequeno { font-size: 14px; }
 .fuerte { font-weight: 800; }

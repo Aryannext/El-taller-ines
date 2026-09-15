@@ -12,6 +12,12 @@
       "runtimeExecutable": "C:\\wamp64\\bin\\php\\php8.4.15\\php.exe",
       "runtimeArgs": ["sistema/artisan", "serve", "--host=127.0.0.1", "--port=8000"],
       "port": 8000
+    },
+    {
+      "name": "sistema-con-datos",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["scripts/servidor_de_prueba.py"],
+      "port": 8000
     }
   ]
 }

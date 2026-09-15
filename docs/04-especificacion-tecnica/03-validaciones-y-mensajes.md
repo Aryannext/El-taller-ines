@@ -175,6 +175,7 @@ No son errores: orientan a la usuaria.
 | Pantalla | Cuándo | Mensaje | Historia |
 | --- | --- | --- | --- |
 | **PT-03** | La búsqueda no encuentra clientes | No hay clientes con «{busqueda}». | HU-04 |
+| **PT-03** | El negocio todavía no tiene clientes | Todavía no hay clientes registrados. | HU-04 |
 | **PT-05** | El cliente no tiene órdenes | {cliente} no tiene órdenes y no debe nada. | HU-05 |
 | **PT-06** | Una prenda se guarda sin foto | Sin foto: tómale una para reconocerla después. | HU-17 |
 | **PT-06** | Se registra un cliente nuevo desde la orden | Vuelve a elegir las fotos que ya habías tomado. | HU-10 |

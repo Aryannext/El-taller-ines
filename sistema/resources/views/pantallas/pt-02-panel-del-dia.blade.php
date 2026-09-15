@@ -13,8 +13,7 @@
       <span class="fuerte">Hola, {{ $usuaria }}</span>
       <span class="texto-2 pequeno">Aquí verás lo que necesita tu atención hoy: cobros, entregas atrasadas y avisos.</span>
     </div>
-
-    {{-- Acceso directo hasta que exista la lista de clientes (PT-03, HU-04) --}}
-    <a class="btn btn-secundario" href="{{ route('clientes.nuevo') }}"><i class="i i-mas"></i>Registrar cliente</a>
   </main>
+
+  <x-navegacion actual="panel" />
 @endsection
