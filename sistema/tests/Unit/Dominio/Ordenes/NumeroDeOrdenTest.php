@@ -7,7 +7,7 @@ use App\Dominio\Ordenes\NumeroDeOrden;
 use PHPUnit\Framework\TestCase;
 
 /**
- * RN-08 · Número de orden: su formato y el siguiente. Que no se reutilice lo prueba RegistrarOrdenTest.
+ * RN-08 · Número de orden: su formato, el siguiente y cómo se lee lo que escribe la dueña. Que no se reutilice lo prueba RegistrarOrdenTest.
  */
 class NumeroDeOrdenTest extends TestCase
 {
@@ -23,5 +23,17 @@ class NumeroDeOrdenTest extends TestCase
     {
         $this->expectException(ReglaIncumplida::class);
         NumeroDeOrden::desde(0);
+    }
+
+    public function test_rn_08_se_lee_como_se_escribe_en_la_bolsa(): void
+    {
+        foreach (['42', '0042', '#0042', ' #42 ', '# 0042'] as $texto) {
+            $this->assertSame(42, NumeroDeOrden::leer($texto)?->valor(), "«{$texto}»");
+        }
+        $this->assertSame(10000, NumeroDeOrden::leer('#10000')?->valor());
+
+        foreach (['', '0', '#', 'marta', '42a', '4 2', '-42', '4.2', '1234567890'] as $texto) {
+            $this->assertNull(NumeroDeOrden::leer($texto), "«{$texto}» no es un número de orden");
+        }
     }
 }

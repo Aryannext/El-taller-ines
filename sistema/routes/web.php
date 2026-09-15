@@ -30,6 +30,7 @@ Route::middleware(['auth', 'auth.session', 'cache.headers:no_store;private'])->g
     Route::get('/clientes/{cliente}/editar', [ClienteController::class, 'editar'])->whereNumber('cliente')->name('clientes.editar');
     Route::put('/clientes/{cliente}', [ClienteController::class, 'corregir'])->whereNumber('cliente')->name('clientes.corregir');
 
+    Route::get('/ordenes', [OrdenController::class, 'listar'])->name('ordenes.listar');
     Route::get('/ordenes/nueva', [OrdenController::class, 'nueva'])->name('ordenes.nueva');
     Route::post('/ordenes', [OrdenController::class, 'guardar'])->name('ordenes.guardar');
     Route::get('/ordenes/{orden}/guardada', [OrdenController::class, 'guardada'])->whereNumber('orden')->name('ordenes.guardada');

@@ -183,6 +183,8 @@ No son errores: orientan a la usuaria.
 | **PT-07** | La orden se guardó | Escribe este número en la bolsa. | HU-08 |
 | **PT-07** | La orden se guardó | La orden de {cliente} quedó guardada. | HU-07 |
 | **PT-08** | El número buscado no existe | No hay una orden con el número {numero}. | HU-15 |
+| **PT-08** | Lo buscado no es un número de orden | Escribe solo el número de la bolsa, por ejemplo 42. | HU-15 |
+| **PT-08** | No hay órdenes en el estado elegido | No hay órdenes {estado}. | HU-15 |
 | **PT-13** | Se elimina una prenda o una foto | ¿Eliminar {que}? No se puede deshacer. | HU-13, HU-19 |
 | **PT-18** | No hay avisos por enviar | No hay avisos por enviar. | HU-29 |
 | **PT-23** | La contraseña cambió | Tu contraseña cambió. Se cerró la sesión en los demás dispositivos. | HU-02 |

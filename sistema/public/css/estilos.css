@@ -181,12 +181,13 @@ textarea.entrada { min-height: 76px; resize: vertical; }
 .segmentos input { position: absolute; opacity: 0; pointer-events: none; }
 .segmentos label:has(input:checked) { border-color: var(--primario); background: var(--primario-suave); color: var(--primario); }
 
-.pestanas { display: flex; gap: 4px; padding: 4px; border-radius: 12px; background: var(--neutro-suave); overflow-x: auto; }
+/* Las pestañas bajan a una fila más cuando no caben todas: ninguna queda escondida detrás de un desplazamiento lateral */
+.pestanas { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 4px; padding: 4px; border-radius: 12px; background: var(--neutro-suave); }
 .pestanas a {
-  flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 0 10px;
+  display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 0 10px;
   border-radius: 9px; color: var(--tinta-2); font-weight: 700; font-size: 15px; text-decoration: none; white-space: nowrap;
 }
-.pestanas a[aria-selected="true"] { background: #fff; color: var(--tinta); box-shadow: var(--sombra); }
+.pestanas a[aria-selected="true"], .pestanas a[aria-current="page"] { background: #fff; color: var(--tinta); box-shadow: var(--sombra); }
 .contador { min-width: 22px; padding: 0 6px; border-radius: 999px; background: var(--peligro); color: #fff; font-size: 13px; line-height: 22px; text-align: center; }
 .contador.neutro { background: var(--borde-fuerte); color: var(--tinta); }
 

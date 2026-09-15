@@ -22,6 +22,20 @@ final class NumeroDeOrden
         return new self($valor);
     }
 
+    /**
+     * Lee el número como se escribe en la bolsa: «42», «0042» o «#0042», con espacios alrededor (CA-15.2).
+     * Devuelve null si el texto no es un número de orden.
+     */
+    public static function leer(string $texto): ?self
+    {
+        // Hasta 9 dígitos: cabe en la columna numero, que es un entero sin signo
+        if (preg_match('/^\s*#?\s*0*([1-9]\d{0,8})\s*$/', $texto, $partes) !== 1) {
+            return null;
+        }
+
+        return new self((int) $partes[1]);
+    }
+
     public function siguiente(): self
     {
         return new self($this->valor + 1);

@@ -5,8 +5,11 @@ namespace App\Http\Controladores;
 use App\Aplicacion\Configuracion\GestionarTiposDePrenda;
 use App\Aplicacion\Consultas\BuscarClientes;
 use App\Aplicacion\Consultas\DetalleDeOrden;
+use App\Aplicacion\Consultas\ListarOrdenes;
 use App\Aplicacion\Ordenes\RegistrarOrden;
 use App\Dominio\Compartido\Reloj;
+use App\Dominio\Ordenes\EstadoDeOrden;
+use App\Dominio\Ordenes\NumeroDeOrden;
 use App\Http\Solicitudes\OrdenRequest;
 use App\Modelos\Orden;
 use DateTimeImmutable;
@@ -17,6 +20,41 @@ use Illuminate\View\View;
 
 class OrdenController
 {
+    /**
+     * PT-08 · Órdenes por estado de avance (?estado=). Con ?numero= abre la orden de esa bolsa (HU-15).
+     */
+    public function listar(Request $solicitud, ListarOrdenes $listarOrdenes): View|RedirectResponse
+    {
+        $busqueda = is_string($solicitud->query('numero')) ? trim($solicitud->query('numero')) : '';
+        $aviso = null;
+
+        if ($busqueda !== '') {
+            $numero = NumeroDeOrden::leer($busqueda);
+            $orden = $numero === null ? null : $listarOrdenes->buscarPorNumero($numero);
+
+            if ($orden !== null) {
+                return redirect()->route('ordenes.detalle', $orden);
+            }
+
+            $aviso = $numero === null
+                ? 'Escribe solo el número de la bolsa, por ejemplo 42.'
+                : "No hay una orden con el número {$numero->formato()}.";
+        }
+
+        $estado = is_string($solicitud->query('estado')) ? EstadoDeOrden::tryFrom($solicitud->query('estado')) : null;
+        $estado ??= EstadoDeOrden::EnProceso;
+        $pagina = is_string($solicitud->query('pagina')) && ctype_digit($solicitud->query('pagina')) ? max(1, (int) $solicitud->query('pagina')) : 1;
+
+        return view('pantallas.pt-08-ordenes', [
+            'estado' => $estado,
+            'busqueda' => $busqueda,
+            'aviso' => $aviso,
+            'ordenes' => $listarOrdenes->listar($estado, $pagina),
+            'enProceso' => $listarOrdenes->contar(EstadoDeOrden::EnProceso),
+            'listas' => $listarOrdenes->contar(EstadoDeOrden::ListaParaEntregar),
+        ]);
+    }
+
     /**
      * PT-06 · Nueva orden. Desde la ficha llega con ?cliente= para dejarlo elegido.
      */
