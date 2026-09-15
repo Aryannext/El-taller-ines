@@ -356,6 +356,11 @@ textarea.entrada { min-height: 76px; resize: vertical; }
 .opcion-hoja.actual { color: var(--tinta-2); }
 
 .fondo-app { pointer-events: none; }
+/* PT-11 · Acciones de una prenda (HU-20): las opciones de estado son botones que envían el cambio */
+button.opcion-hoja { width: 100%; border: 0; background: transparent; font: inherit; font-weight: 700; text-align: left; cursor: pointer; }
+.opcion-hoja.actual .i { background: none; } /* reemplazan estilos en línea del mockup */
+.pila-nula { gap: 0; }
+.enlace-sugerencia { min-height: 44px; text-decoration: none; }
 
 /* --- Pantalla de inicio de sesión ----------------------------------------------------------- */
 

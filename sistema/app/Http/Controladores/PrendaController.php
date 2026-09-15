@@ -3,16 +3,66 @@
 namespace App\Http\Controladores;
 
 use App\Aplicacion\Consultas\DetalleDeOrden;
+use App\Aplicacion\Ordenes\CambiarEstadoDePrenda;
 use App\Aplicacion\Ordenes\CorregirPrenda;
 use App\Dominio\Compartido\ReglaIncumplida;
+use App\Dominio\Ordenes\EstadoDeOrden;
+use App\Dominio\Ordenes\EstadoDePrenda;
 use App\Http\Solicitudes\PrendaRequest;
 use App\Modelos\Orden;
 use App\Modelos\Prenda;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
+/**
+ * Las acciones sobre una prenda. No hay ninguna para cambiar el estado de la orden: se calcula desde sus prendas (RN-19).
+ */
 class PrendaController
 {
+    /**
+     * PT-11 · Acciones de una prenda: en qué va y qué más se puede hacer (HU-20). Solo ofrece los cambios permitidos (CA-20.2).
+     */
+    public function acciones(Orden $orden, Prenda $prenda, CambiarEstadoDePrenda $cambiarEstado, DetalleDeOrden $detalleDeOrden): View|RedirectResponse
+    {
+        try {
+            $cambiarEstado->exigirQueSePuedaCambiar($prenda, $orden);
+        } catch (ReglaIncumplida $regla) {
+            return $this->alDetalleConElMotivo($orden, $regla);
+        }
+
+        return view('pantallas.pt-11-acciones-prenda', [
+            ...$detalleDeOrden->obtener($orden),
+            'prenda' => $prenda,
+            'estadosPosibles' => $cambiarEstado->estadosPosibles($prenda, $orden),
+        ]);
+    }
+
+    public function cambiarEstado(Request $solicitud, Orden $orden, Prenda $prenda, CambiarEstadoDePrenda $cambiarEstado): RedirectResponse
+    {
+        // Solo los valores posibles; si el cambio se permite desde el estado actual lo decide TransicionesDePrenda (03-validaciones-y-mensajes)
+        $datos = $solicitud->validate(
+            ['estado' => ['required', 'in:pendiente,en_proceso,terminada']],
+            ['estado.required' => 'Elige uno de los estados que se muestran.', 'estado.in' => 'Elige uno de los estados que se muestran.'],
+        );
+        $hacia = EstadoDePrenda::from($datos['estado']);
+
+        try {
+            $estadoDeLaOrden = $cambiarEstado->ejecutar($prenda, $hacia);
+        } catch (ReglaIncumplida $regla) {
+            return $regla->campo !== null
+                ? redirect()->route('prendas.acciones', [$orden, $prenda])->withErrors([$regla->campo => $regla->mensajeParaUsuaria])
+                : $this->alDetalleConElMotivo($orden, $regla);
+        }
+
+        // CA-20.3: si con esta prenda la orden quedó lista, eso es lo que importa decir
+        $mensaje = $estadoDeLaOrden === EstadoDeOrden::ListaParaEntregar && $hacia === EstadoDePrenda::Terminada
+            ? 'La orden quedó lista para entregar.'
+            : "Listo: «{$prenda->descripcion_arreglo}» ahora está ".mb_strtolower($hacia->etiqueta()).'.';
+
+        return redirect()->route('ordenes.detalle', $orden)->with('exito', $mensaje);
+    }
+
     /**
      * PT-13 · Corregir el arreglo o el precio (HU-12). Si la prenda no se puede corregir, vuelve al detalle con el motivo (CA-12.3).
      */

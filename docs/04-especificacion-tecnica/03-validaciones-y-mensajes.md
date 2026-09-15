@@ -170,6 +170,7 @@ Los lanza `ReglaIncumplida` desde el dominio o el caso de uso.
 | **RN-16** | Corregir, eliminar o devolver una prenda dejaría lo pagado por encima del valor | `precio` | La orden quedaría valiendo {valor} y ya tiene {pagado} pagados. Primero anula el pago que sobra. |
 | **RN-17** | Se intenta agregar una cuarta foto a una prenda | `fotos` | Esta prenda ya tiene 3 fotos. Elimina una para agregar otra. |
 | **RN-18** | Se intenta agregar una prenda a una orden Entregada | — | Solo se pueden agregar prendas a una orden en proceso o lista para entregar. |
+| **RN-20** | Se intenta pasar a Entregada una prenda desde sus acciones | `estado` | Las prendas terminadas se entregan con el botón Entregar de la orden. |
 | **RN-21** | Se va a entregar una orden con saldo | — | {cliente} debe {saldo}. ¿Entregar de todos modos? |
 | **RN-24** | Se intenta cambiar algo en una orden Cancelada | — | Esta orden está cancelada y no admite cambios. |
 | **RN-24** | Se intenta cancelar una orden Entregada | — | Una orden entregada no se puede cancelar. |
@@ -204,6 +205,9 @@ No son errores: orientan a la usuaria.
 | **PT-08** | Lo buscado no es un número de orden | Escribe solo el número de la bolsa, por ejemplo 42. | HU-15 |
 | **PT-08** | No hay órdenes en el estado elegido | No hay órdenes {estado}. | HU-15 |
 | **PT-09** | Se corrigió una prenda | Los cambios de la prenda quedaron guardados. | HU-12 |
+| **PT-09** | Cambió el estado de una prenda | Listo: «{arreglo}» ahora está {estado}. | HU-20 |
+| **PT-09** | Con esa prenda, la orden quedó lista | La orden quedó lista para entregar. | HU-20 |
+| **PT-11** | Siempre, bajo las acciones | Las prendas terminadas se entregan con el botón Entregar de la orden. | HU-20 |
 | **PT-10** | Siempre, sobre las fotos | Toca una foto para verla grande y comparar con las prendas del rincón. | HU-18 |
 | **PT-10** | Una prenda no tiene fotos | Esta prenda no tiene fotos. | HU-18 |
 | **PT-13** | La orden ya tiene pagos | La orden no puede valer menos de lo ya pagado ({pagado}). | HU-12 |

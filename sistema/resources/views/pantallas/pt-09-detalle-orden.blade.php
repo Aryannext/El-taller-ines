@@ -69,14 +69,17 @@
                   <img class="foto" src="{{ route('fotos.mostrar', $foto) }}" alt="Foto {{ $foto->posicion }} de {{ $prenda->tipoPrenda->nombre }}" width="56" height="56" loading="lazy">
                 @endforeach
               </div>
+            @elseif (in_array($prenda->id, $prendasCorregibles, true))
+              {{-- CA-17.4: sugiere tomarle una y lleva a donde se agrega --}}
+              <a class="aviso-sugerencia enlace-sugerencia" href="{{ route('prendas.editar', [$orden, $prenda]) }}"><i class="i i-camara i-sm"></i>Sin foto · tomar una</a>
             @else
               <span class="aviso-sugerencia"><i class="i i-camara i-sm"></i>Sin foto</span>
             @endif
             <span class="fuerte dinero">@dinero($prenda->precio)</span>
           </div>
-          {{-- HU-12 y HU-17: solo las prendas que se pueden corregir (RN-15, RN-24) --}}
+          {{-- HU-20: en qué va y las demás acciones de la prenda (PT-11). No se ofrece si ya no cambia (RN-15, RN-24) --}}
           @if (in_array($prenda->id, $prendasCorregibles, true))
-            <a class="btn btn-secundario btn-pequeno" href="{{ route('prendas.editar', [$orden, $prenda]) }}">Corregir arreglo, precio o fotos</a>
+            <a class="btn btn-secundario btn-pequeno" href="{{ route('prendas.acciones', [$orden, $prenda]) }}">Cambiar estado</a>
           @endif
         </div>
       @endforeach

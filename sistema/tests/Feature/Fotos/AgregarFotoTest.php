@@ -106,7 +106,7 @@ class AgregarFotoTest extends TestCase
         $this->assertSame(0, Foto::count());
         // El detalle sugiere tomarle una y lleva a donde se agrega
         $this->get(route('ordenes.detalle', $orden))
-            ->assertSeeInOrder(['Vestido', 'Sin foto', route('prendas.editar', [$orden, $vestido]), 'Corregir arreglo, precio o fotos']);
+            ->assertSeeInOrder(['Vestido', route('prendas.editar', [$orden, $vestido]), 'Sin foto · tomar una']);
         $this->get(route('prendas.editar', [$orden, $vestido]))
             ->assertSee('0 de 3')
             ->assertSee('Sin foto: tómale una para reconocerla después.');

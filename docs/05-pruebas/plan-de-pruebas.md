@@ -37,7 +37,7 @@ Si una prueba necesita una situación que ningún documento describe, primero se
 | [Reglas de negocio](casos-de-prueba/09-reglas-de-negocio.md) | 44 | 44 | 0 | 0 |
 | [Requisitos no funcionales](#cómo-se-prueba-cada-requisito-no-funcional) | 35 | 19 | 3 | 13 |
 
-**Pruebas automáticas planeadas:** 167 métodos en 51 clases · **Escritas en `sistema/tests/`:** 70 de 167.
+**Pruebas automáticas planeadas:** 167 métodos en 51 clases · **Escritas en `sistema/tests/`:** 79 de 167.
 
 | Épica | Historias | Casos |
 | --- | --- | --- |

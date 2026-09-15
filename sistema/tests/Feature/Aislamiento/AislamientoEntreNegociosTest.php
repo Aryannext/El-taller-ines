@@ -140,6 +140,8 @@ class AislamientoEntreNegociosTest extends TestCase
             'clientes.corregir' => ['PUT', route('clientes.corregir', $this->martaDelNegocioA), ['nombre' => 'Otra', 'celular' => '3001112233']],
             'ordenes.guardada' => ['GET', route('ordenes.guardada', $this->ordenDelNegocioA), []],
             'ordenes.detalle' => ['GET', route('ordenes.detalle', $this->ordenDelNegocioA), []],
+            'prendas.acciones' => ['GET', route('prendas.acciones', [$this->ordenDelNegocioA, $this->prendaDelNegocioA]), []],
+            'prendas.cambiar-estado' => ['POST', route('prendas.cambiar-estado', [$this->ordenDelNegocioA, $this->prendaDelNegocioA]), ['estado' => 'terminada']],
             'prendas.editar' => ['GET', route('prendas.editar', [$this->ordenDelNegocioA, $this->prendaDelNegocioA]), []],
             'prendas.corregir' => ['PUT', route('prendas.corregir', [$this->ordenDelNegocioA, $this->prendaDelNegocioA]), ['descripcion_arreglo' => 'Otro arreglo', 'precio' => '1000']],
             'fotos.de-orden' => ['GET', route('fotos.de-orden', $this->ordenDelNegocioA), []],

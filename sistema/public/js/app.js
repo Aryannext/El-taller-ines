@@ -193,9 +193,12 @@ function unSoloEnvio() {
       if (formulario.id) {
         botones.push(...document.querySelectorAll(`button[type="submit"][form="${formulario.id}"]`));
       }
-      botones.forEach((boton) => {
-        boton.disabled = true;
-      });
+      // Después de que el navegador arma el envío: un botón deshabilitado antes no manda su valor (PT-11 envía estado con el botón)
+      setTimeout(() => {
+        botones.forEach((boton) => {
+          boton.disabled = true;
+        });
+      }, 0);
     });
   });
 }

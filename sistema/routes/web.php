@@ -39,6 +39,9 @@ Route::middleware(['auth', 'auth.session', 'cache.headers:no_store;private'])->g
 
     // La prenda se busca dentro de la orden de la dirección: /ordenes/43/prendas/7 no abre una prenda de la #0042
     Route::scopeBindings()->group(function () {
+        // RN-19: el estado se cambia en la prenda; no hay ruta para cambiar el de la orden
+        Route::get('/ordenes/{orden}/prendas/{prenda}', [PrendaController::class, 'acciones'])->whereNumber(['orden', 'prenda'])->name('prendas.acciones');
+        Route::post('/ordenes/{orden}/prendas/{prenda}/estado', [PrendaController::class, 'cambiarEstado'])->whereNumber(['orden', 'prenda'])->name('prendas.cambiar-estado');
         Route::get('/ordenes/{orden}/prendas/{prenda}/editar', [PrendaController::class, 'editar'])->whereNumber(['orden', 'prenda'])->name('prendas.editar');
         Route::put('/ordenes/{orden}/prendas/{prenda}', [PrendaController::class, 'corregir'])->whereNumber(['orden', 'prenda'])->name('prendas.corregir');
         Route::post('/ordenes/{orden}/prendas/{prenda}/fotos', [FotoController::class, 'guardar'])->whereNumber(['orden', 'prenda'])->name('fotos.agregar');
