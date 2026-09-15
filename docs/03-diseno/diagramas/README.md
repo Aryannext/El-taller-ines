@@ -97,6 +97,7 @@ classDiagram
         +valor(array preciosYEstados) Dinero
         +pagado(array pagos) Dinero
         +saldo(Dinero valor, array pagos) Dinero
+        +porCobrar(array saldosDeOrdenes) Dinero
         +estadoDePago(Dinero saldo) EstadoDePago
     }
     class ReglasDeValor {

@@ -261,6 +261,7 @@ textarea.entrada { min-height: 76px; resize: vertical; }
 .cifra.principal { grid-column: 1 / -1; min-height: 0; background: var(--primario); border-color: var(--primario); color: #fff; }
 .cifra.principal .encabezado, .cifra.principal .nota { color: #dfe5fb; }
 .cifra.principal .valor { font-size: 38px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; } /* reemplaza el estilo en línea de las filas de PT-05 */
 
 .banda { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border-radius: 12px; font-size: 15.5px; }
 .banda .i { margin-top: 1px; }

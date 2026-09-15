@@ -40,6 +40,20 @@ class CalculadoraDeSaldoTest extends TestCase
         $this->assertSame(0, $calculadora->saldo(Dinero::pesos(31000), [[10000, false], [21000, false]])->valor());
     }
 
+    public function test_por_cobrar_suma_los_saldos_sin_las_canceladas(): void
+    {
+        $calculadora = new CalculadoraDeSaldo;
+
+        // #0040 entregada con $12.000, #0042 en proceso con $21.000 y #0041 cancelada con $8.000 (ejemplo de RN-32)
+        $this->assertSame(33000, $calculadora->porCobrar([
+            [Dinero::pesos(12000), false],
+            [Dinero::pesos(21000), false],
+            [Dinero::pesos(8000), true],
+        ])->valor());
+        $this->assertSame(0, $calculadora->porCobrar([])->valor());
+        $this->assertSame(0, $calculadora->porCobrar([[Dinero::pesos(8000), true]])->valor());
+    }
+
     public function test_rn_29_estado_de_pago(): void
     {
         $calculadora = new CalculadoraDeSaldo;

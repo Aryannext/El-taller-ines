@@ -57,6 +57,25 @@ final class CalculadoraDeSaldo
         return $valor->restar($this->pagado($pagos));
     }
 
+    /**
+     * RN-32: suma los saldos de las órdenes que no están canceladas, incluidas las entregadas.
+     * Sirve para lo que debe un cliente (HU-05) y para el total por cobrar del negocio (HU-25, HU-26).
+     *
+     * @param  iterable<array{0: Dinero, 1: bool}>  $saldos  saldo y si la orden está cancelada
+     */
+    public function porCobrar(iterable $saldos): Dinero
+    {
+        $total = Dinero::pesos(0);
+
+        foreach ($saldos as [$saldo, $cancelada]) {
+            if (! $cancelada) {
+                $total = $total->sumar($saldo);
+            }
+        }
+
+        return $total;
+    }
+
     public function estadoDePago(Dinero $saldo): EstadoDePago
     {
         return $saldo->esMayorQue(Dinero::pesos(0)) ? EstadoDePago::PorCobrar : EstadoDePago::Pagada;

@@ -5,6 +5,7 @@ namespace App\Http\Controladores;
 use App\Aplicacion\Clientes\CorregirCliente;
 use App\Aplicacion\Clientes\RegistrarCliente;
 use App\Aplicacion\Consultas\BuscarClientes;
+use App\Aplicacion\Consultas\FichaDeCliente;
 use App\Http\Solicitudes\ClienteRequest;
 use App\Modelos\Cliente;
 use Illuminate\Http\RedirectResponse;
@@ -36,11 +37,11 @@ class ClienteController
     }
 
     /**
-     * PT-05 · Por ahora los datos del cliente; sus órdenes y lo que debe llegan con HU-05.
+     * PT-05 · Los datos del cliente, sus órdenes y cuánto debe (HU-05).
      */
-    public function ficha(Cliente $cliente): View
+    public function ficha(Cliente $cliente, FichaDeCliente $fichaDeCliente): View
     {
-        return view('pantallas.pt-05-ficha-cliente', ['cliente' => $cliente]);
+        return view('pantallas.pt-05-ficha-cliente', $fichaDeCliente->obtener($cliente));
     }
 
     public function editar(Cliente $cliente): View
