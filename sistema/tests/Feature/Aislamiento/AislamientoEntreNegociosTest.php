@@ -3,6 +3,7 @@
 namespace Tests\Feature\Aislamiento;
 
 use App\Modelos\Cliente;
+use App\Modelos\Orden;
 use App\Modelos\Usuario;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -30,11 +31,14 @@ class AislamientoEntreNegociosTest extends TestCase
 
     private Cliente $martaDelNegocioA;
 
+    private Orden $ordenDelNegocioA;
+
     protected function setUp(): void
     {
         parent::setUp();
 
         $this->martaDelNegocioA = Cliente::factory()->create(['nombre' => 'Marta Rincón', 'celular' => '3104567890']);
+        $this->ordenDelNegocioA = Orden::factory()->create(['cliente_id' => $this->martaDelNegocioA->id, 'numero' => 42]);
         $this->usuariaDelNegocioA = Usuario::factory()->create(['negocio_id' => $this->martaDelNegocioA->negocio_id]);
         $this->usuariaDelNegocioB = Usuario::factory()->create();
         Cliente::factory()->create(['negocio_id' => $this->usuariaDelNegocioB->negocio_id, 'nombre' => 'Luis Pardo']);
@@ -123,6 +127,7 @@ class AislamientoEntreNegociosTest extends TestCase
             'clientes.ficha' => ['GET', route('clientes.ficha', $this->martaDelNegocioA)],
             'clientes.editar' => ['GET', route('clientes.editar', $this->martaDelNegocioA)],
             'clientes.corregir' => ['PUT', route('clientes.corregir', $this->martaDelNegocioA)],
+            'ordenes.guardada' => ['GET', route('ordenes.guardada', $this->ordenDelNegocioA)],
         ];
     }
 }

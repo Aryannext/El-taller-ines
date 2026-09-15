@@ -62,6 +62,9 @@ def cargar_datos(servidor: ServidorTemporal, php: str) -> None:
                        (negocio, hash_contrasena))
         cursor.executemany("INSERT INTO clientes (negocio_id, nombre, celular) VALUES (%s, %s, %s)",
                            [(negocio, nombre, celular) for nombre, celular in CLIENTES])
+        # La misma lista inicial de NegocioInicialSeeder (RF-16)
+        cursor.executemany("INSERT INTO tipos_prenda (negocio_id, nombre) VALUES (%s, %s)",
+                           [(negocio, nombre) for nombre in ("Pantalón", "Camisa", "Blusa", "Vestido", "Falda", "Chaqueta")])
 
 
 def main() -> int:

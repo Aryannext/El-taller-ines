@@ -201,6 +201,12 @@ textarea.entrada { min-height: 76px; resize: vertical; }
 .pila-amplia { gap: 16px; } /* reemplaza el estilo en línea de los mockups, que la política de seguridad no permite */
 /* Un formulario que envuelve el contenido y las acciones fijas conserva la columna de .app */
 .formulario-pantalla { flex: 1; display: flex; flex-direction: column; }
+/* Un elemento con el atributo hidden no se muestra aunque su clase le dé display (el campo «¿Qué prenda es?») */
+[hidden] { display: none !important; }
+/* Reemplazan estilos en línea de los mockups */
+.alinear-inicio { align-self: flex-start; }
+.bolsa { gap: 20px; padding: 12px 0 4px; }
+.titulo-bolsa { font-size: 20px; }
 /* Destino de la navegación que todavía no existe: se ve, pero no se puede tocar */
 .navegacion .pendiente {
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;

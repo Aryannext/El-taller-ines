@@ -5,6 +5,9 @@ includes:
 parameters:
     # RNF-29: nivel 5 o superior, sin errores
     level: 5
+    # Lee las conversiones del método casts() de cada modelo, como EstadoDePrenda o immutable_datetime.
+    # Sin esto, Larastan solo ve que casts() devuelve un array y usa los tipos de las migraciones.
+    parseModelCastsMethod: true
     paths:
         - app
         - database

@@ -22,7 +22,7 @@ class Orden extends Model
 
     protected $table = 'ordenes';
 
-    protected $fillable = ['cliente_id', 'numero', 'fecha_entrega_acordada', 'lista_en', 'cancelada_en', 'token_formulario'];
+    protected $fillable = ['cliente_id', 'numero', 'fecha_entrega_acordada', 'recibida_en', 'lista_en', 'cancelada_en', 'token_formulario'];
 
     protected function casts(): array
     {

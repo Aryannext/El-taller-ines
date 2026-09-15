@@ -43,7 +43,7 @@ Un valor con centavos, como `15.000,50`, queda `15000,50` y no pasa la regla `in
 | --- | --- | --- | --- | --- |
 | `token_formulario` | `required`, `uuid` | `required`, `uuid`: La página se desactualizó. Vuelve a abrir el formulario. | `ordenes.token_formulario` | RNF-14 |
 | `cliente_id` | `required`, `integer`, existe entre los clientes del negocio | `required`: Elige el cliente de la orden.<br>`exists`: Elige un cliente de la lista. | `ordenes.cliente_id` | RN-01, RN-05 |
-| `fecha_entrega_acordada` | `required`, `date_format:Y-m-d`, `after_or_equal` a hoy según `Reloj` | `required`: Elige la fecha de entrega acordada.<br>`after_or_equal`: La entrega no puede ser antes de la fecha de recepción. | `ordenes.fecha_entrega_acordada` | RN-07, RN-09 |
+| `fecha_entrega_acordada` | `required`, `date_format:Y-m-d`, `after_or_equal` a hoy según `Reloj` | `required`, `date_format`: Elige la fecha de entrega acordada.<br>`after_or_equal`: La entrega no puede ser antes de la fecha de recepción. | `ordenes.fecha_entrega_acordada` | RN-07, RN-09 |
 | `prendas` | `required`, `array`, `min:1` | `required`, `min`: Agrega al menos una prenda. | — | RN-06 |
 | `prendas.*.tipo_prenda_id` | `required`; un tipo activo del negocio, o `otro` | `required`: Elige el tipo de prenda.<br>`exists`: Elige un tipo de prenda de la lista. | `prendas.tipo_prenda_id` | RN-01, RN-10 |
 | `prendas.*.tipo_otro` | `required_if` el tipo es `otro`, `string`, `max:60` | `required_if`: Escribe qué tipo de prenda es.<br>`max`: El tipo de prenda puede tener hasta 60 caracteres. | `tipos_prenda.nombre` | RN-10, RN-43 |
@@ -181,6 +181,7 @@ No son errores: orientan a la usuaria.
 | **PT-06** | Una prenda se guarda sin foto | Sin foto: tómale una para reconocerla después. | HU-17 |
 | **PT-06** | Se registra un cliente nuevo desde la orden | Vuelve a elegir las fotos que ya habías tomado. | HU-10 |
 | **PT-07** | La orden se guardó | Escribe este número en la bolsa. | HU-08 |
+| **PT-07** | La orden se guardó | La orden de {cliente} quedó guardada. | HU-07 |
 | **PT-08** | El número buscado no existe | No hay una orden con el número {numero}. | HU-15 |
 | **PT-13** | Se elimina una prenda o una foto | ¿Eliminar {que}? No se puede deshacer. | HU-13, HU-19 |
 | **PT-18** | No hay avisos por enviar | No hay avisos por enviar. | HU-29 |

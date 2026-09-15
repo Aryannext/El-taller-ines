@@ -2,6 +2,7 @@
 
 namespace App\Modelos;
 
+use App\Dominio\Ordenes\EstadoDePrenda;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -23,6 +24,7 @@ class Prenda extends Model
     {
         return [
             'precio' => 'integer',
+            'estado' => EstadoDePrenda::class,
             'entregada_en' => 'immutable_datetime',
             'devuelta_en' => 'immutable_datetime',
         ];

@@ -14,7 +14,9 @@
       <div class="banda banda-exito" role="status"><i class="i i-check"></i><span>{{ session('exito') }}</span></div>
     @endif
 
-    {{-- Las órdenes y lo que debe llegan con HU-05; mientras no haya órdenes, este es su estado real (CA-05.3) --}}
+    <a class="btn btn-primario" href="{{ route('ordenes.nueva', ['cliente' => $cliente->id]) }}"><i class="i i-mas"></i>Nueva orden para {{ $cliente->nombre }}</a>
+
+    {{-- Las órdenes y lo que debe llegan con HU-05 --}}
     <p class="texto-2">{{ $cliente->nombre }} no tiene órdenes y no debe nada.</p>
   </main>
 

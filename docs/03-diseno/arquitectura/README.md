@@ -306,7 +306,7 @@ Complementa la tabla del [modelo de datos](../modelo-de-datos/README.md#dónde-s
 | **RN-08** | Aplicación | `RegistrarOrden`, `NumeroDeOrden` | Bloquea la fila del negocio, toma el mayor número más uno (ADR-004); `NumeroDeOrden` da el formato #0042 |
 | **RN-09** | Infraestructura | `Reloj`, `RelojDeColombia` | Todo «hoy» y «ahora» sale del reloj, fijado en America/Bogota y reemplazable en las pruebas |
 | **RN-10** | Http | `PrendaRequest` | Tipo, descripción y precio obligatorios |
-| **RN-11** | Dominio | `Dinero` | Solo acepta enteros mayores que cero |
+| **RN-11** | Dominio | `Dinero` | Solo guarda enteros de pesos, nunca negativos; `Dinero::precio` exige además que sea mayor que cero |
 | **RN-12** | Dominio | `EstadoDePrenda` | Los cinco estados; toda prenda nueva empieza Pendiente |
 | **RN-13** | Dominio | `TransicionesDePrenda` | Entregada solo desde Terminada |
 | **RN-14** | Dominio | `TransicionesDePrenda` | Terminada puede volver a En proceso |

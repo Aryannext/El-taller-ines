@@ -2,6 +2,7 @@
 
 use App\Http\Controladores\AjustesController;
 use App\Http\Controladores\ClienteController;
+use App\Http\Controladores\OrdenController;
 use App\Http\Controladores\PanelController;
 use App\Http\Controladores\SesionController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,10 @@ Route::middleware(['auth', 'auth.session', 'cache.headers:no_store;private'])->g
     Route::get('/clientes/{cliente}', [ClienteController::class, 'ficha'])->whereNumber('cliente')->name('clientes.ficha');
     Route::get('/clientes/{cliente}/editar', [ClienteController::class, 'editar'])->whereNumber('cliente')->name('clientes.editar');
     Route::put('/clientes/{cliente}', [ClienteController::class, 'corregir'])->whereNumber('cliente')->name('clientes.corregir');
+
+    Route::get('/ordenes/nueva', [OrdenController::class, 'nueva'])->name('ordenes.nueva');
+    Route::post('/ordenes', [OrdenController::class, 'guardar'])->name('ordenes.guardar');
+    Route::get('/ordenes/{orden}/guardada', [OrdenController::class, 'guardada'])->whereNumber('orden')->name('ordenes.guardada');
 
     Route::get('/ajustes', [AjustesController::class, 'mostrar'])->name('ajustes');
     Route::put('/ajustes/contrasena', [AjustesController::class, 'cambiarContrasena'])->name('ajustes.contrasena');
