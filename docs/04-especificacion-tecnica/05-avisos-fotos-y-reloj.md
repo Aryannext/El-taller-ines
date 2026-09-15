@@ -82,7 +82,7 @@ Content-Type: application/json
 
 - `to` es `Celular::enFormatoInternacional()`: el indicativo 57 y el celular, sin el signo `+`.
 - La conexión espera hasta 5 segundos y la respuesta hasta 10.
-- `WhatsAppCloudApiCanal::estaDisponible()` es verdadero solo si `WHATSAPP_TOKEN` y `WHATSAPP_ID_NUMERO` tienen valor.
+- `WhatsAppCloudApiCanal::estaDisponible()` es verdadero solo si `WHATSAPP_TOKEN`, `WHATSAPP_ID_NUMERO` y `WHATSAPP_VERSION_API` tienen valor: la versión también hace falta para armar la dirección. `config/services.php` los lee en la clave `whatsapp`.
 
 ### Respuestas
 

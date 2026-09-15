@@ -16,7 +16,8 @@ class Aviso extends Model
 
     protected $table = 'avisos';
 
-    protected $fillable = ['ciclo_lista_en', 'estado', 'canal', 'mensaje', 'intentos', 'id_mensaje_whatsapp', 'resuelto_en'];
+    // generado_en lo pone GenerarAviso con el reloj de Colombia (RN-09), no Eloquent
+    protected $fillable = ['generado_en', 'ciclo_lista_en', 'estado', 'canal', 'mensaje', 'intentos', 'id_mensaje_whatsapp', 'resuelto_en'];
 
     protected function casts(): array
     {

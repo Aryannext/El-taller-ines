@@ -7,6 +7,7 @@ use App\Aplicacion\Ordenes\SincronizarEstadoDeOrden;
 use App\Dominio\Ordenes\EstadoDeOrden;
 use App\Dominio\Ordenes\EstadoDePrenda;
 use App\Dominio\Ordenes\OrdenQuedoLista;
+use App\Modelos\Aviso;
 use App\Modelos\Cliente;
 use App\Modelos\Orden;
 use App\Modelos\Prenda;
@@ -32,7 +33,6 @@ class SincronizarEstadoDeOrdenTest extends TestCase
     {
         parent::setUp();
 
-        Event::fake([OrdenQuedoLista::class]);
         $this->duena = Usuario::factory()->create();
         $marta = Cliente::factory()->create(['negocio_id' => $this->duena->negocio_id, 'nombre' => 'Marta Rincón']);
         $this->orden = Orden::factory()->create(['cliente_id' => $marta->id, 'numero' => 42, 'recibida_en' => '2026-09-07 09:15:00']);
@@ -40,6 +40,7 @@ class SincronizarEstadoDeOrdenTest extends TestCase
 
     public function test_rn_22_fecha_en_que_la_orden_quedo_lista(): void
     {
+        Event::fake([OrdenQuedoLista::class]);
         $pantalon = Prenda::factory()->create(['orden_id' => $this->orden->id, 'estado' => 'terminada']);
         $camisa = Prenda::factory()->create(['orden_id' => $this->orden->id, 'estado' => 'en_proceso']);
         $this->actingAs($this->duena);
@@ -65,8 +66,26 @@ class SincronizarEstadoDeOrdenTest extends TestCase
         Event::assertDispatchedTimes(OrdenQuedoLista::class, 2);
     }
 
+    public function test_rn_37_al_quedar_lista_la_orden_se_genera_su_aviso(): void
+    {
+        Prenda::factory()->create(['orden_id' => $this->orden->id, 'estado' => 'terminada']);
+        $pantalon = Prenda::factory()->create(['orden_id' => $this->orden->id, 'estado' => 'en_proceso']);
+        $this->actingAs($this->duena);
+
+        // Se marca Terminado el último pantalón: sin ninguna otra acción, el aviso a Marta queda en la cola
+        $this->cambiarEl('2026-09-14 16:00:00', $pantalon, EstadoDePrenda::Terminada);
+
+        $aviso = Aviso::sole();
+        $this->assertSame(
+            [$this->orden->id, 'en_cola', '2026-09-14 16:00', '2026-09-14 16:00'],
+            [(int) $aviso->orden_id, $aviso->estado, $aviso->ciclo_lista_en->format('Y-m-d H:i'), $aviso->generado_en?->format('Y-m-d H:i')],
+        );
+        $this->assertSame(1, DB::table('jobs')->where('queue', 'avisos')->count());
+    }
+
     public function test_el_evento_de_orden_lista_solo_sale_si_el_cambio_se_confirma(): void
     {
+        Event::fake([OrdenQuedoLista::class]);
         Prenda::factory()->create(['orden_id' => $this->orden->id, 'estado' => 'terminada']);
         $this->actingAs($this->duena);
         $this->fijarReloj('2026-09-14 16:00:00');

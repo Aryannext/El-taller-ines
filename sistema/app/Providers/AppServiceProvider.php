@@ -2,15 +2,20 @@
 
 namespace App\Providers;
 
+use App\Aplicacion\Avisos\GenerarAviso;
 use App\Aplicacion\Consultas\FotosDeOrden;
+use App\Dominio\Avisos\CanalDeAviso;
 use App\Dominio\Compartido\Reloj;
 use App\Dominio\Fotos\AlmacenDeFotos;
+use App\Dominio\Ordenes\OrdenQuedoLista;
+use App\Infraestructura\Avisos\WhatsAppCloudApiCanal;
 use App\Infraestructura\Fotos\AlmacenLocalPrivado;
 use App\Infraestructura\Reloj\RelojDeColombia;
 use DateTimeInterface;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -28,10 +33,21 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(Reloj::class, RelojDeColombia::class);
         // Las pruebas usan la misma clase sobre Storage::fake('privado'), para medir la imagen de verdad (RNF-03)
         $this->app->bind(AlmacenDeFotos::class, AlmacenLocalPrivado::class);
+        // Las pruebas lo reemplazan por CanalDeAvisoFalso. Sin token, EnviarAviso deja el aviso para el envío asistido (RN-40)
+        $this->app->bind(CanalDeAviso::class, fn () => new WhatsAppCloudApiCanal(
+            config('services.whatsapp.token'),
+            config('services.whatsapp.id_numero'),
+            config('services.whatsapp.version_api'),
+            (string) config('services.whatsapp.plantilla', 'orden_lista'),
+            (string) config('services.whatsapp.idioma', 'es'),
+        ));
     }
 
     public function boot(): void
     {
+        // RN-37: al quedar lista la orden se genera su aviso. El oyente no está en app/Listeners, por eso se registra aquí
+        Event::listen(OrdenQuedoLista::class, [GenerarAviso::class, 'handle']);
+
         // RNF-25: la foto no guarda su negocio; FotosDeOrden la busca a través de su orden y, si es de otro negocio, responde 404 (RNF-22).
         // Va aquí y no en routes/web.php: con las rutas en caché ese archivo no se ejecuta, y {foto} quedaría sin filtro.
         Route::bind('foto', fn (string $valor) => app(FotosDeOrden::class)->foto($valor) ?? abort(404));

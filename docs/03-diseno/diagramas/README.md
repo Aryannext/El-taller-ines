@@ -292,7 +292,7 @@ classDiagram
         <<ShouldQueue>>
         +int tries
         +backoff() array
-        +handle(CanalDeAviso canal, Reloj reloj) void
+        +handle(CanalDeAviso canal, Reloj reloj, DetalleDeOrden detalle) void
     }
     class CanalDeAviso {
         <<interface>>

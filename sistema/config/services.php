@@ -28,6 +28,15 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    // Aviso de orden lista por la API oficial (docs/04-especificacion-tecnica/05-avisos-fotos-y-reloj.md). Sin token, envío asistido (RN-40)
+    'whatsapp' => [
+        'token' => env('WHATSAPP_TOKEN'),
+        'id_numero' => env('WHATSAPP_ID_NUMERO'),
+        'version_api' => env('WHATSAPP_VERSION_API'),
+        'plantilla' => env('WHATSAPP_PLANTILLA', 'orden_lista'),
+        'idioma' => env('WHATSAPP_IDIOMA', 'es'),
+    ],
+
     'slack' => [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),
