@@ -6,7 +6,9 @@ use App\Aplicacion\Configuracion\GestionarTiposDePrenda;
 use App\Aplicacion\Consultas\BuscarClientes;
 use App\Aplicacion\Consultas\DetalleDeOrden;
 use App\Aplicacion\Consultas\ListarOrdenes;
+use App\Aplicacion\Ordenes\EntregarOrden;
 use App\Aplicacion\Ordenes\RegistrarOrden;
+use App\Dominio\Compartido\ReglaIncumplida;
 use App\Dominio\Compartido\Reloj;
 use App\Dominio\Ordenes\EstadoDeOrden;
 use App\Dominio\Ordenes\NumeroDeOrden;
@@ -98,5 +100,46 @@ class OrdenController
     public function detalle(Orden $orden, DetalleDeOrden $detalleDeOrden): View
     {
         return view('pantallas.pt-09-detalle-orden', $detalleDeOrden->obtener($orden));
+    }
+
+    /**
+     * PT-16 · Entregar la orden (HU-21): qué sale del taller, qué se queda y, si hay saldo, cuánto se debe (RN-21).
+     */
+    public function confirmarEntrega(Orden $orden, EntregarOrden $entregarOrden, DetalleDeOrden $detalleDeOrden): View|RedirectResponse
+    {
+        // Primero el detalle: carga las prendas en orden para la hoja y para el fondo
+        $detalle = $detalleDeOrden->obtener($orden);
+
+        try {
+            $entregarOrden->exigirQueSePuedaEntregar($orden);
+        } catch (ReglaIncumplida $regla) {
+            return redirect()->route('ordenes.detalle', $orden)->withErrors(['orden' => $regla->mensajeParaUsuaria]);
+        }
+
+        return view('pantallas.pt-16-entregar-orden', [
+            ...$detalle,
+            ...$entregarOrden->repartir($orden),
+            'aviso' => $entregarOrden->avisoDeSaldo($orden, $detalle['saldo']),
+        ]);
+    }
+
+    public function entregar(Request $solicitud, Orden $orden, EntregarOrden $entregarOrden): RedirectResponse
+    {
+        try {
+            $resultado = $entregarOrden->ejecutar($orden, $solicitud->input('confirmacion') === 'si');
+        } catch (ReglaIncumplida $regla) {
+            // CA-21.5: con saldo y sin confirmar, nada cambia y se vuelve a mostrar cuánto se debe
+            return $regla->regla === 'RN-21'
+                ? redirect()->route('ordenes.confirmar-entrega', $orden)
+                : redirect()->route('ordenes.detalle', $orden)->withErrors(['orden' => $regla->mensajeParaUsuaria]);
+        }
+
+        $mensaje = match (true) {
+            $resultado['estado'] === EstadoDeOrden::Entregada => 'La orden quedó entregada.',
+            $resultado['entregadas'] === 1 => 'Se entregó 1 prenda. La orden sigue en proceso.',
+            default => "Se entregaron {$resultado['entregadas']} prendas. La orden sigue en proceso.",
+        };
+
+        return redirect()->route('ordenes.detalle', $orden)->with('exito', $mensaje);
     }
 }

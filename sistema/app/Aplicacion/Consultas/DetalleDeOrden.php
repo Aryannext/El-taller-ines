@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Aplicacion\Consultas;
 
 use App\Dominio\Ordenes\EstadoDeOrden;
+use App\Dominio\Ordenes\EstadoDePrenda;
 use App\Dominio\Ordenes\NumeroDeOrden;
 use App\Dominio\Ordenes\TransicionesDePrenda;
 use App\Dominio\Pagos\CalculadoraDeSaldo;
@@ -26,7 +27,7 @@ class DetalleDeOrden
     ) {}
 
     /**
-     * @return array{orden: Orden, numero: string, valor: Dinero, pagado: Dinero, saldo: Dinero, estado: EstadoDeOrden, estadoDePago: ?EstadoDePago, entregadaEn: ?DateTimeImmutable, prendasCorregibles: list<int>}
+     * @return array{orden: Orden, numero: string, valor: Dinero, pagado: Dinero, saldo: Dinero, estado: EstadoDeOrden, estadoDePago: ?EstadoDePago, entregadaEn: ?DateTimeImmutable, puedeEntregarse: bool, prendasCorregibles: list<int>}
      */
     public function obtener(Orden $orden): array
     {
@@ -57,6 +58,8 @@ class DetalleDeOrden
             // RN-23: la entrega real de la orden es la de su última prenda entregada
             'entregadaEn' => $estado === EstadoDeOrden::Entregada ? $orden->prendas->max('entregada_en') : null,
             // HU-12: las que se pueden corregir (RN-15); en una orden cancelada, ninguna (RN-24)
+            // HU-21: hay algo Terminado para entregar y la orden no está cancelada (RN-20, RN-24)
+            'puedeEntregarse' => $estado !== EstadoDeOrden::Cancelada && $orden->prendas->contains(fn (Prenda $prenda) => $prenda->estado === EstadoDePrenda::Terminada),
             'prendasCorregibles' => $estado === EstadoDeOrden::Cancelada ? [] : $orden->prendas
                 ->filter(fn (Prenda $prenda) => $this->transiciones->puedeModificarse($prenda->estado))
                 ->map(fn (Prenda $prenda) => $prenda->id)

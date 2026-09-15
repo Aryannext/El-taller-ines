@@ -37,6 +37,8 @@ Route::middleware(['auth', 'auth.session', 'cache.headers:no_store;private'])->g
     Route::post('/ordenes', [OrdenController::class, 'guardar'])->name('ordenes.guardar');
     Route::get('/ordenes/{orden}/guardada', [OrdenController::class, 'guardada'])->whereNumber('orden')->name('ordenes.guardada');
     Route::get('/ordenes/{orden}', [OrdenController::class, 'detalle'])->whereNumber('orden')->name('ordenes.detalle');
+    Route::get('/ordenes/{orden}/entregar', [OrdenController::class, 'confirmarEntrega'])->whereNumber('orden')->name('ordenes.confirmar-entrega');
+    Route::post('/ordenes/{orden}/entregar', [OrdenController::class, 'entregar'])->whereNumber('orden')->name('ordenes.entregar');
 
     // La prenda y el pago se buscan dentro de la orden de la dirección: /ordenes/43/prendas/7 no abre una prenda de la #0042
     Route::scopeBindings()->group(function () {

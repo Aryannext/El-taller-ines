@@ -50,6 +50,10 @@
           <dt>Entregada</dt><dd>@fecha($entregadaEn) · @hora($entregadaEn)</dd>
         @endif
       </dl>
+      {{-- HU-21: solo si hay algo Terminado y la orden no está cancelada (RN-20, RN-24). No va fijo abajo para no tapar la navegación --}}
+      @if ($puedeEntregarse)
+        <a class="btn btn-primario" href="{{ route('ordenes.confirmar-entrega', $orden) }}"><i class="i i-bolsa"></i>Entregar</a>
+      @endif
     </div>
 
     <section class="seccion">
