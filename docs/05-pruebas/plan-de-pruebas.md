@@ -217,7 +217,7 @@ Por defecto, un criterio se prueba con una prueba de funcionalidad automática e
 | **RNF-34** | Manual | El VPS corre el mismo commit de `main`, sin archivos modificados, configurado solo con variables de entorno | Sprint 4, con HT-04 | PM-07 |
 | **RNF-35** | Manual | Instalación del APK en un Android real, foto con la cámara, apertura de WhatsApp e instalación desde el navegador en otro celular | Sprint 4, con HT-07 | PM-04 |
 
-> **Sobre RNF-30.** En un repositorio privado de una cuenta gratuita, GitHub no permite exigir que las comprobaciones pasen antes de integrar a `main`. Por eso las comprobaciones corren en cada envío, y la regla de suspensión de este plan obliga a arreglar un `main` en rojo antes de seguir.
+> **Sobre RNF-30.** El repositorio es público desde el 14 de septiembre de 2026, así que GitHub Actions no tiene costo. Aun así, GitHub no inicia los trabajos mientras la cuenta tenga un bloqueo de facturación. En ese caso, `python scripts/calidad.py` corre los mismos pasos en la máquina de desarrollo antes de cada commit, y su resultado es la evidencia. La regla de suspensión de este plan obliga a arreglar un `main` en rojo antes de seguir.
 
 ## Herramientas
 

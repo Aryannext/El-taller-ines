@@ -77,3 +77,5 @@ HT-02 crea el flujo de trabajo `.github/workflows/calidad.yml`. Corre en cada en
 | 7 | Busca `{!!` en `resources/views` y falla si lo encuentra | RNF-23 |
 | 8 | `php artisan migrate:fresh` y comparación del esquema con `esquema.sql` | RNF-31 |
 | 9 | `php artisan test --coverage --min=80`, con la cobertura limitada a `app/Dominio` y `app/Aplicacion` en `phpunit.xml`. Mientras esas carpetas no tengan código, corre las pruebas sin exigir cobertura | RNF-28 |
+
+**Si GitHub Actions no puede correr,** `python scripts/calidad.py` ejecuta los mismos pasos en la máquina de desarrollo, con un MySQL temporal. La búsqueda de secretos de gitleaks se reemplaza por una búsqueda de patrones de claves y tokens en el historial.
