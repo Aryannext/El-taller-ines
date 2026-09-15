@@ -209,8 +209,11 @@ No son errores: orientan a la usuaria.
 | **PT-09** | Con esa prenda, la orden quedó lista | La orden quedó lista para entregar. | HU-20 |
 | **PT-09** | Se registró un pago | El pago de {valor} quedó registrado. | HU-23 |
 | **PT-09** | Se abre Registrar pago en una orden sin saldo | Esta orden ya está pagada. | HU-23 |
+| **PT-09** | Se anuló un pago | El pago de {valor} quedó anulado. | HU-25 |
+| **PT-09** | Se intenta anular un pago que ya está anulado | Este pago ya está anulado. | HU-25 |
 | **PT-14** | Siempre, antes de guardar | La fecha del pago es hoy, {fecha}. | HU-23 |
 | **PT-14** | Con JavaScript, bajo el valor | Usar el saldo completo: {saldo} | HU-23 |
+| **PT-15** | Siempre, antes del motivo | El pago deja de contar en el saldo, pero no se borra: queda visible como anulado, con la fecha y el motivo. | HU-25 |
 | **PT-11** | Siempre, bajo las acciones | Las prendas terminadas se entregan con el botón Entregar de la orden. | HU-20 |
 | **PT-10** | Siempre, sobre las fotos | Toca una foto para verla grande y comparar con las prendas del rincón. | HU-18 |
 | **PT-10** | Una prenda no tiene fotos | Esta prenda no tiene fotos. | HU-18 |

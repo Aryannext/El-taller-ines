@@ -364,6 +364,8 @@ button.opcion-hoja { width: 100%; border: 0; background: transparent; font: inhe
 .opcion-hoja.actual .i { background: none; } /* reemplazan estilos en línea del mockup */
 .pila-nula { gap: 0; }
 .enlace-sugerencia { min-height: 44px; text-decoration: none; }
+/* «Anular este pago» en PT-09: texto pequeño con al menos 44 px para tocar, sin mover la fila */
+.enlace-pequeno { display: inline-block; padding-block: 12px; margin-block: -12px; }
 
 /* --- Pantalla de inicio de sesión ----------------------------------------------------------- */
 

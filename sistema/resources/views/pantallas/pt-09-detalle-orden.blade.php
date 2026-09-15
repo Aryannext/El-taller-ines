@@ -95,6 +95,9 @@
             <dt>{{ $pago->valor < $valor->valor() ? 'Abono' : 'Pago' }} · @fecha($pago->pagado_en) · {{ $pago->metodoPago->nombre }}
               @if ($pago->anulado_en)
                 <br><span class="pequeno">Anulado el @fecha($pago->anulado_en): {{ $pago->motivo_anulacion }}</span>
+              @else
+                {{-- HU-25: un pago mal registrado se anula; no se borra ni se anula dos veces (RN-31) --}}
+                <br><a class="pequeno enlace-pequeno" href="{{ route('pagos.confirmar-anulacion', [$orden, $pago]) }}">Anular este pago</a>
               @endif
             </dt>
             <dd @class(['anulado' => $pago->anulado_en])>− @dinero($pago->valor)</dd>
