@@ -128,6 +128,7 @@ class AislamientoEntreNegociosTest extends TestCase
             'clientes.editar' => ['GET', route('clientes.editar', $this->martaDelNegocioA)],
             'clientes.corregir' => ['PUT', route('clientes.corregir', $this->martaDelNegocioA)],
             'ordenes.guardada' => ['GET', route('ordenes.guardada', $this->ordenDelNegocioA)],
+            'ordenes.detalle' => ['GET', route('ordenes.detalle', $this->ordenDelNegocioA)],
         ];
     }
 }

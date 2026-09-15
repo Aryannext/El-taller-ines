@@ -32,6 +32,7 @@ Route::middleware(['auth', 'auth.session', 'cache.headers:no_store;private'])->g
     Route::get('/ordenes/nueva', [OrdenController::class, 'nueva'])->name('ordenes.nueva');
     Route::post('/ordenes', [OrdenController::class, 'guardar'])->name('ordenes.guardar');
     Route::get('/ordenes/{orden}/guardada', [OrdenController::class, 'guardada'])->whereNumber('orden')->name('ordenes.guardada');
+    Route::get('/ordenes/{orden}', [OrdenController::class, 'detalle'])->whereNumber('orden')->name('ordenes.detalle');
 
     Route::get('/ajustes', [AjustesController::class, 'mostrar'])->name('ajustes');
     Route::put('/ajustes/contrasena', [AjustesController::class, 'cambiarContrasena'])->name('ajustes.contrasena');

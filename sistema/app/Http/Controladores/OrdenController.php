@@ -53,4 +53,12 @@ class OrdenController
     {
         return view('pantallas.pt-07-orden-guardada', $detalleDeOrden->obtener($orden));
     }
+
+    /**
+     * PT-09 · Detalle de la orden, con el número siempre arriba (CA-08.3). HU-14 agrega pagos y avisos.
+     */
+    public function detalle(Orden $orden, DetalleDeOrden $detalleDeOrden): View
+    {
+        return view('pantallas.pt-09-detalle-orden', $detalleDeOrden->obtener($orden));
+    }
 }

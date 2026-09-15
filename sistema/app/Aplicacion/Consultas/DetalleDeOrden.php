@@ -12,7 +12,7 @@ use App\Modelos\Orden;
 use App\Modelos\Prenda;
 
 /**
- * Lo que se muestra de una orden. Por ahora número, valor y estado (PT-07); HU-14 agrega pagos, saldo y avisos.
+ * Lo que se muestra de una orden. Por ahora número, valor y estado (PT-07, PT-09); HU-14 agrega pagos, saldo y avisos.
  */
 class DetalleDeOrden
 {

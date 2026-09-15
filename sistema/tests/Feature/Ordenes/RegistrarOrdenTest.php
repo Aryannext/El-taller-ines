@@ -21,7 +21,7 @@ use RuntimeException;
 use Tests\TestCase;
 
 /**
- * HU-07 · Registrar una orden con sus prendas. Hoy es el 14 de septiembre de 2026, como en los criterios.
+ * HU-07 · Registrar una orden con sus prendas y HU-08 · Obtener el número de la orden. Hoy es el 14 de septiembre de 2026, como en los criterios.
  */
 class RegistrarOrdenTest extends TestCase
 {
@@ -118,6 +118,39 @@ class RegistrarOrdenTest extends TestCase
             ->assertOk()
             ->assertSeeInOrder(['Pantalón', 'Camisa', 'Blusa', 'Vestido', 'Falda', 'Chaqueta', 'Otro…'])
             ->assertDontSee('Overol');
+    }
+
+    public function test_ca_08_1_numero_destacado(): void
+    {
+        Orden::factory()->create(['cliente_id' => $this->marta->id, 'numero' => 41]);
+
+        $this->followingRedirects()->registrar()
+            ->assertOk()
+            ->assertSeeInOrder(['Escribe este número en la bolsa', '<span class="numero-orden">#0042</span>'], false);
+    }
+
+    public function test_ca_08_2_no_se_reutiliza(): void
+    {
+        Orden::factory()->create(['cliente_id' => $this->marta->id, 'numero' => 41, 'cancelada_en' => '2026-09-10 09:00:00']);
+
+        $this->registrar()->assertSessionHasNoErrors();
+
+        $this->assertSame([41, 42], Orden::orderBy('numero')->pluck('numero')->all());
+    }
+
+    public function test_ca_08_3_siempre_visible(): void
+    {
+        Orden::factory()->create(['cliente_id' => $this->marta->id, 'numero' => 41]);
+        $this->registrar()->assertSessionHasNoErrors();
+
+        // Otro día, la dueña abre la orden desde la lista o la ficha del cliente
+        $this->fijarReloj('2026-09-17 08:30:00');
+
+        $this->get(route('ordenes.detalle', Orden::where('numero', 42)->sole()))
+            ->assertOk()
+            ->assertSeeInOrder(['<header class="barra">', '#0042', '</header>', '<main'], false)
+            ->assertSee('Marta Rincón')
+            ->assertSee('$31.000');
     }
 
     public function test_rn_06_una_orden_tiene_al_menos_una_prenda(): void

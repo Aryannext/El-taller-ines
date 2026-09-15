@@ -260,7 +260,7 @@ despliegue/                                 Nginx, servicio de la cola y scripts
 | **HU-05** | PT-05 | `ClienteController` | `FichaDeCliente` |
 | **HU-06** | PT-04 | `ClienteController` | `CorregirCliente` |
 | **HU-07** | PT-06, PT-07 | `OrdenController` | `RegistrarOrden` |
-| **HU-08** | PT-07 | `OrdenController` | `RegistrarOrden`, `NumeroDeOrden` |
+| **HU-08** | PT-07, PT-09 | `OrdenController` | `RegistrarOrden`, `NumeroDeOrden`, `DetalleDeOrden` |
 | **HU-09** | PT-06 | `OrdenController` | `ResolverTipoDePrenda` |
 | **HU-10** | PT-04, PT-06 | `ClienteController` | `RegistrarCliente` |
 | **HU-11** | PT-09 | `PrendaController` | `AgregarPrenda` |

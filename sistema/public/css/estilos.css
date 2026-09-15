@@ -59,6 +59,7 @@ a { color: var(--primario); }
 }
 .barra h1 { flex: 1; min-width: 0; font-size: 19px; font-weight: 800; line-height: 1.2; }
 .barra .sub { display: block; font-size: 14px; font-weight: 400; color: var(--tinta-2); }
+.barra .sub a { display: inline-block; padding-block: 14px; margin-block: -14px; color: inherit; } /* al menos 44 px para tocar sin mover la barra */
 .barra .boton-icono:first-child { margin-left: -6px; }
 
 .contenido { flex: 1; display: flex; flex-direction: column; gap: 16px; padding: 16px 16px 24px; }
@@ -198,6 +199,7 @@ textarea.entrada { min-height: 76px; resize: vertical; }
 .entre { display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 12px; }
 .centrado { align-items: center; text-align: center; }
 .pila { display: flex; flex-direction: column; gap: 8px; }
+.pila-junta { gap: 2px; }
 .pila-amplia { gap: 16px; } /* reemplaza el estilo en línea de los mockups, que la política de seguridad no permite */
 /* Un formulario que envuelve el contenido y las acciones fijas conserva la columna de .app */
 .formulario-pantalla { flex: 1; display: flex; flex-direction: column; }
