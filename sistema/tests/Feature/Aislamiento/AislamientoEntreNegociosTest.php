@@ -107,6 +107,8 @@ class AislamientoEntreNegociosTest extends TestCase
         }
 
         $this->assertSame(array_fill_keys(array_keys($this->casos()), 404), $obtenidos);
+        // Pedir una ruta que modifica tampoco cambia el dato del otro negocio
+        $this->assertSame('Marta Rincón', $this->martaDelNegocioA->fresh()->nombre);
     }
 
     /**
@@ -119,6 +121,8 @@ class AislamientoEntreNegociosTest extends TestCase
     {
         return [
             'clientes.ficha' => ['GET', route('clientes.ficha', $this->martaDelNegocioA)],
+            'clientes.editar' => ['GET', route('clientes.editar', $this->martaDelNegocioA)],
+            'clientes.corregir' => ['PUT', route('clientes.corregir', $this->martaDelNegocioA)],
         ];
     }
 }

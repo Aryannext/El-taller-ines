@@ -25,6 +25,8 @@ Route::middleware(['auth', 'auth.session', 'cache.headers:no_store;private'])->g
     Route::get('/clientes/nuevo', [ClienteController::class, 'nuevo'])->name('clientes.nuevo');
     Route::post('/clientes', [ClienteController::class, 'guardar'])->name('clientes.guardar');
     Route::get('/clientes/{cliente}', [ClienteController::class, 'ficha'])->whereNumber('cliente')->name('clientes.ficha');
+    Route::get('/clientes/{cliente}/editar', [ClienteController::class, 'editar'])->whereNumber('cliente')->name('clientes.editar');
+    Route::put('/clientes/{cliente}', [ClienteController::class, 'corregir'])->whereNumber('cliente')->name('clientes.corregir');
 
     Route::get('/ajustes', [AjustesController::class, 'mostrar'])->name('ajustes');
     Route::put('/ajustes/contrasena', [AjustesController::class, 'cambiarContrasena'])->name('ajustes.contrasena');

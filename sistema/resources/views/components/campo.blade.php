@@ -1,5 +1,5 @@
 {{-- Campo con su etiqueta, su mensaje de error junto a él (RNF-09) y su ayuda, como en los mockups --}}
-@props(['nombre', 'etiqueta', 'tipo' => 'text', 'ayuda' => null])
+@props(['nombre', 'etiqueta', 'tipo' => 'text', 'valor' => null, 'ayuda' => null])
 
 @php
     $describe = trim(($errors->has($nombre) ? "error-{$nombre} " : '').($ayuda ? "ayuda-{$nombre}" : ''));
@@ -8,7 +8,7 @@
 <div @class(['campo', 'con-error' => $errors->has($nombre)])>
   <label for="{{ $nombre }}">{{ $etiqueta }}</label>
   <input class="entrada" id="{{ $nombre }}" name="{{ $nombre }}" type="{{ $tipo }}"
-    @if ($tipo !== 'password') value="{{ old($nombre) }}" @endif
+    @if ($tipo !== 'password') value="{{ old($nombre, $valor) }}" @endif
     @if ($errors->has($nombre)) aria-invalid="true" @endif
     @if ($describe !== '') aria-describedby="{{ $describe }}" @endif
     {{ $attributes }}>
