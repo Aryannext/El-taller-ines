@@ -27,11 +27,17 @@ class Pago extends Model
         ];
     }
 
+    /**
+     * @return BelongsTo<Orden, $this>
+     */
     public function orden(): BelongsTo
     {
         return $this->belongsTo(Orden::class);
     }
 
+    /**
+     * @return BelongsTo<MetodoPago, $this>
+     */
     public function metodoPago(): BelongsTo
     {
         return $this->belongsTo(MetodoPago::class);

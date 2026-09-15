@@ -1,3 +1,21 @@
 <?php
 
-// Las rutas se agregan con cada historia, según docs/04-especificacion-tecnica/02-rutas.md
+use App\Http\Controladores\PanelController;
+use App\Http\Controladores\SesionController;
+use Illuminate\Support\Facades\Route;
+
+// Rutas según docs/04-especificacion-tecnica/02-rutas.md
+
+Route::middleware('guest')->group(function () {
+    Route::get('/entrar', [SesionController::class, 'formulario'])->name('sesion.formulario');
+    Route::post('/entrar', [SesionController::class, 'entrar'])
+        ->middleware('throttle:inicio-de-sesion')
+        ->name('sesion.entrar');
+});
+
+// Las páginas con datos del taller no se guardan en el navegador: Atrás no las muestra al salir (CA-01.4)
+Route::middleware(['auth', 'auth.session', 'cache.headers:no_store;private'])->group(function () {
+    Route::post('/salir', [SesionController::class, 'salir'])->name('sesion.salir');
+
+    Route::get('/', [PanelController::class, 'mostrar'])->name('panel');
+});

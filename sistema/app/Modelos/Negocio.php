@@ -23,26 +23,41 @@ class Negocio extends Model
         return ['dias_sin_reclamar' => 'integer'];
     }
 
+    /**
+     * @return HasMany<Usuario, $this>
+     */
     public function usuarios(): HasMany
     {
         return $this->hasMany(Usuario::class);
     }
 
+    /**
+     * @return HasMany<Cliente, $this>
+     */
     public function clientes(): HasMany
     {
         return $this->hasMany(Cliente::class);
     }
 
+    /**
+     * @return HasMany<TipoPrenda, $this>
+     */
     public function tiposPrenda(): HasMany
     {
         return $this->hasMany(TipoPrenda::class);
     }
 
+    /**
+     * @return HasMany<MetodoPago, $this>
+     */
     public function metodosPago(): HasMany
     {
         return $this->hasMany(MetodoPago::class);
     }
 
+    /**
+     * @return HasMany<Orden, $this>
+     */
     public function ordenes(): HasMany
     {
         return $this->hasMany(Orden::class);

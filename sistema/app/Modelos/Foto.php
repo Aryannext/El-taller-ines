@@ -29,6 +29,9 @@ class Foto extends Model
         ];
     }
 
+    /**
+     * @return BelongsTo<Prenda, $this>
+     */
     public function prenda(): BelongsTo
     {
         return $this->belongsTo(Prenda::class);

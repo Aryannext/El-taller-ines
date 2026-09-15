@@ -28,16 +28,25 @@ class Prenda extends Model
         ];
     }
 
+    /**
+     * @return BelongsTo<Orden, $this>
+     */
     public function orden(): BelongsTo
     {
         return $this->belongsTo(Orden::class);
     }
 
+    /**
+     * @return BelongsTo<TipoPrenda, $this>
+     */
     public function tipoPrenda(): BelongsTo
     {
         return $this->belongsTo(TipoPrenda::class);
     }
 
+    /**
+     * @return HasMany<Foto, $this>
+     */
     public function fotos(): HasMany
     {
         return $this->hasMany(Foto::class);

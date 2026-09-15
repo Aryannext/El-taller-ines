@@ -32,6 +32,9 @@ class Usuario extends Authenticatable
         return ['contrasena' => 'hashed'];
     }
 
+    /**
+     * @return BelongsTo<Negocio, $this>
+     */
     public function negocio(): BelongsTo
     {
         return $this->belongsTo(Negocio::class);

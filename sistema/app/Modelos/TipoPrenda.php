@@ -24,6 +24,9 @@ class TipoPrenda extends Model
         return ['activo' => 'boolean'];
     }
 
+    /**
+     * @return HasMany<Prenda, $this>
+     */
     public function prendas(): HasMany
     {
         return $this->hasMany(Prenda::class);

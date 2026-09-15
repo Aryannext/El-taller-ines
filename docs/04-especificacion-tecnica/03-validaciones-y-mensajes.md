@@ -104,7 +104,7 @@ Estos formularios son tan pequeños que se validan con `validate()` en el contro
 
 | Campo | Reglas | Mensajes | Columna | Regla de negocio |
 | --- | --- | --- | --- | --- |
-| `usuario` | `required`, `string`, `max:60` | `required`: Escribe tu usuario.<br>`auth.failed`: Usuario o contraseña incorrectos.<br>`auth.throttle`: Hiciste demasiados intentos. Espera {segundos} segundos y vuelve a intentarlo. | `usuarios.usuario` | RN-01 |
+| `usuario` | `required`, `string`, `max:60` | `required`: Escribe tu usuario.<br>`max`, `auth.failed`: Usuario o contraseña incorrectos.<br>`auth.throttle`: Hiciste demasiados intentos. Espera {segundos} segundos y vuelve a intentarlo. | `usuarios.usuario` | RN-01 |
 | `contrasena` | `required`, `string` | `required`: Escribe tu contraseña. | — | RNF-20 |
 
 El error de inicio de sesión es uno solo y no dice si falló el usuario o la contraseña (CA-01.2).

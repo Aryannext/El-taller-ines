@@ -24,6 +24,9 @@ class MetodoPago extends Model
         return ['activo' => 'boolean'];
     }
 
+    /**
+     * @return HasMany<Pago, $this>
+     */
     public function pagos(): HasMany
     {
         return $this->hasMany(Pago::class);

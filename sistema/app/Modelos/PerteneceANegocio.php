@@ -37,6 +37,9 @@ trait PerteneceANegocio
         });
     }
 
+    /**
+     * @return BelongsTo<Negocio, $this>
+     */
     public function negocio(): BelongsTo
     {
         return $this->belongsTo(Negocio::class);

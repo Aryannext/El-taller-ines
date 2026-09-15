@@ -28,6 +28,9 @@ class Aviso extends Model
         ];
     }
 
+    /**
+     * @return BelongsTo<Orden, $this>
+     */
     public function orden(): BelongsTo
     {
         return $this->belongsTo(Orden::class);

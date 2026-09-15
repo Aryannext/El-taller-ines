@@ -43,26 +43,41 @@ class Orden extends Model
         return 'numero';
     }
 
+    /**
+     * @return BelongsTo<Cliente, $this>
+     */
     public function cliente(): BelongsTo
     {
         return $this->belongsTo(Cliente::class);
     }
 
+    /**
+     * @return HasMany<Prenda, $this>
+     */
     public function prendas(): HasMany
     {
         return $this->hasMany(Prenda::class);
     }
 
+    /**
+     * @return HasMany<Pago, $this>
+     */
     public function pagos(): HasMany
     {
         return $this->hasMany(Pago::class);
     }
 
+    /**
+     * @return HasMany<Aviso, $this>
+     */
     public function avisos(): HasMany
     {
         return $this->hasMany(Aviso::class);
     }
 
+    /**
+     * @return HasManyThrough<Foto, Prenda, $this>
+     */
     public function fotos(): HasManyThrough
     {
         return $this->hasManyThrough(Foto::class, Prenda::class);

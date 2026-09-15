@@ -8,6 +8,7 @@
 | **Hash** | bcrypt, el algoritmo por defecto de Laravel, con costo 12 | RNF-19 |
 | **Al entrar** | Se regenera el identificador de la sesión, para que nadie reutilice uno anterior | RNF-23 |
 | **Error** | Un solo mensaje para usuario o contraseña equivocados | CA-01.2 |
+| **La contraseña no vuelve al formulario** | Al volver con un error, Laravel guarda en la sesión lo escrito, salvo los campos llamados `password`. `bootstrap/app.php` agrega a esa lista los campos de contraseña en español | RNF-19 |
 | **Cerrar sesión** | POST a `sesion.salir`: cierra la sesión, la invalida y regenera el token CSRF | RF-02, CA-01.4 |
 | **Cambiar la contraseña** | Además de cambiarla, cierra la sesión en los demás dispositivos con `Auth::logoutOtherDevices`, por si alguien más la conocía. Por eso las rutas usan el middleware `auth.session` | HU-02 |
 | **Sin «recordarme»** | La sesión dura mientras se use; RNF-21 pide cerrarla después de 8 horas sin uso | RNF-21 |
