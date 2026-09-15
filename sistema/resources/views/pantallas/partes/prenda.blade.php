@@ -1,9 +1,10 @@
-{{-- Una prenda de la orden: tipo, «Otro», arreglo y precio (RN-10, RN-11, RN-43). En la plantilla, $indice es __INDICE__ --}}
+{{-- Una prenda de la orden: tipo, «Otro», arreglo, precio y fotos (RN-10, RN-11, RN-17, RN-43). En la plantilla, $indice es __INDICE__ --}}
 @php
     $nombre = fn (string $campo) => "prendas[{$indice}][{$campo}]";
     $id = fn (string $campo) => "prenda-{$indice}-{$campo}";
     $error = fn (string $campo) => $errors->first("prendas.{$indice}.{$campo}");
     $esOtro = ($prenda['tipo_prenda_id'] ?? null) === 'otro';
+    $errorFotos = $error('fotos') ?: $errors->first("prendas.{$indice}.fotos.*");
 @endphp
 
 <div class="prenda" data-prenda>
@@ -55,5 +56,24 @@
     @if ($error('precio'))
       <span class="mensaje-error" id="{{ $id('precio') }}-error"><i class="i i-alerta"></i>{{ $error('precio') }}</span>
     @endif
+  </div>
+
+  {{-- HU-17: hasta 3 fotos, con la cámara trasera o desde la galería (RN-17). El servidor las reduce (RNF-03) --}}
+  <div @class(['campo', 'con-error' => $errorFotos]) data-fotos>
+    <span class="etiqueta">Fotos <span class="texto-2 pequeno peso-normal">· hasta 3</span></span>
+    <div class="dos-columnas">
+      <label class="btn btn-secundario"><i class="i i-camara"></i>Tomar foto<input class="sr" type="file" name="{{ $nombre('fotos') }}[]" accept="image/*" capture="environment" data-foto></label>
+      <label class="btn btn-secundario"><i class="i i-galeria"></i>Galería<input class="sr" type="file" name="{{ $nombre('fotos') }}[]" accept="image/*" multiple data-foto></label>
+    </div>
+    <span class="texto-2 pequeno" role="status" data-fotos-elegidas hidden></span>
+    @if ($errorFotos)
+      <span class="mensaje-error"><i class="i i-alerta"></i>{{ $errorFotos }}</span>
+    @endif
+    {{-- Un archivo no se puede devolver al formulario: si la orden no se guardó, las fotos se eligen de nuevo --}}
+    @if ($errors->any())
+      <span class="ayuda">Vuelve a elegir las fotos que ya habías tomado.</span>
+    @endif
+    {{-- CA-17.4 --}}
+    <span class="aviso-sugerencia" data-sin-foto><i class="i i-alerta i-sm"></i>Sin foto: tómale una para reconocerla después.</span>
   </div>
 </div>

@@ -8,7 +8,7 @@
     <h1>Nueva orden<span class="sub">Recibida hoy · @fechaConDia($hoy)</span></h1>
   </header>
 
-  <form class="formulario-pantalla" method="POST" action="{{ route('ordenes.guardar') }}" data-un-envio>
+  <form class="formulario-pantalla" method="POST" action="{{ route('ordenes.guardar') }}" enctype="multipart/form-data" data-un-envio>
     @csrf
     <input type="hidden" name="token_formulario" value="{{ old('token_formulario', $token) }}">
 

@@ -90,7 +90,8 @@ class DetalleDeOrdenTest extends TestCase
             ->assertDontSee('Avisos al cliente');
 
         // La miniatura se entrega desde el disco privado (RNF-25)
-        $this->assertSame('imagen del pantalón', $this->get(route('fotos.mostrar', $foto))->assertOk()->streamedContent());
+        $miniatura = $this->get(route('fotos.mostrar', $foto))->assertOk()->assertHeader('Content-Type', 'image/jpeg');
+        $this->assertSame('imagen del pantalón', file_get_contents($miniatura->baseResponse->getFile()->getPathname()));
     }
 
     public function test_ca_14_2_orden_entregada(): void

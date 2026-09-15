@@ -126,7 +126,7 @@ Content-Type: application/json
 | --- | --- | --- |
 | 1. Enderezar | Gira la imagen según cómo estaba el celular al tomarla | — |
 | 2. Reducir | Deja el lado mayor en 1.600 px como máximo, sin agrandar las fotos pequeñas | RNF-03 |
-| 3. Codificar | JPEG con calidad 80. Si pesa más de 400 KB, baja la calidad de 10 en 10 hasta 50; si aún pesa más, reduce el lado mayor a 1.200 px y repite | RNF-03 |
+| 3. Codificar | JPEG con calidad 80. Si pesa más de 400 KB, baja la calidad de 10 en 10 hasta 50; si aún pesa más, reduce el lado mayor a 1.200 px y repite. Como resguardo sigue con 900, 600 y 400 px, porque la columna `bytes` no admite más de 400 KB | RNF-03 |
 | 4. Quitar metadatos | Al volver a codificar con GD se pierden los datos EXIF, incluida la ubicación GPS del celular | RNF-26 |
 | 5. Guardar | En el disco `privado` (`storage/app/privado`), con la ruta `fotos/{negocio_id}/{uuid}.jpg` | RNF-25 |
 | 6. Registrar | Una fila en `fotos` con la primera posición libre de 1 a 3, la ruta, el ancho, el alto y el peso | RN-17 |
@@ -136,7 +136,8 @@ Content-Type: application/json
 
 ### Cómo se entregan
 
-- `FotoController@mostrar` responde con el archivo que devuelve `AlmacenDeFotos::entregar()`, con las cabeceras `Content-Type: image/jpeg` y `Cache-Control: private, max-age=3600`.
+- `FotoController@mostrar` responde con el archivo cuya ubicación devuelve `AlmacenDeFotos::entregar()`, con `Content-Type: image/jpeg`.
+- Como toda página con datos del taller, sale con `Cache-Control: no-store, private`: al cerrar sesión, el navegador no conserva las fotos (CA-01.4). Se prefirió eso a guardarlas una hora en el caché.
 - Nunca se crea el enlace `public/storage` de Laravel, ni hay una dirección pública de las fotos (RNF-25).
 
 ## Reloj

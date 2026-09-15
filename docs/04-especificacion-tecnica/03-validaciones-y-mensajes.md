@@ -50,7 +50,7 @@ Un valor con centavos, como `15.000,50`, queda `15000,50` y no pasa la regla `in
 | `prendas.*.descripcion_arreglo` | `required`, `string`, `max:255` | `required`: Escribe qué arreglo lleva la prenda.<br>`max`: La descripción puede tener hasta 255 caracteres. | `prendas.descripcion_arreglo` | RN-10 |
 | `prendas.*.precio` | `required`, `integer`, `min:1`, `max:4294967295` | `required`: Escribe el precio del arreglo.<br>`integer`: Escribe el precio en pesos, sin centavos.<br>`min`: El precio debe ser mayor que cero. | `prendas.precio` | RN-11 |
 | `prendas.*.fotos` | `array`, `max:3` | `max`: Cada prenda puede tener hasta 3 fotos. | `fotos.posicion` | RN-17 |
-| `prendas.*.fotos.*` | `image`, `mimes:jpg,jpeg,png,webp`, `max:10240` | `image`, `mimes`: La foto debe ser JPG, PNG o WebP.<br>`max`: La foto no puede pesar más de 10 MB. | — | RNF-03 |
+| `prendas.*.fotos.*` | `image`, `mimes:jpg,jpeg,png,webp`, `max:10240` | `image`, `mimes`: La foto debe ser JPG, PNG o WebP.<br>`max`: La foto no puede pesar más de 10 MB.<br>`uploaded`: La foto no se pudo subir. Vuelve a intentarlo. | — | RNF-03 |
 | `abono` | `nullable`, `integer`, `min:1` | `integer`: Escribe el abono en pesos, sin centavos.<br>`min`: El abono debe ser mayor que cero. | `pagos.valor` | RN-25, RN-28 |
 | `metodo_pago_id` | `required_with:abono`, un método activo del negocio | `required_with`: Elige cómo pagó el abono. | `pagos.metodo_pago_id` | RN-01, RN-25 |
 
@@ -66,6 +66,19 @@ El tipo solo se valida al agregar: al corregir, una prenda no cambia de tipo (RF
 | `tipo_otro` | `required_if` el tipo es `otro`, `string`, `max:60` | `required_if`: Escribe qué tipo de prenda es. | `tipos_prenda.nombre` | RN-43 |
 | `descripcion_arreglo` | `required`, `string`, `max:255` | `required`: Escribe qué arreglo lleva la prenda. | `prendas.descripcion_arreglo` | RN-10 |
 | `precio` | `required`, `integer`, `min:1`, `max:4294967295` | `integer`: Escribe el precio en pesos, sin centavos.<br>`min`: El precio debe ser mayor que cero. | `prendas.precio` | RN-11 |
+
+### FotoRequest
+
+**Rutas:** `fotos.agregar`
+
+Al registrar una orden, las fotos de cada prenda usan estos mismos mensajes.
+
+| Campo | Reglas | Mensajes | Columna | Regla de negocio |
+| --- | --- | --- | --- | --- |
+| `fotos` | `required`, `array`, `max:3` | `required`: Toma o elige una foto.<br>`max`: Cada prenda puede tener hasta 3 fotos. | `fotos.posicion` | RN-17 |
+| `fotos.*` | `image`, `mimes:jpg,jpeg,png,webp`, `max:10240` | `image`, `mimes`: La foto debe ser JPG, PNG o WebP.<br>`max`: La foto no puede pesar más de 10 MB.<br>`uploaded`: La foto no se pudo subir. Vuelve a intentarlo. | — | RNF-03 |
+
+`AgregarFoto` cuenta también las fotos que la prenda ya tiene: si no caben todas las nuevas, responde «Cada prenda puede tener hasta 3 fotos.», y si ya tiene 3, el mensaje de RN-17. En ningún caso guarda una parte.
 
 ### PagoRequest
 
@@ -179,7 +192,10 @@ No son errores: orientan a la usuaria.
 | **PT-05** | El cliente no tiene órdenes | {cliente} no tiene órdenes y no debe nada. | HU-05 |
 | **PT-05** | Se corrigieron los datos del cliente | Los datos de {cliente} quedaron actualizados. | HU-06 |
 | **PT-06** | Una prenda se guarda sin foto | Sin foto: tómale una para reconocerla después. | HU-17 |
-| **PT-06** | Se registra un cliente nuevo desde la orden | Vuelve a elegir las fotos que ya habías tomado. | HU-10 |
+| **PT-06** | Se registra un cliente nuevo desde la orden, o la orden vuelve con un error | Vuelve a elegir las fotos que ya habías tomado. | HU-10, HU-17 |
+| **PT-06**, **PT-13** | Se eligen fotos, con JavaScript | {cantidad} fotos elegidas. | HU-17 |
+| **PT-13** | Se guardaron las fotos | La foto quedó guardada. / Las fotos quedaron guardadas. | HU-17 |
+| **PT-13** | La prenda ya tiene 3 fotos | Ya tiene las 3 fotos que caben. | HU-17 |
 | **PT-07** | La orden se guardó | Escribe este número en la bolsa. | HU-08 |
 | **PT-07** | La orden se guardó | La orden de {cliente} quedó guardada. | HU-07 |
 | **PT-08** | El número buscado no existe | No hay una orden con el número {numero}. | HU-15 |

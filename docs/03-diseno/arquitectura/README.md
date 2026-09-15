@@ -219,6 +219,7 @@ sistema/
 │   │       ├── ClienteRequest.php
 │   │       ├── OrdenRequest.php
 │   │       ├── PrendaRequest.php
+│   │       ├── FotoRequest.php
 │   │       ├── PagoRequest.php
 │   │       ├── AnulacionRequest.php
 │   │       └── ContrasenaRequest.php
@@ -313,7 +314,7 @@ Complementa la tabla del [modelo de datos](../modelo-de-datos/README.md#dónde-s
 | **RN-14** | Dominio | `TransicionesDePrenda` | Terminada puede volver a En proceso |
 | **RN-15** | Dominio | `TransicionesDePrenda` | Entregada y Devuelta no cambian ni se editan |
 | **RN-16** | Dominio | `ReglasDeValor` | `CorregirPrenda`, `EliminarPrenda` y `DevolverPrendaSinArreglar` preguntan si el nuevo valor queda por debajo de lo pagado |
-| **RN-17** | Aplicación | `AgregarFoto`, `AlmacenLocalPrivado` | Máximo tres fotos por prenda; la imagen se reduce antes de guardarla (RNF-03) |
+| **RN-17** | Aplicación | `AgregarFoto`, `AlmacenLocalPrivado`, `FotoRequest` | Máximo tres fotos por prenda; la imagen se reduce antes de guardarla (RNF-03) |
 | **RN-18** | Dominio | `EstadoDeOrden` | Calcula En proceso, Lista para entregar, Entregada o Cancelada |
 | **RN-19** | Http | `PrendaController` | No existe ruta ni caso de uso para cambiar el estado de la orden; solo el de sus prendas |
 | **RN-20** | Aplicación | `EntregarOrden` | Marca Entregadas las prendas Terminadas y deja las demás |

@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Dominio\Compartido\Reloj;
+use App\Dominio\Fotos\AlmacenDeFotos;
+use App\Infraestructura\Fotos\AlmacenLocalPrivado;
 use App\Infraestructura\Reloj\RelojDeColombia;
 use DateTimeInterface;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -22,6 +24,8 @@ class AppServiceProvider extends ServiceProvider
     {
         // Las pruebas lo reemplazan por un reloj fijo (RN-09)
         $this->app->singleton(Reloj::class, RelojDeColombia::class);
+        // Las pruebas usan la misma clase sobre Storage::fake('privado'), para medir la imagen de verdad (RNF-03)
+        $this->app->bind(AlmacenDeFotos::class, AlmacenLocalPrivado::class);
     }
 
     public function boot(): void

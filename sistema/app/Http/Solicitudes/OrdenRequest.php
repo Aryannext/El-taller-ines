@@ -5,10 +5,11 @@ namespace App\Http\Solicitudes;
 use App\Dominio\Compartido\Reloj;
 use App\Modelos\Cliente;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\Rule;
 
 /**
- * Orden con sus prendas (HU-07). Reglas y mensajes de docs/04-especificacion-tecnica/03-validaciones-y-mensajes.md.
+ * Orden con sus prendas (HU-07) y sus fotos (HU-17). Reglas y mensajes de docs/04-especificacion-tecnica/03-validaciones-y-mensajes.md.
  */
 class OrdenRequest extends FormRequest
 {
@@ -35,6 +36,9 @@ class OrdenRequest extends FormRequest
             'fecha_entrega_acordada' => ['required', 'date_format:Y-m-d', "after_or_equal:{$hoy}"],
             'prendas' => ['required', 'array', 'min:1'],
             ...PrendaRequest::reglas('prendas.*.'),
+            // RN-17 y RNF-03: hasta 3 fotos por prenda, de un tipo de imagen conocido
+            'prendas.*.fotos' => ['nullable', 'array', 'max:3'],
+            'prendas.*.fotos.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:10240'],
         ];
     }
 
@@ -56,6 +60,7 @@ class OrdenRequest extends FormRequest
             'prendas.array' => 'Agrega al menos una prenda.',
             'prendas.min' => 'Agrega al menos una prenda.',
             ...PrendaRequest::mensajes('prendas.*.'),
+            ...FotoRequest::mensajes('prendas.*.'),
         ];
     }
 
@@ -65,7 +70,7 @@ class OrdenRequest extends FormRequest
     }
 
     /**
-     * @return list<array{tipo_prenda_id: int|string, tipo_otro: ?string, descripcion_arreglo: string, precio: int}>
+     * @return list<array{tipo_prenda_id: int|string, tipo_otro: ?string, descripcion_arreglo: string, precio: int, fotos: list<string>}>
      */
     public function prendas(): array
     {
@@ -74,6 +79,7 @@ class OrdenRequest extends FormRequest
             'tipo_otro' => $prenda['tipo_otro'] ?? null,
             'descripcion_arreglo' => $prenda['descripcion_arreglo'],
             'precio' => (int) $prenda['precio'],
+            'fotos' => array_values(array_map(fn (UploadedFile $foto) => (string) $foto->getRealPath(), $prenda['fotos'] ?? [])),
         ], $this->validated('prendas')));
     }
 }

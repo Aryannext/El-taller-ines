@@ -311,6 +311,10 @@ textarea.entrada { min-height: 76px; resize: vertical; }
 .miniaturas { display: flex; gap: 6px; }
 .miniaturas .foto { width: 56px; border-radius: 8px; }
 .miniaturas img.foto { height: 56px; object-fit: cover; }
+.fotos img.foto { width: 100%; height: auto; object-fit: cover; }
+.peso-normal { font-weight: 400; } /* reemplaza el estilo en línea de «· hasta 3» en los mockups */
+/* El campo de archivo va escondido dentro del botón «Tomar foto» o «Galería»: el foco se muestra en el botón */
+.btn:has(> input:focus-visible) { outline: 3px solid var(--primario); outline-offset: 2px; }
 .fila.alinear-arriba { align-items: flex-start; } /* reemplaza el estilo en línea del mockup de PT-09 */
 
 .aviso-sugerencia { display: flex; align-items: center; gap: 8px; font-size: 14.5px; color: var(--aviso); font-weight: 700; }

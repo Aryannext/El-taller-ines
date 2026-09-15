@@ -73,9 +73,9 @@
             @endif
             <span class="fuerte dinero">@dinero($prenda->precio)</span>
           </div>
-          {{-- HU-12: solo las prendas que se pueden corregir (RN-15, RN-24) --}}
+          {{-- HU-12 y HU-17: solo las prendas que se pueden corregir (RN-15, RN-24) --}}
           @if (in_array($prenda->id, $prendasCorregibles, true))
-            <a class="btn btn-secundario btn-pequeno" href="{{ route('prendas.editar', [$orden, $prenda]) }}">Corregir arreglo o precio</a>
+            <a class="btn btn-secundario btn-pequeno" href="{{ route('prendas.editar', [$orden, $prenda]) }}">Corregir arreglo, precio o fotos</a>
           @endif
         </div>
       @endforeach
