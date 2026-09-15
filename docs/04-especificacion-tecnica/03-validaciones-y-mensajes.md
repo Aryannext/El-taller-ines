@@ -212,11 +212,15 @@ No son errores: orientan a la usuaria.
 | **PT-09** | Se abre Registrar pago en una orden sin saldo | Esta orden ya está pagada. | HU-23 |
 | **PT-09** | Se entregó la orden completa | La orden quedó entregada. | HU-21 |
 | **PT-09** | Se entregó parte de la orden | Se entregó 1 prenda. La orden sigue en proceso. / Se entregaron {n} prendas. La orden sigue en proceso. | HU-21 |
+| **PT-09** | Se canceló la orden | La orden {numero} quedó cancelada. | HU-22 |
 | **PT-09** | Se anuló un pago | El pago de {valor} quedó anulado. | HU-25 |
 | **PT-09** | Se intenta anular un pago que ya está anulado | Este pago ya está anulado. | HU-25 |
 | **PT-14** | Siempre, antes de guardar | La fecha del pago es hoy, {fecha}. | HU-23 |
 | **PT-14** | Con JavaScript, bajo el valor | Usar el saldo completo: {saldo} | HU-23 |
 | **PT-16** | Quedan prendas Pendientes o En proceso | Es una entrega parcial: la orden sigue En proceso. | HU-21 |
+| **PT-17** | Siempre, antes de confirmar | Cancélala solo si {cliente} desistió del arreglo. | HU-22 |
+| **PT-17** | La orden tiene pagos | El abono de {valor} sigue registrado. / Los pagos por {pagado} siguen registrados. | HU-22 |
+| **PT-17** | Siempre, antes de confirmar | No se puede reabrir. Su número no se vuelve a usar. | HU-22 |
 | **PT-15** | Siempre, antes del motivo | El pago deja de contar en el saldo, pero no se borra: queda visible como anulado, con la fecha y el motivo. | HU-25 |
 | **PT-11** | Siempre, bajo las acciones | Las prendas terminadas se entregan con el botón Entregar de la orden. | HU-20 |
 | **PT-10** | Siempre, sobre las fotos | Toca una foto para verla grande y comparar con las prendas del rincón. | HU-18 |

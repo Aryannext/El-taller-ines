@@ -366,6 +366,8 @@ button.opcion-hoja { width: 100%; border: 0; background: transparent; font: inhe
 .enlace-sugerencia { min-height: 44px; text-decoration: none; }
 /* «Anular este pago» en PT-09: texto pequeño con al menos 44 px para tocar, sin mover la fila */
 .enlace-pequeno { display: inline-block; padding-block: 12px; margin-block: -12px; }
+/* Lo que implica una acción que no se deshace (PT-17) */
+.lista-explicacion { margin: 0; padding-left: 20px; }
 
 /* --- Pantalla de inicio de sesión ----------------------------------------------------------- */
 

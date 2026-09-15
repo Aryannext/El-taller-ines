@@ -49,6 +49,9 @@
         @if ($entregadaEn)
           <dt>Entregada</dt><dd>@fecha($entregadaEn) · @hora($entregadaEn)</dd>
         @endif
+        @if ($orden->cancelada_en)
+          <dt>Cancelada</dt><dd>@fecha($orden->cancelada_en) · @hora($orden->cancelada_en)</dd>
+        @endif
       </dl>
       {{-- HU-21: solo si hay algo Terminado y la orden no está cancelada (RN-20, RN-24). No va fijo abajo para no tapar la navegación --}}
       @if ($puedeEntregarse)
@@ -137,6 +140,11 @@
           @endforeach
         </ul>
       </section>
+    @endif
+
+    {{-- HU-22: no se ofrece en una orden Entregada ni en una ya Cancelada (RN-24) --}}
+    @if ($puedeCancelarse)
+      <a class="btn btn-peligro-borde" href="{{ route('ordenes.confirmar-cancelacion', $orden) }}">Cancelar la orden</a>
     @endif
   </main>
 

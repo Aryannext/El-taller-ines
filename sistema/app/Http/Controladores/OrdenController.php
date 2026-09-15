@@ -6,6 +6,7 @@ use App\Aplicacion\Configuracion\GestionarTiposDePrenda;
 use App\Aplicacion\Consultas\BuscarClientes;
 use App\Aplicacion\Consultas\DetalleDeOrden;
 use App\Aplicacion\Consultas\ListarOrdenes;
+use App\Aplicacion\Ordenes\CancelarOrden;
 use App\Aplicacion\Ordenes\EntregarOrden;
 use App\Aplicacion\Ordenes\RegistrarOrden;
 use App\Dominio\Compartido\ReglaIncumplida;
@@ -141,5 +142,38 @@ class OrdenController
         };
 
         return redirect()->route('ordenes.detalle', $orden)->with('exito', $mensaje);
+    }
+
+    /**
+     * PT-17 · ¿Cancelar la orden? (HU-22): qué implica y que no se puede reabrir.
+     */
+    public function confirmarCancelacion(Orden $orden, CancelarOrden $cancelarOrden, DetalleDeOrden $detalleDeOrden): View|RedirectResponse
+    {
+        $detalle = $detalleDeOrden->obtener($orden);
+
+        try {
+            $cancelarOrden->exigirQueSePuedaCancelar($orden);
+        } catch (ReglaIncumplida $regla) {
+            return redirect()->route('ordenes.detalle', $orden)->withErrors(['orden' => $regla->mensajeParaUsuaria]);
+        }
+
+        return view('pantallas.pt-17-cancelar-orden', $detalle);
+    }
+
+    public function cancelar(Request $solicitud, Orden $orden, CancelarOrden $cancelarOrden): RedirectResponse
+    {
+        // RNF-10: sin la confirmación nada cambia y se vuelve a preguntar
+        if ($solicitud->input('confirmacion') !== 'si') {
+            return redirect()->route('ordenes.confirmar-cancelacion', $orden);
+        }
+
+        try {
+            $cancelarOrden->ejecutar($orden);
+        } catch (ReglaIncumplida $regla) {
+            return redirect()->route('ordenes.detalle', $orden)->withErrors(['orden' => $regla->mensajeParaUsuaria]);
+        }
+
+        return redirect()->route('ordenes.detalle', $orden)
+            ->with('exito', 'La orden '.NumeroDeOrden::desde($orden->numero)->formato().' quedó cancelada.');
     }
 }

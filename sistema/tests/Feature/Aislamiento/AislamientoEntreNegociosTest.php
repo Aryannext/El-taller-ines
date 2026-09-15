@@ -128,6 +128,7 @@ class AislamientoEntreNegociosTest extends TestCase
         $this->assertSame(15000, $this->prendaDelNegocioA->fresh()->precio);
         $this->assertSame('Subir basta 3 cm', $this->prendaDelNegocioA->fresh()->descripcion_arreglo);
         $this->assertNull($this->pagoDelNegocioA->fresh()->anulado_en);
+        $this->assertNull($this->ordenDelNegocioA->fresh()->cancelada_en);
         $this->assertSame(1, Pago::count());
     }
 
@@ -152,6 +153,8 @@ class AislamientoEntreNegociosTest extends TestCase
             'ordenes.detalle' => ['GET', route('ordenes.detalle', $ordenA), []],
             'ordenes.confirmar-entrega' => ['GET', route('ordenes.confirmar-entrega', $ordenA), []],
             'ordenes.entregar' => ['POST', route('ordenes.entregar', $ordenA), ['confirmacion' => 'si']],
+            'ordenes.confirmar-cancelacion' => ['GET', route('ordenes.confirmar-cancelacion', $ordenA), []],
+            'ordenes.cancelar' => ['POST', route('ordenes.cancelar', $ordenA), ['confirmacion' => 'si']],
             'prendas.acciones' => ['GET', route('prendas.acciones', [$ordenA, $prendaA]), []],
             'prendas.cambiar-estado' => ['POST', route('prendas.cambiar-estado', [$ordenA, $prendaA]), ['estado' => 'terminada']],
             'prendas.editar' => ['GET', route('prendas.editar', [$ordenA, $prendaA]), []],
