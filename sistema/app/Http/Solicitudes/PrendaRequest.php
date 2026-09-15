@@ -5,6 +5,7 @@ namespace App\Http\Solicitudes;
 use App\Modelos\TipoPrenda;
 use Closure;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Arr;
 
 /**
  * Datos de una prenda (RN-10, RN-11, RN-43). OrdenRequest usa las mismas reglas para cada prenda de la orden.
@@ -77,6 +78,11 @@ class PrendaRequest extends FormRequest
      */
     public function rules(): array
     {
+        // Al corregir, una prenda no cambia de tipo (RF-12)
+        if ($this->routeIs('prendas.corregir')) {
+            return Arr::only(self::reglas(), ['descripcion_arreglo', 'precio']);
+        }
+
         return self::reglas();
     }
 

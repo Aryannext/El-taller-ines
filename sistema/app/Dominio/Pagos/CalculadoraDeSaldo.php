@@ -30,11 +30,11 @@ final class CalculadoraDeSaldo
     }
 
     /**
-     * El valor menos los pagos no anulados. Nunca queda negativo: RN-28 impide pagar más que el saldo.
+     * Suma los pagos que no están anulados (RN-31).
      *
      * @param  iterable<array{0: int, 1: bool}>  $pagos  valor y si está anulado
      */
-    public function saldo(Dinero $valor, iterable $pagos): Dinero
+    public function pagado(iterable $pagos): Dinero
     {
         $pagado = Dinero::pesos(0);
 
@@ -44,7 +44,17 @@ final class CalculadoraDeSaldo
             }
         }
 
-        return $valor->restar($pagado);
+        return $pagado;
+    }
+
+    /**
+     * El valor menos los pagos no anulados. Nunca queda negativo: RN-16 y RN-28 impiden que lo pagado supere el valor.
+     *
+     * @param  iterable<array{0: int, 1: bool}>  $pagos  valor y si está anulado
+     */
+    public function saldo(Dinero $valor, iterable $pagos): Dinero
+    {
+        return $valor->restar($this->pagado($pagos));
     }
 
     public function estadoDePago(Dinero $saldo): EstadoDePago

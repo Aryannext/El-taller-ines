@@ -185,6 +185,9 @@ No son errores: orientan a la usuaria.
 | **PT-08** | El número buscado no existe | No hay una orden con el número {numero}. | HU-15 |
 | **PT-08** | Lo buscado no es un número de orden | Escribe solo el número de la bolsa, por ejemplo 42. | HU-15 |
 | **PT-08** | No hay órdenes en el estado elegido | No hay órdenes {estado}. | HU-15 |
+| **PT-09** | Se corrigió una prenda | Los cambios de la prenda quedaron guardados. | HU-12 |
+| **PT-13** | La orden ya tiene pagos | La orden no puede valer menos de lo ya pagado ({pagado}). | HU-12 |
+| **PT-13** | Se escribe un precio distinto | El valor de la orden pasará de {valor} a {nuevo_valor} y el saldo a {saldo}. | HU-12 |
 | **PT-13** | Se elimina una prenda o una foto | ¿Eliminar {que}? No se puede deshacer. | HU-13, HU-19 |
 | **PT-18** | No hay avisos por enviar | No hay avisos por enviar. | HU-29 |
 | **PT-23** | La contraseña cambió | Tu contraseña cambió. Se cerró la sesión en los demás dispositivos. | HU-02 |

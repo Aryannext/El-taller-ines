@@ -24,6 +24,14 @@
   </header>
 
   <main class="contenido">
+    @if (session('exito'))
+      <div class="banda banda-exito" role="status"><i class="i i-check"></i><span>{{ session('exito') }}</span></div>
+    @endif
+    {{-- CA-12.3: por qué no se pudo corregir una prenda (RN-15, RN-24) --}}
+    @error('prenda')
+      <div class="banda banda-error" role="alert"><i class="i i-alerta"></i><span>{{ $message }}</span></div>
+    @enderror
+
     <div class="tarjeta">
       <div class="entre">
         <span class="chip {{ $chipDeOrden[$estado->value] }}">{{ $estado->etiqueta() }}</span>
@@ -65,6 +73,10 @@
             @endif
             <span class="fuerte dinero">@dinero($prenda->precio)</span>
           </div>
+          {{-- HU-12: solo las prendas que se pueden corregir (RN-15, RN-24) --}}
+          @if (in_array($prenda->id, $prendasCorregibles, true))
+            <a class="btn btn-secundario btn-pequeno" href="{{ route('prendas.editar', [$orden, $prenda]) }}">Corregir arreglo o precio</a>
+          @endif
         </div>
       @endforeach
     </section>

@@ -95,8 +95,9 @@ classDiagram
     }
     class CalculadoraDeSaldo {
         +valor(array preciosYEstados) Dinero
-        +saldo(Dinero valor, array pagosNoAnulados) Dinero
-        +estadoDePago(Dinero saldo) string
+        +pagado(array pagos) Dinero
+        +saldo(Dinero valor, array pagos) Dinero
+        +estadoDePago(Dinero saldo) EstadoDePago
     }
     class ReglasDeValor {
         +exigirValorNoMenorQuePagado(Dinero nuevoValor, Dinero pagado) void

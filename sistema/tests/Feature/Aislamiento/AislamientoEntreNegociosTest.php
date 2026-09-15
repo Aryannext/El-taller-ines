@@ -35,6 +35,8 @@ class AislamientoEntreNegociosTest extends TestCase
 
     private Orden $ordenDelNegocioA;
 
+    private Prenda $prendaDelNegocioA;
+
     private Foto $fotoDelNegocioA;
 
     protected function setUp(): void
@@ -43,7 +45,8 @@ class AislamientoEntreNegociosTest extends TestCase
 
         $this->martaDelNegocioA = Cliente::factory()->create(['nombre' => 'Marta Rincón', 'celular' => '3104567890']);
         $this->ordenDelNegocioA = Orden::factory()->create(['cliente_id' => $this->martaDelNegocioA->id, 'numero' => 42]);
-        $this->fotoDelNegocioA = Foto::factory()->create(['prenda_id' => Prenda::factory()->create(['orden_id' => $this->ordenDelNegocioA->id])->id]);
+        $this->prendaDelNegocioA = Prenda::factory()->create(['orden_id' => $this->ordenDelNegocioA->id, 'descripcion_arreglo' => 'Subir basta 3 cm', 'precio' => 15000]);
+        $this->fotoDelNegocioA = Foto::factory()->create(['prenda_id' => $this->prendaDelNegocioA->id]);
         $this->usuariaDelNegocioA = Usuario::factory()->create(['negocio_id' => $this->martaDelNegocioA->negocio_id]);
         $this->usuariaDelNegocioB = Usuario::factory()->create();
         Cliente::factory()->create(['negocio_id' => $this->usuariaDelNegocioB->negocio_id, 'nombre' => 'Luis Pardo']);
@@ -111,31 +114,36 @@ class AislamientoEntreNegociosTest extends TestCase
         $this->actingAs($this->usuariaDelNegocioB);
         $obtenidos = [];
 
-        foreach ($this->casos() as $nombre => [$metodo, $direccion]) {
-            $obtenidos[$nombre] = $this->call($metodo, $direccion)->getStatusCode();
+        foreach ($this->casos() as $nombre => [$metodo, $direccion, $datos]) {
+            $obtenidos[$nombre] = $this->call($metodo, $direccion, $datos)->getStatusCode();
         }
 
         $this->assertSame(array_fill_keys(array_keys($this->casos()), 404), $obtenidos);
-        // Pedir una ruta que modifica tampoco cambia el dato del otro negocio
+        // Pedir una ruta que modifica tampoco cambia los datos del otro negocio
         $this->assertSame('Marta Rincón', $this->martaDelNegocioA->fresh()->nombre);
+        $this->assertSame(15000, $this->prendaDelNegocioA->fresh()->precio);
+        $this->assertSame('Subir basta 3 cm', $this->prendaDelNegocioA->fresh()->descripcion_arreglo);
     }
 
     /**
      * Cómo pedir cada ruta con parámetros usando datos del negocio A, con la sesión del negocio B.
+     * Las que modifican llevan datos válidos, para que un 404 no se confunda con un error de validación.
      * Cada historia que agrega una ruta con parámetros suma aquí su caso (HT-03).
      *
-     * @return array<string, array{0: string, 1: string}>
+     * @return array<string, array{0: string, 1: string, 2: array<string, string>}>
      */
     private function casos(): array
     {
         return [
-            'clientes.ficha' => ['GET', route('clientes.ficha', $this->martaDelNegocioA)],
-            'clientes.editar' => ['GET', route('clientes.editar', $this->martaDelNegocioA)],
-            'clientes.corregir' => ['PUT', route('clientes.corregir', $this->martaDelNegocioA)],
-            'ordenes.guardada' => ['GET', route('ordenes.guardada', $this->ordenDelNegocioA)],
-            'ordenes.detalle' => ['GET', route('ordenes.detalle', $this->ordenDelNegocioA)],
+            'clientes.ficha' => ['GET', route('clientes.ficha', $this->martaDelNegocioA), []],
+            'clientes.editar' => ['GET', route('clientes.editar', $this->martaDelNegocioA), []],
+            'clientes.corregir' => ['PUT', route('clientes.corregir', $this->martaDelNegocioA), ['nombre' => 'Otra', 'celular' => '3001112233']],
+            'ordenes.guardada' => ['GET', route('ordenes.guardada', $this->ordenDelNegocioA), []],
+            'ordenes.detalle' => ['GET', route('ordenes.detalle', $this->ordenDelNegocioA), []],
+            'prendas.editar' => ['GET', route('prendas.editar', [$this->ordenDelNegocioA, $this->prendaDelNegocioA]), []],
+            'prendas.corregir' => ['PUT', route('prendas.corregir', [$this->ordenDelNegocioA, $this->prendaDelNegocioA]), ['descripcion_arreglo' => 'Otro arreglo', 'precio' => '1000']],
             // RNF-25: la foto no guarda su negocio; se busca a través de su orden
-            'fotos.mostrar' => ['GET', route('fotos.mostrar', $this->fotoDelNegocioA)],
+            'fotos.mostrar' => ['GET', route('fotos.mostrar', $this->fotoDelNegocioA), []],
         ];
     }
 }

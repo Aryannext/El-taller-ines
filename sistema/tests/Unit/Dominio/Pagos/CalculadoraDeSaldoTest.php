@@ -34,6 +34,7 @@ class CalculadoraDeSaldoTest extends TestCase
         $calculadora = new CalculadoraDeSaldo;
 
         // Pagos de $10.000 y $5.000, este último anulado
+        $this->assertSame(10000, $calculadora->pagado([[10000, false], [5000, true]])->valor());
         $this->assertSame(21000, $calculadora->saldo(Dinero::pesos(31000), [[10000, false], [5000, true]])->valor());
         $this->assertSame(31000, $calculadora->saldo(Dinero::pesos(31000), [])->valor());
         $this->assertSame(0, $calculadora->saldo(Dinero::pesos(31000), [[10000, false], [21000, false]])->valor());
