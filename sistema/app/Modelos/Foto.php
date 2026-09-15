@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * No guarda su negocio: en las rutas, {foto} se busca con FotosDeOrden::foto(), a través de su prenda y su orden (RNF-25).
+ */
 class Foto extends Model
 {
     use HasFactory;
@@ -27,18 +30,6 @@ class Foto extends Model
             'alto_px' => 'integer',
             'bytes' => 'integer',
         ];
-    }
-
-    /**
-     * La foto no guarda su negocio: se busca a través de su orden, que sí lo filtra (RN-01, RNF-25).
-     * Sin esto, /fotos/{id} entregaría la foto de otro taller.
-     *
-     * @param  mixed  $value
-     * @param  string|null  $field
-     */
-    public function resolveRouteBinding($value, $field = null): ?Model
-    {
-        return $this->newQuery()->whereKey($value)->whereHas('prenda.orden')->first();
     }
 
     /**

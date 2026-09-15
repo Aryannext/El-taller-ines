@@ -9,7 +9,7 @@ use App\Http\Controladores\PrendaController;
 use App\Http\Controladores\SesionController;
 use Illuminate\Support\Facades\Route;
 
-// Rutas según docs/04-especificacion-tecnica/02-rutas.md
+// Rutas según docs/04-especificacion-tecnica/02-rutas.md. El enlace de {foto} está en AppServiceProvider (RNF-25).
 
 Route::middleware('guest')->group(function () {
     Route::get('/entrar', [SesionController::class, 'formulario'])->name('sesion.formulario');
@@ -44,6 +44,7 @@ Route::middleware(['auth', 'auth.session', 'cache.headers:no_store;private'])->g
         Route::post('/ordenes/{orden}/prendas/{prenda}/fotos', [FotoController::class, 'guardar'])->whereNumber(['orden', 'prenda'])->name('fotos.agregar');
     });
 
+    Route::get('/ordenes/{orden}/fotos', [FotoController::class, 'deOrden'])->whereNumber('orden')->name('fotos.de-orden');
     Route::get('/fotos/{foto}', [FotoController::class, 'mostrar'])->whereNumber('foto')->name('fotos.mostrar');
 
     Route::get('/ajustes', [AjustesController::class, 'mostrar'])->name('ajustes');

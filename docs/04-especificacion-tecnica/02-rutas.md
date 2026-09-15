@@ -30,7 +30,7 @@ Si el registro no existe o es de otro negocio, la respuesta es 404, como si no e
 | `{orden}` | `Orden` | `numero` | Filtro global por negocio; el número es único dentro del negocio (RN-08) |
 | `{prenda}` | `Prenda` | `id` | Debe pertenecer a `{orden}`: enlace anidado de Laravel con `scopeBindings` |
 | `{pago}` | `Pago` | `id` | Debe pertenecer a `{orden}`, igual que la prenda |
-| `{foto}` | `Foto` | `id` | `Foto::resolveRouteBinding` la busca a través de su prenda y su orden, que sí filtra por negocio |
+| `{foto}` | `Foto` | `id` | Enlace explícito (`Route::bind`) que la busca con `FotosDeOrden::foto()`, a través de su prenda y su orden |
 | `{aviso}` | `Aviso` | `id` | Enlace explícito que lo busca a través de su orden |
 | `{tipo}` | `TipoPrenda` | `id` | Filtro global por negocio |
 

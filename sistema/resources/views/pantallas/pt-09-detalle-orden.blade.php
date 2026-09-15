@@ -53,7 +53,8 @@
     </div>
 
     <section class="seccion">
-      <h2 class="titulo-seccion">Prendas</h2>
+      {{-- HU-18 --}}
+      <h2 class="titulo-seccion">Prendas <a href="{{ route('fotos.de-orden', $orden) }}">Ver fotos juntas</a></h2>
 
       @foreach ($orden->prendas as $prenda)
         <div @class(['prenda', 'atenuada' => $prenda->estado->value === 'devuelta'])>

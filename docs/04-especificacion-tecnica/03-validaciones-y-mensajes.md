@@ -202,6 +202,8 @@ No son errores: orientan a la usuaria.
 | **PT-08** | Lo buscado no es un número de orden | Escribe solo el número de la bolsa, por ejemplo 42. | HU-15 |
 | **PT-08** | No hay órdenes en el estado elegido | No hay órdenes {estado}. | HU-15 |
 | **PT-09** | Se corrigió una prenda | Los cambios de la prenda quedaron guardados. | HU-12 |
+| **PT-10** | Siempre, sobre las fotos | Toca una foto para verla grande y comparar con las prendas del rincón. | HU-18 |
+| **PT-10** | Una prenda no tiene fotos | Esta prenda no tiene fotos. | HU-18 |
 | **PT-13** | La orden ya tiene pagos | La orden no puede valer menos de lo ya pagado ({pagado}). | HU-12 |
 | **PT-13** | Se escribe un precio distinto | El valor de la orden pasará de {valor} a {nuevo_valor} y el saldo a {saldo}. | HU-12 |
 | **PT-13** | Se elimina una prenda o una foto | ¿Eliminar {que}? No se puede deshacer. | HU-13, HU-19 |

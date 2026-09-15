@@ -4,6 +4,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   prendasDeLaOrden();
   fotosDeLasPrendas();
+  visorDeFotos();
   valorAlCorregir();
   unSoloEnvio();
 });
@@ -89,6 +90,35 @@ function fotosDeLasPrendas() {
     const formulario = entrada.closest('form[data-subir-fotos]');
     if (formulario && total > 0) {
       formulario.requestSubmit();
+    }
+  });
+}
+
+// HU-18: tocar una foto la muestra grande en la misma pantalla (CA-18.2). Sin JavaScript, el enlace abre la foto completa.
+function visorDeFotos() {
+  const visor = document.querySelector('[data-visor]');
+  if (!visor || typeof visor.showModal !== 'function') {
+    return;
+  }
+
+  const imagen = visor.querySelector('[data-visor-imagen]');
+
+  document.addEventListener('click', (evento) => {
+    const enlace = evento.target.closest('a[data-ampliar]');
+    if (!enlace) {
+      return;
+    }
+
+    evento.preventDefault();
+    imagen.src = enlace.href;
+    imagen.alt = enlace.querySelector('img')?.alt ?? '';
+    visor.showModal();
+  });
+
+  // Tocar fuera de la foto también la cierra; Escape la cierra por ser un diálogo
+  visor.addEventListener('click', (evento) => {
+    if (evento.target === visor) {
+      visor.close();
     }
   });
 }

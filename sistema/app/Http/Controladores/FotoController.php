@@ -2,6 +2,7 @@
 
 namespace App\Http\Controladores;
 
+use App\Aplicacion\Consultas\FotosDeOrden;
 use App\Aplicacion\Fotos\AgregarFoto;
 use App\Dominio\Compartido\ReglaIncumplida;
 use App\Dominio\Fotos\AlmacenDeFotos;
@@ -10,10 +11,19 @@ use App\Modelos\Foto;
 use App\Modelos\Orden;
 use App\Modelos\Prenda;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class FotoController
 {
+    /**
+     * PT-10 · Las fotos de la orden agrupadas por prenda, para reconocer las prendas en el rincón (HU-18).
+     */
+    public function deOrden(Orden $orden, FotosDeOrden $fotosDeOrden): View
+    {
+        return view('pantallas.pt-10-fotos-orden', $fotosDeOrden->obtener($orden));
+    }
+
     /**
      * PT-13 · Tomar o elegir fotos para una prenda que ya existe (HU-17).
      */
@@ -33,8 +43,8 @@ class FotoController
     }
 
     /**
-     * Entrega una foto desde el disco privado, solo con sesión y del propio negocio (RNF-25).
-     * La usan las miniaturas de PT-09 y PT-13 y, con HU-18, las fotos de la orden.
+     * Entrega una foto desde el disco privado, solo con sesión y del propio negocio (RNF-25, diagrama 11).
+     * {foto} ya viene buscada por FotosDeOrden::foto(). La usan las miniaturas de PT-09, PT-10 y PT-13.
      */
     public function mostrar(Foto $foto, AlmacenDeFotos $almacen): BinaryFileResponse
     {

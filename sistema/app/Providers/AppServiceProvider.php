@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Aplicacion\Consultas\FotosDeOrden;
 use App\Dominio\Compartido\Reloj;
 use App\Dominio\Fotos\AlmacenDeFotos;
 use App\Infraestructura\Fotos\AlmacenLocalPrivado;
@@ -11,6 +12,7 @@ use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 
@@ -30,6 +32,10 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        // RNF-25: la foto no guarda su negocio; FotosDeOrden la busca a través de su orden y, si es de otro negocio, responde 404 (RNF-22).
+        // Va aquí y no en routes/web.php: con las rutas en caché ese archivo no se ejecuta, y {foto} quedaría sin filtro.
+        Route::bind('foto', fn (string $valor) => app(FotosDeOrden::class)->foto($valor) ?? abort(404));
+
         // Formatos para mostrar (docs/04-especificacion-tecnica/04-datos-y-modelos.md)
         Blade::directive('celular', fn (string $expresion) => "<?php echo e(preg_replace('/^(\\d{3})(\\d{3})(\\d{4})$/', '\$1 \$2 \$3', (string) ({$expresion}))); ?>");
         Blade::directive('dinero', fn (string $expresion) => "<?php echo e(\\App\\Dominio\\Pagos\\Dinero::pesos((int) ({$expresion}))->formato()); ?>");
