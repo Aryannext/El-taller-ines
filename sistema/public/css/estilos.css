@@ -180,6 +180,9 @@ textarea.entrada { min-height: 76px; resize: vertical; }
 }
 .segmentos input { position: absolute; opacity: 0; pointer-events: none; }
 .segmentos label:has(input:checked) { border-color: var(--primario); background: var(--primario-suave); color: var(--primario); }
+/* PT-14: la opción elegida con el teclado se ve, aunque el círculo del radio esté escondido */
+.segmentos label:has(input:focus-visible) { outline: 3px solid var(--primario); outline-offset: 2px; }
+fieldset.campo { min-width: 0; margin: 0; padding: 0; border: 0; }
 
 /* Las pestañas bajan a una fila más cuando no caben todas: ninguna queda escondida detrás de un desplazamiento lateral */
 .pestanas { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 4px; padding: 4px; border-radius: 12px; background: var(--neutro-suave); }

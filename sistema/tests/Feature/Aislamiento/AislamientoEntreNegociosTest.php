@@ -144,6 +144,8 @@ class AislamientoEntreNegociosTest extends TestCase
             'prendas.cambiar-estado' => ['POST', route('prendas.cambiar-estado', [$this->ordenDelNegocioA, $this->prendaDelNegocioA]), ['estado' => 'terminada']],
             'prendas.editar' => ['GET', route('prendas.editar', [$this->ordenDelNegocioA, $this->prendaDelNegocioA]), []],
             'prendas.corregir' => ['PUT', route('prendas.corregir', [$this->ordenDelNegocioA, $this->prendaDelNegocioA]), ['descripcion_arreglo' => 'Otro arreglo', 'precio' => '1000']],
+            'pagos.nuevo' => ['GET', route('pagos.nuevo', $this->ordenDelNegocioA), []],
+            'pagos.guardar' => ['POST', route('pagos.guardar', $this->ordenDelNegocioA), ['token_formulario' => '0b9d2c3e-5f7a-4c1e-9a8b-3d2f1e0c9b7a', 'valor' => '1000', 'metodo_pago_id' => '1']],
             'fotos.de-orden' => ['GET', route('fotos.de-orden', $this->ordenDelNegocioA), []],
             'fotos.agregar' => ['POST', route('fotos.agregar', [$this->ordenDelNegocioA, $this->prendaDelNegocioA]), []],
             // RNF-25: la foto no guarda su negocio; se busca a través de su orden

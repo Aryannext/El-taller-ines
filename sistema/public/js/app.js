@@ -6,8 +6,24 @@ document.addEventListener('DOMContentLoaded', () => {
   fotosDeLasPrendas();
   visorDeFotos();
   valorAlCorregir();
+  usarSaldoCompleto();
   unSoloEnvio();
 });
+
+// HU-23: «Usar el saldo completo» escribe el saldo en el valor del pago (PT-14). Sin JavaScript el botón no aparece.
+function usarSaldoCompleto() {
+  const boton = document.querySelector('[data-usar-saldo]');
+  const valor = document.querySelector('[data-valor-del-pago]');
+  if (!boton || !valor) {
+    return;
+  }
+
+  boton.hidden = false;
+  boton.addEventListener('click', () => {
+    valor.value = boton.dataset.usarSaldo;
+    valor.focus();
+  });
+}
 
 // HU-07 y HU-09: agregar y quitar prendas, y pedir «¿Qué prenda es?» solo al elegir «Otro»
 function prendasDeLaOrden() {

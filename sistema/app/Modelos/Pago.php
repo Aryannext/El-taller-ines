@@ -16,7 +16,8 @@ class Pago extends Model
 
     protected $table = 'pagos';
 
-    protected $fillable = ['metodo_pago_id', 'valor', 'anulado_en', 'motivo_anulacion', 'token_formulario'];
+    // pagado_en lo pone RegistrarPago con el reloj de Colombia (RN-09), no Eloquent
+    protected $fillable = ['metodo_pago_id', 'valor', 'pagado_en', 'anulado_en', 'motivo_anulacion', 'token_formulario'];
 
     protected function casts(): array
     {

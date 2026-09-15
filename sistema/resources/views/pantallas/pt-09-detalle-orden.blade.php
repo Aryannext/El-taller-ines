@@ -27,10 +27,10 @@
     @if (session('exito'))
       <div class="banda banda-exito" role="status"><i class="i i-check"></i><span>{{ session('exito') }}</span></div>
     @endif
-    {{-- CA-12.3: por qué no se pudo corregir una prenda (RN-15, RN-24) --}}
-    @error('prenda')
-      <div class="banda banda-error" role="alert"><i class="i i-alerta"></i><span>{{ $message }}</span></div>
-    @enderror
+    {{-- Por qué no se pudo cambiar una prenda (RN-15, RN-24) o registrar un pago (RN-30) --}}
+    @if ($errors->has('prenda') || $errors->has('orden'))
+      <div class="banda banda-error" role="alert"><i class="i i-alerta"></i><span>{{ $errors->first('prenda') ?: $errors->first('orden') }}</span></div>
+    @endif
 
     <div class="tarjeta">
       <div class="entre">
@@ -101,6 +101,10 @@
           @endforeach
           <dt class="total">Saldo</dt><dd class="total">{{ $saldo->formato() }}</dd>
         </dl>
+        {{-- HU-23: solo si hay algo por cobrar (RN-28) y la orden no está cancelada (RN-30) --}}
+        @if ($estadoDePago?->value === 'por-cobrar')
+          <a class="btn btn-secundario" href="{{ route('pagos.nuevo', $orden) }}"><i class="i i-dinero"></i>Registrar pago</a>
+        @endif
       </div>
     </section>
 

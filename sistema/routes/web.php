@@ -4,6 +4,7 @@ use App\Http\Controladores\AjustesController;
 use App\Http\Controladores\ClienteController;
 use App\Http\Controladores\FotoController;
 use App\Http\Controladores\OrdenController;
+use App\Http\Controladores\PagoController;
 use App\Http\Controladores\PanelController;
 use App\Http\Controladores\PrendaController;
 use App\Http\Controladores\SesionController;
@@ -49,6 +50,9 @@ Route::middleware(['auth', 'auth.session', 'cache.headers:no_store;private'])->g
 
     Route::get('/ordenes/{orden}/fotos', [FotoController::class, 'deOrden'])->whereNumber('orden')->name('fotos.de-orden');
     Route::get('/fotos/{foto}', [FotoController::class, 'mostrar'])->whereNumber('foto')->name('fotos.mostrar');
+
+    Route::get('/ordenes/{orden}/pagos/nuevo', [PagoController::class, 'nuevo'])->whereNumber('orden')->name('pagos.nuevo');
+    Route::post('/ordenes/{orden}/pagos', [PagoController::class, 'guardar'])->whereNumber('orden')->name('pagos.guardar');
 
     Route::get('/ajustes', [AjustesController::class, 'mostrar'])->name('ajustes');
     Route::put('/ajustes/contrasena', [AjustesController::class, 'cambiarContrasena'])->name('ajustes.contrasena');
