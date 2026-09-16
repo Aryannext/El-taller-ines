@@ -176,7 +176,7 @@ CREATE TABLE avisos (
   orden_id            BIGINT UNSIGNED  NOT NULL COMMENT 'Orden que quedó lista (RN-37)',
   ciclo_lista_en      DATETIME         NOT NULL COMMENT 'Valor de ordenes.lista_en al generar el aviso: identifica cada vez que la orden quedó lista (RN-38)',
   estado              ENUM('en_cola', 'enviado', 'pendiente_asistido', 'descartado') NOT NULL DEFAULT 'en_cola' COMMENT 'Resultado del aviso (RN-39, RN-40, RN-41)',
-  canal               ENUM('api_oficial', 'asistido') NULL COMMENT 'Canal por el que salió el aviso (RN-40, ADR-003)',
+  canal               ENUM('api_oficial', 'evolution_api', 'asistido') NULL COMMENT 'Canal por el que salió el aviso (RN-40, ADR-003, ADR-007)',
   mensaje             TEXT             NULL COMMENT 'Texto enviado, armado con los datos de la orden en el momento del envío (RN-42)',
   intentos            TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Intentos de envío por la API oficial, máximo 3 (RNF-17)',
   id_mensaje_whatsapp VARCHAR(100)     NULL COMMENT 'Identificador que devuelve la API oficial al aceptar el mensaje',

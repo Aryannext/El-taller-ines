@@ -196,6 +196,7 @@ sistema/
 │   │   └── Aviso.php
 │   ├── Infraestructura/
 │   │   ├── Avisos/
+│   │   │   ├── EvolutionApiCanal.php        ADR-007
 │   │   │   ├── WhatsAppCloudApiCanal.php
 │   │   │   └── WhatsAppAsistidoCanal.php
 │   │   ├── Fotos/
@@ -421,7 +422,7 @@ sequenceDiagram
 | **RNF-01 · RNF-02** Rapidez y consultas acotadas | Las clases de `Consultas` cargan prendas y pagos por adelantado (eager loading); la medición real es HT-06 |
 | **RNF-03** Fotos reducidas | `AlmacenLocalPrivado` reduce la imagen antes de guardarla |
 | **RNF-04 · RNF-17** No esperar a WhatsApp y no perder avisos | `EnviarAviso` corre en la cola, con tres intentos y espera creciente |
-| **RNF-06** Solo la API oficial | Únicamente `WhatsAppCloudApiCanal` conoce la API; un cambio de versión se hace solo ahí |
+| **RNF-06** Un solo adaptador por canal | Únicamente `EvolutionApiCanal` conoce Evolution API y únicamente `WhatsAppCloudApiCanal` conoce la API oficial; cambiar de servicio o de versión se hace solo ahí (ADR-007) |
 | **RNF-08 · RNF-09** Formatos y mensajes para la usuaria | `Dinero` y `NumeroDeOrden` dan formato; `ReglaIncumplida` lleva el mensaje en español hasta la vista |
 | **RNF-13** Operaciones completas o nada | Cada caso de uso que toca varias filas trabaja dentro de una transacción |
 | **RNF-14** Sin registros duplicados | Token de formulario con clave única en órdenes y pagos |
@@ -441,7 +442,7 @@ sequenceDiagram
 | --- | --- |
 | **Responsabilidad única** | Un caso de uso por acción: `RegistrarPago` no anula pagos; `AnularPago` es otra clase. Los controladores no calculan |
 | **Abierto/cerrado** | Un canal de aviso nuevo es una clase que implementa `CanalDeAviso`, sin modificar `EnviarAviso` |
-| **Sustitución de Liskov** | `WhatsAppCloudApiCanal`, `WhatsAppAsistidoCanal` y el canal falso de las pruebas se usan de la misma forma y devuelven el mismo `ResultadoDeEnvio` |
+| **Sustitución de Liskov** | `EvolutionApiCanal`, `WhatsAppCloudApiCanal`, `WhatsAppAsistidoCanal` y el canal falso de las pruebas se usan de la misma forma y devuelven el mismo `ResultadoDeEnvio` |
 | **Segregación de interfaces** | Interfaces pequeñas y separadas: `CanalDeAviso` solo envía, `AlmacenDeFotos` solo guarda y entrega, `Reloj` solo da la hora |
 | **Inversión de dependencias** | Los casos de uso dependen de `CanalDeAviso`, `AlmacenDeFotos` y `Reloj`, no de sus implementaciones; `AppServiceProvider` las enlaza |
 

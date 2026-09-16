@@ -42,7 +42,7 @@ Las metas de desempeño se fijan con el volumen que tendría un negocio después
 | Código | Requisito | Métrica | Meta | Verificación |
 | --- | --- | --- | --- | --- |
 | **RNF-05** | El sistema funciona en los navegadores del taller | Funciones de los requisitos Must que operan correctamente | 100 % en Chrome para Android y en Chrome y Edge de escritorio, en sus dos últimas versiones principales | Lista de chequeo manual en cada navegador antes de la entrega |
-| **RNF-06** | La integración con WhatsApp usa solo la API oficial | Llamadas a servicios de WhatsApp fuera de la API oficial | Cero; un cambio de versión de la API solo modifica el adaptador del canal | Revisión de código y prueba de integración con el número de prueba de Meta (ADR-003) |
+| **RNF-06** | La integración con WhatsApp pasa por un solo adaptador por canal | Componentes fuera de los adaptadores de canal que llaman a un servicio de WhatsApp | Cero; cambiar de servicio o de versión solo modifica su adaptador | Revisión de código, pruebas de cada adaptador con respuestas simuladas y un envío real por Evolution API (ADR-003, ADR-007) |
 
 ## Usabilidad
 

@@ -14,5 +14,6 @@ if [ ! -f .env ]; then
     echo "Se creó despliegue/.env con secretos nuevos."
 fi
 
+sh ./completar-env.sh
 docker compose up -d --build
 sh ./esperar.sh

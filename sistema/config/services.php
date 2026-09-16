@@ -37,6 +37,13 @@ return [
         'idioma' => env('WHATSAPP_IDIOMA', 'es'),
     ],
 
+    // ADR-007: aviso automático por Evolution API. Si está configurada, se usa en vez de la API oficial
+    'evolution' => [
+        'url' => env('EVOLUTION_URL'),
+        'clave_api' => env('EVOLUTION_API_KEY'),
+        'instancia' => env('EVOLUTION_INSTANCIA'),
+    ],
+
     'slack' => [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),

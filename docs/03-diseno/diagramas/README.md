@@ -303,6 +303,10 @@ classDiagram
     class Reloj {
         <<interface>>
     }
+    class EvolutionApiCanal {
+        +estaDisponible() bool
+        +enviar(Celular destino, MensajeDeAviso mensaje) ResultadoDeEnvio
+    }
     class WhatsAppCloudApiCanal {
         +estaDisponible() bool
         +enviar(Celular destino, MensajeDeAviso mensaje) ResultadoDeEnvio
@@ -335,6 +339,7 @@ classDiagram
     GenerarAviso ..> EnviarAviso : encola
     EnviarAviso --> CanalDeAviso
     AgregarFoto --> AlmacenDeFotos
+    EvolutionApiCanal ..|> CanalDeAviso
     WhatsAppCloudApiCanal ..|> CanalDeAviso
     WhatsAppAsistidoCanal ..|> CanalDeAviso
     AlmacenLocalPrivado ..|> AlmacenDeFotos
@@ -342,7 +347,7 @@ classDiagram
     AppServiceProvider ..> CanalDeAviso : enlaza implementaciones
 ```
 
-- **`EnviarAviso`** pregunta a `WhatsAppCloudApiCanal` si está disponible; si no lo está, o si falla después de tres intentos (`tries`), el aviso queda para `WhatsAppAsistidoCanal` (RN-40, ADR-003).
+- **`EnviarAviso`** pregunta al canal automático si está disponible: `EvolutionApiCanal` si Evolution API está configurada (ADR-007) y, si no, `WhatsAppCloudApiCanal`. Si ninguno lo está, o si falla después de tres intentos (`tries`), el aviso queda para `WhatsAppAsistidoCanal` (RN-40, ADR-003).
 - **`WhatsAppAsistidoCanal.enlace()`** arma la dirección `https://wa.me/57…?text=…` que abre WhatsApp con el mensaje escrito.
 - **En las pruebas**, `AppServiceProvider` se reemplaza por un canal falso, un almacén en memoria y un reloj fijo en el miércoles 16 de septiembre de 2026.
 

@@ -71,7 +71,7 @@ Una historia entra a un sprint solo si cumple la definición de "lista para desa
 
 | Orden | Código | Elemento | Prioridad | Puntos | Sprint | Depende de |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | **HT-01** | Solicitar a Meta el número de prueba y la plantilla del aviso | Must | 1 | Sprint 3 | — |
+| 1 | **HT-01** | Conectar WhatsApp por Evolution API para los avisos | Must | 1 | Sprint 3 | — |
 | 2 | **HT-02** | Proyecto base con calidad automática | Must | 3 | Sprint 3 | — |
 | 3 | **HT-03** | Aislamiento de los datos por negocio | Must | 3 | Sprint 3 | HT-02 |
 | 4 | **HU-01** | Iniciar y cerrar sesión | Must | 3 | Sprint 3 | HT-03 |
@@ -117,7 +117,7 @@ Una historia entra a un sprint solo si cumple la definición de "lista para desa
 
 ### Por qué este orden
 
-- **HT-01 va primero** aunque vale un punto: la aprobación de la plantilla depende de Meta y puede tardar días. Pedirla el primer día del Sprint 3 deja tiempo antes de construir HU-28.
+- **HT-01 va primero** aunque vale un punto: dependía de terceros. Con la API oficial la plantilla requería aprobación de Meta; ADR-007 la cambió por Evolution API cuando ese trámite no se pudo completar.
 - **El Sprint 3 construye el registro** (C-01, C-06): sin clientes, órdenes, prendas y fotos no hay nada que cambiar de estado, cobrar ni avisar.
 - **HU-05 va al final del Sprint 3** porque la ficha del cliente muestra sus órdenes; su saldo se completa cuando existan los pagos (HU-23) y sus criterios se vuelven a probar entonces.
 - **HT-04 abre el Sprint 4:** desplegar temprano descubre los problemas del servidor cuando todavía quedan días. Desde ahí, cada historia terminada se despliega el mismo día.
@@ -142,18 +142,18 @@ Todavía no hay velocidad medida, así que el compromiso de cada sprint de desar
 
 ## Habilitadores técnicos
 
-### HT-01 · Solicitar a Meta el número de prueba y la plantilla del aviso
+### HT-01 · Conectar WhatsApp por Evolution API para los avisos
 
-**Nace de:** ADR-003 · RNF-06 · supuesto del [alcance](../01-problema/alcance.md): Meta aprueba la plantilla a tiempo.
+**Nace de:** ADR-003 · ADR-007 · RNF-06. El alta en la API oficial de Meta no se logró completar (ADR-007).
 
 **Terminado cuando:**
 
-- [ ] El aprendiz creó la cuenta de desarrollador de Meta y la app con WhatsApp.
-- [ ] El número de prueba de Meta envía un mensaje a un celular registrado como destinatario de prueba.
-- [ ] La plantilla del aviso de orden lista está enviada a revisión y su texto está en la documentación.
+- [ ] Evolution API corre en el VPS, solo en el servidor y con su clave, sin guardar conversaciones.
+- [ ] El WhatsApp del aprendiz está conectado a la instancia `taller`.
+- [ ] Un aviso real de una orden lista llega al celular del aprendiz (PM-08).
 - [ ] Las credenciales viven fuera del repositorio (RNF-24).
 
-**Si Meta no aprueba a tiempo:** la demostración de HU-28 usa el envío asistido de HU-29, como prevé el alcance.
+**Si la sesión se cae:** los avisos quedan para el envío asistido de HU-29 hasta volver a escanear el QR.
 
 ### HT-02 · Proyecto base con calidad automática
 

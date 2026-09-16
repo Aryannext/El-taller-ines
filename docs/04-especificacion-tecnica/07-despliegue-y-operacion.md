@@ -10,7 +10,7 @@ HT-04 confirmó el servidor: un VPS de Hostinger con Ubuntu 24.04, **compartido*
 | --- | --- |
 | **Dirección** | `https://proyectosena.online/taller`, dentro del sitio del portafolio, como sus otros proyectos |
 | **Carpeta** | `/home/cristian/proyectos/proyectosena.online/el-taller-ines`, un clon del repositorio que maneja el usuario `cristian` |
-| **Contenedores** | `despliegue/docker-compose.yml`: `web` (PHP 8.4 con Apache, sirve `sistema/public`), `cola` (el trabajador de los avisos) y `db` (MySQL 8.4) |
+| **Contenedores** | `despliegue/docker-compose.yml`: `web` (PHP 8.4 con Apache, sirve `sistema/public`), `cola` (el trabajador de los avisos), `db` (MySQL 8.4), y `evolution` con `evolution-db` (Evolution API y su PostgreSQL, ADR-007) |
 | **Puertos** | `web` escucha solo en `127.0.0.1:3012`. `db` no publica ningún puerto: solo la alcanzan los otros dos contenedores |
 | **Datos** | Los volúmenes `taller_db` (la base) y `taller_storage` (fotos, sesiones y registros) |
 | **Escritura** | Dentro del contenedor, `www-data` solo escribe en `sistema/storage` y `sistema/bootstrap/cache` |
@@ -54,6 +54,10 @@ HT-04 confirmó el servidor: un VPS de Hostinger con Ubuntu 24.04, **compartido*
 | `WHATSAPP_VERSION_API` | La vigente al hacer HT-01 | La misma | Versión de la API de Meta en la dirección |
 | `WHATSAPP_PLANTILLA` | `orden_lista` | `orden_lista` | Nombre de la plantilla |
 | `WHATSAPP_IDIOMA` | `es` | `es` | Idioma de la plantilla |
+| `EVOLUTION_URL` | Vacía | `http://evolution:8080` | Dirección de Evolution API dentro de Docker (ADR-007) |
+| `EVOLUTION_API_KEY` | Vacía | Secreta, generada por `completar-env.sh` | Clave de Evolution API |
+| `EVOLUTION_INSTANCIA` | Vacía | `taller`, cuando el WhatsApp ya está conectado | Nombre de la conexión de WhatsApp; vacía, los avisos van al envío asistido |
+| `EVOLUTION_DB_PASSWORD` | — | Secreta, generada por `completar-env.sh` | Contraseña de la base de Evolution API |
 | `USUARIA_INICIAL_USUARIO` | `taller` | El que elija la dueña | Solo para `NegocioInicialSeeder` |
 | `USUARIA_INICIAL_CONTRASENA` | Local | No se guarda: `crear-usuaria.sh` la pide sin mostrarla y la pasa a un contenedor temporal | Solo para `NegocioInicialSeeder` |
 | `RESPALDO_CARPETA` | — | `/var/respaldos/taller` | Dónde quedan los respaldos diarios |
@@ -88,6 +92,24 @@ php artisan queue:work --queue=avisos --sleep=3 --max-time=3600
 - **`restart: always`:** si el trabajador se detiene por cualquier motivo, Docker lo vuelve a iniciar, también cuando se reinicia el servidor (HT-04).
 - **`--max-time=3600`:** el trabajador termina cada hora y Docker lo reinicia limpio, lo que evita que acumule memoria.
 - **`user: www-data`** y espera a que `web` esté sano, para no competir con él al aplicar las migraciones.
+
+## Evolution API
+
+Implementa ADR-007. Los contenedores `evolution` y `evolution-db` van en el mismo `docker-compose.yml`.
+
+- **Imagen fija:** `evoapicloud/evolution-api:v2.3.7`, la última estable al tomar la decisión.
+- **Sin salida pública:** escucha solo en `127.0.0.1:3013` y exige `EVOLUTION_API_KEY`. El sistema la alcanza dentro de Docker en `EVOLUTION_URL`.
+- **No guarda conversaciones:** está configurada para guardar solo la sesión del número conectado, sin mensajes, chats, contactos ni historial.
+- **Claves:** `completar-env.sh` agrega al `.env` del servidor las variables que falten y genera ahí la clave y la contraseña. `instalar.sh` y `desplegar.sh` lo llaman antes de levantar los contenedores.
+
+### Conectar el WhatsApp
+
+1. El aprendiz abre un túnel desde su equipo: `ssh -L 3013:127.0.0.1:3013 cristian@31.97.129.144`.
+2. Abre `http://localhost:3013/manager` e inicia sesión con la clave, que lee en el servidor con `grep EVOLUTION_API_KEY despliegue/.env`.
+3. Crea la instancia `taller` y escanea el QR desde WhatsApp → Dispositivos vinculados.
+4. Escribe `EVOLUTION_INSTANCIA=taller` en `despliegue/.env` y corre `docker compose up -d` para que `web` y `cola` tomen el valor.
+
+Si la sesión se cierra en el celular, los envíos fallan, los avisos quedan para envío asistido y hay que repetir los pasos 1 a 3.
 
 ## Tareas programadas
 

@@ -1,6 +1,6 @@
 # ADR-003 · Avisos por WhatsApp: API oficial con envío asistido de respaldo
 
-**Estado:** aceptada · **Fecha:** 13 de septiembre de 2026
+**Estado:** aceptada; su canal automático lo modifica [ADR-007](ADR-007-avisos-por-evolution-api.md) · **Fecha:** 13 de septiembre de 2026
 
 ## Contexto
 

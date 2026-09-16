@@ -99,6 +99,39 @@ Content-Type: application/json
 
 **Fuera de esta entrega:** confirmar si el cliente recibió o leyó el mensaje (ADR-003).
 
+## Evolution API
+
+ADR-007 cambia el canal automático: si Evolution API está configurada, `EvolutionApiCanal` envía el aviso; si no, se usa `WhatsAppCloudApiCanal`. La cola, los reintentos, el envío asistido y la constancia no cambian.
+
+### Solicitud
+
+```http
+POST {EVOLUTION_URL}/message/sendText/{EVOLUTION_INSTANCIA}
+apikey: {EVOLUTION_API_KEY}
+Content-Type: application/json
+```
+
+```json
+{
+  "number": "573104567890",
+  "text": "Hola Marta, tu orden #0042 del taller está lista para recoger. Prendas listas: 3. Saldo pendiente: $21.000. Te esperamos."
+}
+```
+
+- `number` es `Celular::enFormatoInternacional()` y `text` es `MensajeDeAviso::texto()`: no hay plantilla.
+- `EvolutionApiCanal::estaDisponible()` es verdadero solo si `EVOLUTION_URL`, `EVOLUTION_API_KEY` y `EVOLUTION_INSTANCIA` tienen valor.
+- La conexión espera hasta 5 segundos y la respuesta hasta 20.
+
+### Respuestas
+
+| Respuesta | Qué hace el canal | Qué pasa con el aviso |
+| --- | --- | --- |
+| 2xx con `key.id` | Devuelve `ResultadoDeEnvio` aceptado, con el identificador | `enviado`, con canal `evolution_api` (RN-41) |
+| Sin conexión, tiempo agotado, error 5xx o 429 | Lanza una excepción: es un error temporal, como una sesión caída | La cola reintenta; al tercer intento fallido, `pendiente_asistido` (RNF-17) |
+| Otro error 4xx: número sin WhatsApp, instancia inexistente o clave errada | Devuelve `ResultadoDeEnvio` no aceptado con el código HTTP | `pendiente_asistido` de inmediato (RN-40) |
+
+- El error registrado es solo el código HTTP: la respuesta de Evolution API repite el celular, y el registro no lo guarda.
+
 ## Envío asistido
 
 - `WhatsAppAsistidoCanal::enlace()` devuelve `https://wa.me/573104567890?text=` seguido del texto del mensaje codificado con `rawurlencode`.
@@ -152,6 +185,6 @@ Content-Type: application/json
 
 | Interfaz | Implementación | En las pruebas |
 | --- | --- | --- |
-| `CanalDeAviso` | `WhatsAppCloudApiCanal`. `AvisoController` usa `WhatsAppAsistidoCanal` directamente para armar el enlace | `CanalDeAvisoFalso` |
+| `CanalDeAviso` | `EvolutionApiCanal` si Evolution API está configurada; si no, `WhatsAppCloudApiCanal` (ADR-007). `AvisoController` usa `WhatsAppAsistidoCanal` directamente para armar el enlace | `CanalDeAvisoFalso` |
 | `AlmacenDeFotos` | `AlmacenLocalPrivado` | La misma clase, sobre un disco falso |
 | `Reloj` | `RelojDeColombia`, una sola instancia | `RelojFijo` |

@@ -285,7 +285,7 @@ Mensaje al cliente para informarle que su orden está lista, con su canal y su r
 | `orden_id` | `bigint unsigned` | No | — | FK, UK | Orden que quedó lista (RN-37) |
 | `ciclo_lista_en` | `datetime` | No | — | UK | Valor de ordenes.lista_en al generar el aviso: identifica cada vez que la orden quedó lista (RN-38) |
 | `estado` | `enum('en_cola','enviado','pendiente_asistido','descartado')` | No | en_cola | — | Resultado del aviso (RN-39, RN-40, RN-41) |
-| `canal` | `enum('api_oficial','asistido')` | Sí | — | — | Canal por el que salió el aviso (RN-40, ADR-003) |
+| `canal` | `enum('api_oficial','evolution_api','asistido')` | Sí | — | — | Canal por el que salió el aviso (RN-40, ADR-003, ADR-007) |
 | `mensaje` | `text` | Sí | — | — | Texto enviado, armado con los datos de la orden en el momento del envío (RN-42) |
 | `intentos` | `tinyint unsigned` | No | 0 | — | Intentos de envío por la API oficial, máximo 3 (RNF-17) |
 | `id_mensaje_whatsapp` | `varchar(100)` | Sí | — | — | Identificador que devuelve la API oficial al aceptar el mensaje |

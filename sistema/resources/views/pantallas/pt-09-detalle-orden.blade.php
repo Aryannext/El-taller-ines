@@ -13,7 +13,7 @@
     'pendiente_asistido' => ['Por enviar', 'chip-asistido', 'Falta enviarlo desde WhatsApp.'],
     'descartado' => ['Descartado', 'chip-descartado', 'No se envió: la orden dejó de estar lista antes de enviarlo.'],
   ];
-  $canales = ['api_oficial' => 'API oficial', 'asistido' => 'Envío asistido'];
+  $canales = ['api_oficial' => 'API oficial', 'evolution_api' => 'WhatsApp automático', 'asistido' => 'Envío asistido'];
 @endphp
 
 @section('contenido')

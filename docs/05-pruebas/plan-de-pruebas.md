@@ -186,7 +186,7 @@ Por defecto, un criterio se prueba con una prueba de funcionalidad automática e
 | **RNF-03** | Automática | `AlmacenLocalPrivadoTest` guarda una imagen de 5 MB y mide el lado mayor y el peso de lo guardado (CA-17.5) | Sprint 3, con HU-17 | GitHub Actions |
 | **RNF-04** | Automática | Con un canal que tarda 10 s, marcar la última prenda Terminada responde en menos de 1 s y el envío queda en la cola sin ejecutarse (CA-28.2) | Sprint 4, con HU-28 | GitHub Actions |
 | **RNF-05** | Manual | Recorrido de las historias Must en Chrome para Android, Chrome de escritorio y Edge de escritorio | Sprint 4 | PM-05 |
-| **RNF-06** | Automática y manual | `WhatsAppCloudApiCanalTest` comprueba con respuestas simuladas que solo se llama a la API oficial; una búsqueda en el código confirma que ninguna otra clase la llama; un envío real al número de prueba de Meta | Sprint 4, con HT-01 y HU-28 | PM-08 |
+| **RNF-06** | Automática y manual | `EvolutionApiCanalTest` y `WhatsAppCloudApiCanalTest` comprueban cada adaptador con respuestas simuladas, y una búsqueda en el código confirma que ninguna otra clase llama a esos servicios; un envío real por Evolution API (ADR-007) | Sprint 4, con HT-01 y HU-28 | PM-08 |
 | **RNF-07** | Manual | Cada pantalla a 360 px: sin desplazamiento horizontal y con controles de al menos 44 × 44 px, medidos con un script sobre el navegador | Sprints 3 y 4 | PM-05 |
 | **RNF-08** | Automática | `DineroTest` prueba el formato de los pesos; las pruebas de los criterios comparan fechas y horas con el formato exacto de las pantallas | Sprint 3 | GitHub Actions |
 | **RNF-09** | Automática y manual | Las pruebas de los criterios comparan el texto exacto de cada mensaje; una lista de chequeo revisa los demás mensajes de validación | Sprint 4 | PM-05 |
@@ -274,7 +274,7 @@ Un doble de prueba reemplaza una pieza real que es lenta, externa o impredecible
 | --- | --- | --- | --- |
 | **`RelojFijo`** | `RelojDeColombia` | Cualquier fecha y hora, y avanzar el tiempo | Toda regla con fechas: RN-07, RN-09, RN-33 a RN-36, CA-27.2 y CA-33.3 |
 | **`CanalDeAvisoFalso`** | `WhatsAppCloudApiCanal` | Anota los mensajes, tarda 10 s, falla N veces y luego acepta, o siempre falla | RNF-04, RNF-17 y los criterios de HU-28 a HU-30 |
-| **Respuestas HTTP simuladas** | La API de WhatsApp de Meta | Mensaje aceptado, error del servidor y número inválido | `WhatsAppCloudApiCanalTest` (RNF-06) |
+| **Respuestas HTTP simuladas** | Evolution API y la API de WhatsApp de Meta | Mensaje aceptado, error del servidor, sin conexión y número inválido | `EvolutionApiCanalTest` y `WhatsAppCloudApiCanalTest` (RNF-06) |
 | **Disco falso** | El disco privado de las fotos | — | Las pruebas de fotos. La reducción usa el `AlmacenLocalPrivado` real sobre el disco falso, para medir la imagen de verdad (RNF-03) |
 
 El canal falso devuelve el mismo `ResultadoDeEnvio` que los canales reales. Es el principio de sustitución de Liskov descrito en la arquitectura: si el canal falso se comportara distinto, las pruebas no dirían nada del canal real.

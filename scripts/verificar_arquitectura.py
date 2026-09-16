@@ -84,7 +84,7 @@ def main() -> int:
     sin_uso = sorted(c for c in en_estructura - nombradas
                      if c not in {"AppServiceProvider", "Negocio", "Usuario", "Cliente", "TipoPrenda", "MetodoPago",
                                   "Orden", "Prenda", "Foto", "Pago", "Aviso", "ResultadoDeEnvio", "ReglaIncumplida",
-                                  "AlmacenDeFotos", "WhatsAppCloudApiCanal", "WhatsAppAsistidoCanal"})
+                                  "AlmacenDeFotos", "EvolutionApiCanal", "WhatsAppCloudApiCanal", "WhatsAppAsistidoCanal"})
 
     print(f"{len(filas_reglas)} reglas · {len(filas_historias)} historias · {len(en_estructura)} clases en la estructura")
     if sin_uso:

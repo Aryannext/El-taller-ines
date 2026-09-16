@@ -9,6 +9,7 @@ use App\Dominio\Avisos\CanalDeAviso;
 use App\Dominio\Compartido\Reloj;
 use App\Dominio\Fotos\AlmacenDeFotos;
 use App\Dominio\Ordenes\OrdenQuedoLista;
+use App\Infraestructura\Avisos\EvolutionApiCanal;
 use App\Infraestructura\Avisos\WhatsAppCloudApiCanal;
 use App\Infraestructura\Fotos\AlmacenLocalPrivado;
 use App\Infraestructura\Reloj\RelojDeColombia;
@@ -34,14 +35,23 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(Reloj::class, RelojDeColombia::class);
         // Las pruebas usan la misma clase sobre Storage::fake('privado'), para medir la imagen de verdad (RNF-03)
         $this->app->bind(AlmacenDeFotos::class, AlmacenLocalPrivado::class);
-        // Las pruebas lo reemplazan por CanalDeAvisoFalso. Sin token, EnviarAviso deja el aviso para el envío asistido (RN-40)
-        $this->app->bind(CanalDeAviso::class, fn () => new WhatsAppCloudApiCanal(
-            config('services.whatsapp.token'),
-            config('services.whatsapp.id_numero'),
-            config('services.whatsapp.version_api'),
-            (string) config('services.whatsapp.plantilla', 'orden_lista'),
-            (string) config('services.whatsapp.idioma', 'es'),
-        ));
+        // Las pruebas lo reemplazan por CanalDeAvisoFalso. ADR-007: si Evolution API está configurada se usa esa; si no, la API oficial.
+        // Sin ninguna de las dos, EnviarAviso deja el aviso para el envío asistido (RN-40)
+        $this->app->bind(CanalDeAviso::class, function (): CanalDeAviso {
+            $evolution = new EvolutionApiCanal(
+                config('services.evolution.url'),
+                config('services.evolution.clave_api'),
+                config('services.evolution.instancia'),
+            );
+
+            return $evolution->estaDisponible() ? $evolution : new WhatsAppCloudApiCanal(
+                config('services.whatsapp.token'),
+                config('services.whatsapp.id_numero'),
+                config('services.whatsapp.version_api'),
+                (string) config('services.whatsapp.plantilla', 'orden_lista'),
+                (string) config('services.whatsapp.idioma', 'es'),
+            );
+        });
     }
 
     public function boot(): void
