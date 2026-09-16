@@ -178,6 +178,8 @@ El usuario `cristian`, desde la carpeta del clon:
 | 4 | `esperar.sh` | Espera a que `/up` responda |
 | 5 | Prueba de humo | La sección F de PM-07 |
 
+- **Dos scripts:** `desplegar.sh` solo hace el paso 1 y luego ejecuta `aplicar.sh` con `exec`, que ya viene actualizado por el pull. Un script que se actualiza a sí mismo mientras corre sigue leyendo la versión anterior: así se desplegaron una vez los contenedores de Evolution API sin sus claves.
+- **`aplicar.sh`** corre primero `completar-env.sh`, para que las variables nuevas lleguen al `.env` del servidor antes de levantar los contenedores.
 - **Mientras se recrea `web`** el sistema no responde unos segundos; Nginx devuelve 502 en ese momento.
 - **Para volver a la versión anterior:** `git checkout <commit anterior>` y los pasos 2 a 4.
 - **Migraciones compatibles:** una migración nueva no rompe la versión anterior del código. Por ejemplo, una columna se agrega en un despliegue y se deja de usar antes de borrarla en otro.
