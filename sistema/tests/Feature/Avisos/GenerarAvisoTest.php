@@ -4,7 +4,9 @@ namespace Tests\Feature\Avisos;
 
 use App\Aplicacion\Avisos\EnviarAviso;
 use App\Aplicacion\Avisos\GenerarAviso;
+use App\Aplicacion\Ordenes\CambiarEstadoDePrenda;
 use App\Dominio\Avisos\CanalDeAviso;
+use App\Dominio\Ordenes\EstadoDePrenda;
 use App\Dominio\Ordenes\OrdenQuedoLista;
 use App\Modelos\Aviso;
 use App\Modelos\Cliente;
@@ -117,6 +119,31 @@ class GenerarAvisoTest extends TestCase
         );
         Queue::assertPushedTimes(EnviarAviso::class, 2);
         Queue::assertPushedOn('avisos', EnviarAviso::class);
+    }
+
+    public function test_ca_30_3_vuelve_a_quedar_lista(): void
+    {
+        $this->usarCanal(CanalDeAvisoFalso::queAcepta());
+        $this->actingAs($this->duena);
+
+        // Queda lista: se genera su aviso (RN-37)
+        $this->marcarTerminadaLaUltimaPrenda();
+        $this->assertSame(['en_cola'], Aviso::pluck('estado')->all());
+
+        // Marta se mide la camisa y vuelve a En proceso: el aviso se descarta (RN-39)
+        $this->fijarReloj('2026-09-15 17:00:00');
+        app(CambiarEstadoDePrenda::class)->ejecutar($this->mangas->fresh(), EstadoDePrenda::EnProceso);
+        $this->assertSame(['descartado'], Aviso::pluck('estado')->all());
+
+        // Al quedar lista otra vez, se genera un aviso nuevo, con la fecha de esta vez (RN-38)
+        $this->fijarReloj('2026-09-15 17:30:00');
+        $this->marcarTerminadaLaUltimaPrenda();
+
+        $this->assertSame(['descartado', 'en_cola'], Aviso::orderBy('id')->pluck('estado')->all());
+        $this->assertSame(
+            ['2026-09-15 16:00', '2026-09-15 17:30'],
+            Aviso::orderBy('id')->get()->map(fn (Aviso $aviso) => $aviso->ciclo_lista_en->format('Y-m-d H:i'))->all(),
+        );
     }
 
     private function usarCanal(CanalDeAvisoFalso $canal): CanalDeAvisoFalso

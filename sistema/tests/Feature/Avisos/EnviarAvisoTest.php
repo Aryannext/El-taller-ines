@@ -3,8 +3,10 @@
 namespace Tests\Feature\Avisos;
 
 use App\Aplicacion\Avisos\EnviarAviso;
+use App\Aplicacion\Ordenes\CambiarEstadoDePrenda;
 use App\Aplicacion\Pagos\RegistrarPago;
 use App\Dominio\Avisos\CanalDeAviso;
+use App\Dominio\Ordenes\EstadoDePrenda;
 use App\Modelos\Aviso;
 use App\Modelos\Cliente;
 use App\Modelos\MetodoPago;
@@ -119,6 +121,20 @@ class EnviarAvisoTest extends TestCase
         $aviso = $this->aviso->fresh();
         $this->assertSame([3, 'pendiente_asistido', 3, null, null], [$canal->llamadas, $aviso->estado, $aviso->intentos, $aviso->canal, $aviso->mensaje]);
         $this->assertSame([0, 1], [DB::table('jobs')->count(), DB::table('failed_jobs')->count()]);
+    }
+
+    public function test_ca_30_1_aviso_en_espera(): void
+    {
+        $canal = $this->usarCanal(CanalDeAvisoFalso::queAcepta());
+        EnviarAviso::dispatch($this->aviso->id);
+
+        // El cliente se mide la camisa y vuelve a En proceso: al sincronizar, el aviso en espera se descarta (RN-39)
+        app(CambiarEstadoDePrenda::class)->ejecutar($this->mangas, EstadoDePrenda::EnProceso);
+        $this->assertSame(['descartado', '2026-09-15 16:01'], [$this->aviso->fresh()->estado, $this->aviso->fresh()->resuelto_en?->format('Y-m-d H:i')]);
+
+        // Y cuando llega su turno en la cola, no se envía
+        $this->procesarLaCola();
+        $this->assertSame([0, 'descartado'], [$canal->llamadas, $this->aviso->fresh()->estado]);
     }
 
     public function test_rn_39_no_se_avisa_una_orden_que_ya_no_esta_lista(): void

@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * RN-18 y RN-22: después de cualquier cambio en las prendas, recalcula el estado de la orden y registra o borra la fecha en que quedó lista.
- * La llaman los casos de uso que cambian prendas, dentro de su transacción. HU-30 agrega descartar los avisos pendientes cuando la orden
- * deja de estar lista (RN-39); hoy todavía no se generan avisos.
+ * La llaman los casos de uso que cambian prendas, dentro de su transacción. Si la orden deja de estar lista, sus avisos sin enviar se
+ * descartan: ya no hay por qué llamar al cliente (RN-39, HU-30).
  */
 class SincronizarEstadoDeOrden
 {
@@ -32,8 +32,19 @@ class SincronizarEstadoDeOrden
         } elseif ($estado === EstadoDeOrden::EnProceso && $orden->lista_en !== null) {
             // Si vuelve a En proceso, la fecha se borra; si se entrega, se conserva
             $orden->update(['lista_en' => null]);
+            $this->descartarAvisosSinEnviar($orden);
         }
 
         return $estado;
+    }
+
+    /**
+     * RN-39: los avisos que todavía no salieron no tienen a quién avisar. Los enviados y los ya descartados no se tocan (CA-30.1, CA-30.2).
+     */
+    private function descartarAvisosSinEnviar(Orden $orden): void
+    {
+        $orden->avisos()
+            ->whereIn('estado', ['en_cola', 'pendiente_asistido'])
+            ->update(['estado' => 'descartado', 'resuelto_en' => $this->reloj->ahora()]);
     }
 }
