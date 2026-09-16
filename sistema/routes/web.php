@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controladores\AjustesController;
+use App\Http\Controladores\AvisoController;
 use App\Http\Controladores\ClienteController;
 use App\Http\Controladores\FotoController;
 use App\Http\Controladores\OrdenController;
@@ -61,6 +62,11 @@ Route::middleware(['auth', 'auth.session', 'cache.headers:no_store;private'])->g
 
     Route::get('/ordenes/{orden}/pagos/nuevo', [PagoController::class, 'nuevo'])->whereNumber('orden')->name('pagos.nuevo');
     Route::post('/ordenes/{orden}/pagos', [PagoController::class, 'guardar'])->whereNumber('orden')->name('pagos.guardar');
+
+    // HU-29: los avisos que la dueña envía desde su WhatsApp. El enlace de {aviso} está en AppServiceProvider (RNF-25)
+    Route::get('/avisos', [AvisoController::class, 'pendientes'])->name('avisos.pendientes');
+    Route::get('/avisos/{aviso}/whatsapp', [AvisoController::class, 'abrirWhatsapp'])->whereNumber('aviso')->name('avisos.abrir-whatsapp');
+    Route::post('/avisos/{aviso}/enviado', [AvisoController::class, 'confirmarEnvio'])->whereNumber('aviso')->name('avisos.confirmar-envio');
 
     Route::get('/ajustes', [AjustesController::class, 'mostrar'])->name('ajustes');
     Route::put('/ajustes/contrasena', [AjustesController::class, 'cambiarContrasena'])->name('ajustes.contrasena');

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Aplicacion\Avisos\GenerarAviso;
+use App\Aplicacion\Consultas\AvisosPorEnviar;
 use App\Aplicacion\Consultas\FotosDeOrden;
 use App\Dominio\Avisos\CanalDeAviso;
 use App\Dominio\Compartido\Reloj;
@@ -51,6 +52,8 @@ class AppServiceProvider extends ServiceProvider
         // RNF-25: la foto no guarda su negocio; FotosDeOrden la busca a través de su orden y, si es de otro negocio, responde 404 (RNF-22).
         // Va aquí y no en routes/web.php: con las rutas en caché ese archivo no se ejecuta, y {foto} quedaría sin filtro.
         Route::bind('foto', fn (string $valor) => app(FotosDeOrden::class)->foto($valor) ?? abort(404));
+        // Igual que la foto, el aviso no guarda su negocio: se busca a través de su orden (HU-29)
+        Route::bind('aviso', fn (string $valor) => app(AvisosPorEnviar::class)->aviso($valor) ?? abort(404));
 
         // Formatos para mostrar (docs/04-especificacion-tecnica/04-datos-y-modelos.md)
         Blade::directive('celular', fn (string $expresion) => "<?php echo e(preg_replace('/^(\\d{3})(\\d{3})(\\d{4})$/', '\$1 \$2 \$3', (string) ({$expresion}))); ?>");

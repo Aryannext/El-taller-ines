@@ -2,6 +2,7 @@
 
 namespace App\Http\Controladores;
 
+use App\Aplicacion\Consultas\AvisosPorEnviar;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -10,13 +11,15 @@ use Illuminate\View\View;
  */
 class PanelController
 {
-    public function mostrar(Request $request): View
+    public function mostrar(Request $request, AvisosPorEnviar $avisosPorEnviar): View
     {
         $usuaria = $request->user();
 
         return view('pantallas.pt-02-panel-del-dia', [
             'usuaria' => $usuaria->nombre,
             'negocio' => $usuaria->negocio->nombre,
+            // HU-29: los avisos que esperan salir desde el WhatsApp de la dueña
+            'avisosPorEnviar' => $avisosPorEnviar->contar(),
         ]);
     }
 }

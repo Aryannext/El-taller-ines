@@ -17,7 +17,10 @@ final class ResultadoDeEnvio
         public readonly ?string $error,
     ) {}
 
-    public static function aceptado(string $canal, string $idMensaje): self
+    /**
+     * El envío asistido no devuelve identificador: lo manda la usuaria desde su WhatsApp (RN-40).
+     */
+    public static function aceptado(string $canal, ?string $idMensaje = null): self
     {
         return new self(true, $canal, $idMensaje, null);
     }

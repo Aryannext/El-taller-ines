@@ -229,6 +229,10 @@ No son errores: orientan a la usuaria.
 | **PT-13** | Se escribe un precio distinto | El valor de la orden pasará de {valor} a {nuevo_valor} y el saldo a {saldo}. | HU-12 |
 | **PT-13** | Se elimina una prenda o una foto | ¿Eliminar {que}? No se puede deshacer. | HU-13, HU-19 |
 | **PT-18** | No hay avisos por enviar | No hay avisos por enviar. | HU-29 |
+| **PT-18** | Siempre que haya avisos | El envío automático por WhatsApp no salió. Envía cada aviso con un toque desde tu WhatsApp. | HU-29 |
+| **PT-18** | Se confirmó el envío | El aviso a {cliente} quedó registrado como enviado. | HU-29 |
+| **PT-18** | Se confirma un aviso que ya se resolvió | Este aviso ya no está pendiente de envío. | HU-29 |
+| **PT-18** | La orden dejó de estar lista antes de confirmar | La orden ya no está lista, así que su aviso salió de la lista. | HU-29, HU-30 |
 | **PT-23** | La contraseña cambió | Tu contraseña cambió. Se cerró la sesión en los demás dispositivos. | HU-02 |
 
 ## Páginas de error

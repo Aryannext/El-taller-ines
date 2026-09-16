@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Aislamiento;
 
+use App\Modelos\Aviso;
 use App\Modelos\Cliente;
 use App\Modelos\Foto;
 use App\Modelos\Orden;
@@ -42,6 +43,8 @@ class AislamientoEntreNegociosTest extends TestCase
 
     private Pago $pagoDelNegocioA;
 
+    private Aviso $avisoDelNegocioA;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -51,6 +54,7 @@ class AislamientoEntreNegociosTest extends TestCase
         $this->prendaDelNegocioA = Prenda::factory()->create(['orden_id' => $this->ordenDelNegocioA->id, 'descripcion_arreglo' => 'Subir basta 3 cm', 'precio' => 15000]);
         $this->fotoDelNegocioA = Foto::factory()->create(['prenda_id' => $this->prendaDelNegocioA->id]);
         $this->pagoDelNegocioA = Pago::factory()->create(['orden_id' => $this->ordenDelNegocioA->id, 'valor' => 10000]);
+        $this->avisoDelNegocioA = Aviso::factory()->create(['orden_id' => $this->ordenDelNegocioA->id, 'estado' => 'pendiente_asistido', 'canal' => null, 'mensaje' => null, 'resuelto_en' => null]);
         $this->usuariaDelNegocioA = Usuario::factory()->create(['negocio_id' => $this->martaDelNegocioA->negocio_id]);
         $this->usuariaDelNegocioB = Usuario::factory()->create();
         Cliente::factory()->create(['negocio_id' => $this->usuariaDelNegocioB->negocio_id, 'nombre' => 'Luis Pardo']);
@@ -129,6 +133,7 @@ class AislamientoEntreNegociosTest extends TestCase
         $this->assertSame('Subir basta 3 cm', $this->prendaDelNegocioA->fresh()->descripcion_arreglo);
         $this->assertNull($this->pagoDelNegocioA->fresh()->anulado_en);
         $this->assertNull($this->ordenDelNegocioA->fresh()->cancelada_en);
+        $this->assertSame('pendiente_asistido', $this->avisoDelNegocioA->fresh()->estado);
         $this->assertSame(1, Pago::count());
     }
 
@@ -165,7 +170,9 @@ class AislamientoEntreNegociosTest extends TestCase
             'pagos.anular' => ['POST', route('pagos.anular', [$ordenA, $pagoA]), ['motivo_anulacion' => 'Otro motivo', 'confirmacion' => 'si']],
             'fotos.de-orden' => ['GET', route('fotos.de-orden', $ordenA), []],
             'fotos.agregar' => ['POST', route('fotos.agregar', [$ordenA, $prendaA]), []],
-            // RNF-25: la foto no guarda su negocio; se busca a través de su orden
+            // RNF-25: ni la foto ni el aviso guardan su negocio; se buscan a través de su orden
+            'avisos.abrir-whatsapp' => ['GET', route('avisos.abrir-whatsapp', $this->avisoDelNegocioA), []],
+            'avisos.confirmar-envio' => ['POST', route('avisos.confirmar-envio', $this->avisoDelNegocioA), []],
             'fotos.mostrar' => ['GET', route('fotos.mostrar', $this->fotoDelNegocioA), []],
         ];
     }
