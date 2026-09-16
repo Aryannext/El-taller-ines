@@ -57,6 +57,8 @@ class EnviarAvisoTest extends TestCase
         $this->aviso = $this->avisoEnCola('2026-09-15 16:00:00');
 
         $this->fijarReloj('2026-09-15 16:01:00');
+        // El tiempo queda quieto: las esperas entre reintentos se miden con travel(), no con lo que tarde la máquina
+        $this->freezeTime();
         $this->actingAs($this->duena);
     }
 

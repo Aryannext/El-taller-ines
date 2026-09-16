@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   valorAlCorregir();
   usarSaldoCompleto();
   unSoloEnvio();
+  instalarTrabajadorDeServicio();
 });
 
 // HU-23: «Usar el saldo completo» escribe el saldo en el valor del pago (PT-14). Sin JavaScript el botón no aparece.
@@ -216,5 +217,21 @@ function unSoloEnvio() {
         });
       }, 0);
     });
+  });
+}
+
+// ADR-006: el trabajador de servicio permite instalar el sistema y mostrar la página sin conexión (RNF-35).
+// Su dirección sale del manifiesto, así funciona igual en /taller que en la raíz del dominio.
+function instalarTrabajadorDeServicio() {
+  if (!('serviceWorker' in navigator)) {
+    return;
+  }
+  const manifiesto = document.querySelector('link[rel="manifest"]');
+  if (!manifiesto) {
+    return;
+  }
+  const trabajador = new URL('sw.js', manifiesto.href);
+  navigator.serviceWorker.register(trabajador, { scope: new URL('./', trabajador) }).catch(() => {
+    // Sin trabajador el sistema funciona igual: solo no se puede instalar ni avisar que falta internet
   });
 }

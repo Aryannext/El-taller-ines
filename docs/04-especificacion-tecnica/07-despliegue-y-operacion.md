@@ -175,22 +175,24 @@ Implementa ADR-006 y RNF-35.
 | `name` | El-taller-ines |
 | `short_name` | Taller |
 | `lang` | `es-CO` |
-| `start_url` | `/` |
-| `scope` | `/` |
+| `start_url` | `./` |
+| `scope` | `./` |
 | `display` | `standalone` |
 | `orientation` | `portrait` |
 | `background_color` | `#f3f4f8`, el `--fondo` de los mockups |
 | `theme_color` | `#2a44a8`, el `--primario` de los mockups |
-| `icons` | 192 y 512 px, y una versión `maskable` de 512 px que Android puede recortar en círculo |
+| `icons` | `iconos/icono-192.png`, `iconos/icono-512.png` y `iconos/icono-maskable-512.png`, que Android puede recortar en círculo |
 
-Los íconos se diseñan en HT-07 con la letra del avatar de PT-19 sobre el color primario.
+Los íconos llevan las tijeras de la marca, las mismas de PT-01, en blanco sobre el color primario. `start_url` y `scope` son relativos al manifiesto, así el sistema se instala igual en `/taller` que en la raíz de un dominio propio.
 
 ### Service worker
 
 `public/sw.js`:
 
-- Al instalarse, guarda en caché solo `sin-conexion.html`, `css/estilos.css`, las fuentes y los íconos.
+- Al instalarse, guarda en caché solo `sin-conexion.html`, `css/estilos.css`, `js/app.js`, las fuentes y los íconos.
+- `app.js` lo registra tomando su dirección del manifiesto, así el alcance queda en `/taller` sin escribirlo en el código.
 - Para abrir una página, pide primero a la red. Si no hay red, muestra `sin-conexion.html`.
+- Los estilos, el guion, las fuentes y los íconos también se piden primero a la red, y la respuesta actualiza el caché. Si se sirvieran desde el caché, un despliegue nuevo no se vería hasta cambiarle el nombre al caché a mano.
 - **Nunca guarda páginas ni fotos con datos del taller.** Así, un celular perdido sin conexión no muestra información de clientes (RNF-25).
 - Nginx lo sirve sin caché, para que una versión nueva llegue enseguida. Cuando cambian los archivos que guarda, cambia el nombre de su caché: `taller-v1`, `taller-v2`.
 

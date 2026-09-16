@@ -38,8 +38,13 @@ from verificar_modelo import ServidorTemporal, buscar_mysqld  # noqa: E402
 SECRETOS = re.compile(
     r"APP_KEY=base64:[A-Za-z0-9+/=]{20,}|ghp_[A-Za-z0-9]{20,}|github_pat_|EAA[A-Za-z0-9]{30,}"
     r"|BEGIN [A-Z ]*PRIVATE KEY|AKIA[0-9A-Z]{16}|xox[bap]-|sk-[A-Za-z0-9]{20,}"
-    r"|(?:DB_PASSWORD|WHATSAPP_TOKEN|USUARIA_INICIAL_CONTRASENA)=\S+"
+    # Un valor que sale de una expansión del shell, como $(openssl rand ...), no es un secreto: lo genera el servidor
+    r"|(?:DB_PASSWORD|MYSQL_ROOT_PASSWORD|WHATSAPP_TOKEN|USUARIA_INICIAL_CONTRASENA)=(?!\$)\S+"
 )
+# Archivos que hablan de secretos sin contenerlos: este script lleva los patrones que busca,
+# e instalar.sh genera la llave y las contraseñas en el servidor con openssl (RNF-24).
+SIN_SECRETOS = {"scripts/calidad.py", "despliegue/instalar.sh"}
+
 DOCUMENTACION = ["publicar_backlog.py", "verificar_arquitectura.py", "verificar_diagramas.py",
                  "verificar_especificacion.py", "generar_plan_de_pruebas.py"]
 
@@ -58,8 +63,7 @@ def secretos_en_el_historial() -> tuple[bool, str]:
     for linea in salida.splitlines():
         if linea.startswith("+++ "):
             archivo = linea[6:] if linea.startswith("+++ b/") else ""
-        # Este script contiene los patrones que busca: no es un secreto
-        elif linea.startswith("+") and archivo != "scripts/calidad.py" and SECRETOS.search(linea):
+        elif linea.startswith("+") and archivo not in SIN_SECRETOS and SECRETOS.search(linea):
             encontrados.append(f"{archivo}: {linea.strip()}")
     return not encontrados, "\n".join(encontrados[:10]) or "Sin secretos en el historial"
 

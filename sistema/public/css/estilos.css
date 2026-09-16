@@ -424,3 +424,15 @@ button.opcion-hoja { width: 100%; border: 0; background: transparent; font: inhe
   src: url("../fuentes/atkinson-hyperlegible-mono-latin-ext.woff2") format("woff2");
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
+
+/* En una pantalla grande la app se ve como lo que es: una aplicación de celular, centrada y con su propio marco,
+   en vez de una columna suelta. El diseño del celular no cambia: esto solo aplica desde 700 px. */
+@media (min-width: 700px) {
+  body { background: #e6e9f2; padding: 24px 0; }
+  .app {
+    min-height: min(100vh - 48px, 860px);
+    border: 1px solid var(--borde); border-radius: 24px; overflow: hidden;
+    box-shadow: 0 18px 50px rgba(22, 27, 46, .14);
+  }
+  .acceso { min-height: auto; flex: 1; }
+}
