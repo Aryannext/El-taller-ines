@@ -52,10 +52,17 @@ jobs:
           extensions: pdo_mysql, mbstring, gd, exif, fileinfo, curl, zip
           coverage: pcov
 
-      - name: Preparar Python para comparar el esquema
+      - name: Preparar Python
         uses: actions/setup-python@v6
         with:
           python-version: '3.13'
+
+      # Antes que nada: si el diseño se contradice, lo demás valida un código que ya no corresponde
+      - name: La documentación de diseño no se contradice
+        run: |
+          python ../scripts/verificar_arquitectura.py
+          python ../scripts/verificar_especificacion.py
+          python ../scripts/verificar_diagramas.py
 
       - name: Instalar dependencias
         run: composer install --no-interaction --prefer-dist --no-progress
