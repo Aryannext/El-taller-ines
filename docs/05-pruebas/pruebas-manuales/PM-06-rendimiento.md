@@ -13,14 +13,19 @@ El percentil 95 significa que 95 de cada 100 solicitudes tardan eso o menos. Se 
 1. HT-06 está terminado: el generador crea 500 clientes, 750 órdenes, 2.200 prendas y 1.500 pagos.
 2. Cargar el volumen en el VPS. El taller aún no usa el sistema, así que no hay datos reales que proteger. Se borra al terminar.
 3. Elegir para la medición una orden de 10 prendas y un término de búsqueda que devuelva varios clientes.
-4. Tener una sesión iniciada para el script de medición.
+4. Tener a mano el usuario y la contraseña: el script de medición inicia la sesión y pide la contraseña sin mostrarla.
 
 ## Pasos
 
 ### Tiempo de respuesta del servidor
 
-1. Para cada pantalla de la tabla, hacer 5 solicitudes de calentamiento que no se cuentan.
-2. Hacer 100 solicitudes seguidas con el script de medición y anotar el percentil 95 y el máximo.
+1. Correr el script de medición, que por cada pantalla hace 5 solicitudes de calentamiento que no se cuentan:
+
+   ```sh
+   python scripts/medir_rendimiento.py https://proyectosena.online/taller --usuario taller --orden <la de 10 prendas>
+   ```
+
+2. Luego hace 100 solicitudes seguidas y reporta el percentil 95 y el máximo de cada pantalla, que se copian a la tabla del registro.
 3. Anotar la carga del VPS durante la medición.
 
 ### Carga en 4G simulada

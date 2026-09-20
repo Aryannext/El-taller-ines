@@ -60,6 +60,7 @@ jobs:
       # Antes que nada: si el diseño se contradice, lo demás valida un código que ya no corresponde
       - name: La documentación de diseño no se contradice
         run: |
+          python -m compileall -q ../scripts
           python ../scripts/verificar_arquitectura.py
           python ../scripts/verificar_especificacion.py
           python ../scripts/verificar_diagramas.py
