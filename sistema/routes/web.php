@@ -8,6 +8,7 @@ use App\Http\Controladores\OrdenController;
 use App\Http\Controladores\PagoController;
 use App\Http\Controladores\PanelController;
 use App\Http\Controladores\PrendaController;
+use App\Http\Controladores\SeguimientoController;
 use App\Http\Controladores\SesionController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,9 @@ Route::middleware(['auth', 'auth.session', 'cache.headers:no_store;private'])->g
     Route::post('/salir', [SesionController::class, 'salir'])->name('sesion.salir');
 
     Route::get('/', [PanelController::class, 'mostrar'])->name('panel');
+
+    // HU-33: la lista que extiende el panel (CA-32.2)
+    Route::get('/seguimiento/atrasadas', [SeguimientoController::class, 'atrasadas'])->name('seguimiento.atrasadas');
 
     Route::get('/clientes', [ClienteController::class, 'buscar'])->name('clientes.buscar');
     Route::get('/clientes/nuevo', [ClienteController::class, 'nuevo'])->name('clientes.nuevo');
