@@ -1,3 +1,6 @@
 __pycache__/
 # Secretos de producción en el VPS (RNF-24)
 despliegue/.env
+# Entorno local de desarrollo: PHP y MySQL portátiles, datos de la base,
+# respaldos y la contraseña de la usuaria demo. Nada de esto se versiona (RNF-24).
+local/
