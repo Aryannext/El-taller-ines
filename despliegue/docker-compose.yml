@@ -43,6 +43,23 @@ services:
       - storage:/var/www/taller/sistema/storage
     command: ["php", "artisan", "queue:work", "--queue=avisos", "--sleep=3", "--max-time=3600"]
 
+  # Las tareas de la aplicación (HT-05). Los respaldos no corren aquí sino en el cron del host:
+  # mysqldump vive dentro de db y alcanzarlo desde un contenedor exigiría montarle el socket de Docker.
+  programador:
+    image: el-taller-ines:actual
+    pull_policy: never
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      TALLER_ROL: programador
+    user: www-data
+    depends_on:
+      web:
+        condition: service_healthy
+    volumes:
+      - storage:/var/www/taller/sistema/storage
+    command: ["php", "artisan", "schedule:work"]
+
   db:
     image: mysql:8.4
     restart: unless-stopped

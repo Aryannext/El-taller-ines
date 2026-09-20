@@ -1,0 +1,11 @@
+# Respaldos de El-taller-ines (RNF-15, HT-05). Se instala en el servidor con:
+#   docs/04-especificacion-tecnica/07-despliegue-y-operacion.md
+# El registro queda en /var/log/taller-respaldos.log, que ese paso crea a nombre de cristian.
+SHELL=/bin/sh
+PATH=/usr/local/bin:/usr/bin:/bin
+
+# Respaldo diario de la base y las fotos, a las 2 de la mañana
+0 2 * * * cristian cd /home/cristian/proyectos/proyectosena.online/el-taller-ines && sh despliegue/respaldar.sh >> /var/log/taller-respaldos.log 2>&1
+
+# Copia semanal a Google Drive, los domingos a las 3
+0 3 * * 0 cristian cd /home/cristian/proyectos/proyectosena.online/el-taller-ines && sh despliegue/copiar-a-drive.sh >> /var/log/taller-respaldos.log 2>&1

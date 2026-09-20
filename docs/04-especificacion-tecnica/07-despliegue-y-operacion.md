@@ -10,7 +10,7 @@ HT-04 confirmó el servidor: un VPS de Hostinger con Ubuntu 24.04, **compartido*
 | --- | --- |
 | **Dirección** | `https://proyectosena.online/taller`, dentro del sitio del portafolio, como sus otros proyectos |
 | **Carpeta** | `/home/cristian/proyectos/proyectosena.online/el-taller-ines`, un clon del repositorio que maneja el usuario `cristian` |
-| **Contenedores** | `despliegue/docker-compose.yml`: `web` (PHP 8.4 con Apache, sirve `sistema/public`), `cola` (el trabajador de los avisos), `db` (MySQL 8.4), y `evolution` con `evolution-db` (Evolution API y su PostgreSQL, ADR-007) |
+| **Contenedores** | `despliegue/docker-compose.yml`: `web` (PHP 8.4 con Apache, sirve `sistema/public`), `cola` (el trabajador de los avisos), `programador` (las tareas de la aplicación), `db` (MySQL 8.4), y `evolution` con `evolution-db` (Evolution API y su PostgreSQL, ADR-007) |
 | **Puertos** | `web` escucha solo en `127.0.0.1:3012`. `db` no publica ningún puerto: solo la alcanzan los otros dos contenedores |
 | **Datos** | Los volúmenes `taller_db` (la base) y `taller_storage` (fotos, sesiones y registros) |
 | **Escritura** | Dentro del contenedor, `www-data` solo escribe en `sistema/storage` y `sistema/bootstrap/cache` |
@@ -64,6 +64,7 @@ HT-04 confirmó el servidor: un VPS de Hostinger con Ubuntu 24.04, **compartido*
 | `RESPALDO_DIAS` | — | `14` | Días que se conservan (RNF-15) |
 | `RESPALDO_REMOTO` | — | `drive:taller-respaldos` | Carpeta de Google Drive configurada en rclone |
 | `RESPALDO_COPIAS_REMOTAS` | — | `2` | Copias semanales que se conservan en Google Drive |
+| `MYSQL_PWD` | — | No se guarda: `respaldar.sh` y `restaurar.sh` se la pasan a `mysqldump` y a `mysql` solo mientras corren | Contraseña de MySQL fuera de la lista de procesos (RNF-24) |
 
 ## Nginx
 
@@ -113,32 +114,41 @@ Si la sesión se cierra en el celular, los envíos fallan, los avisos quedan par
 
 ## Tareas programadas
 
-Todavía no hay tareas: llegan con HT-05. Entonces se agrega a `docker-compose.yml` un contenedor `programador` con la misma imagen, que ejecuta `php artisan schedule:work`.
+Las tareas se reparten en dos lugares, según lo que necesiten alcanzar.
 
-Las tareas estarán en `routes/console.php`. Usan la hora de Colombia porque la aplicación está en esa zona.
+**Las de la aplicación** las corre el contenedor `programador`, que usa la misma imagen y ejecuta `php artisan schedule:work`. Están en `routes/console.php` y usan la hora de Colombia porque la aplicación está en esa zona.
+
+| Tarea | Cuándo | Qué hace | Requisito |
+| --- | --- | --- | --- |
+| Limpiar trabajos fallidos | Domingos, 4:00 a. m. | `php artisan queue:prune-failed --hours=336` | — |
+
+Si una tarea falla, el programador lo anota en el registro de Laravel.
+
+**Los respaldos** los corre el cron del host, como el usuario `cristian`, con el archivo `despliegue/cron/taller` instalado en `/etc/cron.d/taller`.
 
 | Tarea | Cuándo | Qué hace | Requisito |
 | --- | --- | --- | --- |
 | Respaldo diario | Todos los días, 2:00 a. m. | `despliegue/respaldar.sh` | RNF-15 |
 | Copia semanal a Google Drive | Domingos, 3:00 a. m. | `despliegue/copiar-a-drive.sh` | RNF-15 |
-| Limpiar trabajos fallidos | Domingos, 4:00 a. m. | `php artisan queue:prune-failed --hours=336` | — |
 
-Si una tarea falla, el programador lo anota en el registro de Laravel.
+**Por qué no van con las otras:** `mysqldump` corre dentro del contenedor `db`, y alcanzarlo desde el `programador` exigiría montarle el socket de Docker, que es darle control del host entero a un contenedor que atiende peticiones. En un VPS compartido eso contradice lo que revisa PM-07. El cliente de MySQL tampoco sirve como atajo: el de Debian es de MariaDB y no se autentica contra MySQL 8.4, que usa `caching_sha2_password`.
+
+La salida de las dos queda en `/var/log/taller-respaldos.log`.
 
 ## Respaldos
-
-> Esta sección se escribió para una instalación sin contenedores. HT-05 la ajusta: `mysqldump` corre dentro del contenedor `db` y las fotos se toman del volumen `taller_storage`.
 
 ### Respaldo diario
 
 `despliegue/respaldar.sh`:
 
 1. Crea la carpeta `RESPALDO_CARPETA/AAAA-MM-DD`.
-2. Exporta la base: `mysqldump --defaults-extra-file=/etc/taller/respaldo.cnf --single-transaction --no-tablespaces taller | gzip > base.sql.gz`. `--single-transaction` copia un estado coherente sin detener el sistema.
-3. Empaqueta las fotos: `tar -czf fotos.tar.gz -C /var/www/taller/sistema/storage/app/privado fotos`.
+2. Exporta la base con `mysqldump --single-transaction --no-tablespaces` dentro del contenedor `db` y la comprime en `base.sql.gz`. `--single-transaction` copia un estado coherente sin detener el sistema. El dump se escribe y se comprime en dos pasos, y no encadenado con una tubería: en `sh` un fallo de `mysqldump` se perdería y el respaldo quedaría a medias sin que nadie se entere.
+3. Empaqueta las fotos del volumen `taller_storage` en `fotos.tar.gz`, con `tar -czf - -C /var/www/taller/sistema/storage/app/privado fotos` dentro del contenedor `web`.
 4. Guarda la huella de cada archivo en `sumas.txt` con `sha256sum`, para comprobar en la restauración que no se dañaron.
 5. Borra las carpetas de más de `RESPALDO_DIAS` días.
 6. Si un paso falla, se detiene con error.
+
+La contraseña llega al contenedor en `MYSQL_PWD` y no como argumento, para que no aparezca en la lista de procesos del servidor (RNF-24).
 
 ### Copia semanal
 
@@ -149,6 +159,17 @@ Si una tarea falla, el programador lo anota en el registro de Laravel.
 
 - **Por qué 2 copias:** el requisito no fija cuántas guardar. RNF-15 calcula unos 2,6 GB de fotos después de 3 años; con 2 copias son 5,2 GB, que caben con margen en los 15 GB gratuitos.
 - **Configuración de rclone:** el aprendiz la crea en el servidor con `rclone config`. Autorizar la cuenta de Google es un paso que hace él.
+
+### Restauración
+
+`despliegue/restaurar.sh CARPETA BASE CARPETA_STORAGE` deshace el respaldo donde haga falta:
+
+1. Comprueba `sumas.txt` con `sha256sum -c`, por si el viaje a Google Drive y de vuelta dañó algo.
+2. Carga `base.sql.gz` en la base que se le indique.
+3. Descomprime `fotos.tar.gz` en el disco privado.
+
+No corre en el VPS ni lo toca: el peor caso que mide PM-02 es que el VPS ya no exista. La contraseña se pasa en `MYSQL_PWD`, no por argumento, para que no quede en el historial del shell.
+
 - **Restauración:** se prueba con PM-02 y se explica en el manual técnico (DOC-23).
 
 ## Despliegue
@@ -162,9 +183,19 @@ El usuario `cristian`, desde la carpeta del clon:
 | Paso | Comando | Qué hace |
 | --- | --- | --- |
 | 1 | `git clone https://github.com/Aryannext/El-taller-ines.git el-taller-ines` | Trae el código |
-| 2 | `sh despliegue/instalar.sh` | Crea `despliegue/.env` con la llave y las contraseñas generadas ahí mismo, construye la imagen, levanta los tres contenedores y espera a que `/up` responda |
+| 2 | `sh despliegue/instalar.sh` | Crea `despliegue/.env` con la llave y las contraseñas generadas ahí mismo, construye la imagen, levanta los contenedores y espera a que `/up` responda |
 | 3 | `sh despliegue/crear-usuaria.sh` | Crea el negocio inicial y la usuaria; la contraseña la escribe la dueña o el aprendiz, sin que se muestre |
-| 4 | Agregar la línea `include` al sitio del portafolio, `sudo nginx -t` y `sudo systemctl reload nginx` | Publica `/taller`; es el único paso que necesita `sudo` |
+| 4 | Agregar la línea `include` al sitio del portafolio, `sudo nginx -t` y `sudo systemctl reload nginx` | Publica `/taller` |
+| 5 | Preparar los respaldos, abajo | Programa el respaldo diario y la copia semanal (RNF-15) |
+| 6 | `rclone config` | Autoriza la cuenta de Google Drive donde va la copia semanal; solo se hace una vez |
+
+Los pasos 4 y 5 son los únicos que necesitan `sudo`. El paso 5 son tres comandos: el cron corre como `cristian`, así que la carpeta de los respaldos y el registro tienen que existir y ser suyos antes de la primera corrida.
+
+```sh
+sudo install -d -o cristian -g cristian /var/respaldos/taller
+sudo install -m 644 -o cristian -g cristian /dev/null /var/log/taller-respaldos.log
+sudo cp despliegue/cron/taller /etc/cron.d/taller
+```
 
 ### Actualizar
 
@@ -259,6 +290,6 @@ Los íconos llevan las tijeras de la marca, las mismas de PT-01, en blanco sobre
 | --- | --- | --- |
 | **Disponibilidad** | UptimeRobot consulta `https://proyectosena.online/taller/up` cada 5 minutos y avisa por correo al aprendiz si falla | RNF-16 |
 | **Errores** | Registro diario de Laravel en `storage/logs`, dentro del volumen `taller_storage`, conservado 14 días; `docker compose logs web` muestra los de Apache y PHP | — |
-| **Contenedores** | `docker compose ps` muestra si `web` está sano y si `cola` y `db` corren | HT-04 |
+| **Contenedores** | `docker compose ps` muestra si `web` está sano y si `cola`, `programador` y `db` corren | HT-04 |
 | **Cola** | `docker compose exec web php artisan queue:failed` lista los envíos fallidos | RNF-17 |
-| **Respaldos** | El registro de Laravel anota si una tarea programada falló; PM-02 revisa que existan los 14 días | RNF-15 |
+| **Respaldos** | El cron del host escribe cada corrida en `/var/log/taller-respaldos.log`; PM-02 revisa que existan los 14 días | RNF-15 |
