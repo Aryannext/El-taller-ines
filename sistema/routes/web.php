@@ -27,8 +27,9 @@ Route::middleware(['auth', 'auth.session', 'cache.headers:no_store;private'])->g
 
     Route::get('/', [PanelController::class, 'mostrar'])->name('panel');
 
-    // HU-33: la lista que extiende el panel (CA-32.2)
+    // HU-33 y HU-34: las dos listas que extienden el panel (CA-32.2)
     Route::get('/seguimiento/atrasadas', [SeguimientoController::class, 'atrasadas'])->name('seguimiento.atrasadas');
+    Route::get('/seguimiento/sin-reclamar', [SeguimientoController::class, 'sinReclamar'])->name('seguimiento.sin-reclamar');
 
     Route::get('/clientes', [ClienteController::class, 'buscar'])->name('clientes.buscar');
     Route::get('/clientes/nuevo', [ClienteController::class, 'nuevo'])->name('clientes.nuevo');

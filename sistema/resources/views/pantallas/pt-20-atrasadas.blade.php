@@ -10,8 +10,23 @@
   </header>
 
   <main class="contenido">
+    <nav class="pestanas" aria-label="Seguimiento">
+      <a href="{{ route('seguimiento.atrasadas') }}" aria-current="page">
+        Atrasadas
+        @if (count($ordenes))
+          <span class="contador">{{ count($ordenes) }}</span>
+        @endif
+      </a>
+      <a href="{{ route('seguimiento.sin-reclamar') }}">
+        Sin reclamar
+        @if ($sinReclamar)
+          <span class="contador neutro">{{ $sinReclamar }}</span>
+        @endif
+      </a>
+    </nav>
+
     @if ($ordenes === [])
-      {{-- Nada atrasado es una buena noticia, no una lista vacía --}}
+      {{-- CA-32.3: nada atrasado es una buena noticia, no una lista vacía --}}
       <p class="texto-2">No hay órdenes atrasadas. Todo el trabajo en proceso está dentro de su fecha.</p>
     @else
       <p class="texto-2">Órdenes en proceso cuya fecha de entrega ya pasó, de la más atrasada a la menos.</p>
