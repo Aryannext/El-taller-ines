@@ -4,3 +4,12 @@ despliegue/.env
 # Entorno local de desarrollo: PHP y MySQL portátiles, datos de la base,
 # respaldos y la contraseña de la usuaria demo. Nada de esto se versiona (RNF-24).
 local/
+# App para Android (HT-07). La llave de firma nunca se versiona: quien la tiene puede publicar
+# una app que Android acepta como esta (RNF-24). Los APK y AAB se publican en el servidor, no aquí.
+*.keystore
+*.jks
+*.apk
+*.aab
+# Bubblewrap regenera el proyecto Android entero desde twa-manifest.json: solo ese se versiona
+movil/*
+!movil/twa-manifest.json
