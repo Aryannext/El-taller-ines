@@ -19,7 +19,8 @@
 
     {{-- CA-18.1: agrupadas por prenda, con su tipo y su descripción --}}
     @foreach ($orden->prendas as $prenda)
-      <section class="seccion">
+      {{-- El id deja que las miniaturas del detalle salten directo a esta prenda --}}
+      <section class="seccion" id="prenda-{{ $prenda->id }}">
         <div class="entre">
           <h2 class="titulo-prenda">{{ $prenda->tipoPrenda->nombre }} <span class="texto-2 peso-normal">· {{ $prenda->descripcion_arreglo }}</span></h2>
           <span class="chip {{ $chipDePrenda[$prenda->estado->value] }}">{{ $prenda->estado->etiqueta() }}</span>

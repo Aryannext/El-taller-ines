@@ -71,11 +71,12 @@
           </div>
           <div class="entre">
             @if ($prenda->fotos->isNotEmpty())
-              <div class="miniaturas">
+              {{-- HU-18: tocar las miniaturas lleva a las fotos grandes de esta prenda. En PM-05, «Ver fotos juntas» pasó desapercibido --}}
+              <a class="miniaturas" href="{{ route('fotos.de-orden', $orden) }}#prenda-{{ $prenda->id }}" aria-label="Ver las fotos de {{ $prenda->tipoPrenda->nombre }}">
                 @foreach ($prenda->fotos as $foto)
-                  <img class="foto" src="{{ route('fotos.mostrar', $foto) }}" alt="Foto {{ $foto->posicion }} de {{ $prenda->tipoPrenda->nombre }}" width="56" height="56" loading="lazy">
+                  <img class="foto" src="{{ route('fotos.mostrar', $foto) }}" alt="" width="56" height="56" loading="lazy">
                 @endforeach
-              </div>
+              </a>
             @elseif (in_array($prenda->id, $prendasCorregibles, true))
               {{-- CA-17.4: sugiere tomarle una y lleva a donde se agrega --}}
               <a class="aviso-sugerencia enlace-sugerencia" href="{{ route('prendas.editar', [$orden, $prenda]) }}"><i class="i i-camara i-sm"></i>Sin foto · tomar una</a>

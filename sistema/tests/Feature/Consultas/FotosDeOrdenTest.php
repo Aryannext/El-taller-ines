@@ -84,8 +84,18 @@ class FotosDeOrdenTest extends TestCase
         }
 
         // Desde el detalle de la orden se llega con «Ver fotos juntas»
-        $this->get(route('ordenes.detalle', $this->orden42))
+        $detalle = $this->get(route('ordenes.detalle', $this->orden42))
             ->assertSee('<a href="'.route('fotos.de-orden', $this->orden42).'">Ver fotos juntas</a>', false);
+
+        // …y tocando las miniaturas de una prenda, que llevan directo a sus fotos grandes.
+        // En PM-05 el enlace del título pasó desapercibido: las miniaturas son lo que se toca
+        foreach ([$this->pantalonCompleto->prenda_id => 'Pantalón', $this->camisaBlanca->prenda_id => 'Camisa'] as $prendaId => $tipo) {
+            $detalle->assertSee(
+                '<a class="miniaturas" href="'.route('fotos.de-orden', $this->orden42).'#prenda-'.$prendaId.'" aria-label="Ver las fotos de '.$tipo.'">',
+                false
+            );
+            $pagina->assertSee('id="prenda-'.$prendaId.'"', false);
+        }
     }
 
     public function test_ca_18_3_fotos_privadas(): void
