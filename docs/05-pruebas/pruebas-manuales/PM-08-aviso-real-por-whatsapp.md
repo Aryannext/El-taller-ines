@@ -32,16 +32,28 @@ Si la sesión de WhatsApp está caída, se vuelve a conectar antes de repetir la
 
 ## Registro
 
-**Fecha:** · **Commit:** · **Versión de Evolution API:**
+**Fecha:** 16 de septiembre de 2026, verificada el 21 · **Commit:** `de1b236` · **Versión de Evolution API:** v2.3.7
 
 | Paso | Resultado | Hora | Captura |
 | --- | --- | --- | --- |
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
-| 5 | | | |
+| 1 | Órdenes #0001 (2 prendas, saldo $11.000) y #0002 (1 prenda, saldo $10.000). Reconstruido de la base, no anotado en su momento | — | — |
+| 2 | La orden quedó Lista y el aviso se generó solo. No se anotó cómo respondió la pantalla | 10:01:43 y 10:04:31 | — |
+| 3 | Los dos mensajes llegaron. El aprendiz los encontró el 21 de septiembre | 10:01:46 y 10:04:34 | En el chat del aprendiz consigo mismo; pendiente |
+| 4 | Los dos avisos constan como `enviado` por `evolution_api`, con fecha, hora, mensaje e identificador de WhatsApp | — | — |
+| 5 | La dirección de Evolution API aparece solo en `EvolutionApiCanal` y la de la API de Meta solo en `WhatsAppCloudApiCanal` | 21 sep | — |
 
 **Mensaje recibido (texto exacto):**
 
-**Resultado:**
+> Hola Cristian, tu orden #0001 del taller está lista para recoger. Prendas listas: 2. Saldo pendiente: $11.000. Te esperamos.
+
+> Hola Cristian, tu orden #0002 del taller está lista para recoger. Prendas listas: 1. Saldo pendiente: $10.000. Te esperamos.
+
+**Resultado:** **Aprobado, con salvedades.** Entre generar el aviso y enviarlo pasaron 3 segundos, por la cola y sin ninguna acción de la usuaria (CA-28.1), y el paso 5 encuentra cada servicio solo en su adaptador (RNF-06).
+
+Salvedades, para que el informe no diga más de lo que pasó:
+
+- **El cliente de prueba tenía el mismo celular que el WhatsApp conectado**, así que el sistema se escribió a sí mismo. WhatsApp entrega esos mensajes en el chat de la persona consigo misma y sin notificación: por eso pasaron cinco días sin que nadie los viera. El recorrido completo —aviso, cola, Evolution API, servidores de WhatsApp, celular— quedó probado; la entrega a un número ajeno no.
+- **La preparación no siguió el guion**: no consta que la orden tuviera una prenda Terminada y otra En proceso ni un abono. Los pasos 1 y 2 se reconstruyeron de la base.
+- **Faltan las capturas.**
+
+Antes de la sustentación conviene repetirla completa con el celular de otra persona, con su permiso: es la única forma de mostrar el aviso llegando como le llegaría a un cliente.
