@@ -7,7 +7,9 @@
 #
 # La contraseña no se pasa por argumento, para que no quede en el historial del shell:
 #   read -r clave; MYSQL_PWD=$clave; export MYSQL_PWD
-# MYSQL_USER y MYSQL_HOST cambian el usuario y el servidor; por defecto root en 127.0.0.1.
+# MYSQL_USER, MYSQL_HOST y MYSQL_PORT cambian a dónde se restaura; por defecto root en 127.0.0.1:3306.
+# El puerto hace falta más de lo que parece: la máquina de desarrollo puede tener su MySQL en otro,
+# y PM-02 restaura justamente ahí.
 set -eu
 
 if [ $# -ne 3 ]; then
@@ -20,6 +22,7 @@ base=$2
 storage=$3
 usuario=${MYSQL_USER:-root}
 servidor=${MYSQL_HOST:-127.0.0.1}
+puerto=${MYSQL_PORT:-3306}
 
 for archivo in base.sql.gz fotos.tar.gz sumas.txt; do
     if [ ! -f "$respaldo/$archivo" ]; then
@@ -31,7 +34,7 @@ done
 # Que el respaldo no se haya dañado en el viaje a Google Drive y de vuelta
 (cd "$respaldo" && sha256sum -c sumas.txt)
 
-gzip -dc "$respaldo/base.sql.gz" | mysql --host="$servidor" --user="$usuario" "$base"
+gzip -dc "$respaldo/base.sql.gz" | mysql --host="$servidor" --port="$puerto" --user="$usuario" "$base"
 
 mkdir -p "$storage/app/privado"
 tar -xzf "$respaldo/fotos.tar.gz" -C "$storage/app/privado"

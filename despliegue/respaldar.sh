@@ -17,14 +17,16 @@ mkdir -p "$destino"
 # La base. --single-transaction copia un estado coherente sin detener el sistema.
 # El dump no se encadena a gzip con una tubería: en sh el fallo de mysqldump se perdería y
 # el respaldo quedaría a medias sin que nadie se entere.
+# La entrada cerrada: «docker compose exec -T» se lleva el stdin que tenga el script, y si alguien lo
+# corre a mano desde la terminal empieza a tragarse lo que teclee
 docker compose exec -T -e MYSQL_PWD="$clave" db \
-    mysqldump --user=root --single-transaction --no-tablespaces "$base" > "$destino/base.sql"
+    mysqldump --user=root --single-transaction --no-tablespaces "$base" > "$destino/base.sql" < /dev/null
 gzip -f "$destino/base.sql"
 
 # Las fotos, del volumen taller_storage que monta web. Se crea la carpeta por si todavía no hay ninguna.
 docker compose exec -T web sh -c \
     'mkdir -p /var/www/taller/sistema/storage/app/privado/fotos \
-     && tar -czf - -C /var/www/taller/sistema/storage/app/privado fotos' > "$destino/fotos.tar.gz"
+     && tar -czf - -C /var/www/taller/sistema/storage/app/privado fotos' > "$destino/fotos.tar.gz" < /dev/null
 
 # La huella de cada archivo, para comprobar en la restauración que no se dañaron
 (cd "$destino" && sha256sum base.sql.gz fotos.tar.gz > sumas.txt)
