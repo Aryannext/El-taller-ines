@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Dominio\Compartido\Reloj;
 use App\Modelos\MetodoPago;
 use App\Modelos\Negocio;
 use App\Modelos\TipoPrenda;
@@ -51,7 +52,8 @@ class VolumenDeTresAniosSeeder extends Seeder
             throw new RuntimeException('El negocio no tiene tipos de prenda ni métodos de pago: corre NegocioInicialSeeder.');
         }
 
-        $hoy = CarbonImmutable::now()->startOfDay();
+        // El «hoy» del sistema, el mismo que usan las consultas del panel y de seguimiento (RN-09)
+        $hoy = CarbonImmutable::instance(app(Reloj::class)->hoy());
 
         $clientes = $this->clientes($negocio->id, $hoy);
         $ordenes = $this->ordenes($negocio->id, $clientes, $hoy);
