@@ -105,27 +105,36 @@ def main() -> int:
     ]
 
     print(f"{argumentos.solicitudes} solicitudes por pantalla, tras {argumentos.calentamiento} de calentamiento.\n")
-    print(f"| {'Pantalla':<42} | {'Percentil 95':>12} | {'Máximo':>8} | ¿Cumple? |")
-    print(f"| {'-' * 42} | {'-' * 12} | {'-' * 8} | -------- |")
+    print(f"| {'Pantalla':<42} | {'Percentil 95':>12} | {'Máximo':>8} | {'¿Cumple?':<9} |")
+    print(f"| {'-' * 42} | {'-' * 12} | {'-' * 8} | {'-' * 9} |")
 
-    incumplen = 0
+    lentas = 0
+    fallidas = 0
+
     for nombre, url in pantallas:
         try:
             tiempos = medir(cliente, url, argumentos.solicitudes, argumentos.calentamiento)
         except urllib.error.HTTPError as error:
-            print(f"| {nombre:<42} | {'error ' + str(error.code):>12} | {'—':>8} | no       |")
-            incumplen += 1
+            # No medida no es lo mismo que lenta: un 404 suele ser una dirección mal pasada
+            print(f"| {nombre:<42} | {'error ' + str(error.code):>12} | {'—':>8} | sin medir |")
+            fallidas += 1
             continue
 
         p95 = percentil(tiempos, 95)
         maximo = max(tiempos)
         cumple = p95 <= TOPE_MS
-        incumplen += 0 if cumple else 1
-        print(f"| {nombre:<42} | {p95:>9.0f} ms | {maximo:>5.0f} ms | {'sí' if cumple else 'NO':<8} |")
+        lentas += 0 if cumple else 1
+        print(f"| {nombre:<42} | {p95:>9.0f} ms | {maximo:>5.0f} ms | {'sí' if cumple else 'NO':<9} |")
 
     print()
-    if incumplen:
-        print(f"{incumplen} pantalla(s) pasan de {TOPE_MS} ms en el percentil 95: RNF-01 no se cumple.")
+
+    if fallidas:
+        print(f"{fallidas} pantalla(s) no se pudieron medir: revisa la dirección y la orden que se pasó.")
+
+    if lentas:
+        print(f"{lentas} pantalla(s) pasan de {TOPE_MS} ms en el percentil 95: RNF-01 no se cumple.")
+
+    if fallidas or lentas:
         return 1
 
     print(f"Las {len(pantallas)} pantallas responden en {TOPE_MS} ms o menos en el percentil 95 (RNF-01).")

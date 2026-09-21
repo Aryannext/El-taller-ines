@@ -44,14 +44,22 @@ El percentil 95 significa que 95 de cada 100 solicitudes tardan eso o menos. Se 
 
 ## Registro
 
-**Fecha:** · **Commit:** · **Plan del VPS (CPU y memoria):** · **Volumen cargado:**
+**Fecha:** 21 de septiembre de 2026 · **Commit:** `492b6d5` · **Plan del VPS:** 2 CPU y 8 GB de RAM, compartido con otros proyectos · **Volumen cargado:** 753 órdenes, 501 clientes, 2.205 prendas y 1.501 pagos
 
 | Pantalla | Percentil 95 | Máximo | LCP en 4G simulada | ¿Cumple? |
 | --- | --- | --- | --- | --- |
-| Panel del día (PT-02) | | | | |
-| Detalle de una orden de 10 prendas (PT-09) | | | | |
-| Búsqueda de clientes (PT-03) | | | | |
-| Órdenes atrasadas (PT-20) | | | | |
-| Órdenes sin reclamar (PT-21) | | | | |
+| Panel del día (PT-02) | 53 ms | 79 ms | pendiente | Sí |
+| Detalle de una orden de 10 prendas (PT-09) | 43 ms | 48 ms | pendiente | Sí |
+| Búsqueda de clientes (PT-03) | 28 ms | 37 ms | pendiente | Sí |
+| Órdenes atrasadas (PT-20) | 52 ms | 86 ms | pendiente | Sí |
+| Órdenes sin reclamar (PT-21) | 52 ms | 55 ms | pendiente | Sí |
 
-**Resultado:** · **Si no cumple, consulta lenta encontrada y corrección:**
+100 solicitudes por pantalla tras 5 de calentamiento, con `scripts/medir_rendimiento.py`. La carga del VPS durante la medición fue de 0,46 en el primer minuto; el servidor atiende también el portafolio y los proyectos de otra usuaria, así que esa cifra no es solo del taller.
+
+**Resultado:** **Aprobado en el tiempo de respuesta del servidor.** Las cinco pantallas están entre 8 y 18 veces por debajo del máximo de 500 ms que fija RNF-01, y ninguna de las 500 solicitudes medidas pasó de 86 ms.
+
+El dato que más importa es el detalle de una orden de 10 prendas: 43 ms, el segundo más rápido de las cinco. Es el escenario de F-02, donde la versión 1 repetía una consulta por cada prenda y abrir una orden grande se sentía lento. `ConsultasPorPaginaTest` ya comprobaba que esa pantalla hace las mismas 7 consultas con 1 prenda y con 10; esta medición lo confirma con volumen real y sobre el servidor.
+
+**Falta el LCP en 4G simulada.** Se mide con Lighthouse en perfil móvil, desde el navegador, sobre cada una de las cinco pantallas. Es la mitad de la prueba que no se puede automatizar desde el servidor, y queda pendiente de una corrida manual.
+
+**Si no cumple, consulta lenta encontrada y corrección:** no aplica; no hubo ninguna pantalla lenta.
