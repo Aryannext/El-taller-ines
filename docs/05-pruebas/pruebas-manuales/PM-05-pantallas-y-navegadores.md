@@ -115,9 +115,9 @@ Probar en los tres navegadores:
 
 | Criterio | Qué se hace | Qué debe pasar | Chrome Android | Chrome | Edge |
 | --- | --- | --- | --- | --- | --- |
-| **CA-01.4** | Cerrar sesión y tocar Atrás en el navegador | Aparece el inicio de sesión y ningún dato del taller | | | |
-| **CA-10.1** | Llenar una orden con dos prendas, registrar un cliente nuevo desde ella y volver | La orden tiene al cliente seleccionado y las dos prendas siguen escritas | | | |
-| **CA-18.2** | En las fotos de una orden, tocar una foto | La foto se ve ampliada | | | |
+| **CA-01.4** | Cerrar sesión y tocar Atrás en el navegador | Aparece el inicio de sesión y ningún dato del taller | Sí | Sí | Sí |
+| **CA-10.1** | Llenar una orden con dos prendas, registrar un cliente nuevo desde ella y volver | La orden tiene al cliente seleccionado y las dos prendas siguen escritas | No aplica | No aplica | No aplica |
+| **CA-18.2** | En las fotos de una orden, tocar una foto | La foto se ve ampliada | Sí | Sí | Sí |
 
 ## Criterio de aprobación
 
@@ -128,8 +128,20 @@ Probar en los tres navegadores:
 
 ## Registro
 
-**Fecha:** · **Commit:** · **Chrome para Android (versión y celular):** · **Chrome (versión):** · **Edge (versión):**
+**Fecha:** 21 de septiembre de 2026 · **Commit:** `fc48f20` · **Chrome para Android (versión y celular):** no anotada · **Chrome (versión):** no anotada · **Edge (versión):** no anotada
+
+Además se probó en **Brave 1.95.104**, que usa el mismo motor que Chrome. Queda como prueba adicional y no reemplaza a ninguno de los tres navegadores.
 
 Las tablas de las secciones A a D son la hoja de registro.
 
-**Resultado:** · **Defectos abiertos:**
+**Resultado:** **Parcial.** Se ejecutó solo la sección D, que es la que cierra HU-01 y HU-18.
+
+- **D · aprobada.** CA-01.4 y CA-18.2 pasan en los tres navegadores y también en Brave. CA-10.1 no aplica porque HU-10 es Should y no se construyó.
+- **A, B y C · pendientes.** Faltan el recorrido de las historias Must, las 23 pantallas a 360 px con accesibilidad y los mensajes de validación. Las pantallas PT-12, PT-22 y PT-23 son de historias Should y Could sin construir, así que cuando se corran esas filas tampoco aplican.
+
+Observaciones de esta corrida:
+
+- **Al cerrar sesión y tocar Adelante, el navegador volvió a entrar.** Los registros del servidor muestran que, después del cierre, cada página con datos respondió 302 al inicio de sesión. Se volvió a entrar solo con un `POST /entrar` nuevo, con la contraseña correcta y el token CSRF recién emitido. Un formulario viejo sacado del historial habría respondido 419. Lo más probable es que el gestor de contraseñas del navegador llenara los campos. No es un defecto del sistema, pero en un celular compartido cualquiera podría entrar sin saber la contraseña. El manual de usuario (DOC-22) debe recomendar no guardarla en el navegador.
+- **Las fotos de la orden de prueba devolvían 500.** Se crearon con `docker compose exec`, que corre como root, y la carpeta quedó con permisos 0700 a nombre de root, donde Apache no puede leer. Se corrigió el dueño de la carpeta. No es un defecto del sistema: las fotos que sube la aplicación quedan a nombre de `www-data`.
+
+**Defectos abiertos:** ninguno. Se encontró y se corrigió uno: en el detalle de la orden, las miniaturas no llevaban a las fotos, y el único camino era un enlace pequeño en el título que pasó desapercibido. Corregido en `fc48f20`, también en el mockup.
