@@ -39,21 +39,23 @@ Los 10 pasos pasan. Si el otro celular es un iPhone y el navegador no ofrece ins
 
 ## Registro
 
-**Fecha:** · **Commit:** · **Versión del APK:**
+**Fecha:** 21 de septiembre de 2026 · **Commit:** `fc48f20` · **Versión del APK:** no hay APK todavía (HT-07)
 
-**Android real (modelo y versión):** · **Otro celular (modelo, sistema y navegador):**
+**Android real (modelo y versión):** no anotado; se usó Chrome para Android · **Otro celular (modelo, sistema y navegador):** no se usó
 
 | Paso | Resultado | Captura | Observaciones |
 | --- | --- | --- | --- |
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 · CA-17.1 | | | |
-| 5 · CA-17.2 | | | |
-| 6 | | | |
-| 7 · CA-29.2 | | | |
-| 8 | | | |
-| 9 | | | |
-| 10 | | | |
+| 1 | Pendiente | | Espera el APK de HT-07 |
+| 2 | Pendiente | | Espera el APK y `assetlinks.json` |
+| 3 | Pendiente | | |
+| 4 · CA-17.1 | **Sí.** La cámara abrió desde Chrome para Android y la foto quedó asociada a la prenda «Blusa · Subir basta 3 cm» de la #0003 | La del detalle de la orden | Se guardó reducida a 1200 × 1600 px y 242 KB (RNF-03). Se tomó al corregir una prenda que ya existía, no al registrarla; es la misma carga de fotos |
+| 5 · CA-17.2 | **Sí.** La foto elegida de la galería quedó como la segunda de la misma prenda | | Se guardó a 1600 × 1200 px y 320 KB, sin perder la orientación horizontal |
+| 6 | Pendiente | | |
+| 7 · CA-29.2 | Pendiente | | |
+| 8 | Pendiente | | |
+| 9 | Pendiente | | |
+| 10 | Pendiente | | |
 
-**Resultado:**
+**Resultado:** **Parcial.** Solo se corrieron los pasos 4 y 5, y fue desde Chrome para Android porque todavía no hay APK. Los dos pasan, y eso basta para los criterios de HU-17: la cámara y la galería del celular funcionan, y las fotos quedan asociadas y reducidas.
+
+La prueba completa queda pendiente de HT-07. Hay que instalar el APK y repetir los pasos 4 y 5 dentro de él, porque lo que PM-04 verifica es que la cámara y la galería funcionen desde la app instalada (RNF-35).
