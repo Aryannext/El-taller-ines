@@ -79,7 +79,7 @@ include /home/cristian/proyectos/proyectosena.online/el-taller-ines/despliegue/n
 - **`X-Forwarded-For`** se reemplaza con la IP real en vez de agregarse, para que nadie la falsee ante el límite de intentos del inicio de sesión (RNF-20).
 - **`client_max_body_size 64M`** coincide con `post_max_size` del contenedor.
 - **`.env` y `.git`** no se pueden descargar: Apache solo sirve `sistema/public`.
-- **Pendiente para HT-07:** Android busca `assetlinks.json` en la raíz del dominio, fuera de `/taller`, así que ese único archivo tendrá su propia `location` en el sitio del portafolio.
+- **`location = /.well-known/assetlinks.json`** atiende la raíz del dominio, no `/taller`: Android solo busca ahí el [enlace entre el APK y el sitio](#enlace-entre-el-apk-y-el-sitio). Como `taller.conf` se incluye en el `server` del portafolio, esa `location` vive en `taller.conf`, versionada, y el sitio del portafolio no se toca.
 - **Pendiente:** las cabeceras de [seguridad](06-seguridad.md#cabeceras) se envían desde el contenedor, no desde el Nginx compartido, para no cambiar las de los otros proyectos.
 
 ## Servicio de la cola
@@ -257,7 +257,13 @@ Los íconos llevan las tijeras de la marca, las mismas de PT-01, en blanco sobre
 
 ### Enlace entre el APK y el sitio
 
-`public/.well-known/assetlinks.json`:
+Android comprueba que el APK y el sitio son del mismo dueño leyendo `https://proyectosena.online/.well-known/assetlinks.json`, **en la raíz del dominio**. No lo busca bajo `/taller`, y exige que responda 200 con `application/json` y sin redirecciones.
+
+- **Dónde está el archivo:** `sistema/public/.well-known/assetlinks.json`, en el repositorio. El contenedor lo sirve como cualquier archivo de `public/`.
+- **Cómo llega a la raíz:** `taller.conf` tiene una `location = /.well-known/assetlinks.json` que lo pide al contenedor. Si el archivo estuviera solo en `public/`, sin esa `location`, quedaría publicado en `/taller/.well-known/assetlinks.json`, donde Android nunca mira, y el APK abriría con la barra del navegador.
+- **Si otra app del dominio lo necesitara:** hay un solo archivo por dominio. Sus declaraciones irían en el mismo arreglo, no en otra `location`.
+
+El contenido:
 
 ```json
 [{
