@@ -80,6 +80,7 @@ include /home/cristian/proyectos/proyectosena.online/el-taller-ines/despliegue/n
 - **`client_max_body_size 64M`** coincide con `post_max_size` del contenedor.
 - **`.env` y `.git`** no se pueden descargar: Apache solo sirve `sistema/public`.
 - **`location = /.well-known/assetlinks.json`** atiende la raíz del dominio, no `/taller`: Android solo busca ahí el [enlace entre el APK y el sitio](#enlace-entre-el-apk-y-el-sitio). Como `taller.conf` se incluye en el `server` del portafolio, esa `location` vive en `taller.conf`, versionada, y el sitio del portafolio no se toca.
+- **`location ^~ /taller/descargas/`** sirve el [APK](#apk) directo desde `/home/cristian/descargas-taller/`, sin pasar por el contenedor. Es más larga que `/taller/`, así que gana. Solo entrega archivos por su nombre (`autoindex off`) y con `Content-Disposition: attachment`, para que el celular lo descargue en vez de intentar abrirlo.
 - **Pendiente:** las cabeceras de [seguridad](06-seguridad.md#cabeceras) se envían desde el contenedor, no desde el Nginx compartido, para no cambiar las de los otros proyectos.
 
 ## Servicio de la cola
@@ -291,7 +292,9 @@ El contenido:
 | **Si Gradle se cae sin error** | Con «Failed to reserve memory for metaspace» y `windows-x86` en el registro del fallo, el JDK que bajó Bubblewrap es de 32 bits y no le alcanza la memoria. En HT-07 compiló al segundo intento; si vuelve a pasar, se instala Temurin 17 de 64 bits y se cambia `jdkPath` en `~/.bubblewrap/config.json` |
 | **Si Chrome no puede abrir la app** | `fallbackType: customtabs`, que abre el sistema en una pestaña de Chrome |
 | **Versiones** | `appVersionCode` sube en 1 con cada APK nuevo. Los cambios del sistema no necesitan un APK nuevo (ADR-006) |
-| **Distribución** | El APK firmado se publica en el servidor, en `/descargas/`, desde una carpeta fuera del repositorio. El manual de usuario (DOC-22) explica cómo instalarlo |
+| **Distribución** | El APK firmado se descarga de `https://proyectosena.online/taller/descargas/taller.apk`. Nginx lo sirve directo, con la `location ^~ /taller/descargas/` de `taller.conf`, desde `/home/cristian/descargas-taller/`: fuera del repositorio y fuera de la raíz del portafolio. El manual de usuario (DOC-22) explica cómo instalarlo |
+| **Publicar una versión** | Se suben `taller-<versión>.apk` y su `.sha256`, y `taller.apk` se reemplaza por una copia de la nueva: `scp movil/app-release-signed.apk cristian@proyectosena.online:descargas-taller/taller-1.0.0.apk`. Las versiones anteriores se quedan, por si hay que volver a una |
+| **Si el celular abre la app con la barra del navegador** | Una TWA abre en el navegador predeterminado. Con Chrome abre directo; con Brave, Brave muestra su barra unos 2 segundos mientras comprueba el sitio (PM-04). No es un error del enlace: `adb shell pm get-app-links online.proyectosena.taller` debe decir `verified` |
 
 ## Monitoreo
 
