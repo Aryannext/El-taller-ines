@@ -20,7 +20,7 @@ Dice qué se probó, con qué resultado y qué falta. Sigue el [plan de pruebas]
 | **Defectos abiertos** | **Ninguno.** Los 8 encontrados se corrigieron; los dos últimos los halló PM-07 |
 | **GitHub Actions en `main`** | En verde |
 
-**Lo que falta para poder entregar:** PM-01 (usabilidad, necesita compañeros), PM-03 (instalación, necesita otra persona y otra máquina), lo que queda de PM-07 (la prueba de humo, el reinicio de la cola y dos revisiones a mano), las secciones A, B y C de PM-05 y la medición de Lighthouse de PM-06.
+**Lo que falta para poder entregar:** PM-01 (usabilidad, necesita compañeros), PM-03 (instalación, necesita otra persona y otra máquina), lo que queda de PM-07 (la prueba de humo y dos revisiones a mano), las secciones A, B y C de PM-05 y la medición de Lighthouse de PM-06.
 
 ## 2. Pruebas automáticas
 
@@ -86,6 +86,7 @@ De los 35, **19 se comprueban solos en cada envío** y están en verde: RNF-02, 
 | **RNF-11** Contraste y accesibilidad | PM-05, con Lighthouse | **Pendiente** |
 | **RNF-12** Usabilidad | [PM-01](pruebas-manuales/PM-01-usabilidad.md) con compañeros | **Pendiente** |
 | **RNF-15** Respaldos y restauración | [PM-02](pruebas-manuales/PM-02-restauracion-de-respaldos.md) | **Aprobado.** Restauración en 7 segundos contra un máximo de 60 minutos |
+| **RNF-17** Un fallo de WhatsApp no deja al cliente sin aviso | `EnviarAvisoTest` con un canal que siempre falla, más el reinicio de la cola en PM-07, sección B | **Cumple.** Los tres reintentos con espera creciente y el paso a envío asistido están probados; y si el trabajador se cae, el servicio lo levanta solo en menos de veinte segundos |
 | **RNF-18** HTTPS | PM-07, sección A | **Cumple.** HTTP redirige con 301 y el certificado es válido hasta el 18 de diciembre |
 | **RNF-26** Datos personales | PM-07, sección D | **Cumple desde esta ronda.** Los formularios piden solo nombre y celular, y la política de tratamiento de datos ya está publicada y se lee sin iniciar sesión |
 | **RNF-34** Servidor sin cambios propios | PM-07, sección B | **Cumple.** El VPS corre el mismo commit de `main`, sin archivos modificados y configurado solo por variables de entorno |
@@ -104,7 +105,7 @@ De los 35, **19 se comprueban solos en cada envío** y están en verde: RNF-02, 
 | **PM-04** App en el celular | 22 sep | **Aprobada con observaciones.** Los 10 pasos pasan en un Redmi Note 14 5G con Android 15 |
 | **PM-05** Pantallas y navegadores | 21 sep | **Parcial.** Solo la sección D, en Brave, Chrome, Edge y Android |
 | **PM-06** Rendimiento | 21 sep | **Parcial.** Aprobado en el servidor; falta la medición de Lighthouse en el navegador |
-| **PM-07** Seguridad y operación | 22 sep | **Parcial.** Las secciones A (cifrado) y D (datos personales) pasan completas; B pasa salvo el reinicio de la cola; C pasa en ocho de diez riesgos. Encontró los dos defectos de abajo |
+| **PM-07** Seguridad y operación | 22 sep | **Parcial.** Las secciones A (cifrado), B (código y configuración, con la cola levantándose sola) y D (datos personales) pasan completas; C pasa en ocho de diez riesgos. Encontró los dos defectos de abajo |
 | **PM-08** Aviso real por WhatsApp | 16 sep, verificado el 21 | **Aprobado con salvedades.** El aviso salió solo en 3 segundos; el mensaje llegó al número del aprendiz, no de un tercero |
 
 ### Observaciones y salvedades declaradas
@@ -150,7 +151,7 @@ Del [plan de pruebas](plan-de-pruebas.md#para-entregar):
 | --- | --- | --- |
 | **PM-01 · Usabilidad** con 3 compañeros; si no se consiguen, se hace con quienes estén y se declara | Aprendiz y compañeros | Antes del 9 de octubre |
 | **PM-03 · Instalación** siguiendo el manual técnico, en otra máquina | Un compañero, con el aprendiz observando | Cierre, 11 al 13 de octubre |
-| **Terminar PM-07:** la prueba de humo, el reinicio de la cola y las dos revisiones a mano (A01 y A03) | Aprendiz | Antes del cierre |
+| **Terminar PM-07:** la prueba de humo y las dos revisiones a mano (A01 y A03) | Aprendiz | Antes del cierre |
 | **PM-05 · Secciones A, B y C** en los tres navegadores | Aprendiz | Antes del cierre |
 | **PM-06 · Lighthouse** en el navegador, para cerrar el tiempo de carga | Aprendiz | Antes del cierre |
 | **Decidir sobre RN-44:** construir HU-36 o dejar la regla declarada como no implementada | Aprendiz | Antes del cierre |

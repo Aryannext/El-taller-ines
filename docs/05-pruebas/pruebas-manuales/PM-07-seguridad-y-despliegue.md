@@ -31,7 +31,7 @@ Comprobar sobre el sistema desplegado lo que las pruebas automáticas no alcanza
 | Comparar el commit del VPS con el de `main` | Es el mismo | **Sí.** `38ed8fb` en los dos al momento de la revisión |
 | Revisar si hay archivos modificados en el VPS | No hay ninguno | **Sí.** `git status` sin cambios |
 | Revisar el `.env` del VPS | `APP_ENV=production` y `APP_DEBUG=false`; la cola no es `sync` | **Sí.** `APP_ENV=production`, `APP_DEBUG=false`, `LOG_LEVEL=warning`, `SESSION_SECURE_COOKIE=true` y `QUEUE_CONNECTION=database` |
-| Simular una caída de la cola: `docker compose exec cola sh -c 'kill -TERM 1'` | Docker la vuelve a iniciar sola, y el contador de reinicios sube a 1 | **Pendiente de ejecutar.** `restart: always` está declarado en `docker-compose.yml` |
+| Simular una caída de la cola: `docker compose exec cola sh -c 'kill -TERM 1'` | Docker la vuelve a iniciar sola, y el contador de reinicios sube a 1 | **Sí.** Al recibir la señal el trabajador salió, y veinte segundos después el contenedor estaba arriba otra vez sin que nadie lo tocara: `reinicios=1`, arranque a las 21:18:02 UTC del 22 de septiembre |
 
 > **Por qué así y no de otra forma.** El 22 de septiembre el paso se intentó de dos maneras que no prueban nada, y vale la pena dejarlas escritas para no repetirlas:
 >
@@ -95,7 +95,7 @@ Una prueba de humo es un recorrido corto que confirma que lo principal funciona 
 
 Las tablas de las secciones A a F son la hoja de registro.
 
-**Resultado:** **Parcial.** Las secciones A y D pasan completas. La B pasa salvo el reinicio de la cola, que falta ejecutar. La C pasa en ocho de sus diez riesgos y deja A01 y A03 a la espera de repetirse a mano sobre el sistema desplegado, además de la disponibilidad que falta en A09. La E tiene el monitor activo desde el 21 de septiembre, sin su medición. La F está pendiente.
+**Resultado:** **Parcial.** Las secciones A, B y D pasan completas: la B cerró con el reinicio de la cola, que se levantó sola tras recibir la señal (HT-04, RNF-17). La C pasa en ocho de sus diez riesgos y deja A01 y A03 a la espera de repetirse a mano sobre el sistema desplegado, además de la disponibilidad que falta en A09. La E tiene el monitor activo desde el 21 de septiembre, sin su medición. La F está pendiente.
 
 **Dos hallazgos, los dos corregidos durante la prueba:**
 
