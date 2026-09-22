@@ -13,3 +13,6 @@ local/
 # Bubblewrap regenera el proyecto Android entero desde twa-manifest.json: solo ese se versiona
 movil/*
 !movil/twa-manifest.json
+# El portal se genera desde docs/ con scripts/generar_portal.py y lo publica CI: no se versiona
+/portal/
+/.cache/

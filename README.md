@@ -18,6 +18,19 @@ Sistema de gestión para un taller de arreglos de costura en Florencia, Caquetá
 
 Esta es la segunda versión. La primera, [Costura-app](https://github.com/Aryannext/Costura-app), fue un prototipo móvil construido antes de hacer el análisis. Se conserva como antecedente y como fuente de requisitos, no como base de código. Por qué se rehízo: [ADR-000](docs/03-diseno/adr/ADR-000-rehacer-en-vez-de-refactorizar.md).
 
+## Portal del proyecto
+
+**[aryannext.github.io/El-taller-ines](https://aryannext.github.io/El-taller-ines/)** reúne toda la documentación en un sitio navegable: una página por cada causa, requisito, regla, historia, criterio, caso de uso, pantalla, decisión y prueba. Cada una muestra con qué se relaciona, dónde está en el código, cómo se probó y en qué diagramas aparece; cada código es un enlace.
+
+Se genera desde `docs/` y el código, sin editarlo a mano. CI lo publica con cada cambio en `main` y deja una copia que abre sin internet (el artefacto «portal» del flujo). Para verlo en local:
+
+```
+pip install markdown
+python scripts/generar_portal.py
+```
+
+y abrir `portal/index.html`.
+
 ## Documentación
 
 El orden de las carpetas es el orden del proceso: cada fase parte de lo que dejó la anterior.

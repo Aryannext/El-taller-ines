@@ -1,0 +1,60 @@
+# Genera el portal navegable del proyecto y lo publica en GitHub Pages. También deja la carpeta como
+# artefacto «portal», para abrirla sin internet el día de la sustentación.
+# GitHub Pages tiene que estar configurado con «Source: GitHub Actions» (Settings → Pages).
+name: Portal
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Una publicación a la vez; si llega otra, la que estaba en curso termina
+concurrency:
+  group: portal
+  cancel-in-progress: false
+
+jobs:
+  generar:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Traer el código
+        uses: actions/checkout@v5
+
+      - name: Preparar Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+
+      - name: Instalar la dependencia del portal
+        run: pip install markdown==3.7
+
+      - name: Generar el portal
+        run: python scripts/generar_portal.py
+
+      - name: Guardar la copia sin internet
+        uses: actions/upload-artifact@v4
+        with:
+          name: portal
+          path: portal/
+          retention-days: 30
+
+      - name: Preparar la publicación
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: portal/
+
+  publicar:
+    needs: generar
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.publicacion.outputs.page_url }}
+    steps:
+      - name: Publicar en GitHub Pages
+        id: publicacion
+        uses: actions/deploy-pages@v4
