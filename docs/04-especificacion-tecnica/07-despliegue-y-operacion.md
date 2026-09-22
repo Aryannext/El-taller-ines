@@ -81,7 +81,7 @@ include /home/cristian/proyectos/proyectosena.online/el-taller-ines/despliegue/n
 - **`.env` y `.git`** no se pueden descargar: Apache solo sirve `sistema/public`.
 - **`location = /.well-known/assetlinks.json`** atiende la raíz del dominio, no `/taller`: Android solo busca ahí el [enlace entre el APK y el sitio](#enlace-entre-el-apk-y-el-sitio). Como `taller.conf` se incluye en el `server` del portafolio, esa `location` vive en `taller.conf`, versionada, y el sitio del portafolio no se toca.
 - **`location ^~ /taller/descargas/`** sirve el [APK](#apk) directo desde `/home/cristian/descargas-taller/`, sin pasar por el contenedor. Es más larga que `/taller/`, así que gana. Solo entrega archivos por su nombre (`autoindex off`) y con `Content-Disposition: attachment`, para que el celular lo descargue en vez de intentar abrirlo.
-- **Pendiente:** las cabeceras de [seguridad](06-seguridad.md#cabeceras) se envían desde el contenedor, no desde el Nginx compartido, para no cambiar las de los otros proyectos.
+- **Las cabeceras de [seguridad](06-seguridad.md#cabeceras)** las envía el contenedor, con `despliegue/apache/taller.conf`, y no el Nginx compartido, para no cambiárselas a los otros proyectos del dominio. PM-07 las comprueba sobre el sistema desplegado.
 
 ## Servicio de la cola
 

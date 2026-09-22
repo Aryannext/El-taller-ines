@@ -32,9 +32,10 @@ RUN { \
 
 # Apache sirve solo sistema/public
 ENV APACHE_DOCUMENT_ROOT=/var/www/taller/sistema/public
+# Las cabeceras de seguridad y el resto de la configuración propia, versionadas en despliegue/apache/taller.conf
+COPY despliegue/apache/taller.conf /etc/apache2/conf-available/taller.conf
 RUN sed -ri 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf /etc/apache2/apache2.conf \
     && sed -ri 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf \
-    && printf 'ServerTokens Prod\nServerSignature Off\n' > /etc/apache2/conf-available/taller.conf \
     && a2enconf taller \
     && a2enmod rewrite headers
 

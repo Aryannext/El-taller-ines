@@ -37,12 +37,12 @@ La cookie es `HttpOnly`, así que JavaScript no la puede leer, y `SameSite=Lax`.
 
 | Cabecera | Valor | Dónde | Por qué |
 | --- | --- | --- | --- |
-| `Strict-Transport-Security` | `max-age=31536000` | Nginx | El navegador usa HTTPS aunque se escriba `http://` (RNF-18) |
+| `Strict-Transport-Security` | `max-age=31536000` | Nginx | El navegador usa HTTPS aunque se escriba `http://` (RNF-18). **Pendiente:** vale para todo el dominio, así que la decide el dueño del portafolio, no este proyecto |
 | `Cache-Control` | `no-store, private` | Laravel, en las rutas con sesión | Después de cerrar sesión, el botón Atrás no muestra datos guardados (CA-01.4) |
-| `X-Content-Type-Options` | `nosniff` | Nginx | El navegador no interpreta un archivo como otro tipo |
-| `X-Frame-Options` | `DENY` | Nginx | Ningún otro sitio puede incrustar el sistema para engañar a la usuaria |
-| `Referrer-Policy` | `same-origin` | Nginx | Al abrir WhatsApp, la dirección con el número de orden no se envía a otro sitio |
-| `Content-Security-Policy` | `default-src 'self'; img-src 'self' blob:; script-src 'self'; style-src 'self'; font-src 'self'; frame-ancestors 'none'; form-action 'self'` | Nginx | Solo se ejecutan scripts y estilos del propio sistema, lo que frena un ataque XSS aunque algo se escape (RNF-23) |
+| `X-Content-Type-Options` | `nosniff` | Contenedor | El navegador no interpreta un archivo como otro tipo |
+| `X-Frame-Options` | `DENY` | Contenedor | Ningún otro sitio puede incrustar el sistema para engañar a la usuaria |
+| `Referrer-Policy` | `same-origin` | Contenedor | Al abrir WhatsApp, la dirección con el número de orden no se envía a otro sitio |
+| `Content-Security-Policy` | `default-src 'self'; img-src 'self' blob:; script-src 'self'; style-src 'self'; font-src 'self'; frame-ancestors 'none'; form-action 'self'; base-uri 'self'` | Contenedor | Solo se ejecutan scripts y estilos del propio sistema, lo que frena un ataque XSS aunque algo se escape (RNF-23) |
 
 `img-src` permite `blob:` para la vista previa de la foto antes de enviarla. La política no permite estilos en línea, por eso los de los mockups se convierten en clases (01).
 
