@@ -41,14 +41,14 @@ Los 10 pasos pasan. Si el otro celular es un iPhone y el navegador no ofrece ins
 
 **Fecha:** 22 de septiembre de 2026 · **Commit:** `947ab45` · **Versión del APK:** 1.0.0 (`appVersionCode` 1), firmada con la llave `taller` (huella SHA-256 `59:1E:30:…:62:FA`)
 
-**Android real (modelo y versión):** Android 10 con Chrome 153, según el registro del servidor; el modelo no se anotó · **Otro celular (modelo, sistema y navegador):** un Tecno con Android; el navegador no se anotó
+**Android real (modelo y versión):** Redmi Note 14 5G (24094RAD4G) con Android 15 y Chrome 153, leído con `adb`. El servidor lo registraba como «Android 10» porque Chrome siempre informa esa versión · **Otro celular (modelo, sistema y navegador):** un Tecno con Android; el navegador no se anotó
 
 La primera corrida, del 21 de septiembre, probó los pasos 4 y 5 desde Chrome para Android porque aún no había APK: fotos #4 y #5 de la #0003, a 1200 × 1600 px y 242 KB, y a 1600 × 1200 px y 320 KB. Esta corrida repite todo dentro del APK.
 
 | Paso | Resultado | Evidencia | Observaciones |
 | --- | --- | --- | --- |
 | 1 | **Sí.** El APK se instaló en el Android | | Se pasó al celular a mano, porque `/descargas/` todavía no existe |
-| 2 | **Sí, con una observación.** Abre a pantalla completa, sin barra | El servidor recibió `GET /.well-known/assetlinks.json` desde el celular. La API de Digital Asset Links de Google devuelve el paquete `online.proyectosena.taller` con la misma huella del APK | **Cada vez que se abre**, se ve el navegador unos 2 segundos antes de quedar a pantalla completa. Como la barra se va sola, Android sí valida el enlace; si no lo validara, se quedaría todo el tiempo. Queda para revisar con `adb logcat` si molesta a las usuarias |
+| 2 | **Sí.** Abre a pantalla completa, sin barra | `pm get-app-links` da `proyectosena.online: verified` con la huella del APK. Con Chrome como navegador predeterminado, `adb logcat` muestra la app en `com.android.chrome/…CustomTabActivity`, y la captura al primer segundo ya no tiene barra | En la primera corrida el navegador predeterminado era **Brave**. La app abría en `com.brave.browser/…CustomTabActivity` y Brave mostraba su barra unos 2 segundos cada vez, mientras comprobaba el sitio por su cuenta. No es un defecto del APK ni de `assetlinks.json`: una TWA abre en el navegador predeterminado |
 | 3 | **Sí.** Entra al panel del día | `POST /entrar` 302 desde el APK | |
 | 4 · CA-17.1 | **Sí.** La cámara abrió dentro del APK y la foto quedó en la prenda «E» de la #0004 | Foto #7, 9:27:56 | Guardada a 1200 × 1600 px y 212 KB (RNF-03). Se agregó a una prenda existente: la app no permite agregar prendas a una orden que ya existe, porque HU-11 no se construyó |
 | 5 · CA-17.2 | **Sí.** La foto de la galería quedó como la tercera de la misma prenda | Foto #8, 9:28:10 | Guardada a 720 × 1600 px y 117 KB |
@@ -56,12 +56,12 @@ La primera corrida, del 21 de septiembre, probó los pasos 4 y 5 desde Chrome pa
 | 7 · CA-29.2 | **Sí.** Desde «Avisos por enviar», «Abrir WhatsApp y enviar» abrió WhatsApp en el chat del cliente con el mensaje escrito | | No se envió |
 | 8 · CA-29.4 | **Sí.** Al volver sin confirmar, el aviso sigue por enviar | El aviso #3 seguía `pendiente_asistido`, sin canal ni fecha de resuelto | |
 | 9 | **Sí.** En modo avión, la app muestra la página «Sin internet…» y no el error del navegador | El servidor entregó `sin-conexion.html` al celular | |
-| 10 | **Sí.** En el Tecno, el navegador ofreció instalarlo, quedó el ícono y abre sin barra | | A diferencia del APK, instalada así no muestra el navegador al abrir |
+| 10 | **Sí.** En el Tecno, el navegador ofreció instalarlo, quedó el ícono y abre sin barra | | |
 
 **Resultado:** **Aprobada con observaciones.** Los 10 pasos pasan: la app se instala, abre a pantalla completa y la cámara, la galería, WhatsApp y la página sin conexión funcionan desde el APK (RNF-35).
 
 Quedan tres observaciones:
 
-- **El APK muestra el navegador unos 2 segundos cada vez que se abre.** No impide trabajar. Está para revisar en la versión 1.0.1 del APK.
+- **Con Brave como navegador predeterminado, el APK muestra la barra de Brave unos 2 segundos al abrir.** Con Chrome, que es el que trae Android, abre directo. El manual de usuario (DOC-22) lo explica en la instalación.
 - **La preparación no se cumplió al pie de la letra:** el negocio sí tiene API de WhatsApp. El paso 7 se probó con un aviso pasado a pendiente a mano, que es el mismo estado que deja la cola cuando la API falla.
 - **No se puede agregar una prenda a una orden que ya existe (HU-11).** No es parte de PM-04, pero apareció al buscar cómo registrar una prenda nueva.
