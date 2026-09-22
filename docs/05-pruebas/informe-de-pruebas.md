@@ -1,26 +1,26 @@
 # Informe de pruebas
 
-**Entregable:** DOC-21 · **Corte:** 22 de septiembre de 2026 · **Commit:** `1cd0b14` · **Estado:** en curso, se completa en el cierre
+**Entregable:** DOC-21 · **Corte:** 22 de septiembre de 2026 · **Commit:** `f086f13` · **Estado:** en curso, se completa en el cierre
 
 Dice qué se probó, con qué resultado y qué falta. Sigue el [plan de pruebas](plan-de-pruebas.md), que es quien define la estrategia, los criterios de salida y los protocolos.
 
-> **Este informe se escribe mientras se prueba, no al final.** Las pruebas manuales que faltan (PM-01, PM-03 y PM-07) necesitan a otras personas o el cierre del proyecto; sus filas están marcadas como pendientes y se llenan con su hoja de registro.
+> **Este informe se escribe mientras se prueba, no al final.** Las pruebas que faltan (PM-01 y PM-03) necesitan a otras personas, y de PM-05, PM-06 y PM-07 quedan pasos por ejecutar; sus filas están marcadas y se llenan con su hoja de registro.
 
 ## 1. Resumen
 
 | Qué | Resultado |
 | --- | --- |
-| **Pruebas automáticas** | **248 pruebas, todas pasan** (1.263 comprobaciones), en 62 segundos |
+| **Pruebas automáticas** | **251 pruebas, todas pasan** (1.276 comprobaciones), en poco más de un minuto |
 | **Dónde corren** | En cada envío a GitHub, y en la máquina de desarrollo antes de cada commit |
 | **Cobertura** | El flujo exige **80 % o más** de `app/Dominio` y `app/Aplicacion`; si baja, la corrida falla |
 | **Criterios de aceptación** | 125. Los de las historias construidas están verificados; los 19 que faltan son de historias que no se construyeron |
 | **Reglas de negocio** | 44. Las 43 de las historias construidas tienen prueba; falta RN-44, de HU-36 |
 | **Historias Must** | **26 de 26 verificadas** |
-| **Pruebas manuales** | 5 de 8 ejecutadas: PM-02, PM-04, PM-08 aprobadas; PM-05 y PM-06 parciales; faltan PM-01, PM-03 y PM-07 |
-| **Defectos abiertos** | **Ninguno.** Los 6 encontrados se corrigieron y quedaron con prueba |
+| **Pruebas manuales** | 6 de 8 ejecutadas: PM-02, PM-04 y PM-08 aprobadas; PM-05, PM-06 y PM-07 parciales; faltan PM-01 y PM-03 |
+| **Defectos abiertos** | **Ninguno.** Los 8 encontrados se corrigieron; los dos últimos los halló PM-07 |
 | **GitHub Actions en `main`** | En verde |
 
-**Lo que falta para poder entregar:** PM-01 (usabilidad, necesita compañeros), PM-03 (instalación, necesita otra persona y otra máquina), PM-07 (seguridad y operación), las secciones A, B y C de PM-05 y la medición de Lighthouse de PM-06.
+**Lo que falta para poder entregar:** PM-01 (usabilidad, necesita compañeros), PM-03 (instalación, necesita otra persona y otra máquina), lo que queda de PM-07 (la prueba de humo, el reinicio de la cola y dos revisiones a mano), las secciones A, B y C de PM-05 y la medición de Lighthouse de PM-06.
 
 ## 2. Pruebas automáticas
 
@@ -28,9 +28,9 @@ Cada criterio de aceptación y cada regla de negocio se prueban con el ejemplo e
 
 | Medida | Valor |
 | --- | --- |
-| Pruebas que se ejecutan | 248, todas pasan |
-| Comprobaciones dentro de ellas | 1.263 |
-| Métodos escritos en `sistema/tests` | 234 |
+| Pruebas que se ejecutan | 251, todas pasan |
+| Comprobaciones dentro de ellas | 1.276 |
+| Métodos escritos en `sistema/tests` | 237 |
 | Métodos planeados en el plan | 167, de los cuales **146 están escritos**; los 21 que faltan son de las historias no construidas |
 | Tiempo de la corrida completa | 62 segundos en la máquina de desarrollo |
 
@@ -86,8 +86,11 @@ De los 35, **19 se comprueban solos en cada envío** y están en verde: RNF-02, 
 | **RNF-11** Contraste y accesibilidad | PM-05, con Lighthouse | **Pendiente** |
 | **RNF-12** Usabilidad | [PM-01](pruebas-manuales/PM-01-usabilidad.md) con compañeros | **Pendiente** |
 | **RNF-15** Respaldos y restauración | [PM-02](pruebas-manuales/PM-02-restauracion-de-respaldos.md) | **Aprobado.** Restauración en 7 segundos contra un máximo de 60 minutos |
-| **RNF-16** Monitoreo, **RNF-18** HTTPS, **RNF-26** datos personales, **RNF-34** servidor sin cambios propios | [PM-07](pruebas-manuales/PM-07-seguridad-y-despliegue.md) | **Pendiente** |
-| **RNF-23** Defensa ante ataques web | Pruebas automáticas de CSRF, HTML y SQL, más la lista de chequeo de PM-07 | **Parcial.** La parte automática cumple; falta la revisión |
+| **RNF-18** HTTPS | PM-07, sección A | **Cumple.** HTTP redirige con 301 y el certificado es válido hasta el 18 de diciembre |
+| **RNF-26** Datos personales | PM-07, sección D | **Cumple desde esta ronda.** Los formularios piden solo nombre y celular, y la política de tratamiento de datos ya está publicada y se lee sin iniciar sesión |
+| **RNF-34** Servidor sin cambios propios | PM-07, sección B | **Cumple.** El VPS corre el mismo commit de `main`, sin archivos modificados y configurado solo por variables de entorno |
+| **RNF-16** Monitoreo | PM-07, sección E | **Parcial.** El monitor consulta el sistema cada 5 minutos desde el 21 de septiembre; falta anotar la disponibilidad del período |
+| **RNF-23** Defensa ante ataques web | Pruebas automáticas de CSRF, HTML y SQL, más la lista de chequeo de PM-07 | **Parcial.** La parte automática cumple, con dos pruebas nuevas escritas en esta ronda. En PM-07 pasan ocho de los diez riesgos; faltan A01 y A03 a mano sobre el sistema desplegado |
 | **RNF-33** Instalación en 30 minutos | [PM-03](pruebas-manuales/PM-03-instalacion-desde-el-manual.md) | **Pendiente.** En un ensayo previo del autor del manual tomó 12 min 35 s, pero la prueba exige otra persona |
 | **RNF-35** App en el celular | [PM-04](pruebas-manuales/PM-04-app-en-el-celular.md) | **Aprobado con observaciones** |
 
@@ -101,7 +104,7 @@ De los 35, **19 se comprueban solos en cada envío** y están en verde: RNF-02, 
 | **PM-04** App en el celular | 22 sep | **Aprobada con observaciones.** Los 10 pasos pasan en un Redmi Note 14 5G con Android 15 |
 | **PM-05** Pantallas y navegadores | 21 sep | **Parcial.** Solo la sección D, en Brave, Chrome, Edge y Android |
 | **PM-06** Rendimiento | 21 sep | **Parcial.** Aprobado en el servidor; falta la medición de Lighthouse en el navegador |
-| **PM-07** Seguridad y operación | — | **Pendiente** |
+| **PM-07** Seguridad y operación | 22 sep | **Parcial.** Las secciones A (cifrado) y D (datos personales) pasan completas; B pasa salvo el reinicio de la cola; C pasa en ocho de diez riesgos. Encontró los dos defectos de abajo |
 | **PM-08** Aviso real por WhatsApp | 16 sep, verificado el 21 | **Aprobado con salvedades.** El aviso salió solo en 3 segundos; el mensaje llegó al número del aprendiz, no de un tercero |
 
 ### Observaciones y salvedades declaradas
@@ -122,6 +125,8 @@ Ninguno abierto. Los que se encontraron al probar se corrigieron y quedaron cubi
 | El respaldo se quedaba esperando una entrada que nadie escribía | PM-02 | Media | Se corrigió la llamada dentro del contenedor (`492b6d5`) |
 | Una prueba de fotos fallaba según la máquina | Corrida en otra máquina | Baja | Se fijó la calidad de la imagen y se adaptaron las medidas (`f439917`, `765bdb6`) |
 | El plan nombraba pruebas de RN-32 a RN-36 que no existían | Revisión con el portal | Media | Se escribieron y las reglas de seguimiento se movieron al dominio (`7c58cf6`) |
+| **El sistema no enviaba ninguna cabecera de seguridad**: ni política de contenido, ni `X-Frame-Options`, ni `Referrer-Policy`, ni `nosniff` | PM-07, A05 | Media | Las envía el contenedor, sin cambiarles las cabeceras a los otros proyectos del dominio (`38ed8fb`) |
+| **La política de tratamiento de datos no existía**, aunque su ruta estaba especificada desde el Sprint 2 | PM-07, D | Media | Se escribió y se publicó, enlazada desde el inicio de sesión, con su prueba automática (`f086f13`) |
 
 **Comportamiento revisado y declarado sin defecto:** en PM-05, al cerrar sesión y usar «Atrás» y «Adelante», el navegador muestra la pantalla de inicio de sesión y no datos del taller. Se comprobó en los registros del servidor que toda página con datos responde con una redirección al inicio de sesión (CA-01.4).
 
@@ -136,7 +141,7 @@ Del [plan de pruebas](plan-de-pruebas.md#para-entregar):
 | Reglas de negocio | Todas con una prueba que pasa | **Parcial:** 43 de 44. Falta RN-44, de la historia recortada HU-36 |
 | Cobertura de `Dominio` y `Aplicacion` | 80 % o más | **Cumple:** el flujo falla si baja |
 | Defectos críticos o altos abiertos | Ninguno | **Cumple** |
-| Protocolos manuales | Ejecutados y registrados | **No cumple todavía:** faltan PM-01, PM-03 y PM-07, y completar PM-05 y PM-06 |
+| Protocolos manuales | Ejecutados y registrados | **No cumple todavía:** faltan PM-01 y PM-03, y completar PM-05, PM-06 y PM-07 |
 | GitHub Actions en `main` | En verde | **Cumple** |
 
 ## 9. Qué falta antes de la entrega
@@ -145,10 +150,11 @@ Del [plan de pruebas](plan-de-pruebas.md#para-entregar):
 | --- | --- | --- |
 | **PM-01 · Usabilidad** con 3 compañeros; si no se consiguen, se hace con quienes estén y se declara | Aprendiz y compañeros | Antes del 9 de octubre |
 | **PM-03 · Instalación** siguiendo el manual técnico, en otra máquina | Un compañero, con el aprendiz observando | Cierre, 11 al 13 de octubre |
-| **PM-07 · Seguridad y operación** del despliegue | Aprendiz | Antes del cierre |
+| **Terminar PM-07:** la prueba de humo, el reinicio de la cola y las dos revisiones a mano (A01 y A03) | Aprendiz | Antes del cierre |
 | **PM-05 · Secciones A, B y C** en los tres navegadores | Aprendiz | Antes del cierre |
 | **PM-06 · Lighthouse** en el navegador, para cerrar el tiempo de carga | Aprendiz | Antes del cierre |
 | **Decidir sobre RN-44:** construir HU-36 o dejar la regla declarada como no implementada | Aprendiz | Antes del cierre |
+| **Decidir sobre `Strict-Transport-Security`:** vale para todo el dominio, no solo para el sistema | Dueño del dominio | Antes del cierre |
 | **Una corrida completa** de todas las pruebas antes de la sustentación | Aprendiz | Cierre |
 
 ## 10. Dónde está la evidencia
