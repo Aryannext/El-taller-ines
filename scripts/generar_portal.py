@@ -56,6 +56,7 @@ DOCUMENTOS = {
     "docs/03-diseno/arquitectura/README.md": "Arquitectura",
     "docs/03-diseno/modelo-de-datos/README.md": "Modelo de datos",
     "docs/05-pruebas/plan-de-pruebas.md": "Plan de pruebas",
+    "docs/05-pruebas/informe-de-pruebas.md": "Informe de pruebas",
     "docs/06-manuales/manual-de-usuario.md": "Manual de usuario",
     "docs/06-manuales/user-manual.md": "User manual",
     "docs/06-manuales/manual-tecnico.md": "Manual técnico",
@@ -64,7 +65,7 @@ DOCUMENTOS = {
 GRUPOS_DE_DOCUMENTOS = [
     ("Especificación técnica", [d for d in DOCUMENTOS if "04-especificacion" in d]),
     ("Documentos de diseño", ["docs/03-diseno/arquitectura/README.md", "docs/03-diseno/modelo-de-datos/README.md"]),
-    ("Pruebas y manuales", ["docs/05-pruebas/plan-de-pruebas.md", "docs/06-manuales/manual-de-usuario.md", "docs/06-manuales/user-manual.md",
+    ("Pruebas y manuales", ["docs/05-pruebas/plan-de-pruebas.md", "docs/05-pruebas/informe-de-pruebas.md", "docs/06-manuales/manual-de-usuario.md", "docs/06-manuales/user-manual.md",
                             "docs/06-manuales/manual-tecnico.md", "docs/06-manuales/technical-manual.md"]),
 ]
 

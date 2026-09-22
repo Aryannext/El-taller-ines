@@ -1,0 +1,159 @@
+# Informe de pruebas
+
+**Entregable:** DOC-21 · **Corte:** 22 de septiembre de 2026 · **Commit:** `1cd0b14` · **Estado:** en curso, se completa en el cierre
+
+Dice qué se probó, con qué resultado y qué falta. Sigue el [plan de pruebas](plan-de-pruebas.md), que es quien define la estrategia, los criterios de salida y los protocolos.
+
+> **Este informe se escribe mientras se prueba, no al final.** Las pruebas manuales que faltan (PM-01, PM-03 y PM-07) necesitan a otras personas o el cierre del proyecto; sus filas están marcadas como pendientes y se llenan con su hoja de registro.
+
+## 1. Resumen
+
+| Qué | Resultado |
+| --- | --- |
+| **Pruebas automáticas** | **248 pruebas, todas pasan** (1.263 comprobaciones), en 62 segundos |
+| **Dónde corren** | En cada envío a GitHub, y en la máquina de desarrollo antes de cada commit |
+| **Cobertura** | El flujo exige **80 % o más** de `app/Dominio` y `app/Aplicacion`; si baja, la corrida falla |
+| **Criterios de aceptación** | 125. Los de las historias construidas están verificados; los 19 que faltan son de historias que no se construyeron |
+| **Reglas de negocio** | 44. Las 43 de las historias construidas tienen prueba; falta RN-44, de HU-36 |
+| **Historias Must** | **26 de 26 verificadas** |
+| **Pruebas manuales** | 5 de 8 ejecutadas: PM-02, PM-04, PM-08 aprobadas; PM-05 y PM-06 parciales; faltan PM-01, PM-03 y PM-07 |
+| **Defectos abiertos** | **Ninguno.** Los 6 encontrados se corrigieron y quedaron con prueba |
+| **GitHub Actions en `main`** | En verde |
+
+**Lo que falta para poder entregar:** PM-01 (usabilidad, necesita compañeros), PM-03 (instalación, necesita otra persona y otra máquina), PM-07 (seguridad y operación), las secciones A, B y C de PM-05 y la medición de Lighthouse de PM-06.
+
+## 2. Pruebas automáticas
+
+Cada criterio de aceptación y cada regla de negocio se prueban con el ejemplo escrito en su documento. Las pruebas se escribieron junto con cada historia, y ninguna historia se dio por terminada sin ellas.
+
+| Medida | Valor |
+| --- | --- |
+| Pruebas que se ejecutan | 248, todas pasan |
+| Comprobaciones dentro de ellas | 1.263 |
+| Métodos escritos en `sistema/tests` | 234 |
+| Métodos planeados en el plan | 167, de los cuales **146 están escritos**; los 21 que faltan son de las historias no construidas |
+| Tiempo de la corrida completa | 62 segundos en la máquina de desarrollo |
+
+**Qué más revisa cada envío, además de las pruebas:** secretos en el historial (gitleaks), dependencias con vulnerabilidades conocidas, estilo con Pint, análisis estático con Larastan y las reglas de capas con PHPat, vistas sin escapar, que las migraciones produzcan el esquema documentado, y los verificadores que contrastan los documentos entre sí.
+
+## 3. Resultado por historia
+
+| Prioridad | Historias | Con todos sus criterios verificados | Sin construir |
+| --- | --- | --- | --- |
+| **Must** | 26 | **26** | 0 |
+| **Should** | 8 | 3 (HU-11, HU-26, HU-27) | 5 |
+| **Could** | 2 | 0 | 2 |
+
+Dos criterios de historias Must no tienen prueba automática porque **son manuales por diseño**, y quedaron verificados a mano:
+
+| Criterio | Por qué es manual | Dónde se verificó |
+| --- | --- | --- |
+| **CA-17.1** Tomar una foto con la cámara | La cámara solo existe en un celular real | [PM-04](pruebas-manuales/PM-04-app-en-el-celular.md), aprobado |
+| **CA-18.2** Ver una foto ampliada | Es comportamiento del navegador | [PM-05](pruebas-manuales/PM-05-pantallas-y-navegadores.md), sección D, aprobado |
+
+### Historias no construidas, declaradas
+
+El plan permite recortar historias *Should* y *Could* si no alcanza la capacidad, y exige declararlas con su motivo junto con las reglas que solo ellas usan.
+
+| Historia | Prioridad | Criterios sin verificar | Motivo |
+| --- | --- | --- | --- |
+| **HU-10** Registrar un cliente nuevo mientras registro su orden | Should | 2 | Fuera de la capacidad comprometida. Se puede registrar el cliente antes de la orden, como explica el manual de usuario |
+| **HU-13** Eliminar una prenda registrada por error | Should | 4 | Fuera de la capacidad. Se corrige la prenda con HU-12 |
+| **HU-16** Renombrar o desactivar tipos de prenda | Could | 2 | Fuera de la capacidad. Los tipos se agregan solos al escribir «Otro» (RN-43) |
+| **HU-19** Eliminar una foto | Should | 2 | Fuera de la capacidad. Se pueden agregar hasta 3 fotos por prenda |
+| **HU-24** Registrar un abono al recibir la orden | Should | 2 | Fuera de la capacidad. El abono se registra enseguida con HU-23 |
+| **HU-35** Cambiar el plazo para considerar una orden sin reclamar | Could | 2 | Fuera de la capacidad. El plazo queda en 30 días (RN-35) |
+| **HU-36** Devolver una prenda sin arreglar | Should | 5 | Fuera de la capacidad. **Es la única que deja una regla sin prueba: RN-44** |
+
+## 4. Reglas de negocio
+
+Las 44 reglas tienen su caso de prueba definido con el ejemplo de su documento (RNF-28). **43 tienen prueba escrita y pasa.** La única sin prueba es **RN-44** (devolver una prenda sin arreglar), porque su historia no se construyó.
+
+Durante este corte se corrigió un desajuste: el plan nombraba pruebas de **RN-32 a RN-36** que no existían con ese nombre. Al escribirlas apareció que RN-34, RN-35 y RN-36 vivían dentro de las consultas y no en el dominio, donde las pone la arquitectura. Se creó `ReglasDeSeguimiento`, las consultas la usan y las tres reglas quedaron con su prueba (`7c58cf6`).
+
+## 5. Requisitos no funcionales
+
+De los 35, **19 se comprueban solos en cada envío** y están en verde: RNF-02, 03, 04, 08, 13, 14, 17, 19, 20, 21, 22, 24, 25, 27, 28, 29, 30 y 31, más RNF-32, que se verificó al revisar el modelo de datos. Los demás dependen de una prueba manual o tienen una parte manual:
+
+| Requisito | Cómo se verifica | Estado |
+| --- | --- | --- |
+| **RNF-01** Tiempo de respuesta | [PM-06](pruebas-manuales/PM-06-rendimiento.md): el servidor con el volumen de 3 años, y el tiempo de carga con Lighthouse | **Parcial.** El servidor aprobado: las cinco pantallas entre 8 y 18 veces por debajo del máximo de 500 ms. Falta la medición en el navegador |
+| **RNF-05** Navegadores del taller | [PM-05](pruebas-manuales/PM-05-pantallas-y-navegadores.md), sección A | **Pendiente** |
+| **RNF-06** Un adaptador por canal de WhatsApp | Pruebas de cada adaptador, más una revisión en [PM-08](pruebas-manuales/PM-08-aviso-real-por-whatsapp.md) | **Cumple** |
+| **RNF-07** Diseño para el celular | PM-05, sección B | **Pendiente** |
+| **RNF-09** Mensajes de error | Pruebas automáticas del texto exacto, más la lista de chequeo de PM-05, sección C | **Parcial.** La parte automática cumple; falta la revisión |
+| **RNF-10** Confirmación antes de una acción irreversible | Una prueba por acción | **Parcial.** Cancelar una orden y anular un pago están probadas; eliminar prenda, eliminar foto y devolver sin arreglar son de historias recortadas |
+| **RNF-11** Contraste y accesibilidad | PM-05, con Lighthouse | **Pendiente** |
+| **RNF-12** Usabilidad | [PM-01](pruebas-manuales/PM-01-usabilidad.md) con compañeros | **Pendiente** |
+| **RNF-15** Respaldos y restauración | [PM-02](pruebas-manuales/PM-02-restauracion-de-respaldos.md) | **Aprobado.** Restauración en 7 segundos contra un máximo de 60 minutos |
+| **RNF-16** Monitoreo, **RNF-18** HTTPS, **RNF-26** datos personales, **RNF-34** servidor sin cambios propios | [PM-07](pruebas-manuales/PM-07-seguridad-y-despliegue.md) | **Pendiente** |
+| **RNF-23** Defensa ante ataques web | Pruebas automáticas de CSRF, HTML y SQL, más la lista de chequeo de PM-07 | **Parcial.** La parte automática cumple; falta la revisión |
+| **RNF-33** Instalación en 30 minutos | [PM-03](pruebas-manuales/PM-03-instalacion-desde-el-manual.md) | **Pendiente.** En un ensayo previo del autor del manual tomó 12 min 35 s, pero la prueba exige otra persona |
+| **RNF-35** App en el celular | [PM-04](pruebas-manuales/PM-04-app-en-el-celular.md) | **Aprobado con observaciones** |
+
+## 6. Pruebas manuales
+
+| Prueba | Fecha | Resultado |
+| --- | --- | --- |
+| **PM-01** Usabilidad | — | **Pendiente.** Necesita 3 compañeros de formación; el aprendiz no puede reemplazarlos |
+| **PM-02** Restauración de respaldos | 21 sep | **Aprobado.** 7 segundos; conteos idénticos; una orden de control abrió con sus prendas, su saldo y sus 3 fotos |
+| **PM-03** Instalación siguiendo el manual | — | **Pendiente.** Necesita otra persona y otra máquina; se hace en el cierre, con DOC-23 |
+| **PM-04** App en el celular | 22 sep | **Aprobada con observaciones.** Los 10 pasos pasan en un Redmi Note 14 5G con Android 15 |
+| **PM-05** Pantallas y navegadores | 21 sep | **Parcial.** Solo la sección D, en Brave, Chrome, Edge y Android |
+| **PM-06** Rendimiento | 21 sep | **Parcial.** Aprobado en el servidor; falta la medición de Lighthouse en el navegador |
+| **PM-07** Seguridad y operación | — | **Pendiente** |
+| **PM-08** Aviso real por WhatsApp | 16 sep, verificado el 21 | **Aprobado con salvedades.** El aviso salió solo en 3 segundos; el mensaje llegó al número del aprendiz, no de un tercero |
+
+### Observaciones y salvedades declaradas
+
+- **PM-04:** con Brave como navegador predeterminado, el APK muestra la barra de Brave unos 2 segundos mientras comprueba el sitio; con Chrome abre directo. No es un defecto del APK ni del enlace con el sitio, que Android valida (`verified`). Además, el paso del envío asistido se probó pasando un aviso a pendiente a mano, porque el negocio sí tiene WhatsApp automático.
+- **PM-08:** el aviso real se envió al celular del aprendiz. Enviar a un tercero exige su consentimiento (RNF-26), así que queda declarado.
+- **PM-06:** la medición del servidor está hecha; la del navegador (Lighthouse) la debe correr el aprendiz en su equipo.
+
+## 7. Defectos
+
+Ninguno abierto. Los que se encontraron al probar se corrigieron y quedaron cubiertos por una prueba o por el protocolo que los descubrió.
+
+| Defecto | Dónde salió | Severidad | Corrección |
+| --- | --- | --- | --- |
+| Las miniaturas del detalle de la orden no llevaban a las fotos grandes: había que escribir la dirección a mano | PM-05 | Media | Las miniaturas son un enlace a las fotos de su prenda (`fc48f20`), con prueba automática |
+| Las fotos subidas desde el servidor respondían error 500 | Operación tras PM-04 | Alta | La carpeta se había creado como `root`. Se corrigió el dueño y quedó escrito en el manual técnico |
+| `restaurar.sh` no aceptaba un MySQL en otro puerto | PM-02 | Media | Se agregó `MYSQL_PORT` (`492b6d5`) |
+| El respaldo se quedaba esperando una entrada que nadie escribía | PM-02 | Media | Se corrigió la llamada dentro del contenedor (`492b6d5`) |
+| Una prueba de fotos fallaba según la máquina | Corrida en otra máquina | Baja | Se fijó la calidad de la imagen y se adaptaron las medidas (`f439917`, `765bdb6`) |
+| El plan nombraba pruebas de RN-32 a RN-36 que no existían | Revisión con el portal | Media | Se escribieron y las reglas de seguimiento se movieron al dominio (`7c58cf6`) |
+
+**Comportamiento revisado y declarado sin defecto:** en PM-05, al cerrar sesión y usar «Atrás» y «Adelante», el navegador muestra la pantalla de inicio de sesión y no datos del taller. Se comprobó en los registros del servidor que toda página con datos responde con una redirección al inicio de sesión (CA-01.4).
+
+## 8. Criterios de salida
+
+Del [plan de pruebas](plan-de-pruebas.md#para-entregar):
+
+| Condición | Meta | Hoy |
+| --- | --- | --- |
+| Criterios de las historias Must | 100 % verificados | **Cumple:** 26 de 26 historias |
+| Criterios de las Should y Could implementadas | 100 %, y las recortadas se declaran | **Cumple:** HU-11, HU-26 y HU-27 verificadas; las 7 recortadas están declaradas arriba con su motivo |
+| Reglas de negocio | Todas con una prueba que pasa | **Parcial:** 43 de 44. Falta RN-44, de la historia recortada HU-36 |
+| Cobertura de `Dominio` y `Aplicacion` | 80 % o más | **Cumple:** el flujo falla si baja |
+| Defectos críticos o altos abiertos | Ninguno | **Cumple** |
+| Protocolos manuales | Ejecutados y registrados | **No cumple todavía:** faltan PM-01, PM-03 y PM-07, y completar PM-05 y PM-06 |
+| GitHub Actions en `main` | En verde | **Cumple** |
+
+## 9. Qué falta antes de la entrega
+
+| Pendiente | Quién lo hace | Cuándo |
+| --- | --- | --- |
+| **PM-01 · Usabilidad** con 3 compañeros; si no se consiguen, se hace con quienes estén y se declara | Aprendiz y compañeros | Antes del 9 de octubre |
+| **PM-03 · Instalación** siguiendo el manual técnico, en otra máquina | Un compañero, con el aprendiz observando | Cierre, 11 al 13 de octubre |
+| **PM-07 · Seguridad y operación** del despliegue | Aprendiz | Antes del cierre |
+| **PM-05 · Secciones A, B y C** en los tres navegadores | Aprendiz | Antes del cierre |
+| **PM-06 · Lighthouse** en el navegador, para cerrar el tiempo de carga | Aprendiz | Antes del cierre |
+| **Decidir sobre RN-44:** construir HU-36 o dejar la regla declarada como no implementada | Aprendiz | Antes del cierre |
+| **Una corrida completa** de todas las pruebas antes de la sustentación | Aprendiz | Cierre |
+
+## 10. Dónde está la evidencia
+
+- **Registros de cada prueba manual:** en [pruebas-manuales/](pruebas-manuales/), al final de cada protocolo.
+- **Casos de prueba** de cada criterio y regla, con el nombre de su prueba: en [casos-de-prueba/](casos-de-prueba/).
+- **Corridas automáticas:** en GitHub Actions, una por envío.
+- **Trazabilidad completa:** el [portal del proyecto](https://aryannext.github.io/El-taller-ines/) enlaza cada criterio con su prueba y con el código que lo cumple.

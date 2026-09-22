@@ -23,7 +23,7 @@ Si una prueba necesita una situación que ningún documento describe, primero se
 | **Este plan** | Estrategia, herramientas, entornos, datos, criterios de salida, defectos y cronograma |
 | [Casos de prueba](casos-de-prueba/) | Un archivo por épica con sus criterios, y uno con las reglas de negocio. Se generan |
 | [Pruebas manuales](pruebas-manuales/) | Los protocolos PM-01 a PM-08: preparación, pasos, criterio de aprobación y hoja de registro |
-| **Informe de pruebas** (DOC-21, Sprint 4) | Los resultados. Se escribe al ejecutar las pruebas, con las hojas de registro llenas |
+| [**Informe de pruebas**](informe-de-pruebas.md) (DOC-21, Sprint 4) | Los resultados. Se escribe al ejecutar las pruebas, con las hojas de registro llenas |
 
 <!-- resumen:inicio -->
 
@@ -37,7 +37,7 @@ Si una prueba necesita una situación que ningún documento describe, primero se
 | [Reglas de negocio](casos-de-prueba/09-reglas-de-negocio.md) | 44 | 44 | 0 | 0 |
 | [Requisitos no funcionales](#cómo-se-prueba-cada-requisito-no-funcional) | 35 | 19 | 3 | 13 |
 
-**Pruebas automáticas planeadas:** 167 métodos en 51 clases · **Escritas en `sistema/tests/`:** 124 de 167.
+**Pruebas automáticas planeadas:** 167 métodos en 51 clases · **Escritas en `sistema/tests/`:** 146 de 167.
 
 | Épica | Historias | Casos |
 | --- | --- | --- |
@@ -371,4 +371,4 @@ Un defecto es cualquier diferencia entre lo que hace el sistema y lo que dice un
 ## Pendiente
 
 - El instructor aprueba el plan junto con el producto terminado (DOC-14).
-- Los resultados van en el informe de pruebas (DOC-21).
+- Los resultados van en el [informe de pruebas](informe-de-pruebas.md) (DOC-21), que se completa en el cierre con PM-01, PM-03 y PM-07.
