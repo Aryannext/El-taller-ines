@@ -64,4 +64,4 @@ Quedan tres observaciones:
 
 - **Con Brave como navegador predeterminado, el APK muestra la barra de Brave unos 2 segundos al abrir.** Con Chrome, que es el que trae Android, abre directo. El manual de usuario (DOC-22) lo explica en la instalación.
 - **La preparación no se cumplió al pie de la letra:** el negocio sí tiene API de WhatsApp. El paso 7 se probó con un aviso pasado a pendiente a mano, que es el mismo estado que deja la cola cuando la API falla.
-- **No se puede agregar una prenda a una orden que ya existe (HU-11).** No es parte de PM-04, pero apareció al buscar cómo registrar una prenda nueva.
+- **No se podía agregar una prenda a una orden que ya existe (HU-11).** No es parte de PM-04, pero apareció al buscar cómo registrar una prenda nueva. Se construyó el mismo día (`0461d70`) y se probó desde el APK: la #0004, que estaba lista, recibió una prenda nueva y volvió a En proceso.
