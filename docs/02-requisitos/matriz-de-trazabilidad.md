@@ -203,7 +203,7 @@ Los que aparecen en historias se prueban con ellas; los demás se verifican sobr
 | RNF-03 | Las fotos se reducen antes de guardarse | Eficiencia de desempeño | HU-17 | Prueba automática que sube una foto de 5 MB y revisa lo guardado |
 | RNF-04 | Registrar una orden o cambiar un estado no espera a WhatsApp | Eficiencia de desempeño | HU-28 | Prueba automática con un canal de aviso simulado que tarda 10 s (ADR-003) |
 | RNF-05 | El sistema funciona en los navegadores del taller | Compatibilidad | — | Lista de chequeo manual en cada navegador antes de la entrega |
-| RNF-06 | La integración con WhatsApp pasa por un solo adaptador por canal | Compatibilidad | — | Revisión de código, pruebas de cada adaptador y un envío real por Evolution API (ADR-003, ADR-007) |
+| RNF-06 | La integración con WhatsApp pasa por un solo adaptador por canal | Compatibilidad | — | Revisión de código, pruebas de cada adaptador con respuestas simuladas y un envío real por Evolution API (ADR-003, ADR-007) |
 | RNF-07 | El diseño es primero para el celular | Usabilidad | — | Revisión de cada pantalla a 360 px |
 | RNF-08 | Los datos se muestran como se leen en Colombia | Usabilidad | — | Pruebas automáticas de formato |
 | RNF-09 | Los errores dicen qué pasó y cómo corregirlo | Usabilidad | — | Revisión de todos los mensajes contra una lista de chequeo |
