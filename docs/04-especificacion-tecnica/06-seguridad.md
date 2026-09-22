@@ -87,6 +87,6 @@ RN-01 y RNF-22 se cumplen en varias capas, porque un solo punto de control se pu
 RNF-26 aplica la Ley 1581 de 2012:
 
 - **Datos del cliente:** solo nombre y celular.
-- **Política de tratamiento:** se publica en `/politica-de-datos`, sin iniciar sesión. Dice qué datos se guardan, para qué (registrar sus órdenes y avisarle cuando estén listas), quién es el responsable (el taller) y cómo pedir que se corrijan. Su texto se escribe en el Sprint 4 y lo revisa el instructor.
+- **Política de tratamiento:** se publica en `/politica-de-datos`, sin iniciar sesión. Dice qué datos se guardan, para qué (registrar sus órdenes y avisarle cuando estén listas), quién es el responsable (el taller) y cómo pedir que se corrijan. Su texto está en `resources/views/pantallas/politica-de-datos.blade.php`, enlazado desde el inicio de sesión; lo revisa el instructor.
 - **Fotos:** se guardan sin la ubicación GPS del celular (05).
 - **Registros del servidor:** no guardan nombres ni celulares de clientes.

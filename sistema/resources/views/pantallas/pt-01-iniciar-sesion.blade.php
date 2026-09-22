@@ -28,6 +28,8 @@
       <button class="btn btn-primario btn-bloque" type="submit">Entrar</button>
     </form>
 
-    <p class="texto-2 pequeno">Los datos del taller y de sus clientes se tratan según la Ley 1581 de 2012.</p>
+    {{-- RNF-26: la política se puede leer sin iniciar sesión --}}
+    <p class="texto-2 pequeno">Los datos del taller y de sus clientes se tratan según la Ley 1581 de 2012.
+      <a href="{{ route('politica-de-datos') }}">Ver la política de tratamiento de datos</a>.</p>
   </main>
 @endsection

@@ -22,6 +22,9 @@ Route::middleware('guest')->group(function () {
         ->name('sesion.entrar');
 });
 
+// RNF-26: la política de tratamiento de datos se lee sin iniciar sesión
+Route::view('/politica-de-datos', 'pantallas.politica-de-datos')->name('politica-de-datos');
+
 // Las páginas con datos del taller no se guardan en el navegador: Atrás no las muestra al salir (CA-01.4)
 Route::middleware(['auth', 'auth.session', 'cache.headers:no_store;private'])->group(function () {
     Route::post('/salir', [SesionController::class, 'salir'])->name('sesion.salir');
