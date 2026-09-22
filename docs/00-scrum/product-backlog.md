@@ -109,7 +109,7 @@ Una historia entra a un sprint solo si cumple la definición de "lista para desa
 | 36 | **HU-13** | Eliminar una prenda registrada por error | Should | 2 | — | HU-12 |
 | 37 | **HU-36** | Devolver una prenda sin arreglar | Should | 2 | — | HU-20, HU-23 |
 | 38 | **HU-10** | Registrar un cliente nuevo mientras registro su orden | Should | 3 | — | HU-07 |
-| 39 | **HU-11** | Agregar una prenda a una orden que ya existe | Should | 2 | — | HU-20 |
+| 39 | **HU-11** | Agregar una prenda a una orden que ya existe | Should | 2 | Sprint 4 | HU-20 |
 | 40 | **HU-27** | Ver cuánto dinero he recibido | Should | 2 | — | HU-25 |
 | 41 | **HU-19** | Eliminar una foto | Should | 1 | — | HU-17 |
 | 42 | **HU-35** | Cambiar el plazo para considerar una orden sin reclamar | Could | 1 | — | HU-34 |
@@ -125,6 +125,7 @@ Una historia entra a un sprint solo si cumple la definición de "lista para desa
 - **HT-07 cierra el Sprint 4:** el APK abre el sistema desplegado, así que necesita el dominio con HTTPS (HT-04) y las pantallas de fotos y avisos ya construidas.
 - **HU-26 encabeza lo Should:** ataca el efecto E-03, no saber cuánto falta por cobrar, y reutiliza el saldo ya construido.
 - **HU-36 va junto a HU-13:** las dos corrigen qué prendas cuentan en el valor de la orden. Se agregó el 14 de septiembre, al analizar el proceso actual.
+- **HU-11 se adelantó al Sprint 4** el 22 de septiembre, antes que HU-26: en PM-04 el aprendiz buscó cómo agregar una prenda a una orden en proceso y no había forma. Es el caso de C-01.1, la prenda que no quedó anotada, y reutiliza el formulario de PT-06.
 
 ## Capacidad y compromiso
 

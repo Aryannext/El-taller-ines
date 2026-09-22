@@ -5,10 +5,12 @@ namespace App\Http\Solicitudes;
 use App\Modelos\TipoPrenda;
 use Closure;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 
 /**
- * Datos de una prenda (RN-10, RN-11, RN-43). OrdenRequest usa las mismas reglas para cada prenda de la orden.
+ * Datos de una prenda (RN-10, RN-11, RN-43): la que se agrega a una orden que ya existe (HU-11) y la que se corrige (HU-12).
+ * OrdenRequest usa las mismas reglas para cada prenda de la orden.
  * Mensajes de docs/04-especificacion-tecnica/03-validaciones-y-mensajes.md.
  */
 class PrendaRequest extends FormRequest
@@ -83,7 +85,12 @@ class PrendaRequest extends FormRequest
             return Arr::only(self::reglas(), ['descripcion_arreglo', 'precio']);
         }
 
-        return self::reglas();
+        return [
+            ...self::reglas(),
+            // HU-17: la prenda que se agrega trae sus fotos, como en la orden nueva (RN-17, RNF-03)
+            'fotos' => ['nullable', 'array', 'max:3'],
+            'fotos.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:10240'],
+        ];
     }
 
     /**
@@ -91,6 +98,16 @@ class PrendaRequest extends FormRequest
      */
     public function messages(): array
     {
-        return self::mensajes();
+        return [...self::mensajes(), ...FotoRequest::mensajes()];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function rutasDeFotos(): array
+    {
+        $fotos = $this->file('fotos', []);
+
+        return array_values(array_map(fn (UploadedFile $foto) => (string) $foto->getRealPath(), is_array($fotos) ? $fotos : [$fotos]));
     }
 }

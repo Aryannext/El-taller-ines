@@ -91,6 +91,11 @@
           @endif
         </div>
       @endforeach
+
+      {{-- HU-11: la prenda que se olvidó registrar. Solo en una orden En proceso o Lista para entregar (RF-11) --}}
+      @if ($puedeAgregarPrendas)
+        <a class="btn btn-texto alinear-inicio" href="{{ route('prendas.nueva', $orden) }}"><i class="i i-mas i-sm"></i>Agregar una prenda</a>
+      @endif
     </section>
 
     <section class="seccion">

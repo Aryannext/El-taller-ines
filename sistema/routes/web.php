@@ -48,6 +48,10 @@ Route::middleware(['auth', 'auth.session', 'cache.headers:no_store;private'])->g
     Route::get('/ordenes/{orden}/cancelar', [OrdenController::class, 'confirmarCancelacion'])->whereNumber('orden')->name('ordenes.confirmar-cancelacion');
     Route::post('/ordenes/{orden}/cancelar', [OrdenController::class, 'cancelar'])->whereNumber('orden')->name('ordenes.cancelar');
 
+    // HU-11: la prenda que se olvidó registrar al recibir la orden
+    Route::get('/ordenes/{orden}/prendas/nueva', [PrendaController::class, 'nueva'])->whereNumber('orden')->name('prendas.nueva');
+    Route::post('/ordenes/{orden}/prendas', [PrendaController::class, 'agregar'])->whereNumber('orden')->name('prendas.agregar');
+
     // La prenda y el pago se buscan dentro de la orden de la dirección: /ordenes/43/prendas/7 no abre una prenda de la #0042
     Route::scopeBindings()->group(function () {
         // RN-19: el estado se cambia en la prenda; no hay ruta para cambiar el de la orden

@@ -1,17 +1,21 @@
-{{-- Una prenda de la orden: tipo, «Otro», arreglo, precio y fotos (RN-10, RN-11, RN-17, RN-43). En la plantilla, $indice es __INDICE__ --}}
+{{-- Una prenda de la orden: tipo, «Otro», arreglo, precio y fotos (RN-10, RN-11, RN-17, RN-43). En la plantilla, $indice es __INDICE__.
+     Con $indice en null es la única prenda del formulario, la que se agrega a una orden que ya existe (HU-11), y sus campos van sin prefijo --}}
 @php
-    $nombre = fn (string $campo) => "prendas[{$indice}][{$campo}]";
-    $id = fn (string $campo) => "prenda-{$indice}-{$campo}";
-    $error = fn (string $campo) => $errors->first("prendas.{$indice}.{$campo}");
+    $nombre = fn (string $campo) => $indice === null ? $campo : "prendas[{$indice}][{$campo}]";
+    $id = fn (string $campo) => $indice === null ? "prenda-{$campo}" : "prenda-{$indice}-{$campo}";
+    $clave = fn (string $campo) => $indice === null ? $campo : "prendas.{$indice}.{$campo}";
+    $error = fn (string $campo) => $errors->first($clave($campo));
     $esOtro = ($prenda['tipo_prenda_id'] ?? null) === 'otro';
-    $errorFotos = $error('fotos') ?: $errors->first("prendas.{$indice}.fotos.*");
+    $errorFotos = $error('fotos') ?: $errors->first($clave('fotos.*'));
 @endphp
 
 <div class="prenda" data-prenda>
-  <div class="entre">
-    <span class="tipo" data-titulo>Prenda</span>
-    <button class="boton-icono" type="button" aria-label="Quitar prenda" data-quitar><i class="i i-basura"></i></button>
-  </div>
+  @if ($indice !== null)
+    <div class="entre">
+      <span class="tipo" data-titulo>Prenda</span>
+      <button class="boton-icono" type="button" aria-label="Quitar prenda" data-quitar><i class="i i-basura"></i></button>
+    </div>
+  @endif
 
   <div @class(['campo', 'con-error' => $error('tipo_prenda_id')])>
     <label for="{{ $id('tipo_prenda_id') }}">Tipo de prenda</label>

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controladores;
 
+use App\Aplicacion\Configuracion\GestionarTiposDePrenda;
 use App\Aplicacion\Consultas\DetalleDeOrden;
+use App\Aplicacion\Ordenes\AgregarPrenda;
 use App\Aplicacion\Ordenes\CambiarEstadoDePrenda;
 use App\Aplicacion\Ordenes\CorregirPrenda;
 use App\Dominio\Compartido\ReglaIncumplida;
@@ -20,6 +22,41 @@ use Illuminate\View\View;
  */
 class PrendaController
 {
+    /**
+     * PT-06 con una sola prenda: la que se olvidó registrar al recibir la orden (HU-11). Si la orden no la admite, vuelve al detalle con el motivo.
+     */
+    public function nueva(Orden $orden, AgregarPrenda $agregarPrenda, DetalleDeOrden $detalleDeOrden, GestionarTiposDePrenda $tiposDePrenda): View|RedirectResponse
+    {
+        try {
+            $agregarPrenda->exigirQueSePuedaAgregar($orden);
+        } catch (ReglaIncumplida $regla) {
+            return $this->alDetalleConElMotivo($orden, $regla);
+        }
+
+        return view('pantallas.pt-06-agregar-prenda', [...$detalleDeOrden->obtener($orden), 'tipos' => $tiposDePrenda->activos()]);
+    }
+
+    public function agregar(PrendaRequest $solicitud, Orden $orden, AgregarPrenda $agregarPrenda): RedirectResponse
+    {
+        try {
+            $prenda = $agregarPrenda->ejecutar(
+                $orden,
+                $solicitud->validated('tipo_prenda_id') === 'otro' ? 'otro' : (int) $solicitud->validated('tipo_prenda_id'),
+                $solicitud->validated('tipo_otro'),
+                $solicitud->validated('descripcion_arreglo'),
+                (int) $solicitud->validated('precio'),
+                $solicitud->rutasDeFotos(),
+            );
+        } catch (ReglaIncumplida $regla) {
+            // RN-17 se muestra junto a las fotos; RN-18 y RN-24 impiden agregar y vuelven al detalle
+            return $regla->campo !== null
+                ? back()->withInput()->withErrors([$regla->campo => $regla->mensajeParaUsuaria])
+                : $this->alDetalleConElMotivo($orden, $regla);
+        }
+
+        return redirect()->route('ordenes.detalle', $orden)->with('exito', "Listo: «{$prenda->descripcion_arreglo}» quedó en la orden.");
+    }
+
     /**
      * PT-11 · Acciones de una prenda: en qué va y qué más se puede hacer (HU-20). Solo ofrece los cambios permitidos (CA-20.2).
      */

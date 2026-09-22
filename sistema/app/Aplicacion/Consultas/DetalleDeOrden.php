@@ -27,7 +27,7 @@ class DetalleDeOrden
     ) {}
 
     /**
-     * @return array{orden: Orden, numero: string, valor: Dinero, pagado: Dinero, saldo: Dinero, estado: EstadoDeOrden, estadoDePago: ?EstadoDePago, entregadaEn: ?DateTimeImmutable, puedeEntregarse: bool, puedeCancelarse: bool, prendasCorregibles: list<int>}
+     * @return array{orden: Orden, numero: string, valor: Dinero, pagado: Dinero, saldo: Dinero, estado: EstadoDeOrden, estadoDePago: ?EstadoDePago, entregadaEn: ?DateTimeImmutable, puedeEntregarse: bool, puedeCancelarse: bool, puedeAgregarPrendas: bool, prendasCorregibles: list<int>}
      */
     public function obtener(Orden $orden): array
     {
@@ -62,6 +62,8 @@ class DetalleDeOrden
             'puedeEntregarse' => $estado !== EstadoDeOrden::Cancelada && $orden->prendas->contains(fn (Prenda $prenda) => $prenda->estado === EstadoDePrenda::Terminada),
             // HU-22: solo una orden que no está Entregada ni ya Cancelada (RN-24)
             'puedeCancelarse' => ! in_array($estado, [EstadoDeOrden::Entregada, EstadoDeOrden::Cancelada], true),
+            // HU-11: solo En proceso o Lista para entregar (RF-11, RN-24)
+            'puedeAgregarPrendas' => in_array($estado, [EstadoDeOrden::EnProceso, EstadoDeOrden::ListaParaEntregar], true),
             'prendasCorregibles' => $estado === EstadoDeOrden::Cancelada ? [] : $orden->prendas
                 ->filter(fn (Prenda $prenda) => $this->transiciones->puedeModificarse($prenda->estado))
                 ->map(fn (Prenda $prenda) => $prenda->id)

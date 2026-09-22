@@ -135,6 +135,7 @@ class AislamientoEntreNegociosTest extends TestCase
         $this->assertNull($this->ordenDelNegocioA->fresh()->cancelada_en);
         $this->assertSame('pendiente_asistido', $this->avisoDelNegocioA->fresh()->estado);
         $this->assertSame(1, Pago::count());
+        $this->assertSame(1, $this->ordenDelNegocioA->prendas()->count());
     }
 
     /**
@@ -160,6 +161,8 @@ class AislamientoEntreNegociosTest extends TestCase
             'ordenes.entregar' => ['POST', route('ordenes.entregar', $ordenA), ['confirmacion' => 'si']],
             'ordenes.confirmar-cancelacion' => ['GET', route('ordenes.confirmar-cancelacion', $ordenA), []],
             'ordenes.cancelar' => ['POST', route('ordenes.cancelar', $ordenA), ['confirmacion' => 'si']],
+            'prendas.nueva' => ['GET', route('prendas.nueva', $ordenA), []],
+            'prendas.agregar' => ['POST', route('prendas.agregar', $ordenA), ['tipo_prenda_id' => 'otro', 'tipo_otro' => 'Chaleco', 'descripcion_arreglo' => 'Otro arreglo', 'precio' => '1000']],
             'prendas.acciones' => ['GET', route('prendas.acciones', [$ordenA, $prendaA]), []],
             'prendas.cambiar-estado' => ['POST', route('prendas.cambiar-estado', [$ordenA, $prendaA]), ['estado' => 'terminada']],
             'prendas.editar' => ['GET', route('prendas.editar', [$ordenA, $prendaA]), []],

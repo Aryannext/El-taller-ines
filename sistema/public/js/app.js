@@ -26,11 +26,30 @@ function usarSaldoCompleto() {
   });
 }
 
-// HU-07 y HU-09: agregar y quitar prendas, y pedir «¿Qué prenda es?» solo al elegir «Otro»
+// HU-07 y HU-09: agregar y quitar prendas, y pedir «¿Qué prenda es?» solo al elegir «Otro».
+// Al agregar una prenda a una orden que ya existe (HU-11) hay una sola y no hay plantilla: solo aplica «Otro»
 function prendasDeLaOrden() {
   const lista = document.querySelector('[data-prendas]');
+  if (!lista) {
+    return;
+  }
+
+  const alternarOtro = (tipo) => {
+    const campoOtro = tipo.closest('[data-prenda]').querySelector('[data-otro]');
+    const esOtro = tipo.value === 'otro';
+    campoOtro.hidden = !esOtro;
+    campoOtro.querySelector('input').required = esOtro;
+  };
+
+  lista.addEventListener('change', (evento) => {
+    if (evento.target.matches('[data-tipo]')) {
+      alternarOtro(evento.target);
+    }
+  });
+  lista.querySelectorAll('[data-tipo]').forEach(alternarOtro);
+
   const plantilla = document.querySelector('#plantilla-prenda');
-  if (!lista || !plantilla) {
+  if (!plantilla) {
     return;
   }
 
@@ -45,19 +64,6 @@ function prendasDeLaOrden() {
       quitar.hidden = prendas.length === 1;
     });
   };
-
-  const alternarOtro = (tipo) => {
-    const campoOtro = tipo.closest('[data-prenda]').querySelector('[data-otro]');
-    const esOtro = tipo.value === 'otro';
-    campoOtro.hidden = !esOtro;
-    campoOtro.querySelector('input').required = esOtro;
-  };
-
-  lista.addEventListener('change', (evento) => {
-    if (evento.target.matches('[data-tipo]')) {
-      alternarOtro(evento.target);
-    }
-  });
 
   lista.addEventListener('click', (evento) => {
     const quitar = evento.target.closest('[data-quitar]');
@@ -76,7 +82,6 @@ function prendasDeLaOrden() {
     prenda.querySelector('[data-tipo]').focus();
   });
 
-  lista.querySelectorAll('[data-tipo]').forEach(alternarOtro);
   renumerar();
 }
 
