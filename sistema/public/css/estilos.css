@@ -437,6 +437,30 @@ a.banda { text-decoration: none; }
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
+/* Páginas de error (404, 419, 500…). La forma viene del componente «not-found-01» de 21st.dev: el número
+   arriba en letra de máquina, el titular grande, la explicación corta y los destinos listados debajo. */
+.error { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; gap: 16px; padding: 32px 20px; }
+.error-codigo { font: 700 12.5px/1 var(--fuente-numeros); letter-spacing: .14em; text-transform: uppercase; color: var(--tinta-2); }
+.error-titulo { font-size: 32px; font-weight: 800; line-height: 1.08; letter-spacing: -.015em; }
+.error-texto { max-width: 46ch; color: var(--tinta-2); }
+.error-acciones { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+.error-acciones .btn { flex: 1 1 200px; }
+
+.error-sugerencias { margin-top: 12px; border-top: 1px solid var(--borde); padding-top: 14px; }
+.error-sugerencias .etiqueta { font: 700 12.5px/1 var(--fuente-numeros); letter-spacing: .14em; text-transform: uppercase; color: var(--tinta-2); }
+.error-sugerencias ul { list-style: none; margin: 6px 0 0; padding: 0; }
+.error-sugerencias li + li { border-top: 1px solid var(--borde); }
+.error-sugerencias a {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  min-height: 56px; padding: 8px 10px; margin-inline: -10px;
+  border-radius: var(--radio-control); color: inherit; text-decoration: none;
+}
+.error-sugerencias a:hover { background: var(--superficie); }
+.error-sugerencias .destino { font-weight: 700; }
+.error-sugerencias .que-hay { display: block; font-size: 14px; color: var(--tinta-2); }
+.error-sugerencias .i { color: var(--borde-fuerte); }
+.error-sugerencias a:hover .i { color: var(--primario); }
+
 /* En una pantalla grande la app se ve como lo que es: una aplicación de celular, centrada y con su propio marco,
    en vez de una columna suelta. El diseño del celular no cambia: esto solo aplica desde 700 px. */
 @media (min-width: 700px) {
@@ -446,5 +470,5 @@ a.banda { text-decoration: none; }
     border: 1px solid var(--borde); border-radius: 24px; overflow: hidden;
     box-shadow: 0 18px 50px rgba(22, 27, 46, .14);
   }
-  .acceso { min-height: auto; flex: 1; }
+  .acceso, .error { min-height: auto; flex: 1; }
 }

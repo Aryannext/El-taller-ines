@@ -10,14 +10,14 @@ Dice qué se probó, con qué resultado y qué falta. Sigue el [plan de pruebas]
 
 | Qué | Resultado |
 | --- | --- |
-| **Pruebas automáticas** | **251 pruebas, todas pasan** (1.276 comprobaciones), en poco más de un minuto |
+| **Pruebas automáticas** | **253 pruebas, todas pasan** (1.301 comprobaciones), en poco más de un minuto |
 | **Dónde corren** | En cada envío a GitHub, y en la máquina de desarrollo antes de cada commit |
 | **Cobertura** | El flujo exige **80 % o más** de `app/Dominio` y `app/Aplicacion`; si baja, la corrida falla |
 | **Criterios de aceptación** | 125. Los de las historias construidas están verificados; los 19 que faltan son de historias que no se construyeron |
 | **Reglas de negocio** | 44. Las 43 de las historias construidas tienen prueba; falta RN-44, de HU-36 |
 | **Historias Must** | **26 de 26 verificadas** |
 | **Pruebas manuales** | 6 de 8 ejecutadas: PM-02, PM-04 y PM-08 aprobadas; PM-05, PM-06 y PM-07 parciales; faltan PM-01 y PM-03 |
-| **Defectos abiertos** | **Ninguno.** Los 8 encontrados se corrigieron; los dos últimos los halló PM-07 |
+| **Defectos abiertos** | **Ninguno.** Los 9 encontrados se corrigieron; los tres últimos los halló PM-07 |
 | **GitHub Actions en `main`** | En verde |
 
 **Lo que falta para poder entregar:** PM-01 (usabilidad, necesita compañeros), PM-03 (instalación, necesita otra persona y otra máquina), lo que queda de PM-07 (la prueba de humo y dos revisiones a mano), las secciones A, B y C de PM-05 y la medición de Lighthouse de PM-06.
@@ -28,9 +28,9 @@ Cada criterio de aceptación y cada regla de negocio se prueban con el ejemplo e
 
 | Medida | Valor |
 | --- | --- |
-| Pruebas que se ejecutan | 251, todas pasan |
-| Comprobaciones dentro de ellas | 1.276 |
-| Métodos escritos en `sistema/tests` | 237 |
+| Pruebas que se ejecutan | 253, todas pasan |
+| Comprobaciones dentro de ellas | 1.301 |
+| Métodos escritos en `sistema/tests` | 239 |
 | Métodos planeados en el plan | 167, de los cuales **146 están escritos**; los 21 que faltan son de las historias no construidas |
 | Tiempo de la corrida completa | 62 segundos en la máquina de desarrollo |
 
@@ -81,7 +81,7 @@ De los 35, **19 se comprueban solos en cada envío** y están en verde: RNF-02, 
 | **RNF-05** Navegadores del taller | [PM-05](pruebas-manuales/PM-05-pantallas-y-navegadores.md), sección A | **Pendiente** |
 | **RNF-06** Un adaptador por canal de WhatsApp | Pruebas de cada adaptador, más una revisión en [PM-08](pruebas-manuales/PM-08-aviso-real-por-whatsapp.md) | **Cumple** |
 | **RNF-07** Diseño para el celular | PM-05, sección B | **Pendiente** |
-| **RNF-09** Mensajes de error | Pruebas automáticas del texto exacto, más la lista de chequeo de PM-05, sección C | **Parcial.** La parte automática cumple; falta la revisión |
+| **RNF-09** Mensajes de error | Pruebas automáticas del texto exacto, más la lista de chequeo de PM-05, sección C | **Parcial.** La parte automática cumple. En esta ronda se agregaron las pantallas de error del sistema —404, 403, 419, 429, 500 y 503—, que antes salían con el texto crudo del servidor; falta la revisión de PM-05 |
 | **RNF-10** Confirmación antes de una acción irreversible | Una prueba por acción | **Parcial.** Cancelar una orden y anular un pago están probadas; eliminar prenda, eliminar foto y devolver sin arreglar son de historias recortadas |
 | **RNF-11** Contraste y accesibilidad | PM-05, con Lighthouse | **Pendiente** |
 | **RNF-12** Usabilidad | [PM-01](pruebas-manuales/PM-01-usabilidad.md) con compañeros | **Pendiente** |
@@ -128,6 +128,7 @@ Ninguno abierto. Los que se encontraron al probar se corrigieron y quedaron cubi
 | El plan nombraba pruebas de RN-32 a RN-36 que no existían | Revisión con el portal | Media | Se escribieron y las reglas de seguimiento se movieron al dominio (`7c58cf6`) |
 | **El sistema no enviaba ninguna cabecera de seguridad**: ni política de contenido, ni `X-Frame-Options`, ni `Referrer-Policy`, ni `nosniff` | PM-07, A05 | Media | Las envía el contenedor, sin cambiarles las cabeceras a los otros proyectos del dominio (`38ed8fb`) |
 | **La política de tratamiento de datos no existía**, aunque su ruta estaba especificada desde el Sprint 2 | PM-07, D | Media | Se escribió y se publicó, enlazada desde el inicio de sesión, con su prueba automática (`f086f13`) |
+| **Los errores salían con la página cruda del servidor**: un «404 Not Found» en inglés, sin decir qué hacer, contra lo que pide RNF-09 | PM-07, A05 | Baja | Se escribieron las pantallas de error del taller (404, 403, 419, 429, 500 y 503), cada una con su explicación y su salida, y su prueba |
 
 **Comportamiento revisado y declarado sin defecto:** en PM-05, al cerrar sesión y usar «Atrás» y «Adelante», el navegador muestra la pantalla de inicio de sesión y no datos del taller. Se comprobó en los registros del servidor que toda página con datos responde con una redirección al inicio de sesión (CA-01.4).
 
