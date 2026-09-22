@@ -54,4 +54,31 @@ class SeguridadWebTest extends TestCase
 
         $this->assertSame([], $sinProteger, 'Toda ruta que escribe pasa por el grupo web, que exige el token.');
     }
+
+    public function test_rnf_23_la_politica_de_contenido_deja_pasar_lo_que_la_app_sí_usa(): void
+    {
+        // El 22 de septiembre la política dejó sin iconos a toda la app: son SVG escritos en «data:» dentro
+        // de la hoja de estilos, y img-src no los permitía. Esta prueba compara la política con lo que la
+        // hoja de estilos realmente carga, para que un cambio en cualquiera de las dos no rompa la otra.
+        $configuracion = file_get_contents(base_path('../despliegue/apache/taller.conf'));
+        $estilos = file_get_contents(public_path('css/estilos.css'));
+
+        $this->assertIsString($configuracion);
+        $this->assertIsString($estilos);
+        $this->assertMatchesRegularExpression('/Content-Security-Policy/', $configuracion);
+
+        preg_match('/img-src ([^;"]+)/', $configuracion, $imagenes);
+        $permitido = $imagenes[1] ?? '';
+
+        $this->assertStringContainsString("'self'", $permitido);
+
+        if (str_contains($estilos, 'url("data:')) {
+            $this->assertStringContainsString('data:', $permitido, 'La hoja de estilos carga imágenes «data:» (los iconos) y la política debe permitirlas.');
+        }
+
+        // Lo que sigue prohibido: traer código de afuera
+        $this->assertStringContainsString("script-src 'self'", $configuracion);
+        $this->assertStringNotContainsString("'unsafe-inline'", $configuracion);
+        $this->assertStringNotContainsString("'unsafe-eval'", $configuracion);
+    }
 }

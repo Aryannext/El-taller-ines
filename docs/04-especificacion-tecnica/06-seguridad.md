@@ -42,9 +42,9 @@ La cookie es `HttpOnly`, así que JavaScript no la puede leer, y `SameSite=Lax`.
 | `X-Content-Type-Options` | `nosniff` | Contenedor | El navegador no interpreta un archivo como otro tipo |
 | `X-Frame-Options` | `DENY` | Contenedor | Ningún otro sitio puede incrustar el sistema para engañar a la usuaria |
 | `Referrer-Policy` | `same-origin` | Contenedor | Al abrir WhatsApp, la dirección con el número de orden no se envía a otro sitio |
-| `Content-Security-Policy` | `default-src 'self'; img-src 'self' blob:; script-src 'self'; style-src 'self'; font-src 'self'; frame-ancestors 'none'; form-action 'self'; base-uri 'self'` | Contenedor | Solo se ejecutan scripts y estilos del propio sistema, lo que frena un ataque XSS aunque algo se escape (RNF-23) |
+| `Content-Security-Policy` | `default-src 'self'; img-src 'self' data: blob:; script-src 'self'; style-src 'self'; font-src 'self'; frame-ancestors 'none'; form-action 'self'; base-uri 'self'` | Contenedor | Solo se ejecutan scripts y estilos del propio sistema, lo que frena un ataque XSS aunque algo se escape (RNF-23) |
 
-`img-src` permite `blob:` para la vista previa de la foto antes de enviarla. La política no permite estilos en línea, por eso los de los mockups se convierten en clases (01).
+`img-src` permite `blob:` para la vista previa de la foto antes de enviarla, y `data:` para los iconos, que son SVG escritos dentro de la hoja de estilos; sin `data:` la app se queda sin un solo icono. Ninguno de los dos permite ejecutar código. La política no permite estilos en línea, por eso los de los mockups se convierten en clases (01).
 
 ## Aislamiento entre negocios
 
