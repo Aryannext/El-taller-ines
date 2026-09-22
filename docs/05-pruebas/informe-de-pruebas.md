@@ -1,6 +1,6 @@
 # Informe de pruebas
 
-**Entregable:** DOC-21 · **Corte:** 22 de septiembre de 2026 · **Commit:** `f086f13` · **Estado:** en curso, se completa en el cierre
+**Entregable:** DOC-21 · **Corte:** 22 de septiembre de 2026 · **Commit:** `9b711de` · **Estado:** en curso, se completa en el cierre
 
 Dice qué se probó, con qué resultado y qué falta. Sigue el [plan de pruebas](plan-de-pruebas.md), que es quien define la estrategia, los criterios de salida y los protocolos.
 
@@ -10,14 +10,14 @@ Dice qué se probó, con qué resultado y qué falta. Sigue el [plan de pruebas]
 
 | Qué | Resultado |
 | --- | --- |
-| **Pruebas automáticas** | **253 pruebas, todas pasan** (1.301 comprobaciones), en poco más de un minuto |
+| **Pruebas automáticas** | **254 pruebas, todas pasan** (1.309 comprobaciones), en poco más de un minuto |
 | **Dónde corren** | En cada envío a GitHub, y en la máquina de desarrollo antes de cada commit |
 | **Cobertura** | El flujo exige **80 % o más** de `app/Dominio` y `app/Aplicacion`; si baja, la corrida falla |
 | **Criterios de aceptación** | 125. Los de las historias construidas están verificados; los 19 que faltan son de historias que no se construyeron |
 | **Reglas de negocio** | 44. Las 43 de las historias construidas tienen prueba; falta RN-44, de HU-36 |
 | **Historias Must** | **26 de 26 verificadas** |
 | **Pruebas manuales** | 6 de 8 ejecutadas: PM-02, PM-04 y PM-08 aprobadas; PM-05, PM-06 y PM-07 parciales; faltan PM-01 y PM-03 |
-| **Defectos abiertos** | **Ninguno.** Los 9 encontrados se corrigieron; los tres últimos los halló PM-07 |
+| **Defectos abiertos** | **Ninguno.** Los 10 encontrados se corrigieron; los cuatro últimos los halló PM-07, y uno de ellos lo causó la corrección de otro |
 | **GitHub Actions en `main`** | En verde |
 
 **Lo que falta para poder entregar:** PM-01 (usabilidad, necesita compañeros), PM-03 (instalación, necesita otra persona y otra máquina), lo que queda de PM-07 (la prueba de humo y dos revisiones a mano), las secciones A, B y C de PM-05 y la medición de Lighthouse de PM-06.
@@ -28,9 +28,9 @@ Cada criterio de aceptación y cada regla de negocio se prueban con el ejemplo e
 
 | Medida | Valor |
 | --- | --- |
-| Pruebas que se ejecutan | 253, todas pasan |
-| Comprobaciones dentro de ellas | 1.301 |
-| Métodos escritos en `sistema/tests` | 239 |
+| Pruebas que se ejecutan | 254, todas pasan |
+| Comprobaciones dentro de ellas | 1.309 |
+| Métodos escritos en `sistema/tests` | 240 |
 | Métodos planeados en el plan | 167, de los cuales **146 están escritos**; los 21 que faltan son de las historias no construidas |
 | Tiempo de la corrida completa | 62 segundos en la máquina de desarrollo |
 
@@ -129,6 +129,7 @@ Ninguno abierto. Los que se encontraron al probar se corrigieron y quedaron cubi
 | **El sistema no enviaba ninguna cabecera de seguridad**: ni política de contenido, ni `X-Frame-Options`, ni `Referrer-Policy`, ni `nosniff` | PM-07, A05 | Media | Las envía el contenedor, sin cambiarles las cabeceras a los otros proyectos del dominio (`38ed8fb`) |
 | **La política de tratamiento de datos no existía**, aunque su ruta estaba especificada desde el Sprint 2 | PM-07, D | Media | Se escribió y se publicó, enlazada desde el inicio de sesión, con su prueba automática (`f086f13`) |
 | **Los errores salían con la página cruda del servidor**: un «404 Not Found» en inglés, sin decir qué hacer, contra lo que pide RNF-09 | PM-07, A05 | Baja | Se escribieron las pantallas de error del taller (404, 403, 419, 429, 500 y 503), cada una con su explicación y su salida, y su prueba |
+| **La política de contenido dejó sin iconos a toda la app.** La corrección anterior de RNF-23 no permitía imágenes `data:`, y los iconos son SVG escritos dentro de la hoja de estilos | Al revisar en el navegador la pantalla de error recién desplegada | Media | Se permitió `data:` en `img-src`, que no deja ejecutar código, y se escribió una prueba que compara la política con lo que la hoja de estilos carga de verdad (`9b711de`) |
 
 **Comportamiento revisado y declarado sin defecto:** en PM-05, al cerrar sesión y usar «Atrás» y «Adelante», el navegador muestra la pantalla de inicio de sesión y no datos del taller. Se comprobó en los registros del servidor que toda página con datos responde con una redirección al inicio de sesión (CA-01.4).
 
