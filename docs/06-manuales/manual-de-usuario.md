@@ -31,7 +31,7 @@ Reemplaza el cuaderno y la memoria. Con él:
 
 - cada prenda que recibes queda anotada, con su arreglo, su precio y hasta 3 fotos;
 - cada orden tiene un **número** que escribes en la bolsa, así sabes de quién es la ropa aunque esté mezclada en el rincón;
-- sabes cuánto te debe cada cliente, porque los abonos y pagos restan solos;
+- sabes cuánto te debe cada cliente, porque los abonos y pagos restan solos, y cuánto dinero recibiste en el día, la semana o el mes;
 - cuando una orden queda lista, el cliente recibe un **aviso por WhatsApp**;
 - la pantalla **Hoy** te dice qué necesita tu atención: cobros, entregas atrasadas y avisos.
 
@@ -95,12 +95,12 @@ Es lo primero que ves al entrar. Te muestra lo que necesita tu atención:
 
 | Tarjeta | Qué te dice | Al tocarla |
 | --- | --- | --- |
-| **Por cobrar** | Cuánto te deben en total, sumando las órdenes que no están canceladas | — |
+| **Por cobrar** | Cuánto te deben en total, sumando las órdenes que no están canceladas | Ves quién te debe y cuánto has recibido ([sección 9](#9-cobrar)) |
 | **Atrasadas** | Cuántas órdenes pasaron su fecha de entrega sin estar listas | Ves cuáles son ([sección 12](#12-órdenes-atrasadas-y-sin-reclamar)) |
 | **Sin reclamar** | Cuántas órdenes llevan más de 30 días listas sin que nadie las recoja | Ves cuáles son y cuánto deben |
 | **Avisos por enviar** | Cuántos avisos de WhatsApp no salieron solos y tienes que enviar tú | Los envías con un toque ([sección 11](#11-avisar-al-cliente-por-whatsapp)) |
 
-**La barra de abajo** está en casi todas las pantallas: **Hoy**, **Órdenes**, **Nueva** (el botón redondo, para registrar una orden) y **Clientes**. **Dinero** aparece en gris porque todavía no está disponible.
+**La barra de abajo** está en casi todas las pantallas: **Hoy**, **Órdenes**, **Nueva** (el botón redondo, para registrar una orden), **Clientes** y **Dinero**.
 
 <br clear="right">
 
@@ -252,6 +252,21 @@ Si el cliente dejó una prenda que no quedó en la orden, no hace falta crear ot
 - Escribe el **Motivo**; es obligatorio.
 - El sistema te muestra cómo queda el saldo antes de confirmar.
 - Toca **Anular pago**. El pago **no se borra**: deja de contar en el saldo y queda visible como anulado, con la fecha y el motivo.
+
+<br clear="right">
+
+### Cuánto recibiste y quién te debe
+
+<img src="capturas/22-dinero.png" alt="Pantalla Dinero con lo recibido en el mes y quién me debe" width="260" align="right">
+
+Toca **Dinero** en la barra de abajo, o la tarjeta **Por cobrar** de **Hoy**.
+
+**Recibido:** cuánto dinero te entró. Elige **Hoy**, **Semana** (de lunes a domingo), **Mes** o **Fechas**. Con **Fechas** eliges **Desde** y **Hasta** y tocas **Ver lo recibido**.
+
+- Suma los pagos y abonos de ese período, del día en que se registraron.
+- **Los pagos anulados no cuentan.** Si hubo alguno, el sistema lo dice debajo del total, por ejemplo «5 pagos · no incluye 1 pago anulado», para que la cuenta te cuadre con lo que recuerdas.
+
+**Quién me debe:** el total por cobrar y las órdenes que deben, **de la mayor deuda a la menor**, con su estado. Toca una para abrirla y cobrar. Las órdenes pagadas y las canceladas no aparecen.
 
 <br clear="right">
 

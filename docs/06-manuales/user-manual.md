@@ -33,7 +33,7 @@ It replaces the notebook and memory. With it:
 
 - every garment you receive is recorded, with its alteration, its price and up to 3 photos;
 - every order has a **number** you write on the bag, so you know whose clothes they are even when they are mixed up in the corner;
-- you know how much each customer owes, because deposits and payments are subtracted automatically;
+- you know how much each customer owes, because deposits and payments are subtracted automatically, and how much money you received in the day, week or month;
 - when an order is ready, the customer gets a **WhatsApp notice**;
 - the **Hoy** (Today) screen tells you what needs your attention: payments due, late deliveries and notices.
 
@@ -97,12 +97,12 @@ It is the first thing you see after signing in. It shows what needs your attenti
 
 | Card | What it tells you | When you tap it |
 | --- | --- | --- |
-| **Por cobrar** (To collect) | How much you are owed in total, across orders that are not cancelled | — |
+| **Por cobrar** (To collect) | How much you are owed in total, across orders that are not cancelled | You see who owes you and how much you have received ([section 9](#9-payments)) |
 | **Atrasadas** (Overdue) | How many orders passed their delivery date without being ready | You see which ones ([section 12](#12-overdue-and-unclaimed-orders)) |
 | **Sin reclamar** (Unclaimed) | How many orders have been ready for more than 30 days without being picked up | You see which ones and how much they owe |
 | **Avisos por enviar** (Notices to send) | How many WhatsApp notices did not go out on their own and need you to send them | You send them with one tap ([section 11](#11-notifying-the-customer-on-whatsapp)) |
 
-**The bottom bar** is on almost every screen: **Hoy** (Today), **Órdenes** (Orders), **Nueva** (New, the round button to register an order) and **Clientes** (Customers). **Dinero** (Money) is greyed out because it is not available yet.
+**The bottom bar** is on almost every screen: **Hoy** (Today), **Órdenes** (Orders), **Nueva** (New, the round button to register an order), **Clientes** (Customers) and **Dinero** (Money).
 
 <br clear="right">
 
@@ -254,6 +254,21 @@ If the customer left a garment that did not make it into the order, you do not n
 - Type the **Motivo** (Reason); it is required.
 - The system shows the resulting balance before you confirm.
 - Tap **Anular pago** (Void payment). The payment is **not deleted**: it stops counting towards the balance and stays visible as voided, with the date and reason.
+
+<br clear="right">
+
+### How much you received and who owes you
+
+<img src="capturas/22-dinero.png" alt="Money screen with the month's income and who owes money" width="260" align="right">
+
+Tap **Dinero** (Money) in the bottom bar, or the **Por cobrar** (To collect) card on **Hoy**.
+
+**Recibido** (Received): how much money came in. Choose **Hoy** (Today), **Semana** (Week, Monday to Sunday), **Mes** (Month) or **Fechas** (Dates). With **Fechas**, pick **Desde** (From) and **Hasta** (To) and tap **Ver lo recibido** (Show received).
+
+- It adds up the payments and deposits of that period, by the day they were recorded.
+- **Voided payments do not count.** If there were any, the system says so under the total, for example «5 pagos · no incluye 1 pago anulado» (5 payments, excluding 1 voided payment), so the figure matches what you remember.
+
+**Quién me debe** (Who owes me): the total to collect and the orders that owe money, **from the largest debt to the smallest**, with their status. Tap one to open it and collect. Paid and cancelled orders do not appear.
 
 <br clear="right">
 
