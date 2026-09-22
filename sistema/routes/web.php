@@ -3,6 +3,7 @@
 use App\Http\Controladores\AjustesController;
 use App\Http\Controladores\AvisoController;
 use App\Http\Controladores\ClienteController;
+use App\Http\Controladores\DineroController;
 use App\Http\Controladores\FotoController;
 use App\Http\Controladores\OrdenController;
 use App\Http\Controladores\PagoController;
@@ -71,6 +72,9 @@ Route::middleware(['auth', 'auth.session', 'cache.headers:no_store;private'])->g
 
     Route::get('/ordenes/{orden}/pagos/nuevo', [PagoController::class, 'nuevo'])->whereNumber('orden')->name('pagos.nuevo');
     Route::post('/ordenes/{orden}/pagos', [PagoController::class, 'guardar'])->whereNumber('orden')->name('pagos.guardar');
+
+    // HU-26 y HU-27: quién me debe y cuánto he recibido
+    Route::get('/dinero', [DineroController::class, 'mostrar'])->name('dinero');
 
     // HU-29: los avisos que la dueña envía desde su WhatsApp. El enlace de {aviso} está en AppServiceProvider (RNF-25)
     Route::get('/avisos', [AvisoController::class, 'pendientes'])->name('avisos.pendientes');

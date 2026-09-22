@@ -168,18 +168,22 @@ textarea.entrada { min-height: 76px; resize: vertical; }
 .prefijo > span { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: var(--tinta-2); font-size: 17px; }
 .prefijo .entrada { padding-left: 28px; }
 .dos-columnas { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+/* Un campo de fecha trae un ancho mínimo propio: sin esto, en PT-22 «Hasta» se salía por la derecha a 390 px */
+.dos-columnas > *, .dos-columnas .entrada { min-width: 0; }
 
 .buscador { position: relative; }
 .buscador .i { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: var(--tinta-2); }
 .buscador .entrada { padding-left: 44px; }
 
 .segmentos { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 6px; }
-.segmentos label {
+/* PT-22 usa enlaces en vez de radios: cada período es una dirección y funciona sin JavaScript */
+.segmentos label, .segmentos a {
   display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 48px;
   border: 1.5px solid var(--borde-fuerte); border-radius: var(--radio-control); background: #fff; font-weight: 700;
 }
 .segmentos input { position: absolute; opacity: 0; pointer-events: none; }
-.segmentos label:has(input:checked) { border-color: var(--primario); background: var(--primario-suave); color: var(--primario); }
+.segmentos a { color: var(--tinta); text-decoration: none; }
+.segmentos label:has(input:checked), .segmentos a[aria-current="page"] { border-color: var(--primario); background: var(--primario-suave); color: var(--primario); }
 /* PT-14: la opción elegida con el teclado se ve, aunque el círculo del radio esté escondido */
 .segmentos label:has(input:focus-visible) { outline: 3px solid var(--primario); outline-offset: 2px; }
 fieldset.campo { min-width: 0; margin: 0; padding: 0; border: 0; }
@@ -259,6 +263,7 @@ fieldset.campo { min-width: 0; margin: 0; padding: 0; border: 0; }
 .cifra .encabezado { display: flex; align-items: center; gap: 8px; font-size: 14.5px; color: var(--tinta-2); font-weight: 700; }
 /* Atkinson Hyperlegible raya el cero y no trae otra forma: a 38px y en 800, el «0» del panel parecía un símbolo de prohibido (PM-04).
    Las cifras grandes usan la fuente del sistema, que lo dibuja sin raya */
+.cifra-recibido { font-family: system-ui, "Segoe UI", Roboto, sans-serif; font-size: 34px; line-height: 1; font-weight: 800; }
 .cifra .valor { font-family: system-ui, "Segoe UI", Roboto, sans-serif; font-size: 32px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
 .cifra .nota { font-size: 14px; color: var(--tinta-2); }
 .cifra.alerta .valor, .cifra.alerta .encabezado { color: var(--peligro); }

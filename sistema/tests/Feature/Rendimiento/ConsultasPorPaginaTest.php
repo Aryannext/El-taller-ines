@@ -4,6 +4,7 @@ namespace Tests\Feature\Rendimiento;
 
 use App\Modelos\Cliente;
 use App\Modelos\Orden;
+use App\Modelos\Pago;
 use App\Modelos\Prenda;
 use App\Modelos\TipoPrenda;
 use App\Modelos\Usuario;
@@ -93,6 +94,18 @@ class ConsultasPorPaginaTest extends TestCase
 
         $this->assertNoPasaDelTope(route('seguimiento.atrasadas'), 'Las órdenes atrasadas');
         $this->assertNoPasaDelTope(route('seguimiento.sin-reclamar'), 'Las órdenes sin reclamar');
+    }
+
+    public function test_rnf_02_dinero_no_pasa_del_tope(): void
+    {
+        // Veinte órdenes que deben, con abonos: la lista de quién me debe tiene de dónde crecer
+        foreach (range(70, 89) as $numero) {
+            $orden = $this->orden($numero, 3, estado: 'en_proceso');
+            Pago::factory()->create(['orden_id' => $orden->id, 'valor' => 1000, 'pagado_en' => '2026-09-14 11:00:00']);
+        }
+
+        $this->assertNoPasaDelTope(route('dinero'), 'Dinero');
+        $this->assertNoPasaDelTope(route('dinero', ['periodo' => 'fechas', 'desde' => '2026-09-01', 'hasta' => '2026-09-30']), 'Dinero por fechas');
     }
 
     private function assertNoPasaDelTope(string $url, string $pantalla): void
