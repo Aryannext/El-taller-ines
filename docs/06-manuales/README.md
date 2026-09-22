@@ -3,7 +3,7 @@
 | Manual | Español | English | Entregable |
 | --- | --- | --- | --- |
 | **De usuario:** instalar la app y hacer cada tarea del taller | [manual-de-usuario.md](manual-de-usuario.md) | [user-manual.md](user-manual.md) | DOC-22 |
-| **Técnico y de instalación:** montar, desplegar, respaldar y restaurar el sistema | Pendiente | Pending | DOC-23 |
+| **Técnico y de instalación:** instalar en desarrollo, desplegar, respaldar, restaurar y construir el APK | [manual-tecnico.md](manual-tecnico.md) | [technical-manual.md](technical-manual.md) | DOC-23 |
 
 ## Las capturas
 

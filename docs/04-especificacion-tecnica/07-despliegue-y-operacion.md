@@ -175,7 +175,7 @@ No corre en el VPS ni lo toca: el peor caso que mide PM-02 es que el VPS ya no e
 
 ## Despliegue
 
-Solo se despliega un commit que esté en verde en GitHub Actions. Mientras Actions siga bloqueado por la facturación de la cuenta (HT-02), vale un commit con `scripts/calidad.py` en 7 de 7.
+Solo se despliega un commit que esté en verde en GitHub Actions. Si Actions vuelve a bloquearse por la facturación de la cuenta, como pasó en HT-02, vale un commit con `scripts/calidad.py` en 7 de 7.
 
 ### Primera instalación
 
