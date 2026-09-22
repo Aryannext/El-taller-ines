@@ -31,7 +31,9 @@ Comprobar sobre el sistema desplegado lo que las pruebas automáticas no alcanza
 | Comparar el commit del VPS con el de `main` | Es el mismo | **Sí.** `38ed8fb` en los dos al momento de la revisión |
 | Revisar si hay archivos modificados en el VPS | No hay ninguno | **Sí.** `git status` sin cambios |
 | Revisar el `.env` del VPS | `APP_ENV=production` y `APP_DEBUG=false`; la cola no es `sync` | **Sí.** `APP_ENV=production`, `APP_DEBUG=false`, `LOG_LEVEL=warning`, `SESSION_SECURE_COOKIE=true` y `QUEUE_CONNECTION=database` |
-| Detener el proceso de la cola | El servicio lo vuelve a iniciar solo | **Pendiente de ejecutar.** `restart: always` está declarado en `docker-compose.yml` |
+| Simular una caída de la cola: matar su proceso **por dentro**, con `docker compose exec cola sh -c 'kill -9 1'` | Docker la vuelve a iniciar sola, y el contador de reinicios sube | **Pendiente de ejecutar.** `restart: always` está declarado en `docker-compose.yml` |
+
+> **Por qué «por dentro».** El 22 de septiembre se intentó con `docker compose kill cola` y el contenedor quedó abajo: el demonio de Docker marca como «detenido a mano» todo lo que muera por `docker kill` o `docker stop`, y en ese caso no aplica la política de reinicio. Eso no es una falla del sistema, sino del método: para probar que la cola se levanta sola hay que simular una caída del proceso, no pedirle a Docker que la detenga. La cola quedó ocho minutos abajo y, al volver, no había ningún aviso atascado ni fallido, que es justo lo que se espera de una cola en base de datos.
 
 ## C · Ataques web comunes (RNF-23)
 
