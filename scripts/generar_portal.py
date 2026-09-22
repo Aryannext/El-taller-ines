@@ -63,7 +63,7 @@ DOCUMENTOS = {
 }
 GRUPOS_DE_DOCUMENTOS = [
     ("Especificación técnica", [d for d in DOCUMENTOS if "04-especificacion" in d]),
-    ("Diseño", ["docs/03-diseno/arquitectura/README.md", "docs/03-diseno/modelo-de-datos/README.md"]),
+    ("Documentos de diseño", ["docs/03-diseno/arquitectura/README.md", "docs/03-diseno/modelo-de-datos/README.md"]),
     ("Pruebas y manuales", ["docs/05-pruebas/plan-de-pruebas.md", "docs/06-manuales/manual-de-usuario.md", "docs/06-manuales/user-manual.md",
                             "docs/06-manuales/manual-tecnico.md", "docs/06-manuales/technical-manual.md"]),
 ]
@@ -153,7 +153,8 @@ class Portal:
         paginas_doc = {ruta: f"doc/{Path(ruta).parent.name}-{Path(ruta).stem}.html".lower() for ruta in DOCUMENTOS}
         self.paginas_doc = paginas_doc
         ref = os.environ.get("GITHUB_SHA") or git("rev-parse", "HEAD") or "main"
-        self.enlazador = H.Enlazador(self.conocidos, paginas_doc, repositorio(), ref)
+        titulos = {c: f"{el.tipo.singular} · {L.limpiar_titulo(el.titulo)}" for c, el in self.elementos.items()}
+        self.enlazador = H.Enlazador(self.conocidos, paginas_doc, repositorio(), ref, titulos)
         self.archivos_copiados: set[str] = set()
         self.relacionar()
 
@@ -248,7 +249,7 @@ class Portal:
         for tipo in TIPOS:
             if tipo.prefijo in grupos:
                 nombre = tipo.plural if len(grupos[tipo.prefijo]) > 1 else tipo.singular
-                bloques.append(f"<div><h3>{e(nombre)}</h3>{self.lista_de(grupos[tipo.prefijo], raiz)}</div>")
+                bloques.append(f'<div><h3><span class="sigla">{tipo.prefijo}</span>{e(nombre)}</h3>{self.lista_de(grupos[tipo.prefijo], raiz)}</div>')
         return f'<div class="relaciones">{"".join(bloques)}</div>'
 
     def lugares(self, lugares: list[Lugar], limite: int = 40) -> str:
@@ -301,14 +302,15 @@ class Portal:
         for c in self.elementos:
             cuenta[prefijo(c)] += 1
 
-        def enlace(url: str, texto: str, numero: int | None = None) -> str:
+        def enlace(url: str, texto: str, numero: int | None = None, sigla: str = "") -> str:
             marca = ' aria-current="page"' if url == actual else ""
             n = f'<span class="cuenta">{numero}</span>' if numero is not None else ""
-            return f'<li><a href="{raiz}{url}"{marca}><span>{e(texto)}</span>{n}</a></li>'
+            s = f'<span class="sigla">{sigla}</span>' if sigla else ""
+            return f'<li><a href="{raiz}{url}"{marca}><span>{s}{e(texto)}</span>{n}</a></li>'
 
-        bloques = [f'<ul>{enlace("index.html", "Inicio")}</ul>']
+        bloques = [f'<ul>{enlace("index.html", "Inicio")}{enlace("glosario.html", "Glosario: qué significa cada sigla")}</ul>']
         for seccion in dict.fromkeys(t.seccion for t in TIPOS):
-            items = "".join(enlace(f"t/{t.prefijo}.html", t.plural, cuenta[t.prefijo]) for t in TIPOS if t.seccion == seccion and cuenta[t.prefijo])
+            items = "".join(enlace(f"t/{t.prefijo}.html", t.plural, cuenta[t.prefijo], t.prefijo) for t in TIPOS if t.seccion == seccion and cuenta[t.prefijo])
             if seccion == "Diseño":
                 items += enlace("t/diagramas.html", "Diagramas", len(self.diagramas))
             bloques.append(f"<h2>{e(seccion)}</h2><ul>{items}</ul>")
@@ -337,9 +339,12 @@ class Portal:
             f'<div class="migas"><a href="{raiz}index.html">Inicio</a> › <a href="{raiz}t/{tipo.prefijo}.html">{e(tipo.plural)}</a></div>',
             f'<h1 class="titulo"><span class="codigo-grande">{codigo}</span><span>{e(el.titulo)}</span></h1>',
             f'<div class="etiquetas">{self.etiquetas(codigo)}</div>',
+            # Quien llega sin conocer el proyecto sabe primero qué clase de cosa está viendo
+            f'<p class="tipo-explicado"><span class="sigla">{tipo.prefijo}</span><span><strong>{e(tipo.singular)}:</strong> '
+            f'{e(tipo.explicacion)} <a href="{raiz}glosario.html">Ver todas las siglas</a></span></p>',
         ]
 
-        # Qué es
+        # Qué dice
         if el.cuerpo:
             cuerpo = self.html_de(el.cuerpo, el.fuente, raiz, codigo)
         else:
@@ -350,38 +355,38 @@ class Portal:
             cuerpo = f'<dl class="campos">{filas}</dl>'
         fuente = self.enlazador.github(relativa(el.fuente), el.linea, el.ancla)
         partes.append(
-            f'<section class="tarjeta"><h2>Qué es <span class="nota">· de <a href="{e(fuente)}">{e(relativa(el.fuente))}</a></span></h2>'
+            f'<section class="tarjeta"><h2>Qué dice <span class="nota">· tomado de <a href="{e(fuente)}">{e(relativa(el.fuente))}</a></span></h2>'
             f'<div class="texto">{cuerpo}</div></section>'
         )
 
         # Cómo se ve
         capturas = self.capturas_de(codigo, raiz)
         if capturas:
-            partes.append(f'<section class="tarjeta"><h2>Cómo se ve</h2><div class="capturas">{capturas}</div></section>')
+            partes.append(f'<section class="tarjeta"><h2>Cómo se ve <span class="nota">· la pantalla real y su diseño</span></h2><div class="capturas">{capturas}</div></section>')
 
         # Relaciones
         salientes = self.salientes.get(codigo, [])
         entrantes = self.entrantes.get(codigo, [])
         if salientes:
-            partes.append(f'<section class="tarjeta"><h2>Cita a</h2>{self.agrupados(salientes, raiz)}</section>')
+            partes.append(f'<section class="tarjeta"><h2>Qué menciona <span class="nota">· lo que nombra su texto, agrupado por tipo</span></h2>{self.agrupados(salientes, raiz)}</section>')
         if entrantes:
-            partes.append(f'<section class="tarjeta"><h2>Lo citan</h2>{self.agrupados(entrantes, raiz)}</section>')
+            partes.append(f'<section class="tarjeta"><h2>Quién lo menciona <span class="nota">· los elementos que nombran a {codigo}</span></h2>{self.agrupados(entrantes, raiz)}</section>')
 
         # Dónde está en el código
         codigo_html = self.en_el_codigo(codigo, raiz)
         if codigo_html:
-            partes.append(f'<section class="tarjeta"><h2>Dónde está en el código</h2>{codigo_html}</section>')
+            partes.append(f'<section class="tarjeta"><h2>Dónde está en el código <span class="nota">· cada enlace abre el archivo en GitHub</span></h2>{codigo_html}</section>')
 
         # Cómo se prueba
         pruebas_html = self.como_se_prueba(codigo)
         if pruebas_html:
-            partes.append(f'<section class="tarjeta"><h2>Cómo se prueba</h2>{pruebas_html}</section>')
+            partes.append(f'<section class="tarjeta"><h2>Cómo se comprueba que funciona <span class="nota">· las pruebas automáticas</span></h2>{pruebas_html}</section>')
 
         # Diagramas
         diagramas = self.en_diagramas.get(codigo, [])
         if diagramas:
             items = "".join(f'<li><a href="{raiz}d/{d.id}.html">{e(d.titulo)}</a> <span class="sub">{e(relativa(d.fuente))}</span></li>' for d in diagramas)
-            partes.append(f'<section class="tarjeta"><h2>Aparece en los diagramas</h2><ul class="lista-enlaces">{items}</ul></section>')
+            partes.append(f'<section class="tarjeta"><h2>En qué diagramas aparece</h2><ul class="lista-enlaces">{items}</ul></section>')
 
         # Dónde se menciona en la documentación
         menciones = [m for m in self.en_documentos.get(codigo, []) if not (m[0] == relativa(el.fuente) and m[2] <= el.linea <= m[2] + 400 and m[1].startswith(codigo))]
@@ -395,7 +400,7 @@ class Portal:
                 destino = f"{raiz}{self.paginas_doc[ruta]}#{ancla}" if ruta in self.paginas_doc else self.enlazador.github(ruta, ancla=ancla)
                 items.append(f'<li><a href="{e(destino)}">{e(L.limpiar_titulo(titulo))}</a> <span class="sub">{e(ruta)}</span></li>')
             partes.append(
-                f'<section class="tarjeta"><h2>Dónde se menciona <span class="nota">· {len(items)} secciones de la documentación</span></h2>'
+                f'<section class="tarjeta"><h2>Otros documentos que lo mencionan <span class="nota">· {len(items)} secciones</span></h2>'
                 f'<ul class="lista-enlaces">{"".join(items[:60])}</ul></section>'
             )
 
@@ -493,7 +498,9 @@ class Portal:
             filas.append(f'<tr><td><a href="../e/{c}.html"><strong>{c}</strong></a></td><td>{e(self.titulo_corto(c))}</td>{extra}</tr>')
         cabecera = "<th>Prioridad</th><th>Sprint</th><th>Estado</th>" if tipo.prefijo == "HU" else ""
         contenido = (f'<div class="migas"><a href="../index.html">Inicio</a> › {e(tipo.seccion)}</div>'
-                     f'<h1 class="titulo">{e(tipo.plural)} <span class="etiqueta">{len(codigos)}</span></h1>'
+                     f'<h1 class="titulo"><span class="sigla sigla-grande">{tipo.prefijo}</span>{e(tipo.plural)} <span class="etiqueta">{len(codigos)}</span></h1>'
+                     f'<p class="tipo-explicado"><span><strong>{e(tipo.singular)}:</strong> {e(tipo.explicacion)} '
+                     f'<a href="../glosario.html">Ver todas las siglas</a></span></p>'
                      f'<table class="tabla"><thead><tr><th>Código</th><th>Título</th>{cabecera}</tr></thead><tbody>{"".join(filas)}</tbody></table>')
         self.escribir_pagina(f"t/{tipo.prefijo}.html", tipo.plural, contenido)
 
@@ -544,37 +551,123 @@ class Portal:
                      f'<article class="tarjeta texto">{cuerpo}</article>')
         self.escribir_pagina(url, DOCUMENTOS[ruta], contenido)
 
+    # Las seis etapas del proyecto, en el orden en que se hicieron. El inicio y el glosario se organizan con ellas.
+    ETAPAS = [
+        ("1", "El problema", "Por qué el taller necesita un sistema: qué le pasa hoy y qué pierde por eso.", ["C", "E"]),
+        ("2", "Lo que se quiere lograr", "Cada problema escrito en positivo, agrupado en metas concretas.", ["M", "FN", "OE"]),
+        ("3", "Lo que el sistema debe cumplir", "Qué debe permitir hacer, con qué calidad y qué reglas del taller respeta.", ["F", "RF", "RNF", "RN"]),
+        ("4", "Lo que necesita la dueña", "Cada necesidad contada como una historia, con ejemplos que dicen cuándo está bien hecha.", ["EP", "HU", "CA"]),
+        ("5", "Cómo se diseñó", "El paso a paso de cada tarea, las pantallas, las decisiones técnicas y los diagramas.", ["CU", "PT", "ADR"]),
+        ("6", "Cómo se comprobó y se entregó", "Las pruebas hechas por personas, el trabajo técnico y los documentos entregados.", ["PM", "HT", "DOC"]),
+    ]
+
+    def ficha_de_tipo(self, p: str, cuenta: dict, raiz: str = "") -> str:
+        t = TIPO[p]
+        return (f'<a class="ficha-tipo" href="{raiz}t/{p}.html"><span class="sigla">{p}</span>'
+                f'<span><strong>{e(t.plural)}</strong> <span class="cuenta">{cuenta[p]}</span><br>'
+                f'<span class="sub">{e(t.explicacion)}</span></span></a>')
+
     def inicio(self) -> None:
         cuenta = defaultdict(int)
         for c in self.elementos:
             cuenta[prefijo(c)] += 1
         construidas = sum(1 for c in self.elementos if c.startswith("HU-") and self.estado_de_historia(c)[0] == "Construida")
-        mosaico = "".join(
-            f'<a href="t/{t.prefijo}.html"><strong>{cuenta[t.prefijo]}</strong>{e(t.plural)}</a>' for t in TIPOS if cuenta[t.prefijo]
-        ) + f'<a href="t/diagramas.html"><strong>{len(self.diagramas)}</strong>Diagramas</a>'
-        cadena = "".join(
-            f'<li><a href="t/{p}.html">{e(TIPO[p].plural)}</a></li>' for p in ("C", "M", "OE", "RF", "RN", "HU", "CA") if cuenta[p]
-        ) + '<li><a href="e/CA-11.1.html">Prueba</a></li>'
+
+        etapas = []
+        for numero, titulo, texto, prefijos in self.ETAPAS:
+            fichas = "".join(self.ficha_de_tipo(p, cuenta) for p in prefijos if cuenta[p])
+            if numero == "5":
+                fichas += (f'<a class="ficha-tipo" href="t/diagramas.html"><span class="sigla">◇</span>'
+                           f'<span><strong>Diagramas</strong> <span class="cuenta">{len(self.diagramas)}</span><br>'
+                           f'<span class="sub">Dibujos de cómo funciona cada parte, y en qué partes del código se ejecuta.</span></span></a>')
+            etapas.append(f'<li class="etapa"><div class="etapa-numero">{numero}</div><div><h3>{e(titulo)}</h3><p class="sub">{e(texto)}</p>'
+                          f'<div class="fichas">{fichas}</div></div></li>')
+
         pasos = "".join(
-            f'<li><div><a href="e/{c}.html"><strong>{c}</strong> · {e(self.titulo_corto(c))}</a><p>{e(texto)}</p></div></li>'
+            f'<li><div><a href="e/{c}.html"><span class="sigla">{prefijo(c)}</span><strong>{c}</strong> · {e(self.titulo_corto(c))}</a>'
+            f'<p><em>{e(TIPO[prefijo(c)].singular)}.</em> {e(texto)}</p></div></li>'
             for c, texto in RECORRIDO if c in self.elementos
         )
         estados = next((d for d in self.diagramas if "estado" in d.titulo.lower() and "orden" in d.titulo.lower()), None)
         if estados:
-            pasos += f'<li><div><a href="d/{estados.id}.html"><strong>Diagrama</strong> · {e(estados.titulo)}</a><p>Cómo cambia de estado una orden, y las clases del código que lo hacen.</p></div></li>'
+            pasos += (f'<li><div><a href="d/{estados.id}.html"><span class="sigla">◇</span><strong>Diagrama</strong> · {e(estados.titulo)}</a>'
+                      f'<p>Cómo cambia de estado una orden, y las partes del código que lo hacen.</p></div></li>')
+
         contenido = f"""
 <section class="portada">
   <h1>El-taller-ines</h1>
-  <p>Sistema de órdenes, entregas y cobros para un taller de costura. Este portal reúne el análisis, el diseño,
-  el código y las pruebas del proyecto: cada código, como <a href="e/HU-11.html">HU-11</a> o
-  <a href="e/RN-22.html">RN-22</a>, es un enlace a su página, con todo lo que se relaciona con él.</p>
-  <ul class="cadena">{cadena}</ul>
+  <p class="bajada">Todo el proyecto en un solo lugar: del problema del taller hasta el código y las pruebas.</p>
+  <p>El sistema lleva las órdenes, las entregas y los cobros de un taller de costura. Aquí está todo lo que se hizo para
+  construirlo. Cada cosa tiene un <strong>código corto</strong>, como <a href="e/HU-11.html">HU-11</a>: las letras dicen qué es
+  y el número cuál es. Tocando un código llegas a su página; pasando el cursor encima, ves qué es sin abrirlo.</p>
+  <div class="acciones-portada">
+    <a class="boton" href="#recorrido">Empezar el recorrido guiado</a>
+    <a class="boton secundario" href="glosario.html">Qué significa cada sigla</a>
+  </div>
 </section>
-<section class="tarjeta"><h2>Qué hay</h2><div class="mosaico">{mosaico}</div>
-<p class="sub">{construidas} de {cuenta["HU"]} historias construidas, con prueba automática.</p></section>
-<section class="tarjeta"><h2>Recorrido para la sustentación <span class="nota">· del problema a la prueba, en orden</span></h2><ol class="recorrido">{pasos}</ol></section>
+
+<section class="tarjeta">
+  <h2>Cómo se conecta todo</h2>
+  <p class="sub">El proyecto avanzó en seis etapas y cada una parte de la anterior: una historia (HU) existe porque resuelve un
+  problema (C), y una prueba existe porque comprueba una historia. Por eso todo está enlazado.</p>
+  <ol class="etapas">{"".join(etapas)}</ol>
+</section>
+
+<section class="tarjeta" id="recorrido">
+  <h2>Recorrido guiado <span class="nota">· para la primera vez, o para la sustentación</span></h2>
+  <p class="sub">Sigue un solo hilo, en orden: un problema real del taller, cómo se convirtió en una necesidad, cómo se
+  construyó y cómo se comprobó que funciona.</p>
+  <ol class="recorrido">{pasos}</ol>
+</section>
+
+<section class="tarjeta">
+  <h2>En números</h2>
+  <div class="mosaico">
+    <a href="t/HU.html"><strong>{construidas} de {cuenta["HU"]}</strong>historias construidas</a>
+    <a href="t/CA.html"><strong>{len(self.metodos)}</strong>pruebas automáticas</a>
+    <a href="t/diagramas.html"><strong>{len(self.diagramas)}</strong>diagramas</a>
+    <a href="t/PM.html"><strong>{cuenta["PM"]}</strong>pruebas manuales</a>
+  </div>
+</section>
 """
         self.escribir_pagina("index.html", "Inicio", contenido)
+
+    def glosario(self) -> None:
+        cuenta = defaultdict(int)
+        for c in self.elementos:
+            cuenta[prefijo(c)] += 1
+        bloques = []
+        for numero, titulo, _, prefijos in self.ETAPAS:
+            filas = []
+            for p in prefijos:
+                if not cuenta[p]:
+                    continue
+                t = TIPO[p]
+                ejemplo = (f'<a href="e/{t.ejemplo}.html" title="{e(self.titulo_corto(t.ejemplo))}">{t.ejemplo}</a>'
+                           if t.ejemplo in self.elementos else "")
+                filas.append(f'<tr><td><span class="sigla sigla-grande">{p}</span></td>'
+                             f'<td><a href="t/{p}.html"><strong>{e(t.singular)}</strong></a><br><span class="sub">{e(t.explicacion)}</span></td>'
+                             f'<td>{ejemplo}</td><td>{cuenta[p]}</td></tr>')
+            bloques.append(f'<h2>{numero}. {e(titulo)}</h2><table class="tabla glosario"><thead><tr><th>Sigla</th>'
+                           f'<th>Qué es</th><th>Ejemplo</th><th>Cuántos</th></tr></thead><tbody>{"".join(filas)}</tbody></table>')
+        otras = "".join(f"<dt>{e(palabra)}</dt><dd>{e(texto)}</dd>" for palabra, texto in L.OTRAS_PALABRAS)
+        contenido = f"""
+<div class="migas"><a href="index.html">Inicio</a></div>
+<h1 class="titulo">Glosario</h1>
+<section class="tarjeta texto">
+  <h2>Cómo se lee un código</h2>
+  <p>Cada elemento del proyecto tiene un <strong>código</strong>: unas letras que dicen <strong>qué es</strong> y un número que
+  dice <strong>cuál es</strong>. Así se nombra sin repetir su título, y se puede enlazar desde cualquier documento.</p>
+  <ul>
+    <li><strong>HU-11</strong> es la historia de usuario número 11.</li>
+    <li><strong>CA-11.1</strong> es el primer criterio de aceptación de la historia 11: el número antes del punto dice de qué historia es.</li>
+    <li><strong>C-01.1</strong> es una causa más concreta dentro de la causa C-01. Igual con los efectos (E) y los medios (M).</li>
+  </ul>
+</section>
+<section class="tarjeta">{"".join(bloques)}</section>
+<section class="tarjeta"><h2>Otras palabras</h2><dl class="campos">{otras}</dl></section>
+"""
+        self.escribir_pagina("glosario.html", "Glosario", contenido)
 
     def indice(self) -> None:
         entradas = [[c, self.titulo_corto(c), el.tipo.singular, self.enlazador.elemento(c)] for c, el in sorted(self.elementos.items(), key=lambda x: orden(x[0]))]
@@ -611,6 +704,7 @@ class Portal:
         for ruta in DOCUMENTOS:
             self.pagina_documento(ruta)
         self.inicio()
+        self.glosario()
         self.indice()
         escribir(self.salida / ".nojekyll", "")
 

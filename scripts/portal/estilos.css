@@ -144,3 +144,63 @@ pre.mermaid { background: none; }
   .cabecera, .menu { display: none; }
   .cuerpo { display: block; }
 }
+
+/* --- Para quien llega sin conocer el proyecto ----------------------------------------------- */
+
+/* La sigla de cada tipo, siempre con la misma forma: se reconoce igual en el menú, las listas y el glosario */
+.sigla {
+  display: inline-grid; place-items: center; min-width: 38px; height: 22px; margin-right: 8px; padding: 0 6px;
+  border-radius: 6px; background: var(--primario); color: #fff; font: 700 12px/1 var(--mono); letter-spacing: .02em;
+  vertical-align: 2px;
+}
+.sigla-grande { min-width: 52px; height: 30px; font-size: 15px; }
+.menu .sigla { min-width: 34px; height: 20px; font-size: 11px; background: var(--primario-suave); color: var(--primario); }
+.menu a[aria-current="page"] .sigla { background: var(--primario); color: #fff; }
+.relaciones h3 .sigla { vertical-align: 0; }
+
+/* Un código enlazado avisa con el subrayado punteado que al pasar el cursor dice qué es */
+a.codigo-enlace { text-decoration-style: dotted; text-underline-offset: 3px; }
+
+.tipo-explicado {
+  display: flex; gap: 12px; align-items: flex-start; margin: 0 0 18px; padding: 12px 16px;
+  background: var(--primario-suave); border-radius: var(--radio); color: var(--tinta); font-size: 15px;
+}
+.tipo-explicado .sigla { flex: none; margin-top: 1px; }
+
+.bajada { font-size: 19px; color: var(--tinta) !important; margin-bottom: 12px !important; }
+.portada p + p { margin-top: 10px; }
+.acciones-portada { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.boton {
+  display: inline-block; padding: 11px 18px; border-radius: 999px; background: var(--primario); color: #fff;
+  font-weight: 700; text-decoration: none;
+}
+.boton.secundario { background: var(--primario-suave); color: var(--primario); }
+
+/* Las seis etapas: una línea vertical une los números, como una cadena */
+.etapas { margin: 16px 0 0; padding: 0; list-style: none; }
+.etapa { position: relative; display: grid; grid-template-columns: 44px 1fr; gap: 14px; padding-bottom: 20px; }
+.etapa:not(:last-child)::before { content: ""; position: absolute; left: 21px; top: 44px; bottom: 0; width: 2px; background: var(--borde); }
+.etapa-numero {
+  display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%;
+  background: var(--primario); color: #fff; font-weight: 800; font-size: 18px;
+}
+.etapa h3 { margin: 8px 0 2px; font-size: 18px; }
+.etapa > div > .sub { margin: 0 0 10px; }
+.fichas { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px; }
+.ficha-tipo {
+  display: flex; gap: 4px; padding: 12px 14px; border: 1px solid var(--borde); border-radius: var(--radio);
+  color: var(--tinta); text-decoration: none; background: var(--superficie);
+}
+.ficha-tipo:hover { border-color: var(--primario); }
+.ficha-tipo .sigla { flex: none; }
+.ficha-tipo .cuenta { color: var(--tinta-2); font-size: 14px; }
+.ficha-tipo .sub { color: var(--tinta-2); font-size: 14px; }
+.recorrido .sigla { vertical-align: 1px; }
+.recorrido p em { color: var(--tinta); font-style: normal; font-weight: 700; }
+.sub { color: var(--tinta-2); }
+
+.glosario td:first-child { width: 70px; }
+.glosario td:nth-child(3), .glosario td:nth-child(4) { white-space: nowrap; }
+.tarjeta > h2 + table, .tarjeta h2 { margin-top: 0; }
+.tarjeta > h2 ~ h2 { margin-top: 24px; }
+.glosario { display: table; }

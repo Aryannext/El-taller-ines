@@ -20,8 +20,10 @@ ETIQUETA = re.compile(r"(<[^>]+>)")
 class Enlazador:
     """Sabe la dirección de cada página del portal y la del repositorio en GitHub."""
 
-    def __init__(self, conocidos: set[str], documentos: dict[str, str], repositorio: str, ref: str):
+    def __init__(self, conocidos: set[str], documentos: dict[str, str], repositorio: str, ref: str, titulos: dict[str, str] | None = None):
         self.conocidos = conocidos
+        # «Regla de negocio · Fecha en que la orden quedó lista»: se ve al pasar el cursor sobre cualquier código
+        self.titulos = titulos or {}
         self.documentos = documentos  # ruta del .md en el repositorio → página del portal
         self.repositorio = repositorio
         self.ref = ref
@@ -52,7 +54,7 @@ class Enlazador:
             partes[i] = CODIGO.sub(
                 lambda m: m.group(0)
                 if m.group(0) not in self.conocidos or m.group(0) == propio
-                else f'<a href="{raiz}{self.elemento(m.group(0))}">{m.group(0)}</a>',
+                else f'<a class="codigo-enlace" href="{raiz}{self.elemento(m.group(0))}" title="{e(self.titulos.get(m.group(0), ""))}">{m.group(0)}</a>',
                 parte,
             )
         return "".join(partes)

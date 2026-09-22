@@ -32,27 +32,59 @@ class Tipo:
     singular: str
     plural: str
     seccion: str
+    explicacion: str = ""  # qué es, en palabras de alguien que no conoce el proyecto
+    ejemplo: str = ""  # un código para ver cómo luce
 
 
 TIPOS = [
-    Tipo("C", "Causa", "Causas", "Problema"),
-    Tipo("E", "Efecto", "Efectos", "Problema"),
-    Tipo("M", "Medio", "Medios", "Problema"),
-    Tipo("FN", "Fin", "Fines", "Problema"),
-    Tipo("OE", "Objetivo específico", "Objetivos específicos", "Problema"),
-    Tipo("F", "Fuente de requisitos", "Fuentes de requisitos", "Requisitos"),
-    Tipo("RF", "Requisito funcional", "Requisitos funcionales", "Requisitos"),
-    Tipo("RNF", "Requisito no funcional", "Requisitos no funcionales", "Requisitos"),
-    Tipo("RN", "Regla de negocio", "Reglas de negocio", "Requisitos"),
-    Tipo("EP", "Épica", "Épicas", "Historias"),
-    Tipo("HU", "Historia de usuario", "Historias de usuario", "Historias"),
-    Tipo("CA", "Criterio de aceptación", "Criterios de aceptación", "Historias"),
-    Tipo("CU", "Caso de uso", "Casos de uso", "Diseño"),
-    Tipo("PT", "Pantalla", "Pantallas", "Diseño"),
-    Tipo("ADR", "Decisión de arquitectura", "Decisiones de arquitectura", "Diseño"),
-    Tipo("PM", "Prueba manual", "Pruebas manuales", "Pruebas"),
-    Tipo("HT", "Habilitador técnico", "Habilitadores técnicos", "Entrega"),
-    Tipo("DOC", "Entregable", "Entregables", "Entrega"),
+    Tipo("C", "Causa", "Causas", "Problema",
+         "Una razón por la que el taller tiene problemas hoy. Sale del árbol de problemas.", "C-01.1"),
+    Tipo("E", "Efecto", "Efectos", "Problema",
+         "Una consecuencia de esos problemas: lo que el taller pierde o sufre por ellos.", "E-03"),
+    Tipo("M", "Medio", "Medios", "Problema",
+         "Lo que hay que lograr para eliminar una causa. Es la causa escrita en positivo, en el árbol de objetivos.", "M-01.1"),
+    Tipo("FN", "Fin", "Fines", "Problema",
+         "El beneficio que se consigue al lograr los medios: el efecto escrito en positivo.", "FN-03"),
+    Tipo("OE", "Objetivo específico", "Objetivos específicos", "Problema",
+         "Una meta concreta del proyecto. Agrupa varios medios.", "OE-01"),
+    Tipo("F", "Fuente de requisitos", "Fuentes de requisitos", "Requisitos",
+         "De dónde salió la información: una entrevista, un documento, el prototipo anterior.", "F-01"),
+    Tipo("RF", "Requisito funcional", "Requisitos funcionales", "Requisitos",
+         "Algo que el sistema debe permitir hacer. Por ejemplo, agregar una prenda a una orden.", "RF-11"),
+    Tipo("RNF", "Requisito no funcional", "Requisitos no funcionales", "Requisitos",
+         "Una condición de calidad: qué tan rápido, seguro, fácil o confiable debe ser el sistema.", "RNF-03"),
+    Tipo("RN", "Regla de negocio", "Reglas de negocio", "Requisitos",
+         "Una regla del taller que el sistema hace cumplir. Por ejemplo, que una orden no puede quedar sin prendas.", "RN-22"),
+    Tipo("EP", "Épica", "Épicas", "Historias",
+         "Un grupo de historias de usuario sobre el mismo tema, como «Pagos» o «Avisos».", "EP-03"),
+    Tipo("HU", "Historia de usuario", "Historias de usuario", "Historias",
+         "Algo que la dueña del taller necesita hacer, contado desde su punto de vista: «Como dueña, quiero…, para…».", "HU-11"),
+    Tipo("CA", "Criterio de aceptación", "Criterios de aceptación", "Historias",
+         "Un ejemplo concreto que dice cuándo una historia está bien hecha: «Dado… cuando… entonces…». Cada uno tiene su prueba.", "CA-11.1"),
+    Tipo("CU", "Caso de uso", "Casos de uso", "Diseño",
+         "El paso a paso de una tarea: qué hace la persona, qué responde el sistema y qué pasa si algo sale distinto.", "CU-13"),
+    Tipo("PT", "Pantalla", "Pantallas", "Diseño",
+         "Una pantalla del sistema, con su diseño (mockup) y cómo quedó construida.", "PT-09"),
+    Tipo("ADR", "Decisión de arquitectura", "Decisiones de arquitectura", "Diseño",
+         "Una decisión técnica importante, con las opciones que se compararon y por qué se eligió una.", "ADR-001"),
+    Tipo("PM", "Prueba manual", "Pruebas manuales", "Pruebas",
+         "Una prueba que hace una persona, no una máquina, con su registro de resultados. Por ejemplo, probar la app en un celular real.", "PM-04"),
+    Tipo("HT", "Habilitador técnico", "Habilitadores técnicos", "Entrega",
+         "Trabajo técnico necesario que no es una historia: el servidor, los respaldos, la app para Android.", "HT-07"),
+    Tipo("DOC", "Entregable", "Entregables", "Entrega",
+         "Un documento que se entrega en el proyecto formativo, como un manual o el plan de pruebas.", "DOC-22"),
+]
+
+# Palabras que aparecen en el portal sin ser un código
+OTRAS_PALABRAS = [
+    ("Must, Should, Could", "La prioridad de una historia. Must: se tiene que hacer. Should: debería hacerse si hay tiempo. Could: se puede hacer si sobra tiempo."),
+    ("Sprint", "Un periodo corto de trabajo, de una o dos semanas, con un grupo de historias por terminar. Viene de Scrum, la forma de trabajo del proyecto."),
+    ("Puntos", "Cuánto esfuerzo cuesta una historia, comparada con las demás. No son horas."),
+    ("Mockup", "El dibujo de una pantalla antes de construirla, para acordar cómo se ve."),
+    ("Prueba automática", "Un programa que revisa solo que el sistema haga lo que debe. Se corren todas con cada cambio."),
+    ("Diagrama", "Un dibujo que explica cómo funciona una parte del sistema: sus pasos, sus estados o sus piezas."),
+    ("Clase", "Una pieza del código con una tarea. En «Dónde está en el código» se enlaza al archivo exacto."),
+    ("Orden", "Todo lo que un cliente deja en una visita al taller. Tiene un número, como #0042."),
 ]
 TIPO = {t.prefijo: t for t in TIPOS}
 
