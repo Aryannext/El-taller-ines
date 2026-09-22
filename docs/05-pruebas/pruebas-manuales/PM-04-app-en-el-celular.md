@@ -39,23 +39,29 @@ Los 10 pasos pasan. Si el otro celular es un iPhone y el navegador no ofrece ins
 
 ## Registro
 
-**Fecha:** 21 de septiembre de 2026 · **Commit:** `fc48f20` · **Versión del APK:** no hay APK todavía (HT-07)
+**Fecha:** 22 de septiembre de 2026 · **Commit:** `947ab45` · **Versión del APK:** 1.0.0 (`appVersionCode` 1), firmada con la llave `taller` (huella SHA-256 `59:1E:30:…:62:FA`)
 
-**Android real (modelo y versión):** no anotado; se usó Chrome para Android · **Otro celular (modelo, sistema y navegador):** no se usó
+**Android real (modelo y versión):** Android 10 con Chrome 153, según el registro del servidor; el modelo no se anotó · **Otro celular (modelo, sistema y navegador):** un Tecno con Android; el navegador no se anotó
 
-| Paso | Resultado | Captura | Observaciones |
+La primera corrida, del 21 de septiembre, probó los pasos 4 y 5 desde Chrome para Android porque aún no había APK: fotos #4 y #5 de la #0003, a 1200 × 1600 px y 242 KB, y a 1600 × 1200 px y 320 KB. Esta corrida repite todo dentro del APK.
+
+| Paso | Resultado | Evidencia | Observaciones |
 | --- | --- | --- | --- |
-| 1 | Pendiente | | Espera el APK de HT-07 |
-| 2 | Pendiente | | Espera el APK y `assetlinks.json` |
-| 3 | Pendiente | | |
-| 4 · CA-17.1 | **Sí.** La cámara abrió desde Chrome para Android y la foto quedó asociada a la prenda «Blusa · Subir basta 3 cm» de la #0003 | La del detalle de la orden | Se guardó reducida a 1200 × 1600 px y 242 KB (RNF-03). Se tomó al corregir una prenda que ya existía, no al registrarla; es la misma carga de fotos |
-| 5 · CA-17.2 | **Sí.** La foto elegida de la galería quedó como la segunda de la misma prenda | | Se guardó a 1600 × 1200 px y 320 KB, sin perder la orientación horizontal |
-| 6 | Pendiente | | |
-| 7 · CA-29.2 | Pendiente | | |
-| 8 | Pendiente | | |
-| 9 | Pendiente | | |
-| 10 | Pendiente | | |
+| 1 | **Sí.** El APK se instaló en el Android | | Se pasó al celular a mano, porque `/descargas/` todavía no existe |
+| 2 | **Sí, con una observación.** Abre a pantalla completa, sin barra | El servidor recibió `GET /.well-known/assetlinks.json` desde el celular. La API de Digital Asset Links de Google devuelve el paquete `online.proyectosena.taller` con la misma huella del APK | **Cada vez que se abre**, se ve el navegador unos 2 segundos antes de quedar a pantalla completa. Como la barra se va sola, Android sí valida el enlace; si no lo validara, se quedaría todo el tiempo. Queda para revisar con `adb logcat` si molesta a las usuarias |
+| 3 | **Sí.** Entra al panel del día | `POST /entrar` 302 desde el APK | |
+| 4 · CA-17.1 | **Sí.** La cámara abrió dentro del APK y la foto quedó en la prenda «E» de la #0004 | Foto #7, 9:27:56 | Guardada a 1200 × 1600 px y 212 KB (RNF-03). Se agregó a una prenda existente: la app no permite agregar prendas a una orden que ya existe, porque HU-11 no se construyó |
+| 5 · CA-17.2 | **Sí.** La foto de la galería quedó como la tercera de la misma prenda | Foto #8, 9:28:10 | Guardada a 720 × 1600 px y 117 KB |
+| 6 | **Sí.** La #0004 de Cristian Cantillo pasó a Lista para entregar al marcar Terminada su única prenda | Aviso #3, generado a las 9:10:41 | Como el negocio sí tiene Evolution API (PM-08), el aviso se envió solo y llegó al celular del aprendiz. Para probar los pasos 7 y 8, ese aviso se pasó a mano a `pendiente_asistido`, el estado en que queda cuando la API falla tres veces (RN-40) |
+| 7 · CA-29.2 | **Sí.** Desde «Avisos por enviar», «Abrir WhatsApp y enviar» abrió WhatsApp en el chat del cliente con el mensaje escrito | | No se envió |
+| 8 · CA-29.4 | **Sí.** Al volver sin confirmar, el aviso sigue por enviar | El aviso #3 seguía `pendiente_asistido`, sin canal ni fecha de resuelto | |
+| 9 | **Sí.** En modo avión, la app muestra la página «Sin internet…» y no el error del navegador | El servidor entregó `sin-conexion.html` al celular | |
+| 10 | **Sí.** En el Tecno, el navegador ofreció instalarlo, quedó el ícono y abre sin barra | | A diferencia del APK, instalada así no muestra el navegador al abrir |
 
-**Resultado:** **Parcial.** Solo se corrieron los pasos 4 y 5, y fue desde Chrome para Android porque todavía no hay APK. Los dos pasan, y eso basta para los criterios de HU-17: la cámara y la galería del celular funcionan, y las fotos quedan asociadas y reducidas.
+**Resultado:** **Aprobada con observaciones.** Los 10 pasos pasan: la app se instala, abre a pantalla completa y la cámara, la galería, WhatsApp y la página sin conexión funcionan desde el APK (RNF-35).
 
-La prueba completa queda pendiente de HT-07. Hay que instalar el APK y repetir los pasos 4 y 5 dentro de él, porque lo que PM-04 verifica es que la cámara y la galería funcionen desde la app instalada (RNF-35).
+Quedan tres observaciones:
+
+- **El APK muestra el navegador unos 2 segundos cada vez que se abre.** No impide trabajar. Está para revisar en la versión 1.0.1 del APK.
+- **La preparación no se cumplió al pie de la letra:** el negocio sí tiene API de WhatsApp. El paso 7 se probó con un aviso pasado a pendiente a mano, que es el mismo estado que deja la cola cuando la API falla.
+- **No se puede agregar una prenda a una orden que ya existe (HU-11).** No es parte de PM-04, pero apareció al buscar cómo registrar una prenda nueva.
