@@ -257,7 +257,9 @@ fieldset.campo { min-width: 0; margin: 0; padding: 0; border: 0; }
   border: 1px solid var(--borde); border-radius: var(--radio); background: var(--superficie); color: inherit; text-decoration: none;
 }
 .cifra .encabezado { display: flex; align-items: center; gap: 8px; font-size: 14.5px; color: var(--tinta-2); font-weight: 700; }
-.cifra .valor { font-size: 32px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+/* Atkinson Hyperlegible raya el cero y no trae otra forma: a 38px y en 800, el «0» del panel parecía un símbolo de prohibido (PM-04).
+   Las cifras grandes usan la fuente del sistema, que lo dibuja sin raya */
+.cifra .valor { font-family: system-ui, "Segoe UI", Roboto, sans-serif; font-size: 32px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
 .cifra .nota { font-size: 14px; color: var(--tinta-2); }
 .cifra.alerta .valor, .cifra.alerta .encabezado { color: var(--peligro); }
 .cifra.atencion .valor, .cifra.atencion .encabezado { color: var(--aviso); }
