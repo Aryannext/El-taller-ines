@@ -7,6 +7,7 @@ namespace App\Aplicacion\Consultas;
 use App\Dominio\Compartido\Reloj;
 use App\Dominio\Ordenes\EstadoDeOrden;
 use App\Dominio\Ordenes\NumeroDeOrden;
+use App\Dominio\Ordenes\ReglasDeSeguimiento;
 use App\Modelos\Orden;
 use App\Modelos\Prenda;
 use Illuminate\Database\Eloquent\Builder;
@@ -21,6 +22,7 @@ class OrdenesAtrasadas
     public function __construct(
         private readonly ListarOrdenes $ordenes,
         private readonly Reloj $reloj,
+        private readonly ReglasDeSeguimiento $reglas,
     ) {}
 
     /**
@@ -55,11 +57,11 @@ class OrdenesAtrasadas
      */
     public function diasDeAtraso(Orden $orden): int
     {
-        return (int) $orden->fecha_entrega_acordada->diff($this->reloj->hoy())->days;
+        return $this->reglas->diasDeAtraso($orden->fecha_entrega_acordada, $this->reloj->hoy());
     }
 
     /**
-     * RN-34 en SQL: En proceso y con la fecha acordada anterior a hoy. El estado se filtra con el mismo
+     * RN-34 en SQL, la misma regla de ReglasDeSeguimiento::estaAtrasada: En proceso y con la fecha acordada anterior a hoy. El estado se filtra con el mismo
      * cálculo que la lista de órdenes (RN-18), para no escribirlo dos veces.
      *
      * @return Builder<Orden>

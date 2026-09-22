@@ -72,6 +72,19 @@ class QuienMeDebeTest extends TestCase
         $this->get(route('panel'))->assertSee('<a class="cifra principal" href="'.route('dinero').'">', false);
     }
 
+    public function test_rn_32_total_por_cobrar_del_negocio(): void
+    {
+        // #0040 entregada con saldo $12.000, #0042 en proceso con saldo $21.000 y #0041 cancelada con saldo $8.000
+        $this->orden(40, [['entregada', 22000]], pagado: 10000);
+        $this->orden(42, [['en_proceso', 31000]], pagado: 10000);
+        $this->orden(41, [['pendiente', 8000]], cancelada: true);
+        $this->actingAs($this->duena);
+
+        // El total por cobrar es $33.000 en Dinero y en el panel: la cancelada no se cobra y la entregada sí
+        $this->assertSame(33000, app(QuienMeDebe::class)->obtener()['total']->valor());
+        $this->assertSame(33000, app(PanelDelDia::class)->obtener($this->duena->negocio)['porCobrar']->valor());
+    }
+
     public function test_ca_26_2_las_pagadas_no_aparecen(): void
     {
         $this->orden(45, [['en_proceso', 30000]], pagado: 30000);

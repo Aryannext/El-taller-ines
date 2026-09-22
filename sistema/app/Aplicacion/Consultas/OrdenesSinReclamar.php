@@ -8,6 +8,7 @@ use App\Dominio\Compartido\Reloj;
 use App\Dominio\Ordenes\EstadoDeOrden;
 use App\Dominio\Ordenes\EstadoDePrenda;
 use App\Dominio\Ordenes\NumeroDeOrden;
+use App\Dominio\Ordenes\ReglasDeSeguimiento;
 use App\Dominio\Pagos\CalculadoraDeSaldo;
 use App\Dominio\Pagos\Dinero;
 use App\Dominio\Pagos\EstadoDePago;
@@ -28,6 +29,7 @@ class OrdenesSinReclamar
         private readonly ListarOrdenes $ordenes,
         private readonly CalculadoraDeSaldo $calculadora,
         private readonly Reloj $reloj,
+        private readonly ReglasDeSeguimiento $reglas,
     ) {}
 
     /**
@@ -44,7 +46,6 @@ class OrdenesSinReclamar
             ->orderBy('numero')
             ->get()
             ->map(function (Orden $orden): array {
-                $terminadas = $orden->prendas->filter(fn (Prenda $prenda) => $prenda->estado === EstadoDePrenda::Terminada);
                 $valor = $this->calculadora->valor($orden->prendas->map(fn (Prenda $prenda) => [$prenda->precio, $prenda->estado]));
                 $saldo = $this->calculadora->saldo($valor, $orden->pagos->map(fn (Pago $pago) => [$pago->valor, $pago->anulado_en !== null]));
 
@@ -52,7 +53,7 @@ class OrdenesSinReclamar
                     'orden' => $orden,
                     'numero' => NumeroDeOrden::desde($orden->numero)->formato(),
                     'diasDeEspera' => $this->diasDeEspera($orden),
-                    'prendas' => $terminadas->count(),
+                    'prendas' => $this->reglas->prendasSinReclamar($orden->prendas->map(fn (Prenda $prenda) => $prenda->estado)),
                     'saldo' => $saldo,
                     // Solo se le cobra al cliente si queda saldo (RN-29)
                     'estadoDePago' => $this->calculadora->estadoDePago($saldo),
@@ -82,11 +83,11 @@ class OrdenesSinReclamar
      */
     public function diasDeEspera(Orden $orden): int
     {
-        return (int) $orden->lista_en->setTime(0, 0)->diff($this->reloj->hoy())->days;
+        return $this->reglas->diasDeEspera($orden->lista_en, $this->reloj->hoy());
     }
 
     /**
-     * RN-35 en SQL: Lista para entregar y con más días de espera que el plazo. El estado se filtra con el
+     * RN-35 en SQL, la misma regla de ReglasDeSeguimiento::estaSinReclamar: Lista para entregar y con más días de espera que el plazo. El estado se filtra con el
      * mismo cálculo que la lista de órdenes (RN-18). Con el plazo en 30, una orden lista hace 30 días
      * todavía no aparece: hace falta pasarlo (CA-34.2).
      *
@@ -94,7 +95,7 @@ class OrdenesSinReclamar
      */
     private function sinReclamar(Negocio $negocio): Builder
     {
-        $limite = $this->reloj->hoy()->modify('-'.$negocio->dias_sin_reclamar.' days');
+        $limite = $this->reglas->sinReclamarSiQuedoListaAntesDe($this->reloj->hoy(), $negocio->dias_sin_reclamar);
 
         return $this->ordenes
             ->conEstado(Orden::query(), EstadoDeOrden::ListaParaEntregar)

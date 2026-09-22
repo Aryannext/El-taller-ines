@@ -59,6 +59,18 @@ class DineroRecibidoTest extends TestCase
         $this->assertMatchesRegularExpression('/periodo=mes"\s+aria-current="page"\s*>Mes</', (string) $pagina->getContent());
     }
 
+    public function test_rn_33_dinero_recibido_en_un_periodo(): void
+    {
+        // En septiembre hay pagos de $10.000, $21.000 y $15.000 (anulado): lo recibido en septiembre es $31.000
+        $this->pago(10000, '2026-09-02 10:00:00');
+        $this->pago(21000, '2026-09-20 15:00:00');
+        $this->pago(15000, '2026-09-21 09:00:00', anulado: true);
+        $this->actingAs($this->duena);
+
+        $septiembre = app(DineroRecibido::class)->periodo('mes');
+        $this->assertSame(31000, app(DineroRecibido::class)->entre($septiembre['desde'], $septiembre['hasta'])['recibido']->valor());
+    }
+
     public function test_ca_27_2_pago_de_noche(): void
     {
         // El 14 a las 11:30 p. m., hora de Colombia, sigue siendo el 14 (RN-09)
