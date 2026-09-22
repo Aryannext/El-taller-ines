@@ -627,66 +627,78 @@ flowchart LR
 
 ## 13. Despliegue
 
-Cómo corre en el VPS compartido de Hostinger, confirmado en HT-04. El servidor tiene PHP 8.3 y MariaDB para otros proyectos, así que el sistema usa sus propios contenedores con PHP 8.4 y MySQL 8.4 ([despliegue](../../04-especificacion-tecnica/07-despliegue-y-operacion.md#servidor)).
+Cómo corre en el VPS compartido de Hostinger, confirmado en HT-04 y completado en HT-05 y HT-07. El servidor tiene PHP 8.3 y MariaDB para otros proyectos, así que el sistema usa sus propios contenedores con PHP 8.4 y MySQL 8.4 ([despliegue](../../04-especificacion-tecnica/07-despliegue-y-operacion.md#servidor)).
 
 ```mermaid
 flowchart TB
     subgraph android["«dispositivo» Celular Android"]
-        apk["APK con Trusted Web Activity"] --> chrome["Chrome"]
+        apk["APK con Trusted Web Activity"] --> chrome["Navegador predeterminado<br/>Chrome"]
     end
     subgraph otro["«dispositivo» Otro celular o computador"]
-        navegador["Navegador"]
+        navegador["Navegador<br/>app instalada desde el navegador"]
     end
     subgraph vps["«servidor» VPS compartido · Ubuntu 24.04"]
-        nginx["Nginx del portafolio<br/>proyectosena.online/taller<br/>HTTPS 443 · HTTP 80 redirige"]
+        nginx["Nginx del portafolio<br/>proyectosena.online<br/>HTTPS 443 · HTTP 80 redirige"]
+        descargas[("/home/cristian/descargas-taller<br/>taller.apk")]
         subgraph docker["«Docker Compose» taller"]
-            phpfpm["Contenedor web<br/>PHP 8.4 con Apache · 127.0.0.1:3012"]
-            trabajador["Contenedor cola<br/>se reinicia solo"]
-            cron["Contenedor programador<br/>llega con HT-05"]
+            web["Contenedor web<br/>PHP 8.4 con Apache · 127.0.0.1:3012"]
+            cola["Contenedor cola<br/>queue:work · se reinicia solo"]
+            programador["Contenedor programador<br/>schedule:work"]
             mysql[("Contenedor db<br/>MySQL 8.4 · sin puertos publicados")]
-            fotos[("Volumen taller_storage<br/>fotos")]
+            fotos[("Volumen storage<br/>fotos")]
+            evolution["Contenedor evolution<br/>Evolution API v2.3.7 · 127.0.0.1:3013"]
+            evodb[("Contenedor evolution-db<br/>PostgreSQL 16")]
         end
-        respaldos[("Respaldos diarios<br/>14 días")]
+        cronhost["Cron del host<br/>/etc/cron.d/taller"]
+        respaldos[("/var/respaldos/taller<br/>14 días")]
     end
     dns["DNS del dominio"]
-    whatsapp["WhatsApp Cloud API"]
-    drive["Google Drive"]
-    monitor["Monitor externo<br/>cada 5 minutos"]
+    whatsapp["WhatsApp<br/>número vinculado a Evolution API"]
+    drive["Google Drive<br/>rclone"]
+    monitor["UptimeRobot<br/>cada 5 minutos"]
     github["GitHub<br/>código y GitHub Actions"]
-    chrome -- "HTTPS" --> nginx
-    navegador -- "HTTPS" --> nginx
+    chrome -- "HTTPS /taller/" --> nginx
+    navegador -- "HTTPS /taller/" --> nginx
+    chrome -. "comprueba /.well-known/assetlinks.json" .-> nginx
     dns -. "resuelve el dominio" .-> nginx
-    nginx --> phpfpm
-    phpfpm --> mysql
-    phpfpm --> fotos
-    trabajador --> mysql
-    trabajador -- "HTTPS" --> whatsapp
-    cron --> respaldos
+    nginx -- "/taller/ y /.well-known/assetlinks.json" --> web
+    nginx -- "/taller/descargas/" --> descargas
+    web --> mysql
+    web --> fotos
+    cola --> mysql
+    cola -- "HTTP interno" --> evolution
+    programador --> mysql
+    evolution --> evodb
+    evolution -- "HTTPS" --> whatsapp
+    cronhost -- "mysqldump y copia de fotos" --> respaldos
     respaldos -- "copia semanal" --> drive
-    monitor -- "HTTPS" --> nginx
-    github -. "git pull al desplegar" .-> phpfpm
+    monitor -- "HTTPS /taller/up" --> nginx
+    github -. "git pull al desplegar" .-> web
 ```
 
 | Nodo | Qué corre | Requisito |
 | --- | --- | --- |
-| **Celular Android** | El APK abre el sistema en Chrome a pantalla completa | RNF-35 · ADR-006 |
-| **Nginx del portafolio** | Recibe HTTPS con el certificado de Let's Encrypt del dominio, redirige lo que llegue por HTTP y pasa `/taller` al contenedor web; publicará `assetlinks.json` en la raíz | RNF-18 · ADR-006 |
+| **Celular Android** | El APK abre el sistema a pantalla completa en el navegador predeterminado. Con Chrome abre directo; con Brave, Brave muestra su barra unos 2 segundos mientras comprueba el sitio (PM-04) | RNF-35 · ADR-006 |
+| **Nginx del portafolio** | Recibe HTTPS con el certificado de Let's Encrypt, redirige lo que llegue por HTTP y, con `taller.conf`, pasa `/taller/` y `/.well-known/assetlinks.json` al contenedor web y sirve el APK desde `/taller/descargas/` | RNF-18 · ADR-006 |
+| **Descargas** | El APK firmado, fuera del repositorio y de la raíz del portafolio. Cada versión se sube con `scp` | HT-07 |
 | **Contenedor web** | La aplicación Laravel con PHP 8.4, configurada solo con variables de entorno | RNF-34 |
-| **Contenedor cola** | `php artisan queue:work` con `restart: always`, para que se reinicie solo | RNF-17 · HT-04 |
-| **Contenedor programador** | Respaldo diario de la base y las fotos; copia semanal a Google Drive | RNF-15 · HT-05 |
+| **Contenedor cola** | `php artisan queue:work` con `restart: always`, para que se reinicie solo. Envía los avisos a Evolution API | RNF-17 · HT-04 |
+| **Contenedor programador** | `php artisan schedule:work`: las tareas de la aplicación, como limpiar los trabajos fallidos cada domingo | HT-05 |
 | **Contenedor db** | MySQL 8.4 sin puertos publicados: solo lo alcanzan los contenedores del sistema | RNF-23 |
-| **Monitor externo** | Revisa el sistema cada 5 minutos | RNF-16 |
+| **Evolution API** | Envía los avisos por el WhatsApp vinculado, con su propia base PostgreSQL. Solo escucha en `127.0.0.1` | ADR-007 · HT-01 |
+| **Cron del host** | El respaldo diario de la base y las fotos, y la copia semanal a Google Drive con rclone. No va en el programador para no darle a un contenedor el socket de Docker | RNF-15 · HT-05 |
+| **UptimeRobot** | Consulta `/taller/up` cada 5 minutos y avisa por correo si falla | RNF-16 |
 | **GitHub** | Guarda el código y corre las pruebas; el despliegue trae el código aprobado | RNF-30 |
 
 ## Decisiones que salieron al diagramar
 
 | Hallazgo | Diagrama | Propuesta |
 | --- | --- | --- |
-| **Aviso con el cliente presente.** Si al devolver una prenda sin arreglar la orden queda lista, se genera un aviso aunque el cliente esté en el taller y se lleve todo enseguida | 10 | Esperar unos minutos antes de enviar el aviso automático. Si en ese tiempo la orden se entrega, el aviso se descarta solo (RN-39). No contradice ninguna regla; queda **por decidir antes de construir HU-28** (Sprint 4) y, si se acepta, se agrega a sus criterios |
+| **Aviso con el cliente presente.** Si al devolver una prenda sin arreglar la orden queda lista, se genera un aviso aunque el cliente esté en el taller y se lleve todo enseguida | 10 | Esperar unos minutos antes de enviar el aviso automático. Si en ese tiempo la orden se entrega, el aviso se descarta solo (RN-39). No contradice ninguna regla. **HU-28 se construyó sin esa espera:** el aviso sale apenas la orden queda lista, y la decisión no quedó escrita. Si se acepta la espera, es un cambio en `GenerarAviso` y un criterio nuevo en HU-28 |
 | **La foto se busca por su orden.** `Foto` no tiene `negocio_id`, así que no puede usar el filtro global | 11 | `FotosDeOrden` busca la foto a través de su prenda y su orden, que sí filtran por negocio. Queda cubierto por la prueba de aislamiento (RNF-22) |
 | **Pendiente no vuelve de En proceso.** Ninguna regla lo pide, y no cambia el estado de la orden | 4 | No se permite; si la dueña marca En proceso por error, no afecta ningún cálculo |
 
 ## Pendiente
 
-- Decidir, antes de construir HU-28, si el aviso automático espera unos minutos antes de enviarse.
+- Decidir si el aviso automático espera unos minutos antes de enviarse. HU-28 ya está construida sin esa espera.
 - Los diagramas y la especificación de los casos de uso están en [casos de uso](../casos-de-uso/README.md) (DOC-15).
