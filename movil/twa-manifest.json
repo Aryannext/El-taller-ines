@@ -36,7 +36,12 @@
   "isChromeOSOnly": false,
   "isMetaQuest": false,
   "minSdkVersion": 21,
-  "fingerprints": [],
+  "fingerprints": [
+    {
+      "name": "taller",
+      "value": "59:1E:30:41:00:1B:DC:A2:08:36:00:7F:66:BE:90:1F:A4:01:68:73:32:97:5F:12:A3:48:97:2C:B8:B4:62:FA"
+    }
+  ],
   "additionalTrustedOrigins": [],
   "retainedBundles": [],
   "protocolHandlers": [],

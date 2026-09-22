@@ -286,6 +286,9 @@ El contenido:
 | **Herramienta** | Bubblewrap. La primera vez descarga su propio JDK y Android SDK; esa descarga la hace el aprendiz |
 | **Configuración versionada** | `movil/twa-manifest.json` |
 | **Fuera del repositorio** | `*.keystore`, `*.jks`, `*.apk` y `*.aab`, excluidos en `.gitignore` |
+| **La llave** | `C:\Users\crist\llaves\taller.keystore`, con copia en el Drive personal del aprendiz. Se creó con `keytool -genkeypair` (RSA 2048, alias `taller`) porque `bubblewrap build` no la crea: solo `bubblewrap init` lo hace. Es PKCS12, así que la contraseña del almacén y la de la llave son la misma |
+| **La huella** | `fingerprints` de `twa-manifest.json` y `assetlinks.json` llevan la misma SHA-256. Se saca del APK firmado, sin contraseña: `apksigner verify --print-certs` |
+| **Si Gradle se cae sin error** | Con «Failed to reserve memory for metaspace» y `windows-x86` en el registro del fallo, el JDK que bajó Bubblewrap es de 32 bits y no le alcanza la memoria. En HT-07 compiló al segundo intento; si vuelve a pasar, se instala Temurin 17 de 64 bits y se cambia `jdkPath` en `~/.bubblewrap/config.json` |
 | **Si Chrome no puede abrir la app** | `fallbackType: customtabs`, que abre el sistema en una pestaña de Chrome |
 | **Versiones** | `appVersionCode` sube en 1 con cada APK nuevo. Los cambios del sistema no necesitan un APK nuevo (ADR-006) |
 | **Distribución** | El APK firmado se publica en el servidor, en `/descargas/`, desde una carpeta fuera del repositorio. El manual de usuario (DOC-22) explica cómo instalarlo |
