@@ -455,10 +455,10 @@ def main() -> int:
             print(f"- {error}")
         return 1
 
-    DICCIONARIO.write_text(generar_diccionario(tablas, version), encoding="utf-8")
+    DICCIONARIO.write_text(generar_diccionario(tablas, version), encoding="utf-8", newline="\n")
     leeme = reemplazar_bloque(leeme, "diagrama", generar_diagrama(tablas))
     leeme = reemplazar_bloque(leeme, "verificacion", generar_verificacion(consultas, pruebas, version))
-    LEEME.write_text(leeme, encoding="utf-8")
+    LEEME.write_text(leeme, encoding="utf-8", newline="\n")
     print(f"\nTodo cuadra: {len(consultas)} consultas, {len(pruebas)} pruebas, {len(reglas)} reglas ubicadas. Documentación generada.")
     return 0
 

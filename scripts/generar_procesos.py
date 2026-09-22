@@ -714,12 +714,12 @@ def main() -> int:
     svgs: dict[str, str] = {}
     for d in DIAGRAMAS:
         plano = distribuir(d)
-        (CARPETA / f"{d.archivo}.bpmn").write_text(generar_bpmn(d, plano), encoding="utf-8")
+        (CARPETA / f"{d.archivo}.bpmn").write_text(generar_bpmn(d, plano), encoding="utf-8", newline="\n")
         svgs[d.archivo] = generar_svg(d, plano)
         (CARPETA / f"{d.archivo}.svg").write_text('<?xml version="1.0" encoding="UTF-8"?>\n' + svgs[d.archivo] + "\n",
-                                                   encoding="utf-8")
+                                                   encoding="utf-8", newline="\n")
         print(f"{d.archivo}: {len(d.nodos)} nodos · {len(d.flujos)} flujos · {plano.ancho:.0f} × {plano.alto + 2 * MARGEN:.0f} px")
-    PAGINA.write_text(generar_pagina(DIAGRAMAS, svgs), encoding="utf-8")
+    PAGINA.write_text(generar_pagina(DIAGRAMAS, svgs), encoding="utf-8", newline="\n")
     print(f"Página: {PAGINA.relative_to(RAIZ)}")
     return 0
 

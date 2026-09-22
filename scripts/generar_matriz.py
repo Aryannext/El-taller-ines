@@ -524,8 +524,9 @@ def main() -> int:
     r = relacionar(d)
     errores, cobertura = validar(d, r)
     tablas = construir_tablas(d, r)
-    SALIDA_MD.write_text(generar_md(d, tablas, errores, cobertura) + "\n", encoding="utf-8")
-    SALIDA_HTML.write_text(generar_html(d, tablas, errores, cobertura), encoding="utf-8")
+    # Siempre LF: en Windows, Python escribiría CRLF y el archivo entero aparecería cambiado
+    SALIDA_MD.write_text(generar_md(d, tablas, errores, cobertura) + "\n", encoding="utf-8", newline="\n")
+    SALIDA_HTML.write_text(generar_html(d, tablas, errores, cobertura), encoding="utf-8", newline="\n")
 
     print(f"Causas {len(d['causas'])} · medios {len(d['medios'])} · objetivos {len(d['oes'])} · "
           f"RF {len(d['rfs'])} · RN {len(d['rns'])} · HU {len(d['hus'])} · RNF {len(d['rnfs'])}")
