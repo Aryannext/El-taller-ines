@@ -99,6 +99,24 @@
           <span class="aviso-sugerencia"><i class="i i-alerta i-sm"></i>Sin foto: tómale una para reconocerla después.</span>
         @endif
       </section>
+
+      {{-- HU-13: la prenda que se registró por error. No aparece si es la única o si ya salió del taller (CA-13.3, CA-13.4) --}}
+      @error('prenda')
+        <div class="banda banda-error" role="alert"><i class="i i-alerta"></i><span>{{ $message }}</span></div>
+      @enderror
+
+      @if ($sePuedeEliminar)
+        <div class="tarjeta pila pila-junta">
+          <p class="fuerte">¿Registraste esta prenda por error?</p>
+          <p class="texto-2 pequeno">Elimínala solo si el cliente no la dejó. Si se la lleva sin arreglar, usa «Devolver sin arreglar».</p>
+          <form method="POST" action="{{ route('prendas.eliminar', [$orden, $prenda]) }}" data-un-envio
+            data-confirmar="Se eliminará «{{ $prenda->descripcion_arreglo }}» y sus fotos. La orden quedará valiendo {{ $valorSinLaPrenda->formato() }}. Esto no se puede deshacer.">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-peligro-borde" type="submit"><i class="i i-basura"></i>Eliminar esta prenda</button>
+          </form>
+        </div>
+      @endif
     </main>
 
     <div class="acciones-fijas">

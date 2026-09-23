@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   visorDeFotos();
   valorAlCorregir();
   usarSaldoCompleto();
+  confirmarAntesDeBorrar();
   unSoloEnvio();
   instalarTrabajadorDeServicio();
 });
@@ -223,6 +224,54 @@ function unSoloEnvio() {
       }, 0);
     });
   });
+}
+
+// HU-13 y HU-19 · RNF-10: eliminar una prenda o una foto pregunta antes, en un cuadro de diálogo.
+// El formulario no lleva la confirmación: la agrega este código al aceptar. Sin JavaScript no se borra nada,
+// y el servidor lo dice con su mensaje (03-validaciones-y-mensajes).
+function confirmarAntesDeBorrar() {
+  document.querySelectorAll('form[data-confirmar]').forEach((formulario) => {
+    formulario.addEventListener('submit', (evento) => {
+      if (formulario.dataset.confirmado === 'si') {
+        return;
+      }
+      evento.preventDefault();
+      preguntar(formulario.dataset.confirmar, () => {
+        formulario.dataset.confirmado = 'si';
+        const confirmacion = document.createElement('input');
+        confirmacion.type = 'hidden';
+        confirmacion.name = 'confirmacion';
+        confirmacion.value = 'si';
+        formulario.append(confirmacion);
+        formulario.requestSubmit();
+      });
+    });
+  });
+}
+
+// El cuadro de diálogo: nativo, con el texto de quien pregunta y el foco puesto en «No, dejarla»
+function preguntar(texto, alAceptar) {
+  const cuadro = document.createElement('dialog');
+  cuadro.className = 'cuadro';
+  cuadro.innerHTML = '<p></p><div class="acciones"><button class="btn btn-secundario" value="no">No, dejarla</button>'
+    + '<button class="btn btn-peligro" value="si">Sí, eliminar</button></div>';
+  cuadro.querySelector('p').textContent = texto;
+  document.body.append(cuadro);
+
+  cuadro.addEventListener('click', (evento) => {
+    const boton = evento.target.closest('button');
+    if (!boton) {
+      return;
+    }
+    cuadro.close();
+    cuadro.remove();
+    if (boton.value === 'si') {
+      alAceptar();
+    }
+  });
+
+  cuadro.showModal();
+  cuadro.querySelector('button').focus();
 }
 
 // ADR-006: el trabajador de servicio permite instalar el sistema y mostrar la página sin conexión (RNF-35).

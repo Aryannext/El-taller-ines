@@ -144,7 +144,7 @@ class DevolverPrendaSinArreglarTest extends TestCase
         $this->actingAs($this->duena);
 
         // Devolver la camisa dejaría el valor en $23.000, por debajo de los $30.000 pagados (RN-16)
-        $motivo = 'Con esta devolución lo pagado quedaría por encima del valor de la orden. Anula primero el pago que sobra.';
+        $motivo = 'La orden quedaría valiendo $23.000 y ya tiene $30.000 pagados. Primero anula el pago que sobra.';
         $this->get(route('prendas.confirmar-devolucion', [$orden, $primeraCamisa]))
             ->assertRedirect(route('ordenes.detalle', $orden))
             ->assertSessionHasErrors(['prenda' => $motivo]);

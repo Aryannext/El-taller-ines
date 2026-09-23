@@ -8,6 +8,7 @@ use App\Aplicacion\Ordenes\AgregarPrenda;
 use App\Aplicacion\Ordenes\CambiarEstadoDePrenda;
 use App\Aplicacion\Ordenes\CorregirPrenda;
 use App\Aplicacion\Ordenes\DevolverPrendaSinArreglar;
+use App\Aplicacion\Ordenes\EliminarPrenda;
 use App\Dominio\Compartido\ReglaIncumplida;
 use App\Dominio\Ordenes\EstadoDeOrden;
 use App\Dominio\Ordenes\EstadoDePrenda;
@@ -106,7 +107,7 @@ class PrendaController
     /**
      * PT-13 · Corregir el arreglo o el precio (HU-12). Si la prenda no se puede corregir, vuelve al detalle con el motivo (CA-12.3).
      */
-    public function editar(Orden $orden, Prenda $prenda, CorregirPrenda $corregirPrenda, DetalleDeOrden $detalleDeOrden): View|RedirectResponse
+    public function editar(Orden $orden, Prenda $prenda, CorregirPrenda $corregirPrenda, EliminarPrenda $eliminarPrenda, DetalleDeOrden $detalleDeOrden): View|RedirectResponse
     {
         try {
             $corregirPrenda->exigirQueSePuedaCorregir($prenda, $orden);
@@ -114,7 +115,20 @@ class PrendaController
             return $this->alDetalleConElMotivo($orden, $regla);
         }
 
-        return view('pantallas.pt-13-corregir-prenda', [...$detalleDeOrden->obtener($orden), 'prenda' => $prenda]);
+        // HU-13: la tarjeta de eliminar solo aparece si la prenda se puede eliminar (CA-13.3, CA-13.4)
+        $sePuedeEliminar = true;
+        try {
+            $eliminarPrenda->exigirQueSePuedaEliminar($prenda, $orden);
+        } catch (ReglaIncumplida) {
+            $sePuedeEliminar = false;
+        }
+
+        return view('pantallas.pt-13-corregir-prenda', [
+            ...$detalleDeOrden->obtener($orden),
+            'prenda' => $prenda,
+            'sePuedeEliminar' => $sePuedeEliminar,
+            'valorSinLaPrenda' => $eliminarPrenda->valorSinLaPrenda($prenda, $orden),
+        ]);
     }
 
     public function corregir(PrendaRequest $solicitud, Orden $orden, Prenda $prenda, CorregirPrenda $corregirPrenda): RedirectResponse
@@ -129,6 +143,27 @@ class PrendaController
         }
 
         return redirect()->route('ordenes.detalle', $orden)->with('exito', 'Los cambios de la prenda quedaron guardados.');
+    }
+
+    /**
+     * HU-13 · Eliminar la prenda que se registró por error. El cuadro de diálogo de PT-13 manda la confirmación;
+     * sin ella no se borra nada y se vuelve a preguntar (RNF-10, CA-13.2).
+     */
+    public function eliminar(Request $solicitud, Orden $orden, Prenda $prenda, EliminarPrenda $eliminarPrenda): RedirectResponse
+    {
+        if ($solicitud->input('confirmacion') !== 'si') {
+            return redirect()->route('prendas.editar', [$orden, $prenda])
+                ->withErrors(['prenda' => 'Para eliminar la prenda hay que confirmarlo en el cuadro que aparece.']);
+        }
+
+        try {
+            $eliminarPrenda->ejecutar($prenda, $orden);
+        } catch (ReglaIncumplida $regla) {
+            return redirect()->route('prendas.editar', [$orden, $prenda])->withErrors(['prenda' => $regla->mensajeParaUsuaria]);
+        }
+
+        return redirect()->route('ordenes.detalle', $orden)
+            ->with('exito', "«{$prenda->descripcion_arreglo}» se eliminó de la orden.");
     }
 
     /**

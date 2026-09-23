@@ -9,6 +9,7 @@ use App\Dominio\Compartido\Reloj;
 use App\Dominio\Ordenes\EstadoDePrenda;
 use App\Dominio\Pagos\CalculadoraDeSaldo;
 use App\Dominio\Pagos\Dinero;
+use App\Dominio\Pagos\ReglasDeValor;
 use App\Modelos\Orden;
 use App\Modelos\Pago;
 use App\Modelos\Prenda;
@@ -23,6 +24,7 @@ class DevolverPrendaSinArreglar
     public function __construct(
         private readonly Reloj $reloj,
         private readonly CalculadoraDeSaldo $calculadora,
+        private readonly ReglasDeValor $reglasDeValor,
         private readonly SincronizarEstadoDeOrden $sincronizarEstadoDeOrden,
     ) {}
 
@@ -58,14 +60,11 @@ class DevolverPrendaSinArreglar
             );
         }
 
-        // RN-16: el valor de la orden bajaría por debajo de lo ya pagado
-        $pagado = $this->calculadora->pagado($orden->pagos->map(fn (Pago $pago) => [$pago->valor, $pago->anulado_en !== null]));
-        if ($pagado->esMayorQue($this->valorSinLaPrenda($prenda, $orden))) {
-            throw new ReglaIncumplida(
-                'RN-16',
-                'Con esta devolución lo pagado quedaría por encima del valor de la orden. Anula primero el pago que sobra.',
-            );
-        }
+        // RN-16: la misma regla que al corregir el precio, con su mensaje (03-validaciones-y-mensajes)
+        $this->reglasDeValor->exigirValorNoMenorQuePagado(
+            $this->valorSinLaPrenda($prenda, $orden),
+            $this->calculadora->pagado($orden->pagos->map(fn (Pago $pago) => [$pago->valor, $pago->anulado_en !== null])),
+        );
     }
 
     /**

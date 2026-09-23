@@ -226,6 +226,15 @@ fieldset.campo { min-width: 0; margin: 0; padding: 0; border: 0; }
 .pequeno { font-size: 14px; }
 /* El valor que deja de valer: al devolver una prenda sin arreglar se ve el antes tachado y el después (PT-12, RN-26) */
 .tachado { text-decoration: line-through; }
+
+/* El cuadro que pregunta antes de eliminar una prenda o una foto (HU-13, HU-19 · RNF-10) */
+.cuadro {
+  width: min(420px, calc(100vw - 32px)); padding: 22px; border: 1px solid var(--borde); border-radius: var(--radio);
+  background: var(--superficie); color: var(--tinta); box-shadow: var(--sombra); font: inherit;
+}
+.cuadro::backdrop { background: rgba(22, 27, 46, .5); }
+.cuadro p { margin: 0 0 18px; line-height: 1.45; }
+.cuadro .acciones { display: flex; flex-direction: column; gap: 10px; }
 .fuerte { font-weight: 800; }
 .dinero { font-variant-numeric: tabular-nums; white-space: nowrap; }
 .numero-orden { font-family: var(--fuente-numeros); font-weight: 700; letter-spacing: .01em; white-space: nowrap; }

@@ -63,6 +63,8 @@ Route::middleware(['auth', 'auth.session', 'cache.headers:no_store;private'])->g
         Route::post('/ordenes/{orden}/prendas/{prenda}/estado', [PrendaController::class, 'cambiarEstado'])->whereNumber(['orden', 'prenda'])->name('prendas.cambiar-estado');
         Route::get('/ordenes/{orden}/prendas/{prenda}/editar', [PrendaController::class, 'editar'])->whereNumber(['orden', 'prenda'])->name('prendas.editar');
         Route::put('/ordenes/{orden}/prendas/{prenda}', [PrendaController::class, 'corregir'])->whereNumber(['orden', 'prenda'])->name('prendas.corregir');
+        // HU-13: la prenda que se registró por error. Sin la confirmación del cuadro de diálogo no se borra nada (RNF-10)
+        Route::delete('/ordenes/{orden}/prendas/{prenda}', [PrendaController::class, 'eliminar'])->whereNumber(['orden', 'prenda'])->name('prendas.eliminar');
         Route::post('/ordenes/{orden}/prendas/{prenda}/fotos', [FotoController::class, 'guardar'])->whereNumber(['orden', 'prenda'])->name('fotos.agregar');
 
         // HU-36: el cliente se lleva la prenda sin arreglar. Se confirma antes, porque no se deshace (RN-44, RNF-10)
