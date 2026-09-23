@@ -63,7 +63,7 @@ Los documentos del Sprint 1 se adelantaron: se terminaron el 13 y el 14 de septi
 | **DOC-21** | Informe de pruebas, con la prueba de usabilidad y la restauración de respaldos | Sprint 4 | En curso | 0860099 |
 | **DOC-22** | Manual de usuario en español e inglés | Cierre | Terminado | 6d98103 |
 | **DOC-23** | Manual técnico y de instalación en español e inglés | Cierre | Terminado | 0f2f466 |
-| **DOC-24** | Presentación y ensayo de la sustentación | Cierre | Pendiente | — |
+| **DOC-24** | Presentación y ensayo de la sustentación | Cierre | En curso: la presentación está escrita; falta el ensayo | 22 sep |
 
 ## Desarrollo
 

@@ -61,12 +61,14 @@ DOCUMENTOS = {
     "docs/06-manuales/user-manual.md": "User manual",
     "docs/06-manuales/manual-tecnico.md": "Manual técnico",
     "docs/06-manuales/technical-manual.md": "Technical manual",
+    "docs/07-sustentacion/sustentacion.md": "Sustentación",
 }
 GRUPOS_DE_DOCUMENTOS = [
     ("Especificación técnica", [d for d in DOCUMENTOS if "04-especificacion" in d]),
     ("Documentos de diseño", ["docs/03-diseno/arquitectura/README.md", "docs/03-diseno/modelo-de-datos/README.md"]),
     ("Pruebas y manuales", ["docs/05-pruebas/plan-de-pruebas.md", "docs/05-pruebas/informe-de-pruebas.md", "docs/06-manuales/manual-de-usuario.md", "docs/06-manuales/user-manual.md",
                             "docs/06-manuales/manual-tecnico.md", "docs/06-manuales/technical-manual.md"]),
+    ("Para la sustentación", ["docs/07-sustentacion/sustentacion.md"]),
 ]
 
 # El recorrido para la sustentación: un hilo del problema a la prueba. Los que no existan se omiten.
