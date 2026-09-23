@@ -20,6 +20,12 @@ class OrdenRequest extends FormRequest
         if (is_array($prendas)) {
             $this->merge(['prendas' => array_map(fn ($prenda) => is_array($prenda) ? PrendaRequest::normalizar($prenda) : $prenda, $prendas)]);
         }
+
+        // HU-24: el abono se escribe como el precio, con signo y puntos de miles
+        if (is_string($this->input('abono'))) {
+            $abono = str_replace(['$', '.', ' '], '', $this->input('abono'));
+            $this->merge(['abono' => $abono === '' ? null : $abono]);
+        }
     }
 
     /**
@@ -39,6 +45,12 @@ class OrdenRequest extends FormRequest
             // RN-17 y RNF-03: hasta 3 fotos por prenda, de un tipo de imagen conocido
             'prendas.*.fotos' => ['nullable', 'array', 'max:3'],
             'prendas.*.fotos.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:10240'],
+            // HU-24: el abono al dejar la ropa es opcional; si se escribe, hay que decir cómo pagó (RN-25, RN-28)
+            'abono' => ['nullable', 'integer', 'min:1'],
+            'metodo_pago_id' => [
+                'required_with:abono',
+                Rule::exists('metodos_pago', 'id')->where('negocio_id', $this->user()?->negocio_id)->where('activo', true),
+            ],
         ];
     }
 
@@ -61,7 +73,23 @@ class OrdenRequest extends FormRequest
             'prendas.min' => 'Agrega al menos una prenda.',
             ...PrendaRequest::mensajes('prendas.*.'),
             ...FotoRequest::mensajes('prendas.*.'),
+            'abono.integer' => 'Escribe el abono en pesos, sin centavos.',
+            'abono.min' => 'El abono debe ser mayor que cero.',
+            'metodo_pago_id.required_with' => 'Elige cómo pagó el abono.',
+            'metodo_pago_id.exists' => 'Elige cómo pagó el abono.',
         ];
+    }
+
+    /**
+     * El abono al dejar la ropa y cómo lo pagó, o null si no abonó nada (HU-24).
+     *
+     * @return array{0: int, 1: int}|null
+     */
+    public function abono(): ?array
+    {
+        $abono = $this->validated('abono');
+
+        return $abono === null ? null : [(int) $abono, (int) $this->validated('metodo_pago_id')];
     }
 
     public function cliente(): Cliente

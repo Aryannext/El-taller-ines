@@ -9,6 +9,7 @@ use App\Aplicacion\Consultas\ListarOrdenes;
 use App\Aplicacion\Ordenes\CancelarOrden;
 use App\Aplicacion\Ordenes\EntregarOrden;
 use App\Aplicacion\Ordenes\RegistrarOrden;
+use App\Aplicacion\Pagos\RegistrarPago;
 use App\Dominio\Compartido\ReglaIncumplida;
 use App\Dominio\Compartido\Reloj;
 use App\Dominio\Ordenes\EstadoDeOrden;
@@ -61,7 +62,7 @@ class OrdenController
     /**
      * PT-06 · Nueva orden. Desde la ficha llega con ?cliente= para dejarlo elegido.
      */
-    public function nueva(Request $solicitud, BuscarClientes $buscarClientes, GestionarTiposDePrenda $tiposDePrenda, Reloj $reloj): View
+    public function nueva(Request $solicitud, BuscarClientes $buscarClientes, GestionarTiposDePrenda $tiposDePrenda, RegistrarPago $registrarPago, Reloj $reloj): View
     {
         $cliente = $solicitud->query('cliente');
 
@@ -69,6 +70,8 @@ class OrdenController
             'clientes' => $buscarClientes->listar(''),
             'clienteElegido' => is_string($cliente) && ctype_digit($cliente) ? (int) $cliente : null,
             'tipos' => $tiposDePrenda->activos(),
+            // HU-24: el abono al dejar la ropa se paga con uno de los métodos del negocio (RN-25)
+            'metodos' => $registrarPago->metodosDePago(),
             'hoy' => $reloj->hoy(),
             // Identifica este envío: dos toques seguidos no registran dos órdenes (RNF-14)
             'token' => (string) Str::uuid(),
@@ -77,12 +80,18 @@ class OrdenController
 
     public function guardar(OrdenRequest $solicitud, RegistrarOrden $registrarOrden): RedirectResponse
     {
-        $orden = $registrarOrden->ejecutar(
-            $solicitud->cliente(),
-            new DateTimeImmutable($solicitud->validated('fecha_entrega_acordada')),
-            $solicitud->prendas(),
-            $solicitud->validated('token_formulario'),
-        );
+        try {
+            $orden = $registrarOrden->ejecutar(
+                $solicitud->cliente(),
+                new DateTimeImmutable($solicitud->validated('fecha_entrega_acordada')),
+                $solicitud->prendas(),
+                $solicitud->validated('token_formulario'),
+                $solicitud->abono(),
+            );
+        } catch (ReglaIncumplida $regla) {
+            // RN-28: el abono supera el valor de la orden. No queda ni la orden ni el pago (CA-24.2)
+            return back()->withInput()->withErrors([$regla->campo ?? 'abono' => $regla->mensajeParaUsuaria]);
+        }
 
         return redirect()->route('ordenes.guardada', $orden);
     }

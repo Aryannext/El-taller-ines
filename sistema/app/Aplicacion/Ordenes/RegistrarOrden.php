@@ -31,8 +31,9 @@ class RegistrarOrden
 
     /**
      * @param  list<array{tipo_prenda_id: int|string, tipo_otro: ?string, descripcion_arreglo: string, precio: int, fotos?: list<string>}>  $prendas
+     * @param  array{0: int, 1: int}|null  $abono  lo que abonó al dejar la ropa y con qué método lo pagó (HU-24)
      */
-    public function ejecutar(Cliente $cliente, DateTimeImmutable $entrega, array $prendas, string $token): Orden
+    public function ejecutar(Cliente $cliente, DateTimeImmutable $entrega, array $prendas, string $token, ?array $abono = null): Orden
     {
         // RN-06: la orden y sus prendas se registran juntas
         if ($prendas === []) {
@@ -55,7 +56,7 @@ class RegistrarOrden
             }
 
             // RNF-13: si algo falla a mitad, no queda la orden, ni sus prendas, ni el tipo escrito con «Otro», ni sus fotos
-            return DB::transaction(function () use ($cliente, $entrega, $prendas, $token, $archivos): Orden {
+            return DB::transaction(function () use ($cliente, $entrega, $prendas, $token, $archivos, $abono): Orden {
                 // RN-08: bloquear el negocio hace que dos órdenes simultáneas no tomen el mismo número
                 Negocio::whereKey($cliente->negocio_id)->lockForUpdate()->first();
                 $ultimo = (int) Orden::withoutGlobalScopes()->where('negocio_id', $cliente->negocio_id)->max('numero');
@@ -85,6 +86,10 @@ class RegistrarOrden
                     $this->agregarFoto->registrar($nuevaPrenda, $archivos[$indice] ?? []);
                 }
 
+                if ($abono !== null) {
+                    $this->registrarAbono($orden, $abono[0], $abono[1], $token);
+                }
+
                 return $orden;
             });
         } catch (Throwable $error) {
@@ -100,5 +105,27 @@ class RegistrarOrden
 
             throw $error;
         }
+    }
+
+    /**
+     * HU-24 · El abono al dejar la ropa, dentro de la misma operación que la orden: si algo falla, no queda
+     * ni la orden ni el pago (RNF-13). RN-28: no puede superar el valor de las prendas que se acaban de registrar.
+     */
+    private function registrarAbono(Orden $orden, int $abono, int $metodoPagoId, string $token): void
+    {
+        $valor = Dinero::pesos((int) $orden->prendas()->sum('precio'));
+        $pago = Dinero::pesos($abono);
+
+        if ($pago->esMayorQue($valor)) {
+            throw new ReglaIncumplida('RN-28', "El abono no puede superar el valor de la orden: {$valor->formato()}.", 'abono');
+        }
+
+        $orden->pagos()->create([
+            'metodo_pago_id' => $metodoPagoId,
+            'valor' => $pago->valor(),
+            // La fecha del abono es la de la recepción de la orden, en Colombia (RN-09)
+            'pagado_en' => $orden->recibida_en,
+            'token_formulario' => $token,
+        ]);
     }
 }

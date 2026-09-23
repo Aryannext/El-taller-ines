@@ -8,7 +8,9 @@ use App\Dominio\Compartido\ReglaIncumplida;
 use App\Dominio\Ordenes\EstadoDeOrden;
 use App\Dominio\Ordenes\EstadoDePrenda;
 use App\Modelos\Cliente;
+use App\Modelos\MetodoPago;
 use App\Modelos\Orden;
+use App\Modelos\Pago;
 use App\Modelos\Prenda;
 use App\Modelos\TipoPrenda;
 use App\Modelos\Usuario;
@@ -208,6 +210,61 @@ class RegistrarOrdenTest extends TestCase
 
         $this->assertSame(1, Orden::count());
         $this->assertSame($primera->headers->get('Location'), $segunda->headers->get('Location'));
+    }
+
+    public function test_ca_24_1_abono_inicial(): void
+    {
+        // HU-24: la orden vale $31.000 y Marta abona $10.000 en efectivo al dejar la ropa
+        $efectivo = MetodoPago::factory()->create(['negocio_id' => $this->duena->negocio_id, 'nombre' => 'Efectivo']);
+
+        $this->get(route('ordenes.nueva'))
+            ->assertOk()
+            ->assertSeeInOrder(['Abono al dejar la ropa', '¿Cuánto abona?', 'opcional', 'Método', 'Efectivo']);
+
+        $this->registrar(['abono' => '$10.000', 'metodo_pago_id' => (string) $efectivo->id])
+            ->assertSessionHasNoErrors()
+            ->assertRedirect(route('ordenes.guardada', Orden::sole()));
+
+        $orden = Orden::sole();
+        $pago = $orden->pagos()->sole();
+        $this->assertSame(10000, $pago->valor);
+        $this->assertSame($efectivo->id, $pago->metodo_pago_id);
+        // El abono queda con la fecha en que se recibió la orden (RN-09)
+        $this->assertSame('2026-09-14 10:00:00', $pago->pagado_en->format('Y-m-d H:i:s'));
+
+        $detalle = app(DetalleDeOrden::class)->obtener($orden);
+        $this->assertSame(31000, $detalle['valor']->valor());
+        $this->assertSame(21000, $detalle['saldo']->valor());
+    }
+
+    public function test_ca_24_2_abono_mayor_que_la_orden(): void
+    {
+        // RN-28: el abono no puede superar el valor de la orden, y si falla no queda ni la orden ni el pago (RNF-13)
+        $efectivo = MetodoPago::factory()->create(['negocio_id' => $this->duena->negocio_id, 'nombre' => 'Efectivo']);
+
+        $this->registrar(['abono' => '40.000', 'metodo_pago_id' => (string) $efectivo->id])
+            ->assertRedirect(route('ordenes.nueva'))
+            ->assertSessionHasErrors(['abono' => 'El abono no puede superar el valor de la orden: $31.000.']);
+
+        $this->assertSame(0, Orden::count());
+        $this->assertSame(0, Pago::count());
+        $this->assertSame(0, Prenda::count());
+    }
+
+    public function test_hu_24_el_abono_pide_decir_como_pago_y_no_admite_cero(): void
+    {
+        MetodoPago::factory()->create(['negocio_id' => $this->duena->negocio_id, 'nombre' => 'Efectivo']);
+
+        $this->registrar(['abono' => '10.000'])
+            ->assertSessionHasErrors(['metodo_pago_id' => 'Elige cómo pagó el abono.']);
+        $this->registrar(['abono' => '0'])
+            ->assertSessionHasErrors(['abono' => 'El abono debe ser mayor que cero.']);
+        $this->assertSame(0, Orden::count());
+
+        // Sin abono, la orden se guarda igual y no queda ningún pago
+        $this->registrar(['abono' => ''])->assertSessionHasNoErrors();
+        $this->assertSame(1, Orden::count());
+        $this->assertSame(0, Pago::count());
     }
 
     /**

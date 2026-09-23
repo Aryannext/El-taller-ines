@@ -50,6 +50,37 @@
           @include('pantallas.partes.prenda', ['indice' => '__INDICE__', 'prenda' => []])
         </template>
       </section>
+
+      {{-- HU-24: el abono que dan al dejar la ropa, en el mismo registro, para no hacer dos pasos con el cliente enfrente --}}
+      @if ($metodos->isNotEmpty())
+        <section class="seccion">
+          <h2 class="titulo-seccion">Abono al dejar la ropa</h2>
+          <div class="tarjeta pila">
+            <div @class(['campo', 'con-error' => $errors->has('abono')])>
+              <label for="abono">¿Cuánto abona? <span class="texto-2 pequeno peso-normal">· opcional</span></label>
+              <div class="prefijo"><span>$</span><input class="entrada dinero" id="abono" name="abono" inputmode="numeric"
+                value="{{ old('abono') }}" @error('abono') aria-invalid="true" aria-describedby="error-abono" @enderror></div>
+              @error('abono')
+                {{-- CA-24.2: RN-28 --}}
+                <span class="mensaje-error" id="error-abono"><i class="i i-alerta"></i>{{ $message }}</span>
+              @enderror
+            </div>
+
+            {{-- RN-25: efectivo o Nequi, los métodos activos del negocio --}}
+            <fieldset @class(['campo', 'con-error' => $errors->has('metodo_pago_id')])>
+              <legend class="etiqueta">Método</legend>
+              <div class="segmentos">
+                @foreach ($metodos as $metodo)
+                  <label><input type="radio" name="metodo_pago_id" value="{{ $metodo->id }}" @checked((string) old('metodo_pago_id') === (string) $metodo->id)>{{ $metodo->nombre }}</label>
+                @endforeach
+              </div>
+              @error('metodo_pago_id')
+                <span class="mensaje-error"><i class="i i-alerta"></i>{{ $message }}</span>
+              @enderror
+            </fieldset>
+          </div>
+        </section>
+      @endif
     </main>
 
     <div class="acciones-fijas">
