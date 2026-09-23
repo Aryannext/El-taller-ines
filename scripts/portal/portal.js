@@ -1,4 +1,4 @@
-// Portal del proyecto El-taller-ines: el buscador y los diagramas. Sin librerías más que Mermaid.
+// Portal del proyecto Puntada: el buscador y los diagramas. Sin librerías más que Mermaid.
 // Funciona abriendo los archivos desde una carpeta, sin servidor: el índice llega como un script (indice.js), no con fetch.
 
 (function () {

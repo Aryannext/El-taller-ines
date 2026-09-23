@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definiciones_propuesto_3_entrega_y_cobro" targetNamespace="https://github.com/Aryannext/El-taller-ines" exporter="scripts/generar_procesos.py" exporterVersion="1.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definiciones_propuesto_3_entrega_y_cobro" targetNamespace="https://github.com/Aryannext/puntada" exporter="scripts/generar_procesos.py" exporterVersion="1.0">
   <bpmn:collaboration id="Colaboracion">
-    <bpmn:participant id="Participante" name="Taller de costura · con El-taller-ines · Entrega y cobro" processRef="Proceso" />
+    <bpmn:participant id="Participante" name="Taller de costura · con Puntada · Entrega y cobro" processRef="Proceso" />
   </bpmn:collaboration>
   <bpmn:process id="Proceso" name="Entrega y cobro" isExecutable="false">
     <bpmn:laneSet id="Carriles">
@@ -24,7 +24,7 @@
         <bpmn:flowNodeRef>une_pago</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>entrega</bpmn:flowNodeRef>
       </bpmn:lane>
-      <bpmn:lane id="Carril_sistema" name="El-taller-ines">
+      <bpmn:lane id="Carril_sistema" name="Puntada">
         <bpmn:flowNodeRef>registra</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>fin</bpmn:flowNodeRef>
       </bpmn:lane>

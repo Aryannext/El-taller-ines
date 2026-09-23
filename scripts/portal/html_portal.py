@@ -117,12 +117,12 @@ def pagina(titulo: str, raiz: str, menu: str, contenido: str, pie: str) -> str:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{e(titulo)} · Portal de El-taller-ines</title>
+<title>{e(titulo)} · Portal de Puntada</title>
 <link rel="stylesheet" href="{raiz}recursos/estilos.css">
 </head>
 <body>
 <header class="cabecera">
-  <a class="marca" href="{raiz}index.html">El-taller-ines <span>· portal del proyecto</span></a>
+  <a class="marca" href="{raiz}index.html">Puntada <span>· portal del proyecto</span></a>
   <div class="buscador">
     <input type="search" placeholder="Buscar un código o una palabra: RN-22, abono, foto…  (tecla /)" aria-label="Buscar" data-buscar autocomplete="off">
     <ul class="resultados" data-resultados hidden></ul>

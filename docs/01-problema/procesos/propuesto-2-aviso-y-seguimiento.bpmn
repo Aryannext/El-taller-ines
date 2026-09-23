@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definiciones_propuesto_2_aviso_y_seguimiento" targetNamespace="https://github.com/Aryannext/El-taller-ines" exporter="scripts/generar_procesos.py" exporterVersion="1.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definiciones_propuesto_2_aviso_y_seguimiento" targetNamespace="https://github.com/Aryannext/puntada" exporter="scripts/generar_procesos.py" exporterVersion="1.0">
   <bpmn:collaboration id="Colaboracion">
-    <bpmn:participant id="Participante" name="Taller de costura · con El-taller-ines · Aviso y seguimiento" processRef="Proceso" />
+    <bpmn:participant id="Participante" name="Taller de costura · con Puntada · Aviso y seguimiento" processRef="Proceso" />
   </bpmn:collaboration>
   <bpmn:process id="Proceso" name="Aviso y seguimiento" isExecutable="false">
     <bpmn:laneSet id="Carriles">
@@ -18,7 +18,7 @@
         <bpmn:flowNodeRef>decide</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>sin_reclamar</bpmn:flowNodeRef>
       </bpmn:lane>
-      <bpmn:lane id="Carril_sistema" name="El-taller-ines">
+      <bpmn:lane id="Carril_sistema" name="Puntada">
         <bpmn:flowNodeRef>lista</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>aviso</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>acepto</bpmn:flowNodeRef>

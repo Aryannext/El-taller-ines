@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2320 844" width="2320" height="844" font-family="'Source Sans 3', 'Segoe UI', Arial, sans-serif" role="img" aria-label="Taller de costura · con El-taller-ines · Entrega y cobro">
-<title>Taller de costura · con El-taller-ines · Entrega y cobro</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2320 844" width="2320" height="844" font-family="'Source Sans 3', 'Segoe UI', Arial, sans-serif" role="img" aria-label="Taller de costura · con Puntada · Entrega y cobro">
+<title>Taller de costura · con Puntada · Entrega y cobro</title>
 <defs><marker id="flecha-propuesto-3-entrega-y-cobro" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6f685d" /></marker></defs>
 <rect x="0" y="0" width="2320" height="844" fill="#fffdf8" />
 <rect x="10" y="10" width="2300" height="824" fill="#fffdf8" stroke="#23211d" stroke-width="1.5" />
 <rect x="10" y="10" width="30" height="824" fill="#23211d" />
-<text x="29.0" y="422.0" font-size="12" font-weight="600" fill="#fffdf8" text-anchor="middle" transform="rotate(-90 29.0 422.0)">Taller de costura · con El-taller-ines</text>
+<text x="29.0" y="422.0" font-size="12" font-weight="600" fill="#fffdf8" text-anchor="middle" transform="rotate(-90 29.0 422.0)">Taller de costura · con Puntada</text>
 <rect x="40" y="10" width="2270" height="184" fill="none" stroke="#23211d" stroke-width="1" />
 <rect x="40" y="10" width="30" height="184" fill="#efe9dd" stroke="#23211d" stroke-width="1" />
 <text x="59.0" y="102.0" font-size="11.5" font-weight="600" fill="#23211d" text-anchor="middle" transform="rotate(-90 59.0 102.0)">Cliente del taller</text>
@@ -14,7 +14,7 @@
 <text x="59.0" y="422.0" font-size="11.5" font-weight="600" fill="#23211d" text-anchor="middle" transform="rotate(-90 59.0 422.0)">Dueña del taller</text>
 <rect x="40" y="650" width="2270" height="184" fill="none" stroke="#23211d" stroke-width="1" />
 <rect x="40" y="650" width="30" height="184" fill="#efe9dd" stroke="#23211d" stroke-width="1" />
-<text x="59.0" y="742.0" font-size="11.5" font-weight="600" fill="#23211d" text-anchor="middle" transform="rotate(-90 59.0 742.0)">El-taller-ines</text>
+<text x="59.0" y="742.0" font-size="11.5" font-weight="600" fill="#23211d" text-anchor="middle" transform="rotate(-90 59.0 742.0)">Puntada</text>
 <polyline points="168.0,102.0 206.5,102.0 206.5,286.0 245.0,286.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-3-entrega-y-cobro)" />
 <polyline points="375.0,286.0 445.0,286.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-3-entrega-y-cobro)" />
 <polyline points="495.0,286.0 765.0,286.0" fill="none" stroke="#6f685d" stroke-width="1.4" marker-end="url(#flecha-propuesto-3-entrega-y-cobro)" />
