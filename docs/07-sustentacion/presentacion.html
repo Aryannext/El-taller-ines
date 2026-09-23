@@ -552,6 +552,12 @@
     if (li) { mostrar(Number(li.dataset.i)); indice.classList.remove('visible'); }
   });
 
+  // Abrir con #7 lleva a la lámina 7, y cambiarlo a mano también
+  window.addEventListener('hashchange', () => {
+    const n = Number(location.hash.replace('#', ''));
+    if (n && n - 1 !== actual) mostrar(n - 1);
+  });
+
   window.addEventListener('resize', ajustar);
   ajustar();
   mostrar(Number(location.hash.replace('#', '')) - 1 || 0);
