@@ -78,6 +78,8 @@ Route::middleware(['auth', 'auth.session', 'cache.headers:no_store;private'])->g
 
     Route::get('/ordenes/{orden}/fotos', [FotoController::class, 'deOrden'])->whereNumber('orden')->name('fotos.de-orden');
     Route::get('/fotos/{foto}', [FotoController::class, 'mostrar'])->whereNumber('foto')->name('fotos.mostrar');
+    // HU-19: la foto borrosa o equivocada. Sin la confirmación del cuadro de diálogo no se borra nada (RNF-10)
+    Route::delete('/fotos/{foto}', [FotoController::class, 'eliminar'])->whereNumber('foto')->name('fotos.eliminar');
 
     Route::get('/ordenes/{orden}/pagos/nuevo', [PagoController::class, 'nuevo'])->whereNumber('orden')->name('pagos.nuevo');
     Route::post('/ordenes/{orden}/pagos', [PagoController::class, 'guardar'])->whereNumber('orden')->name('pagos.guardar');

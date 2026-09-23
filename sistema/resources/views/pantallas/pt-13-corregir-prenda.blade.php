@@ -71,7 +71,16 @@
         @if ($fotos->isNotEmpty())
           <div class="fotos">
             @foreach ($fotos as $foto)
-              <img class="foto" src="{{ route('fotos.mostrar', $foto) }}" alt="Foto {{ $foto->posicion }} de {{ $prenda->tipoPrenda->nombre }}" loading="lazy">
+              {{-- HU-19: cada foto se puede quitar; la prenda se conserva aunque quede sin fotos (CA-19.2) --}}
+              <div class="foto-con-quitar">
+                <img class="foto" src="{{ route('fotos.mostrar', $foto) }}" alt="Foto {{ $foto->posicion }} de {{ $prenda->tipoPrenda->nombre }}" loading="lazy">
+                <form method="POST" action="{{ route('fotos.eliminar', $foto) }}" data-un-envio
+                  data-confirmar="Se eliminará la foto {{ $foto->posicion }} de {{ mb_strtolower($prenda->tipoPrenda->nombre) }}. La prenda y sus otras fotos se conservan.">
+                  @csrf
+                  @method('DELETE')
+                  <button class="quitar" type="submit" aria-label="Eliminar la foto {{ $foto->posicion }}"><i class="i i-cerrar i-sm"></i></button>
+                </form>
+              </div>
             @endforeach
           </div>
         @endif

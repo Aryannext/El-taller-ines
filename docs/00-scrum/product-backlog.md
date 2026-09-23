@@ -111,7 +111,7 @@ Una historia entra a un sprint solo si cumple la definición de "lista para desa
 | 38 | **HU-10** | Registrar un cliente nuevo mientras registro su orden | Should | 3 | — | HU-07 |
 | 39 | **HU-11** | Agregar una prenda a una orden que ya existe | Should | 2 | Sprint 4 | HU-20 |
 | 40 | **HU-27** | Ver cuánto dinero he recibido | Should | 2 | Sprint 4 | HU-25 |
-| 41 | **HU-19** | Eliminar una foto | Should | 1 | — | HU-17 |
+| 41 | **HU-19** | Eliminar una foto | Should | 1 | Sprint 4 | HU-17 |
 | 42 | **HU-35** | Cambiar el plazo para considerar una orden sin reclamar | Could | 1 | — | HU-34 |
 | 43 | **HU-16** | Renombrar o desactivar tipos de prenda | Could | 2 | — | HU-09 |
 

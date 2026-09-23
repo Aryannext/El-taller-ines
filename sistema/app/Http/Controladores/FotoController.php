@@ -4,6 +4,7 @@ namespace App\Http\Controladores;
 
 use App\Aplicacion\Consultas\FotosDeOrden;
 use App\Aplicacion\Fotos\AgregarFoto;
+use App\Aplicacion\Fotos\EliminarFoto;
 use App\Dominio\Compartido\ReglaIncumplida;
 use App\Dominio\Fotos\AlmacenDeFotos;
 use App\Http\Solicitudes\FotoRequest;
@@ -11,6 +12,7 @@ use App\Modelos\Foto;
 use App\Modelos\Orden;
 use App\Modelos\Prenda;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
@@ -40,6 +42,29 @@ class FotoController
 
         return redirect()->route('prendas.editar', [$orden, $prenda])
             ->with('exito', count($fotos) === 1 ? 'La foto quedó guardada.' : 'Las fotos quedaron guardadas.');
+    }
+
+    /**
+     * HU-19 · Eliminar una foto borrosa o equivocada. El cuadro de diálogo de PT-13 manda la confirmación;
+     * sin ella no se borra nada (RNF-10). La prenda se conserva aunque quede sin fotos (CA-19.2).
+     */
+    public function eliminar(Request $solicitud, Foto $foto, EliminarFoto $eliminarFoto): RedirectResponse
+    {
+        $prenda = $foto->prenda;
+        $orden = $prenda->orden;
+        $volver = redirect()->route('prendas.editar', [$orden, $prenda]);
+
+        if ($solicitud->input('confirmacion') !== 'si') {
+            return $volver->withErrors(['fotos' => 'Para eliminar la foto hay que confirmarlo en el cuadro que aparece.']);
+        }
+
+        try {
+            $eliminarFoto->ejecutar($foto);
+        } catch (ReglaIncumplida $regla) {
+            return $volver->withErrors(['fotos' => $regla->mensajeParaUsuaria]);
+        }
+
+        return $volver->with('exito', 'La foto se eliminó.');
     }
 
     /**
