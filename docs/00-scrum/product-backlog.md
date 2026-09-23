@@ -60,10 +60,10 @@ Los documentos del Sprint 1 se adelantaron: se terminaron el 13 y el 14 de septi
 | **DOC-18** | Diagramas de clases, secuencia, estados, componentes y despliegue | Sprint 2 | Terminado | 0e744d7 |
 | **DOC-19** | Especificación técnica | Sprint 2 | Terminado | 4d62070 |
 | **DOC-20** | Plan de pruebas | Sprint 2 | Terminado | bc02a90 |
-| **DOC-21** | Informe de pruebas, con la prueba de usabilidad y la restauración de respaldos | Sprint 4 | En curso | 0860099 |
+| **DOC-21** | Informe de pruebas, con la prueba de usabilidad y la restauración de respaldos | Sprint 4 | En curso: se completa con PM-01, PM-03 y lo que falta de PM-05, PM-06 y PM-07 | 0860099, 575abdd |
 | **DOC-22** | Manual de usuario en español e inglés | Cierre | Terminado | 6d98103 |
 | **DOC-23** | Manual técnico y de instalación en español e inglés | Cierre | Terminado | 0f2f466 |
-| **DOC-24** | Presentación y ensayo de la sustentación | Cierre | En curso: la presentación está escrita; falta el ensayo | 22 sep |
+| **DOC-24** | Presentación y ensayo de la sustentación | Cierre | En curso: la presentación y sus diapositivas están escritas; falta el ensayo | c7688a4, 726db59 |
 
 ## Desarrollo
 
