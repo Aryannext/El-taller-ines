@@ -7,6 +7,7 @@ use App\Aplicacion\Consultas\DetalleDeOrden;
 use App\Aplicacion\Ordenes\AgregarPrenda;
 use App\Aplicacion\Ordenes\CambiarEstadoDePrenda;
 use App\Aplicacion\Ordenes\CorregirPrenda;
+use App\Aplicacion\Ordenes\DevolverPrendaSinArreglar;
 use App\Dominio\Compartido\ReglaIncumplida;
 use App\Dominio\Ordenes\EstadoDeOrden;
 use App\Dominio\Ordenes\EstadoDePrenda;
@@ -60,7 +61,7 @@ class PrendaController
     /**
      * PT-11 · Acciones de una prenda: en qué va y qué más se puede hacer (HU-20). Solo ofrece los cambios permitidos (CA-20.2).
      */
-    public function acciones(Orden $orden, Prenda $prenda, CambiarEstadoDePrenda $cambiarEstado, DetalleDeOrden $detalleDeOrden): View|RedirectResponse
+    public function acciones(Orden $orden, Prenda $prenda, CambiarEstadoDePrenda $cambiarEstado, DevolverPrendaSinArreglar $devolver, DetalleDeOrden $detalleDeOrden): View|RedirectResponse
     {
         try {
             $cambiarEstado->exigirQueSePuedaCambiar($prenda, $orden);
@@ -72,6 +73,8 @@ class PrendaController
             ...$detalleDeOrden->obtener($orden),
             'prenda' => $prenda,
             'estadosPosibles' => $cambiarEstado->estadosPosibles($prenda, $orden),
+            // CA-36.3: la opción no se ofrece si la prenda ya está terminada (RN-44)
+            'puedeDevolverse' => $devolver->sePuedeDevolver($prenda),
         ]);
     }
 
@@ -126,6 +129,43 @@ class PrendaController
         }
 
         return redirect()->route('ordenes.detalle', $orden)->with('exito', 'Los cambios de la prenda quedaron guardados.');
+    }
+
+    /**
+     * PT-12 · Devolver una prenda sin arreglar (HU-36). Se pregunta antes, con el valor que quedaría, porque no se deshace (RNF-10).
+     */
+    public function confirmarDevolucion(Orden $orden, Prenda $prenda, DevolverPrendaSinArreglar $devolver, DetalleDeOrden $detalleDeOrden): View|RedirectResponse
+    {
+        $detalle = $detalleDeOrden->obtener($orden);
+
+        try {
+            $devolver->exigirQueSePuedaDevolver($prenda, $orden);
+        } catch (ReglaIncumplida $regla) {
+            return $this->alDetalleConElMotivo($orden, $regla);
+        }
+
+        return view('pantallas.pt-12-devolver-sin-arreglar', [
+            ...$detalle,
+            'prenda' => $prenda,
+            'valorSinLaPrenda' => $devolver->valorSinLaPrenda($prenda, $orden),
+        ]);
+    }
+
+    public function devolver(Request $solicitud, Orden $orden, Prenda $prenda, DevolverPrendaSinArreglar $devolver): RedirectResponse
+    {
+        // RNF-10: sin la confirmación nada cambia y se vuelve a preguntar (CA-36.2)
+        if ($solicitud->input('confirmacion') !== 'si') {
+            return redirect()->route('prendas.confirmar-devolucion', [$orden, $prenda]);
+        }
+
+        try {
+            $devolver->ejecutar($prenda, $orden);
+        } catch (ReglaIncumplida $regla) {
+            return $this->alDetalleConElMotivo($orden, $regla);
+        }
+
+        return redirect()->route('ordenes.detalle', $orden)
+            ->with('exito', "«{$prenda->descripcion_arreglo}» quedó devuelta sin arreglar y ya no se cobra.");
     }
 
     private function alDetalleConElMotivo(Orden $orden, ReglaIncumplida $regla): RedirectResponse

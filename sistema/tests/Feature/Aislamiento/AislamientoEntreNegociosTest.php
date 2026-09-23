@@ -167,6 +167,8 @@ class AislamientoEntreNegociosTest extends TestCase
             'prendas.cambiar-estado' => ['POST', route('prendas.cambiar-estado', [$ordenA, $prendaA]), ['estado' => 'terminada']],
             'prendas.editar' => ['GET', route('prendas.editar', [$ordenA, $prendaA]), []],
             'prendas.corregir' => ['PUT', route('prendas.corregir', [$ordenA, $prendaA]), ['descripcion_arreglo' => 'Otro arreglo', 'precio' => '1000']],
+            'prendas.confirmar-devolucion' => ['GET', route('prendas.confirmar-devolucion', [$ordenA, $prendaA]), []],
+            'prendas.devolver' => ['POST', route('prendas.devolver', [$ordenA, $prendaA]), ['confirmacion' => 'si']],
             'pagos.nuevo' => ['GET', route('pagos.nuevo', $ordenA), []],
             'pagos.guardar' => ['POST', route('pagos.guardar', $ordenA), ['token_formulario' => '0b9d2c3e-5f7a-4c1e-9a8b-3d2f1e0c9b7a', 'valor' => '1000', 'metodo_pago_id' => '1']],
             'pagos.confirmar-anulacion' => ['GET', route('pagos.confirmar-anulacion', [$ordenA, $pagoA]), []],

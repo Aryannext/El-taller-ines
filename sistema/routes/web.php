@@ -65,6 +65,10 @@ Route::middleware(['auth', 'auth.session', 'cache.headers:no_store;private'])->g
         Route::put('/ordenes/{orden}/prendas/{prenda}', [PrendaController::class, 'corregir'])->whereNumber(['orden', 'prenda'])->name('prendas.corregir');
         Route::post('/ordenes/{orden}/prendas/{prenda}/fotos', [FotoController::class, 'guardar'])->whereNumber(['orden', 'prenda'])->name('fotos.agregar');
 
+        // HU-36: el cliente se lleva la prenda sin arreglar. Se confirma antes, porque no se deshace (RN-44, RNF-10)
+        Route::get('/ordenes/{orden}/prendas/{prenda}/devolver', [PrendaController::class, 'confirmarDevolucion'])->whereNumber(['orden', 'prenda'])->name('prendas.confirmar-devolucion');
+        Route::post('/ordenes/{orden}/prendas/{prenda}/devolver', [PrendaController::class, 'devolver'])->whereNumber(['orden', 'prenda'])->name('prendas.devolver');
+
         // RN-31: un pago se anula, no se borra; no hay ruta para eliminarlo
         Route::get('/ordenes/{orden}/pagos/{pago}/anular', [PagoController::class, 'confirmarAnulacion'])->whereNumber(['orden', 'pago'])->name('pagos.confirmar-anulacion');
         Route::post('/ordenes/{orden}/pagos/{pago}/anular', [PagoController::class, 'anular'])->whereNumber(['orden', 'pago'])->name('pagos.anular');

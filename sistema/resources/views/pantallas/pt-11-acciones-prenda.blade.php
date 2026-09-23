@@ -57,7 +57,10 @@
     <div class="pila pila-nula">
       <span class="titulo-seccion">Otras acciones</span>
       <a class="opcion-hoja" href="{{ route('prendas.editar', [$orden, $prenda]) }}"><i class="i i-editar"></i><span>Corregir arreglo, precio o fotos</span></a>
-      {{-- «Devolver sin arreglar» llega con HU-36 --}}
+      {{-- CA-36.3: la devolución sin arreglar solo aparece mientras la prenda está pendiente o en proceso (RN-44) --}}
+      @if ($puedeDevolverse)
+        <a class="opcion-hoja" href="{{ route('prendas.confirmar-devolucion', [$orden, $prenda]) }}"><i class="i i-devolver"></i><span>Devolver sin arreglar<span class="explicacion">El cliente se la lleva como está y ese arreglo no se cobra</span></span></a>
+      @endif
     </div>
 
     <p class="texto-2 pequeno">Las prendas terminadas se entregan con el botón Entregar de la orden.</p>
