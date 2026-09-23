@@ -27,15 +27,22 @@ class NegocioInicialSeeder extends Seeder
     {
         $usuario = (string) config('instalacion.usuaria.usuario');
         $contrasena = (string) config('instalacion.usuaria.contrasena');
+        // HU-37: el correo con el que entrará por Google, si lo tiene. Sin él, entra con usuario y contraseña
+        $correo = mb_strtolower(trim((string) config('instalacion.usuaria.correo')));
 
         if ($usuario === '' || $contrasena === '') {
             throw new RuntimeException('Define USUARIA_INICIAL_USUARIO y USUARIA_INICIAL_CONTRASENA en .env antes de instalar.');
         }
 
-        DB::transaction(function () use ($usuario, $contrasena): void {
+        DB::transaction(function () use ($usuario, $contrasena, $correo): void {
             $negocio = Negocio::create(['nombre' => 'Taller de costura']);
 
-            $usuaria = new Usuario(['nombre' => 'Dueña del taller', 'usuario' => $usuario, 'contrasena' => $contrasena]);
+            $usuaria = new Usuario([
+                'nombre' => 'Dueña del taller',
+                'usuario' => $usuario,
+                'correo' => $correo === '' ? null : $correo,
+                'contrasena' => $contrasena,
+            ]);
             $usuaria->negocio_id = $negocio->id;
             $usuaria->save();
 

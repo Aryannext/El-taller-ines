@@ -5,10 +5,12 @@ namespace App\Providers;
 use App\Aplicacion\Avisos\GenerarAviso;
 use App\Aplicacion\Consultas\AvisosPorEnviar;
 use App\Aplicacion\Consultas\FotosDeOrden;
+use App\Dominio\Acceso\IdentidadDeGoogle;
 use App\Dominio\Avisos\CanalDeAviso;
 use App\Dominio\Compartido\Reloj;
 use App\Dominio\Fotos\AlmacenDeFotos;
 use App\Dominio\Ordenes\OrdenQuedoLista;
+use App\Infraestructura\Acceso\GoogleOAuth;
 use App\Infraestructura\Avisos\EvolutionApiCanal;
 use App\Infraestructura\Avisos\WhatsAppCloudApiCanal;
 use App\Infraestructura\Fotos\AlmacenLocalPrivado;
@@ -35,6 +37,13 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(Reloj::class, RelojDeColombia::class);
         // Las pruebas usan la misma clase sobre Storage::fake('privado'), para medir la imagen de verdad (RNF-03)
         $this->app->bind(AlmacenDeFotos::class, AlmacenLocalPrivado::class);
+
+        // HU-37: el adaptador de Google necesita saber a dónde vuelve la usuaria, y eso lo sabe el enrutador
+        $this->app->bind(IdentidadDeGoogle::class, fn (): IdentidadDeGoogle => new GoogleOAuth(
+            config('services.google.identificador'),
+            config('services.google.secreto'),
+            route('sesion.google.respuesta'),
+        ));
         // Las pruebas lo reemplazan por CanalDeAvisoFalso. ADR-007: si Evolution API está configurada se usa esa; si no, la API oficial.
         // Sin ninguna de las dos, EnviarAviso deja el aviso para el envío asistido (RN-40)
         $this->app->bind(CanalDeAviso::class, function (): CanalDeAviso {

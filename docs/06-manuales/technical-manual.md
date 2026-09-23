@@ -199,11 +199,21 @@ cd puntada
 sh despliegue/instalar.sh
 ```
 
-**3. Create the owner's user.** It asks for the username and the password without showing it; the password is not stored in any file.
+**3. Create the owner's user.** It asks for the username, the Google address —optional— and the password without showing it; the password is not stored in any file. With the address registered, the owner signs in by tapping «Entrar con Google», typing nothing (HU-37).
 
 ```sh
 sh despliegue/crear-usuaria.sh
 ```
+
+**3.1. Signing in with Google, optional.** For the «Entrar con Google» button, create a project in [Google Cloud](https://console.cloud.google.com/):
+
+1. **APIs & Services → OAuth consent screen.** Type **External**, with the system name, the support address and the link to the data policy: `https://proyectosena.online/taller/politica-de-datos`.
+2. **Credentials → Create credentials → OAuth client ID**, type **Web application**. Under **Authorised redirect URIs**, exactly: `https://proyectosena.online/taller/entrar/google/respuesta`.
+3. Copy the **client ID** and the **client secret** into the server's `.env`, as `GOOGLE_IDENTIFICADOR` and `GOOGLE_SECRETO`, and deploy again.
+
+Only the address and the name are requested —no other data—, so with basic scopes Google usually does not require app verification. If it did, testing mode allows up to 100 authorised addresses, plenty for one shop.
+
+**Without those two variables the button does not appear** and sign-in works with username and password: the system runs the same.
 
 **4. Publish `/taller` in Nginx** (needs `sudo`). In the `server` 443 block of `proyectosena.online`, add:
 

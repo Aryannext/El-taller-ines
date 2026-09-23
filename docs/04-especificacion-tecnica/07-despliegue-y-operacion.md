@@ -49,6 +49,9 @@ HT-04 confirmó el servidor: un VPS de Hostinger con Ubuntu 24.04, **compartido*
 | `CACHE_STORE` | `file` | `file` | Caché y límite de intentos |
 | `QUEUE_CONNECTION` | `database` | `database` | Cola de avisos; nunca `sync` |
 | `TALLER_ROL` | — | `web` o `cola`, fijado en `docker-compose.yml` | Solo el contenedor `web` aplica las migraciones al arrancar |
+| `GOOGLE_IDENTIFICADOR` | Vacía, o el de un proyecto de prueba | El del proyecto en Google Cloud | Identificador de cliente de OAuth; sin él, el botón de Google no aparece (HU-37) |
+| `GOOGLE_SECRETO` | Vacía | Secreta | Secreto de cliente de OAuth. Nunca sale del `.env` del servidor |
+| `USUARIA_INICIAL_CORREO` | Vacía | El correo de Google de la dueña, si lo tiene | Lo registra `crear-usuaria.sh` al instalar; con él entra sin contraseña (RN-45) |
 | `WHATSAPP_TOKEN` | Vacía para probar el envío asistido, o el token de prueba | Secreta | Token de la API de Meta |
 | `WHATSAPP_ID_NUMERO` | El del número de prueba | El del número del negocio | Identificador del número que envía |
 | `WHATSAPP_VERSION_API` | La vigente al hacer HT-01 | La misma | Versión de la API de Meta en la dirección |

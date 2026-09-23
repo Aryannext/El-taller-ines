@@ -28,6 +28,12 @@
       <button class="btn btn-primario btn-bloque" type="submit">Entrar</button>
     </form>
 
+    {{-- HU-37: entrar sin contraseña, con el correo que quedó registrado al instalar el sistema (RN-45) --}}
+    @if ($hayGoogle)
+      <div class="o-bien"><span>o</span></div>
+      <a class="btn btn-secundario btn-bloque" href="{{ route('sesion.google') }}"><i class="i i-google"></i>Entrar con Google</a>
+    @endif
+
     {{-- RNF-26: la política se puede leer sin iniciar sesión --}}
     <p class="texto-2 pequeno">Los datos del taller y de sus clientes se tratan según la Ley 1581 de 2012.
       <a href="{{ route('politica-de-datos') }}">Ver la política de tratamiento de datos</a>.</p>

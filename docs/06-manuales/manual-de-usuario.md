@@ -81,6 +81,11 @@ En iPhone el sistema funciona desde Safari, pero no está probado para instalars
 - Si alguno está mal, el sistema dice «Usuario o contraseña incorrectos», sin decir cuál de los dos, para que nadie adivine tu usuario.
 - Después de varios intentos fallidos seguidos tienes que esperar unos segundos antes de volver a intentar. El mensaje te dice cuántos.
 
+**Entrar con Google, sin contraseña:** si quien te instaló el sistema registró tu correo de Google, debajo del botón Entrar aparece **Entrar con Google**. Tócalo, elige tu cuenta y ya estás adentro. No tienes que acordarte de ninguna contraseña.
+
+- Si no ves ese botón, es que tu correo no quedó registrado: entra con usuario y contraseña, y pídele a quien te instaló el sistema que lo agregue.
+- Si eliges una cuenta de Google distinta a la registrada, el sistema no te deja entrar y te lo dice. No pasa nada malo: vuelve a intentar con la tuya.
+
 **Salir:** en **Hoy**, toca el ícono de ajustes (arriba a la derecha) y luego **Cerrar sesión**. Hazlo siempre si le prestas el celular a alguien o usas un computador que no es tuyo.
 
 **Cambiar la contraseña:** en **Ajustes**, escribe la **Contraseña actual**, la **Nueva contraseña** (al menos 8 caracteres) y repítela. Toca **Cambiar contraseña**.

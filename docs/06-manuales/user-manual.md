@@ -83,6 +83,11 @@ On iPhone the system works in Safari, but installing it as an app has not been t
 - If either is wrong, the system says «Usuario o contraseña incorrectos» (Wrong username or password) without saying which one, so nobody can guess your username.
 - After several failed attempts in a row you have to wait a few seconds before trying again. The message tells you how many.
 
+**Signing in with Google, no password:** if whoever installed the system registered your Google address, an **Entrar con Google** button appears below **Entrar**. Tap it, pick your account, and you are in. Nothing to remember.
+
+- No button means your address was not registered: sign in with your user name and password, and ask whoever installed the system to add it.
+- Picking a Google account other than the registered one does not let you in, and the screen says so. Nothing breaks: try again with yours.
+
 **Signing out:** on **Hoy**, tap the settings icon (top right) and then **Cerrar sesión** (Sign out). Always do this if you lend your phone to someone or use a computer that is not yours.
 
 **Changing your password:** in **Ajustes** (Settings), type your **Contraseña actual** (Current password), the **Nueva contraseña** (New password, at least 8 characters) and repeat it. Tap **Cambiar contraseña** (Change password).

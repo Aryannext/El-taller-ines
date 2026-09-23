@@ -48,7 +48,7 @@ class DevolverPrendaSinArreglar
         if (! $this->sePuedeDevolver($prenda)) {
             throw new ReglaIncumplida(
                 'RN-44',
-                'Solo se devuelve sin arreglar una prenda que todavía está pendiente o en proceso.',
+                'Solo se puede devolver sin arreglar una prenda Pendiente o En proceso.',
             );
         }
 
@@ -56,7 +56,7 @@ class DevolverPrendaSinArreglar
         if ($this->esLaUnicaPorResolver($prenda, $orden)) {
             throw new ReglaIncumplida(
                 'RN-44',
-                'Es la única prenda que queda por resolver: lo que corresponde es cancelar la orden.',
+                'Es la única prenda por resolver de la orden. Si el cliente se la lleva sin arreglar, cancela la orden.',
             );
         }
 

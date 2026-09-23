@@ -20,6 +20,10 @@ Route::middleware('guest')->group(function () {
     Route::post('/entrar', [SesionController::class, 'entrar'])
         ->middleware('throttle:inicio-de-sesion')
         ->name('sesion.entrar');
+
+    // HU-37: entrar con la cuenta de Google. Solo pasa un correo ya registrado (RN-45): no hay registro abierto
+    Route::get('/entrar/google', [SesionController::class, 'irAGoogle'])->name('sesion.google');
+    Route::get('/entrar/google/respuesta', [SesionController::class, 'volverDeGoogle'])->name('sesion.google.respuesta');
 });
 
 // RNF-26: la política de tratamiento de datos se lee sin iniciar sesión

@@ -44,6 +44,12 @@ return [
         'instancia' => env('EVOLUTION_INSTANCIA'),
     ],
 
+    // HU-37: entrar con Google. Sin identificador ni secreto, el botón no aparece y se entra con contraseña
+    'google' => [
+        'identificador' => env('GOOGLE_IDENTIFICADOR'),
+        'secreto' => env('GOOGLE_SECRETO'),
+    ],
+
     'slack' => [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),

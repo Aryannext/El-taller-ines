@@ -55,7 +55,7 @@ Una historia entra a un sprint de desarrollo cuando tiene: formato completo, ori
 
 | Épica | Historias | Must | Should | Could | Puntos |
 | --- | --- | --- | --- | --- | --- |
-| **EP-01 · Acceso** | HU-01 a HU-02 | 2 | — | — | 5 |
+| **EP-01 · Acceso** | HU-01, HU-02 y HU-37 | 2 | 1 | — | 8 |
 | **EP-02 · Clientes** | HU-03 a HU-06 | 4 | — | — | 8 |
 | **EP-03 · Órdenes y prendas** | HU-07 a HU-16 | 6 | 3 | 1 | 24 |
 | **EP-04 · Identificación de prendas** | HU-17 a HU-19 | 2 | 1 | — | 6 |
@@ -63,9 +63,9 @@ Una historia entra a un sprint de desarrollo cuando tiene: formato completo, ori
 | **EP-06 · Pagos** | HU-23 a HU-27 | 2 | 3 | — | 11 |
 | **EP-07 · Avisos** | HU-28 a HU-31 | 4 | — | — | 11 |
 | **EP-08 · Seguimiento** | HU-32 a HU-35 | 3 | — | 1 | 8 |
-| **Total** | **36** | **26** | **8** | **2** | **85** |
+| **Total** | **37** | **26** | **9** | **2** | **88** |
 
-**Puntos por prioridad:** Must 66 · Should 16 · Could 3.
+**Puntos por prioridad:** Must 66 · Should 19 · Could 3.
 
 > **Riesgo de capacidad.** Los 66 puntos Must se desarrollan en los Sprints 3 y 4 (12 días). Aún no se conoce la velocidad real. Si al cerrar el Sprint 3 no alcanza, se recorta primero lo Could, después lo Should y, si aun así no alcanza, se renegocia el alcance con el instructor antes de sacrificar pruebas o documentación.
 
@@ -90,6 +90,23 @@ Una historia entra a un sprint de desarrollo cuando tiene: formato completo, ori
 | **CA-01.3** Intentos repetidos | que fallé 5 veces en el último minuto | lo intento por sexta vez | el sistema me pide esperar antes de volver a intentarlo, aunque esta vez la contraseña sea correcta |
 | **CA-01.4** Cerrar sesión | que tengo la sesión iniciada | cierro la sesión y uso el botón Atrás del navegador | veo la pantalla de inicio de sesión y ningún dato del taller |
 | **CA-01.5** Sesión abandonada | que dejé la sesión abierta sin usarla durante más de 8 horas | vuelvo a usar el sistema | me pide iniciar sesión de nuevo |
+
+### HU-37 · Entrar con mi correo de Google
+
+> **Como** dueña del taller, **quiero** entrar tocando mi cuenta de Google, **para** no tener que acordarme de una contraseña que solo uso aquí.
+
+**Nació de:** F-05 y la revisión del 23 de septiembre de 2026. La usuaria del taller usa el celular para lo suyo y una contraseña más termina anotada en un papel. Su cuenta de Google ya está abierta en el teléfono. Quien instala el sistema registra su correo con un comando, así que **no hay registro abierto**: eso sigue fuera del alcance (ADR-002).
+
+**Requisitos:** RF-42 · **Reglas:** RN-01, RN-45 · **Calidad:** RNF-19, RNF-20
+
+**Prioridad:** Should · **Puntos:** 3
+
+| Criterio | Dado | Cuando | Entonces |
+| --- | --- | --- | --- |
+| **CA-37.1** Correo registrado | que mi correo de Google quedó registrado al instalar el sistema | toco «Entrar con Google» y elijo mi cuenta | entro al panel del día de mi negocio, sin escribir contraseña |
+| **CA-37.2** Correo desconocido | que entro con una cuenta de Google que nadie registró | vuelvo del inicio de sesión de Google | no entro, veo que ese correo no tiene acceso y no se crea ninguna usuaria ni ningún taller |
+| **CA-37.3** La contraseña sigue sirviendo | que prefiero entrar como siempre | uso mi usuario y mi contraseña | entro igual que antes |
+| **CA-37.4** Sin Google configurado | que el sistema se instaló sin las llaves de Google | abro la pantalla de inicio de sesión | no veo el botón de Google y entro con usuario y contraseña |
 
 ### HU-02 · Cambiar mi contraseña
 

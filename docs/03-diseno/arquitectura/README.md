@@ -118,6 +118,8 @@ El código vive en `sistema/` desde el Sprint 3. Cada clase nombrada en este doc
 sistema/
 ├── app/
 │   ├── Dominio/                          Reglas del negocio en PHP puro
+│   │   ├── Acceso/
+│   │   │   └── IdentidadDeGoogle.php       Interfaz: quién dice Google que está entrando
 │   │   ├── Clientes/
 │   │   │   └── Celular.php                 Objeto de valor: 10 dígitos que empiezan por 3
 │   │   ├── Ordenes/
@@ -142,6 +144,8 @@ sistema/
 │   │       ├── Reloj.php                   Interfaz: la fecha y hora de Colombia
 │   │       └── ReglaIncumplida.php         Excepción con el mensaje para la usuaria
 │   ├── Aplicacion/                       Una clase por acción de las historias
+│   │   ├── Acceso/
+│   │   │   └── EntrarConGoogle.php         Solo entra un correo ya registrado (RN-45)
 │   │   ├── Clientes/
 │   │   │   ├── RegistrarCliente.php
 │   │   │   └── CorregirCliente.php
@@ -195,6 +199,8 @@ sistema/
 │   │   ├── Pago.php
 │   │   └── Aviso.php
 │   ├── Infraestructura/
+│   │   ├── Acceso/
+│   │   │   └── GoogleOAuth.php             Cambia el código de Google por una identidad, servidor a servidor
 │   │   ├── Avisos/
 │   │   │   ├── EvolutionApiCanal.php        ADR-007
 │   │   │   ├── WhatsAppCloudApiCanal.php
@@ -258,6 +264,7 @@ despliegue/                                 Nginx, servicio de la cola y scripts
 | --- | --- | --- | --- |
 | **HU-01** | PT-01, PT-23 | `SesionController` | Autenticación de Laravel con límite de intentos |
 | **HU-02** | PT-23 | `AjustesController` | `CambiarContrasena`, validado por `ContrasenaRequest` |
+| **HU-37** | PT-01 | `SesionController` | `EntrarConGoogle`, con el adaptador `GoogleOAuth` |
 | **HU-03** | PT-04 | `ClienteController` | `RegistrarCliente` |
 | **HU-04** | PT-03 | `ClienteController` | `BuscarClientes` |
 | **HU-05** | PT-05 | `ClienteController` | `FichaDeCliente` |
@@ -343,6 +350,7 @@ Complementa la tabla del [modelo de datos](../modelo-de-datos/README.md#dónde-s
 | **RN-42** | Dominio | `MensajeDeAviso` | Arma el texto con el número, las prendas listas y el saldo del momento |
 | **RN-43** | Aplicación | `ResolverTipoDePrenda` | Busca el tipo sin distinguir mayúsculas ni tildes; si no existe, lo crea en la lista del negocio |
 | **RN-44** | Aplicación | `DevolverPrendaSinArreglar`, `TransicionesDePrenda` | Solo desde Pendiente o En proceso, sin dejar la orden sin prendas por resolver ni lo pagado por encima del valor |
+| **RN-45** | Aplicación | `EntrarConGoogle` | Busca la usuaria por el correo que Google confirmó; si no existe, no entra y no se crea nada |
 
 ## Dos recorridos
 
@@ -443,8 +451,8 @@ sequenceDiagram
 | **Responsabilidad única** | Un caso de uso por acción: `RegistrarPago` no anula pagos; `AnularPago` es otra clase. Los controladores no calculan |
 | **Abierto/cerrado** | Un canal de aviso nuevo es una clase que implementa `CanalDeAviso`, sin modificar `EnviarAviso` |
 | **Sustitución de Liskov** | `EvolutionApiCanal`, `WhatsAppCloudApiCanal`, `WhatsAppAsistidoCanal` y el canal falso de las pruebas se usan de la misma forma y devuelven el mismo `ResultadoDeEnvio` |
-| **Segregación de interfaces** | Interfaces pequeñas y separadas: `CanalDeAviso` solo envía, `AlmacenDeFotos` solo guarda y entrega, `Reloj` solo da la hora |
-| **Inversión de dependencias** | Los casos de uso dependen de `CanalDeAviso`, `AlmacenDeFotos` y `Reloj`, no de sus implementaciones; `AppServiceProvider` las enlaza |
+| **Segregación de interfaces** | Interfaces pequeñas y separadas: `CanalDeAviso` solo envía, `AlmacenDeFotos` solo guarda y entrega, `Reloj` solo da la hora, `IdentidadDeGoogle` solo dice quién entró |
+| **Inversión de dependencias** | Los casos de uso dependen de `CanalDeAviso`, `AlmacenDeFotos`, `Reloj` e `IdentidadDeGoogle`, no de sus implementaciones; `AppServiceProvider` las enlaza |
 
 ## Pruebas por capa
 

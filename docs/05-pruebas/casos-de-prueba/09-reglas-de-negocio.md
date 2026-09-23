@@ -4,13 +4,14 @@
 
 Cada regla tiene al menos una prueba automática que usa su ejemplo (RNF-28). El nivel sale de la capa donde la arquitectura ubica la regla, y la columna de historias dice qué historias dejarían de necesitarla si se recortaran. Las rutas son relativas a `sistema/tests/`.
 
-**Resumen:** 44 reglas · 15 unitarias · 23 de integración · 5 de funcionalidad · 1 de aislamiento.
+**Resumen:** 45 reglas · 15 unitarias · 24 de integración · 5 de funcionalidad · 1 de aislamiento.
 
 ## Negocio
 
 | Regla | Ejemplo que se prueba | Capa | Nivel | Prueba | Historias |
 | --- | --- | --- | --- | --- | --- |
-| **RN-01** La información pertenece a un negocio | El negocio A tiene la cliente Marta. Una usuaria del negocio B busca "Marta" y no obtiene resultados. | Modelos | Aislamiento | `Feature/Aislamiento/AislamientoEntreNegociosTest.php`<br>`test_rn_01_la_informacion_pertenece_a_un_negocio` | HU-01, HU-04, HU-14, HU-16 |
+| **RN-01** La información pertenece a un negocio | El negocio A tiene la cliente Marta. Una usuaria del negocio B busca "Marta" y no obtiene resultados. | Modelos | Aislamiento | `Feature/Aislamiento/AislamientoEntreNegociosTest.php`<br>`test_rn_01_la_informacion_pertenece_a_un_negocio` | HU-01, HU-37, HU-04, HU-14, HU-16 |
+| **RN-45** Solo entra un correo ya registrado | La dueña del taller entra con `taller@gmail.com`, que quedó registrado al instalar el sistema, y pasa al panel. Alguien más entra con otro correo de Google y el sistema le dice que ese correo no tiene acceso, sin crear nada. | Aplicación | Integración | `Feature/Acceso/EntrarConGoogleTest.php`<br>`test_rn_45_solo_entra_un_correo_ya_registrado` | HU-37 |
 
 ## Clientes
 

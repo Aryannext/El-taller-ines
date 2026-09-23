@@ -4,7 +4,7 @@
 <defs><marker id="abierta-08-duena-seguimiento" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="11" markerHeight="11" orient="auto"><path d="M1 1 L11 6 L1 11" fill="none" stroke="#4a453d" stroke-width="1.5"/></marker><marker id="triangulo-08-duena-seguimiento" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" orient="auto"><path d="M1 1 L13 7 L1 13 z" fill="#fffdf8" stroke="#4a453d" stroke-width="1.5"/></marker></defs>
 <rect width="940" height="440" fill="#fffdf8"/>
 <rect x="190" y="36" width="720" height="382" rx="8" fill="#faf7f0" stroke="#23211d" stroke-width="1.5"/>
-<text x="208.0" y="64.0" font-size="15" font-weight="700" fill="#23211d" text-anchor="start">El-taller-ines · Seguimiento</text>
+<text x="208.0" y="64.0" font-size="15" font-weight="700" fill="#23211d" text-anchor="start">Puntada · Seguimiento</text>
 <line x1="122.0" y1="230.0" x2="276.0" y2="230.0" stroke="#4a453d" stroke-width="1.4"/>
 <line x1="661.2" y1="147.9" x2="488.8" y2="202.1" stroke="#4a453d" stroke-width="1.4" stroke-dasharray="7 5" marker-end="url(#abierta-08-duena-seguimiento)"/>
 <rect x="545.0" y="163.0" width="60" height="17" rx="3" fill="#faf7f0"/>

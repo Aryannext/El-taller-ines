@@ -56,6 +56,16 @@ Todo cliente, orden, prenda, pago y aviso pertenece a un negocio, y una usuaria 
 
 **Ejemplo:** El negocio A tiene la cliente Marta. Una usuaria del negocio B busca "Marta" y no obtiene resultados.
 
+### RN-45 · Solo entra un correo ya registrado
+
+Entrar con Google funciona únicamente si el correo de la cuenta ya está registrado en una usuaria del sistema y Google lo da por verificado. Un correo desconocido no crea usuaria ni negocio: no hay registro abierto (ADR-002).
+
+**Tipo:** Restricción · **Origen:** ADR-002 · idea de negocio · F-05
+
+**Ejemplo:** La dueña del taller entra con `taller@gmail.com`, que quedó registrado al instalar el sistema, y pasa al panel. Alguien más entra con otro correo de Google y el sistema le dice que ese correo no tiene acceso, sin crear nada.
+
+> Es lo que hace que «entrar con Google» sea cómodo sin abrir la puerta: quien instala el sistema decide quién entra, con un comando, y la usuaria no tiene que recordar ninguna contraseña.
+
 ## Clientes
 
 ### RN-02 · Datos mínimos de un cliente

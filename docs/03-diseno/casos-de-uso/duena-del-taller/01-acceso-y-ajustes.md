@@ -33,6 +33,33 @@ Lo que la dueña hace para entrar al sistema y para ajustarlo a su taller. Son c
 - **3a. Datos incorrectos:** el sistema muestra «Usuario o contraseña incorrectos», sin decir cuál de los dos falló, y no deja entrar (CA-01.2).
 - **3b. Cinco intentos fallidos en el último minuto:** el sistema pide esperar antes de volver a intentarlo, aunque la contraseña sea correcta (CA-01.3).
 
+### CU-36 · Entrar con Google
+
+| Campo | Detalle |
+| --- | --- |
+| **Actor principal** | Dueña del taller |
+| **Historias** | HU-37 |
+| **Pantallas** | PT-01 |
+| **Implementa** | `SesionController` |
+| **Precondición** | Su correo de Google quedó registrado en su usuaria al instalar el sistema |
+| **Disparador** | Abre el sistema y prefiere no escribir contraseña |
+| **Postcondición** | Ve el panel del día de su negocio |
+| **Relaciones** | — |
+
+**Flujo principal**
+
+1. La dueña abre el sistema y toca «Entrar con Google».
+2. El sistema la lleva a Google, que le pide elegir su cuenta.
+3. Google devuelve a la dueña al sistema con la confirmación de quién es.
+4. El sistema comprueba que ese correo esté registrado en una usuaria (RN-45).
+5. El sistema muestra el panel del día de su negocio (CU-33).
+
+**Flujos alternativos**
+
+- **4a. El correo no está registrado:** el sistema no la deja entrar, le dice que ese correo no tiene acceso y **no crea ninguna usuaria ni ningún negocio** (CA-37.2, RN-45).
+- **2a. La dueña cancela en Google:** vuelve a la pantalla de inicio de sesión sin cambios.
+- **1a. El sistema se instaló sin las llaves de Google:** el botón no aparece y la dueña entra con usuario y contraseña (CA-37.4, CU-01).
+
 ### CU-02 · Cerrar sesión
 
 | Campo | Detalle |

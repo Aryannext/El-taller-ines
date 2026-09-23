@@ -44,6 +44,8 @@ Si el registro no existe o es de otro negocio, la respuesta es 404, como si no e
 | --- | --- | --- | --- | --- | --- |
 | GET | `/entrar` | `sesion.formulario` | `SesionController@formulario` | PT-01 | HU-01 |
 | POST | `/entrar` | `sesion.entrar` | `SesionController@entrar` | PT-01 | HU-01 |
+| GET | `/entrar/google` | `sesion.google` | `SesionController@irAGoogle` | PT-01 | HU-37 |
+| GET | `/entrar/google/respuesta` | `sesion.google.respuesta` | `SesionController@volverDeGoogle` | PT-01 | HU-37 |
 | POST | `/salir` | `sesion.salir` | `SesionController@salir` | PT-23 | HU-01 |
 | GET | `/politica-de-datos` | `politica-de-datos` | vista | — | — |
 | GET | `/up` | — | Laravel | — | — |

@@ -106,7 +106,7 @@ class DevolverPrendaSinArreglarTest extends TestCase
             ->assertOk()
             ->assertDontSee(route('prendas.confirmar-devolucion', [$orden, $pantalon]), false);
 
-        $motivo = 'Solo se devuelve sin arreglar una prenda que todavía está pendiente o en proceso.';
+        $motivo = 'Solo se puede devolver sin arreglar una prenda Pendiente o En proceso.';
         $this->get(route('prendas.confirmar-devolucion', [$orden, $pantalon]))
             ->assertRedirect(route('ordenes.detalle', $orden))
             ->assertSessionHasErrors(['prenda' => $motivo]);
@@ -124,7 +124,7 @@ class DevolverPrendaSinArreglarTest extends TestCase
         $unica = $this->prenda($orden, $this->camisa, 'Cambiar cremallera', 12000, 'pendiente');
         $this->actingAs($this->duena);
 
-        $motivo = 'Es la única prenda que queda por resolver: lo que corresponde es cancelar la orden.';
+        $motivo = 'Es la única prenda por resolver de la orden. Si el cliente se la lleva sin arreglar, cancela la orden.';
         $this->get(route('prendas.confirmar-devolucion', [$orden, $unica]))
             ->assertRedirect(route('ordenes.detalle', $orden))
             ->assertSessionHasErrors(['prenda' => $motivo]);

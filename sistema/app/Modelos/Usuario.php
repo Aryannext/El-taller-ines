@@ -23,7 +23,7 @@ class Usuario extends Authenticatable
 
     protected $rememberTokenName = 'token_recordar';
 
-    protected $fillable = ['nombre', 'usuario', 'contrasena'];
+    protected $fillable = ['nombre', 'usuario', 'correo', 'contrasena'];
 
     protected $hidden = ['contrasena', 'token_recordar'];
 

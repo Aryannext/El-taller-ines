@@ -4,7 +4,7 @@
 
 Cada criterio de aceptación es un caso de prueba con su mismo código. La clase de prueba de cada historia es la del caso de uso que la implementa; cuando un criterio usa otra, aparece junto al método. Las rutas son relativas a `sistema/tests/`.
 
-**Resumen:** 2 historias · 9 casos · 8 automáticos · 1 automáticos y manuales · 0 manuales.
+**Resumen:** 3 historias · 13 casos · 12 automáticos · 1 automáticos y manuales · 0 manuales.
 
 ## HU-01 · Iniciar y cerrar sesión
 
@@ -17,6 +17,17 @@ Cada criterio de aceptación es un caso de prueba con su mismo código. La clase
 | **CA-01.3** Intentos repetidos | Dado que fallé 5 veces en el último minuto, cuando lo intento por sexta vez | el sistema me pide esperar antes de volver a intentarlo, aunque esta vez la contraseña sea correcta | Funcionalidad | Automática | `test_ca_01_3_intentos_repetidos` |
 | **CA-01.4** Cerrar sesión | Dado que tengo la sesión iniciada, cuando cierro la sesión y uso el botón Atrás del navegador | veo la pantalla de inicio de sesión y ningún dato del taller | Funcionalidad | Automática y manual | `test_ca_01_4_cerrar_sesion`<br>y [PM-05](../pruebas-manuales/PM-05-pantallas-y-navegadores.md) |
 | **CA-01.5** Sesión abandonada | Dado que dejé la sesión abierta sin usarla durante más de 8 horas, cuando vuelvo a usar el sistema | me pide iniciar sesión de nuevo | Funcionalidad | Automática | `test_ca_01_5_sesion_abandonada` |
+
+## HU-37 · Entrar con mi correo de Google
+
+**Prioridad:** Should · **Reglas:** RN-01, RN-45 · **Calidad:** RNF-19, RNF-20 · **Clase de prueba:** `Feature/Acceso/EntrarConGoogleTest.php`
+
+| Caso | Situación | Resultado esperado | Nivel | Forma | Prueba |
+| --- | --- | --- | --- | --- | --- |
+| **CA-37.1** Correo registrado | Dado que mi correo de Google quedó registrado al instalar el sistema, cuando toco «Entrar con Google» y elijo mi cuenta | entro al panel del día de mi negocio, sin escribir contraseña | Funcionalidad | Automática | `test_ca_37_1_correo_registrado` |
+| **CA-37.2** Correo desconocido | Dado que entro con una cuenta de Google que nadie registró, cuando vuelvo del inicio de sesión de Google | no entro, veo que ese correo no tiene acceso y no se crea ninguna usuaria ni ningún taller | Funcionalidad | Automática | `test_ca_37_2_correo_desconocido` |
+| **CA-37.3** La contraseña sigue sirviendo | Dado que prefiero entrar como siempre, cuando uso mi usuario y mi contraseña | entro igual que antes | Funcionalidad | Automática | `test_ca_37_3_la_contrasena_sigue_sirviendo` |
+| **CA-37.4** Sin Google configurado | Dado que el sistema se instaló sin las llaves de Google, cuando abro la pantalla de inicio de sesión | no veo el botón de Google y entro con usuario y contraseña | Funcionalidad | Automática | `test_ca_37_4_sin_google_configurado` |
 
 ## HU-02 · Cambiar mi contraseña
 

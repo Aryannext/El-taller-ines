@@ -197,11 +197,21 @@ cd puntada
 sh despliegue/instalar.sh
 ```
 
-**3. Crear la usuaria de la dueña.** Pide el usuario y la contraseña sin mostrarla; la contraseña no queda en ningún archivo.
+**3. Crear la usuaria de la dueña.** Pide el usuario, el correo de Google —opcional— y la contraseña sin mostrarla; la contraseña no queda en ningún archivo. Con el correo registrado, la dueña entra tocando «Entrar con Google», sin escribir nada (HU-37).
 
 ```sh
 sh despliegue/crear-usuaria.sh
 ```
+
+**3.1. Entrar con Google, opcional.** Si se quiere el botón «Entrar con Google», hay que crear un proyecto en [Google Cloud](https://console.cloud.google.com/):
+
+1. **APIs y servicios → Pantalla de consentimiento de OAuth.** Tipo **Externo**, con el nombre del sistema, el correo de soporte y el enlace a la política de tratamiento de datos: `https://proyectosena.online/taller/politica-de-datos`.
+2. **Credenciales → Crear credenciales → ID de cliente de OAuth**, tipo **Aplicación web**. En **URI de redireccionamiento autorizados**, exactamente: `https://proyectosena.online/taller/entrar/google/respuesta`.
+3. Copiar el **identificador** y el **secreto** en el `.env` del servidor, en `GOOGLE_IDENTIFICADOR` y `GOOGLE_SECRETO`, y volver a desplegar.
+
+Solo se piden el correo y el nombre —ningún otro dato—, así que con permisos básicos normalmente no hace falta que Google verifique la aplicación. Si la pidiera, el modo de prueba admite hasta 100 correos autorizados, de sobra para un taller.
+
+**Sin esas dos variables el botón no aparece** y se entra con usuario y contraseña: el sistema funciona igual.
 
 **4. Publicar `/taller` en Nginx** (necesita `sudo`). En el bloque `server` 443 de `proyectosena.online`, agregar:
 

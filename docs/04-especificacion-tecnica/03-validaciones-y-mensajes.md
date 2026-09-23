@@ -180,6 +180,8 @@ Los lanza `ReglaIncumplida` desde el dominio o el caso de uso.
 | **RN-30** | Se intenta registrar un pago en una orden Cancelada | — | No se pueden registrar pagos en una orden cancelada. |
 | **RN-44** | Se intenta devolver una prenda que no está Pendiente ni En proceso | — | Solo se puede devolver sin arreglar una prenda Pendiente o En proceso. |
 | **RN-44** | Es la única prenda por resolver de la orden | — | Es la única prenda por resolver de la orden. Si el cliente se la lleva sin arreglar, cancela la orden. |
+| **RN-45** | Se entra con un correo de Google que no está registrado en ninguna usuaria | `usuario` | Ese correo no tiene acceso al sistema. Pídeselo a quien te lo instaló. |
+| **RN-45** | Google no confirma la identidad: no responde, el código no sirve o el correo no está verificado | `usuario` | No se pudo confirmar tu cuenta de Google. Intenta otra vez o entra con tu usuario y contraseña. |
 
 El mensaje de RN-28 no lleva punto final, igual que el criterio CA-23.3 y el mockup de PT-14.
 

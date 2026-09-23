@@ -114,6 +114,7 @@ Una historia entra a un sprint solo si cumple la definición de "lista para desa
 | 41 | **HU-19** | Eliminar una foto | Should | 1 | Sprint 4 | HU-17 |
 | 42 | **HU-35** | Cambiar el plazo para considerar una orden sin reclamar | Could | 1 | Sprint 4 | HU-34 |
 | 43 | **HU-16** | Renombrar o desactivar tipos de prenda | Could | 2 | Sprint 4 | HU-09 |
+| 44 | **HU-37** | Entrar con mi correo de Google | Should | 3 | Sprint 4 | HU-01 |
 
 ### Por qué este orden
 
@@ -125,6 +126,7 @@ Una historia entra a un sprint solo si cumple la definición de "lista para desa
 - **HT-07 cierra el Sprint 4:** el APK abre el sistema desplegado, así que necesita el dominio con HTTPS (HT-04) y las pantallas de fotos y avisos ya construidas.
 - **HU-26 encabeza lo Should:** ataca el efecto E-03, no saber cuánto falta por cobrar, y reutiliza el saldo ya construido.
 - **HU-36 va junto a HU-13:** las dos corrigen qué prendas cuentan en el valor de la orden. Se agregó el 14 de septiembre, al analizar el proceso actual.
+- **HU-37 entró el 23 de septiembre**, después de renombrar el producto: la usuaria del taller usa el celular para lo suyo y una contraseña más termina en un papel. Entra con la cuenta de Google que ya tiene abierta, y solo si su correo quedó registrado al instalar (RN-45). El registro abierto sigue fuera del alcance.
 - **HU-36 entró el 22 de septiembre**, después de terminar las Must y los documentos de cierre: era la única historia que dejaba una regla de negocio sin prueba (RN-44), y su pantalla PT-12 ya estaba diseñada desde el Sprint 2.
 - **HU-11 se adelantó al Sprint 4** el 22 de septiembre, antes que HU-26: en PM-04 el aprendiz buscó cómo agregar una prenda a una orden en proceso y no había forma. Es el caso de C-01.1, la prenda que no quedó anotada, y reutiliza el formulario de PT-06.
 - **HU-26 y HU-27 entraron al Sprint 4** el 22 de septiembre, juntas porque comparten PT-22: «Dinero» aparecía en gris en la barra de navegación y la tarjeta «Por cobrar» del panel no llevaba a ninguna parte.
