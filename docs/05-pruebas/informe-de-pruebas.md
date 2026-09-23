@@ -1,6 +1,6 @@
 # Informe de pruebas
 
-**Entregable:** DOC-21 · **Corte:** 22 de septiembre de 2026 · **Commit:** `9b711de` · **Estado:** en curso, se completa en el cierre
+**Entregable:** DOC-21 · **Corte:** 23 de septiembre de 2026 · **Commit:** `bf2a64b` · **Estado:** en curso, se completa en el cierre
 
 Dice qué se probó, con qué resultado y qué falta. Sigue el [plan de pruebas](plan-de-pruebas.md), que es quien define la estrategia, los criterios de salida y los protocolos.
 
@@ -10,12 +10,12 @@ Dice qué se probó, con qué resultado y qué falta. Sigue el [plan de pruebas]
 
 | Qué | Resultado |
 | --- | --- |
-| **Pruebas automáticas** | **286 pruebas, todas pasan** (1.557 comprobaciones), en poco más de un minuto |
+| **Pruebas automáticas** | **301 pruebas, todas pasan** (1.690 comprobaciones), en poco más de un minuto |
 | **Dónde corren** | En cada envío a GitHub, y en la máquina de desarrollo antes de cada commit |
 | **Cobertura** | El flujo exige **80 % o más** de `app/Dominio` y `app/Aplicacion`; si baja, la corrida falla |
-| **Criterios de aceptación** | **125 de 125 verificados**, desde que se construyeron las siete historias que faltaban |
-| **Reglas de negocio** | **44 de 44 con prueba que pasa**, desde que se construyó HU-36 |
-| **Historias Must** | **26 de 26 verificadas**, y también las 8 *Should* y las 2 *Could*: **las 36 del backlog** |
+| **Criterios de aceptación** | **134 de 134 verificados** |
+| **Reglas de negocio** | **47 de 47 con prueba que pasa** |
+| **Historias Must** | **26 de 26 verificadas**, y también las 10 *Should* y las 2 *Could*: **las 38 del backlog** |
 | **Pruebas manuales** | 6 de 8 ejecutadas: PM-02, PM-04 y PM-08 aprobadas; PM-05, PM-06 y PM-07 parciales; faltan PM-01 y PM-03 |
 | **Defectos abiertos** | **Ninguno.** Los 10 encontrados se corrigieron; los cuatro últimos los halló PM-07, y uno de ellos lo causó la corrección de otro |
 | **GitHub Actions en `main`** | En verde |
@@ -28,10 +28,10 @@ Cada criterio de aceptación y cada regla de negocio se prueban con el ejemplo e
 
 | Medida | Valor |
 | --- | --- |
-| Pruebas que se ejecutan | 286, todas pasan |
-| Comprobaciones dentro de ellas | 1.557 |
-| Métodos escritos en `sistema/tests` | 275 |
-| Métodos planeados en el plan | 167, **todos escritos**: al construir las siete historias que faltaban se escribieron los 15 que quedaban |
+| Pruebas que se ejecutan | 301, todas pasan |
+| Comprobaciones dentro de ellas | 1.690 |
+| Métodos escritos en `sistema/tests` | 290 |
+| Métodos planeados en el plan | 179, **todos escritos** |
 | Tiempo de la corrida completa | 62 segundos en la máquina de desarrollo |
 
 **Qué más revisa cada envío, además de las pruebas:** secretos en el historial (gitleaks), dependencias con vulnerabilidades conocidas, estilo con Pint, análisis estático con Larastan y las reglas de capas con PHPat, vistas sin escapar, que las migraciones produzcan el esquema documentado, y los verificadores que contrastan los documentos entre sí.
@@ -41,7 +41,7 @@ Cada criterio de aceptación y cada regla de negocio se prueban con el ejemplo e
 | Prioridad | Historias | Con todos sus criterios verificados | Sin construir |
 | --- | --- | --- | --- |
 | **Must** | 26 | **26** | 0 |
-| **Should** | 8 | **8** | 0 |
+| **Should** | 10 | **10** | 0 |
 | **Could** | 2 | **2** | 0 |
 
 Dos criterios de historias Must no tienen prueba automática porque **son manuales por diseño**, y quedaron verificados a mano:
@@ -63,11 +63,13 @@ El plan permitía recortar historias *Should* y *Could* si no alcanzaba la capac
 | **HU-24** Registrar un abono al recibir la orden | Should | La orden y su abono se guardan juntos, sin dos pasos con el cliente enfrente |
 | **HU-10** Registrar un cliente nuevo desde la orden | Should | Lo escrito en la orden ya no se pierde mientras se registra al cliente |
 | **HU-35** Cambiar el plazo sin reclamar | Could | El plazo de 30 días pasó a ser del negocio |
-| **HU-16** Renombrar o desactivar tipos de prenda | Could | La lista de tipos, que crece sola con «Otro», ahora se puede ordenar |
+| **HU-16** Agregar, renombrar o desactivar tipos de prenda | Could | La lista de tipos, que crece sola con «Otro», ahora se puede ordenar |
+
+**Ese mismo día entraron dos historias más**, al revisar el sistema pensando en la usuaria real —una mujer mayor que usa el celular para lo suyo—: **HU-37**, entrar con la cuenta de Google sin recordar contraseñas, y **HU-38**, ponerle nombre al taller y a la dueña. Con HU-38 se reescribió el aviso que reciben los clientes (RN-46): nombra al taller, trata de usted y no escribe «$0» cuando la orden está pagada.
 
 ## 4. Reglas de negocio
 
-Las 44 reglas tienen su caso de prueba definido con el ejemplo de su documento (RNF-28), y **las 44 tienen prueba escrita y pasa**. La última en cerrarse fue **RN-44** (devolver una prenda sin arreglar): su historia, HU-36, se construyó el 23 de septiembre justamente para no dejar una regla sin comprobar.
+Las 47 reglas tienen su caso de prueba definido con el ejemplo de su documento (RNF-28), y **las 47 tienen prueba escrita y pasa**. La última en cerrarse fue **RN-44** (devolver una prenda sin arreglar): su historia, HU-36, se construyó el 23 de septiembre justamente para no dejar una regla sin comprobar.
 
 Durante este corte se corrigió un desajuste: el plan nombraba pruebas de **RN-32 a RN-36** que no existían con ese nombre. Al escribirlas apareció que RN-34, RN-35 y RN-36 vivían dentro de las consultas y no en el dominio, donde las pone la arquitectura. Se creó `ReglasDeSeguimiento`, las consultas la usan y las tres reglas quedaron con su prueba (`7c58cf6`).
 
@@ -140,8 +142,8 @@ Del [plan de pruebas](plan-de-pruebas.md#para-entregar):
 | Condición | Meta | Hoy |
 | --- | --- | --- |
 | Criterios de las historias Must | 100 % verificados | **Cumple:** 26 de 26 historias |
-| Criterios de las Should y Could implementadas | 100 %, y las recortadas se declaran | **Cumple:** las 10 están construidas y verificadas; no quedó ninguna recortada |
-| Reglas de negocio | Todas con una prueba que pasa | **Cumple:** 44 de 44 |
+| Criterios de las Should y Could implementadas | 100 %, y las recortadas se declaran | **Cumple:** las 12 están construidas y verificadas; no quedó ninguna recortada |
+| Reglas de negocio | Todas con una prueba que pasa | **Cumple:** 47 de 47 |
 | Cobertura de `Dominio` y `Aplicacion` | 80 % o más | **Cumple:** el flujo falla si baja |
 | Defectos críticos o altos abiertos | Ninguno | **Cumple** |
 | Protocolos manuales | Ejecutados y registrados | **No cumple todavía:** faltan PM-01 y PM-03, y completar PM-05, PM-06 y PM-07 |

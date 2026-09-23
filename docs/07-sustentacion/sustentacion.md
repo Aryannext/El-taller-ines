@@ -154,10 +154,10 @@ Cada una trae **qué se muestra**, **qué se dice** (no de memoria: la idea) y *
 
 | | |
 | --- | --- |
-| **286** | pruebas automáticas, todas pasan |
-| **1.557** | comprobaciones dentro de ellas |
-| **36 / 36** | historias del backlog, construidas y verificadas |
-| **44 / 44** | reglas de negocio con prueba |
+| **301** | pruebas automáticas, todas pasan |
+| **1.690** | comprobaciones dentro de ellas |
+| **38 / 38** | historias del backlog, construidas y verificadas |
+| **47 / 47** | reglas de negocio con prueba |
 | **8** | protocolos de prueba manual |
 | **10** | defectos encontrados; **0** abiertos |
 
@@ -181,7 +181,7 @@ Cada una trae **qué se muestra**, **qué se dice** (no de memoria: la idea) y *
 
 **Se muestra:** lo que se dejó fuera del alcance con su motivo, y lo que falta por probar.
 
-**Se dice:** hay que distinguir dos cosas. Lo que quedó **fuera del alcance** —multi-negocio con registro propio, el envío automático con el número real del taller, la impresora de etiquetas— está declarado desde el Sprint 1 con su motivo, no explicado después. Y del **backlog no quedó nada sin construir**: las 36 historias están hechas, incluidas las siete *Should* y *Could* que estuvieron recortadas hasta el último día y se construyeron al final, con sus pruebas. La que más importaba era HU-36, porque era la única que dejaba una regla de negocio sin comprobar.
+**Se dice:** hay que distinguir dos cosas. Lo que quedó **fuera del alcance** —multi-negocio con registro propio, el envío automático con el número real del taller, la impresora de etiquetas— está declarado desde el Sprint 1 con su motivo, no explicado después. Y del **backlog no quedó nada sin construir**: las 38 historias están hechas, incluidas las siete *Should* y *Could* que estuvieron recortadas hasta el último día y se construyeron al final, con sus pruebas. La que más importaba era HU-36, porque era la única que dejaba una regla de negocio sin comprobar.
 
 **Se dice también, sin que lo pregunten:** lo que sí falta son dos pruebas manuales que necesitan a otras personas —la de usabilidad con compañeros y la de instalación por alguien más—, y están agendadas.
 
