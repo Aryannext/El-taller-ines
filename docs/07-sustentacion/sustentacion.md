@@ -1,6 +1,6 @@
 # Presentación y ensayo de la sustentación
 
-**Entregable:** DOC-24 · **Fecha:** 22 de septiembre de 2026 · **Estado:** listo para ensayar
+**Entregable:** DOC-24 · **Fecha:** 23 de septiembre de 2026 · **Estado:** listo para ensayar
 
 Este documento es todo lo que se necesita para sustentar: qué se dice, en qué orden, con qué tiempo, qué se muestra en vivo, qué hacer si algo falla y qué responder cuando pregunten. No hay que leer ningún otro documento el día de la sustentación.
 
@@ -101,7 +101,7 @@ Cada una trae **qué se muestra**, **qué se dice** (no de memoria: la idea) y *
 
 **Se muestra:** la línea de tiempo: Sprint 0 arranque, 1 problema y requisitos, 2 diseño, 3 y 4 desarrollo, cierre.
 
-**Se dice:** Scrum adaptado a un equipo de una persona, con sprints de una semana, backlog priorizado con MoSCoW y estimación en puntos. Nada se programó sin su historia, sus criterios y su mockup. Más de 120 commits, todos con su mensaje explicando el porqué.
+**Se dice:** Scrum adaptado a un equipo de una persona, con sprints de una semana, backlog priorizado con MoSCoW y estimación en puntos. Nada se programó sin su historia, sus criterios y su mockup. Más de 130 commits, todos con su mensaje explicando el porqué.
 
 **De dónde sale:** [plan de sprints](../00-scrum/plan-de-sprints.md) y [product backlog](../00-scrum/product-backlog.md).
 
@@ -154,10 +154,10 @@ Cada una trae **qué se muestra**, **qué se dice** (no de memoria: la idea) y *
 
 | | |
 | --- | --- |
-| **254** | pruebas automáticas, todas pasan |
-| **1.309** | comprobaciones dentro de ellas |
-| **26 / 26** | historias obligatorias verificadas |
-| **43 / 44** | reglas de negocio con prueba |
+| **286** | pruebas automáticas, todas pasan |
+| **1.557** | comprobaciones dentro de ellas |
+| **36 / 36** | historias del backlog, construidas y verificadas |
+| **44 / 44** | reglas de negocio con prueba |
 | **8** | protocolos de prueba manual |
 | **10** | defectos encontrados; **0** abiertos |
 
@@ -179,11 +179,11 @@ Cada una trae **qué se muestra**, **qué se dice** (no de memoria: la idea) y *
 
 ### 13 · Lo que quedó fuera, y por qué
 
-**Se muestra:** las siete historias no construidas, con su motivo en una línea.
+**Se muestra:** lo que se dejó fuera del alcance con su motivo, y lo que falta por probar.
 
-**Se dice:** el plan permitía recortar historias *Should* y *Could* si no alcanzaba la capacidad, **con la condición de declararlas**. Siete quedaron fuera; ninguna es obligatoria, y de cada una se explica cómo se resuelve entre tanto. Una sola regla de negocio quedó sin prueba, RN-44, porque pertenece a una de ellas.
+**Se dice:** hay que distinguir dos cosas. Lo que quedó **fuera del alcance** —multi-negocio con registro propio, el envío automático con el número real del taller, la impresora de etiquetas— está declarado desde el Sprint 1 con su motivo, no explicado después. Y del **backlog no quedó nada sin construir**: las 36 historias están hechas, incluidas las siete *Should* y *Could* que estuvieron recortadas hasta el último día y se construyeron al final, con sus pruebas. La que más importaba era HU-36, porque era la única que dejaba una regla de negocio sin comprobar.
 
-**Se dice también, sin que lo pregunten:** faltan dos pruebas manuales que necesitan a otras personas —la de usabilidad con compañeros y la de instalación por alguien más—, y están agendadas.
+**Se dice también, sin que lo pregunten:** lo que sí falta son dos pruebas manuales que necesitan a otras personas —la de usabilidad con compañeros y la de instalación por alguien más—, y están agendadas.
 
 ### 14 · Lo que sigue
 

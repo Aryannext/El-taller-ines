@@ -364,16 +364,16 @@
   </section>
 
   <!-- 11 · Calidad -->
-  <section class="lamina" data-notas="Las pruebas no se escribieron al final: cada historia se dio por terminada solo con ellas. Corren en cada envío al repositorio, junto con el análisis estático, el estilo, la revisión de dependencias vulnerables y la búsqueda de secretos en el historial. Si algo falla, el cambio no entra. Y los diez defectos están anotados con su causa: dos los encontró la prueba de seguridad a mano, y uno lo causó la corrección de otro. Por eso las pruebas manuales existen.">
+  <section class="lamina" data-notas="Las pruebas no se escribieron al final: cada historia se dio por terminada solo con ellas, y ninguna historia del backlog quedó sin construir. Corren en cada envío al repositorio, junto con el análisis estático, el estilo, la revisión de dependencias vulnerables y la búsqueda de secretos en el historial. Si algo falla, el cambio no entra. Y los diez defectos están anotados con su causa: dos los encontró la prueba de seguridad a mano, y uno lo causó la corrección de otro. Por eso las pruebas manuales existen.">
     <p class="rotulo">Cómo se sabe que funciona</p>
     <h2>Se prueba solo, en cada cambio</h2>
     <div class="cuerpo">
       <div class="col">
         <div class="cifras">
-          <div class="cifra"><span class="n">254</span><span class="q">pruebas automáticas, todas pasan</span></div>
-          <div class="cifra"><span class="n">1.309</span><span class="q">comprobaciones dentro de ellas</span></div>
-          <div class="cifra buena"><span class="n">26/26</span><span class="q">historias obligatorias verificadas</span></div>
-          <div class="cifra"><span class="n">43/44</span><span class="q">reglas de negocio con prueba</span></div>
+          <div class="cifra"><span class="n">286</span><span class="q">pruebas automáticas, todas pasan</span></div>
+          <div class="cifra"><span class="n">1.557</span><span class="q">comprobaciones dentro de ellas</span></div>
+          <div class="cifra buena"><span class="n">36/36</span><span class="q">historias del backlog, construidas</span></div>
+          <div class="cifra buena"><span class="n">44/44</span><span class="q">reglas de negocio con prueba</span></div>
           <div class="cifra"><span class="n">8</span><span class="q">protocolos de prueba manual</span></div>
           <div class="cifra ojo"><span class="n">10 · 0</span><span class="q">defectos encontrados · abiertos</span></div>
         </div>
@@ -404,25 +404,30 @@
   </section>
 
   <!-- 13 · Lo que quedó fuera -->
-  <section class="lamina" data-notas="El plan permitía recortar historias Should y Could si no alcanzaba la capacidad, con la condición de declararlas. Siete quedaron fuera; ninguna es obligatoria, y de cada una se explica cómo se resuelve entre tanto. Una sola regla quedó sin prueba, RN-44, porque pertenece a una de ellas. Decirlo sin que lo pregunten: faltan dos pruebas manuales que necesitan a otras personas, y están agendadas.">
+  <section class="lamina" data-notas="Dos cosas distintas: lo que se decidió dejar fuera del alcance, con su motivo escrito desde el Sprint 1, y lo que falta por probar. Del backlog no quedó nada sin construir: las 36 historias están hechas, incluidas las siete Should y Could que estuvieron declaradas como recortadas hasta el último día. Decir sin que lo pregunten que faltan dos pruebas manuales que necesitan a otras personas, y que están agendadas.">
     <p class="rotulo">Lo que quedó fuera</p>
-    <h2>Siete historias, declaradas con su motivo</h2>
+    <h2>Fuera del alcance, no a medio hacer</h2>
     <div class="cuerpo">
       <div class="col">
         <ul class="lista">
-          <li>Ninguna es <b>obligatoria</b>: todas son <i>Should</i> o <i>Could</i></li>
-          <li>De cada una se explica <b>cómo se resuelve entre tanto</b></li>
-          <li>Dejan <b>una sola regla sin prueba</b>, RN-44</li>
+          <li><b>Multi-negocio con registro propio.</b> Los datos quedaron preparados; el registro, no (ADR-002)</li>
+          <li><b>Envío automático con el número real.</b> Requiere verificar el negocio ante Meta y tiene costo por mensaje</li>
+          <li><b>Impresora de etiquetas.</b> Sin presupuesto: la foto y el número de orden cumplen lo mismo</li>
         </ul>
+        <p style="font-size:21px;max-width:38ch">Cada exclusión está escrita con su motivo desde el Sprint 1, no explicada después.</p>
       </div>
-      <div class="col">
+      <div class="col" style="flex:0 0 360px">
         <div class="tarjeta">
-          <h4>Y lo que falta por probar</h4>
-          <p>Dos pruebas manuales necesitan a otras personas: la de usabilidad con compañeros y la de instalación hecha por alguien más. Están agendadas, y el informe las marca como pendientes.</p>
+          <h4>Del backlog no quedó nada</h4>
+          <p>Las <b>36 historias</b> están construidas, incluidas las siete <i>Should</i> y <i>Could</i> que estuvieron recortadas hasta el final.</p>
+        </div>
+        <div class="tarjeta">
+          <h4>Lo que sí falta probar</h4>
+          <p>Dos pruebas manuales necesitan a otras personas: usabilidad con compañeros e instalación hecha por alguien más. Están agendadas.</p>
         </div>
       </div>
     </div>
-    <div class="pie"><span>Informe de pruebas · sección de historias no construidas</span><span class="numero">13</span></div>
+    <div class="pie"><span>Alcance · informe de pruebas</span><span class="numero">13</span></div>
   </section>
 
   <!-- 14 · Lo que sigue -->
