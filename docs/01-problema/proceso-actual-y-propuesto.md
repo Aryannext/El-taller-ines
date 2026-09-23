@@ -61,7 +61,7 @@ Los diagramas se generan con `python scripts/generar_procesos.py`, que además c
 | 4 | Dueña | Guarda las prendas en el rincón, junto con las de otros clientes y las ya arregladas | C-06 |
 | 5 | Dueña | Arregla las prendas. Nadie más sabe en qué va cada una | C-02 |
 
-### Con El-taller-ines
+### Con Puntada
 
 ![Proceso propuesto, fase 1: recepción y arreglo](procesos/propuesto-1-recepcion-y-arreglo.svg)
 
@@ -93,7 +93,7 @@ Mientras tanto, el panel del día muestra las órdenes cuya fecha acordada ya pa
 
 No se sabe cuántas prendas están esperando ni desde cuándo (C-05, E-04).
 
-### Con El-taller-ines
+### Con Puntada
 
 ![Proceso propuesto, fase 2: aviso y seguimiento](procesos/propuesto-2-aviso-y-seguimiento.svg)
 
@@ -126,7 +126,7 @@ Si la orden deja de estar lista antes de que salga el aviso (por ejemplo, una pr
 
 El retoque no se marca como problema: al medirse, lo que falta se termina y no genera desacuerdos (E-05 descartado en el árbol de problemas).
 
-### Con El-taller-ines
+### Con Puntada
 
 ![Proceso propuesto, fase 3: entrega y cobro](procesos/propuesto-3-entrega-y-cobro.svg)
 
@@ -147,7 +147,7 @@ El sistema no evita del todo el olvido: una orden aparece como atrasada en el pa
 
 ## Qué cambia
 
-| Momento | Hoy | Con El-taller-ines | Causa | Medio |
+| Momento | Hoy | Con Puntada | Causa | Medio |
 | --- | --- | --- | --- | --- |
 | **Recibir** | No se anota nada | La orden queda registrada con sus prendas, precios, fecha y fotos | C-01 | M-01 |
 | **Identificar** | Las prendas de todos van juntas al rincón | El número va escrito en la bolsa y las fotos permiten reconocer cada prenda | C-06 | M-06 |

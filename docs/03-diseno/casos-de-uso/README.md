@@ -54,7 +54,7 @@ Los diagramas siguen UML.
 | **Actor sistema** | Rectángulo con «sistema» | Otro sistema que participa |
 | **Caso de uso** | Elipse con código y nombre | Algo que el actor logra con el sistema |
 | **Caso de otro diagrama** | Elipse punteada con «ver diagrama NN» | Se detalla en otro documento; aparece aquí solo por su relación |
-| **Límite del sistema** | Rectángulo «El-taller-ines · área» | Lo que está adentro lo hace el sistema |
+| **Límite del sistema** | Rectángulo «Puntada · área» | Lo que está adentro lo hace el sistema |
 | **Asociación** | Línea continua | El actor participa en el caso |
 | **«extend»** | Línea punteada con flecha hacia el caso base | El caso agrega un comportamiento opcional al caso base, bajo una condición |
 | **Generalización** | Línea con triángulo hueco hacia el caso general | El caso es una forma particular de otro |

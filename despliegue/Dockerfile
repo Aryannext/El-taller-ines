@@ -1,4 +1,4 @@
-# Imagen de El-taller-ines para el VPS compartido. Se construye desde la raíz del repositorio con despliegue/docker-compose.yml.
+# Imagen de Puntada para el VPS compartido. Se construye desde la raíz del repositorio con despliegue/docker-compose.yml.
 # Por qué Docker y no el PHP del servidor: docs/04-especificacion-tecnica/07-despliegue-y-operacion.md
 
 # 1. Dependencias de producción, sin las de desarrollo (PHPUnit, Pint, Larastan). Las extensiones se comprueban en la etapa 2.

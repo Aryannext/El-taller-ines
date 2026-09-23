@@ -32,7 +32,7 @@ Quién usa el sistema y con qué se comunica (nivel 1 del modelo C4):
 flowchart LR
     duena(["Dueña del taller<br/>celular o computador"])
     cliente(["Cliente del taller<br/>tiene WhatsApp"])
-    sistema["El-taller-ines<br/>sistema web"]
+    sistema["Puntada<br/>sistema web"]
     whatsapp["WhatsApp Cloud API<br/>de Meta"]
     drive["Google Drive<br/>copia semanal de respaldo"]
     duena -- "registra, cobra y entrega<br/>por HTTPS" --> sistema

@@ -1,8 +1,8 @@
 {
   "packageId": "online.proyectosena.taller",
   "host": "proyectosena.online",
-  "name": "El-taller-ines",
-  "launcherName": "Taller",
+  "name": "Puntada",
+  "launcherName": "Puntada",
   "display": "standalone",
   "orientation": "portrait",
   "themeColor": "#2A44A8",

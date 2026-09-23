@@ -343,7 +343,7 @@ def dibujar(d: Diagrama, especificaciones: dict[str, dict], dueno: dict[str, str
         f'<rect width="{ancho:.0f}" height="{alto:.0f}" fill="{C["papel"]}"/>',
         f'<rect x="{lx0}" y="{ly0}" width="{lx1 - lx0:.0f}" height="{ly1 - ly0:.0f}" rx="8" fill="{C["limite"]}" '
         f'stroke="{C["tinta"]}" stroke-width="1.5"/>',
-        texto(lx0 + 18, ly0 + 28, f"El-taller-ines · {d.limite}", 15, C["tinta"], 700, "start"),
+        texto(lx0 + 18, ly0 + 28, f"Puntada · {d.limite}", 15, C["tinta"], 700, "start"),
     ]
     nodos = {n.id: n for n in d.nodos}
 

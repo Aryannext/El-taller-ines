@@ -175,7 +175,7 @@ Cada una trae **qué se muestra**, **qué se dice** (no de memoria: la idea) y *
 
 **Se muestra en vivo, si el tiempo alcanza:** el recorrido guiado, que es exactamente esta idea.
 
-**De dónde sale:** [aryannext.github.io/El-taller-ines](https://aryannext.github.io/El-taller-ines/).
+**De dónde sale:** [aryannext.github.io/puntada](https://aryannext.github.io/puntada/).
 
 ### 13 · Lo que quedó fuera, y por qué
 
@@ -198,8 +198,8 @@ Cada una trae **qué se muestra**, **qué se dice** (no de memoria: la idea) y *
 **Se muestra:** las tres direcciones, grandes y legibles desde el fondo del salón.
 
 - **El sistema:** proyectosena.online/taller
-- **La documentación:** aryannext.github.io/El-taller-ines
-- **El código:** github.com/Aryannext/El-taller-ines
+- **La documentación:** aryannext.github.io/puntada
+- **El código:** github.com/Aryannext/puntada
 
 **Se dice:** la frase de cierre de la sección 1, y gracias.
 

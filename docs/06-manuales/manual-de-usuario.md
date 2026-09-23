@@ -1,4 +1,4 @@
-# Manual de usuario · El-taller-ines
+# Manual de usuario · Puntada
 
 **Entregable:** DOC-22 · **Versión del sistema:** la desplegada el 22 de septiembre de 2026 · **APK:** 1.0.0 · [English version](user-manual.md)
 

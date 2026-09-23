@@ -1,5 +1,5 @@
 #!/bin/sh
-# Arranque de los contenedores web y cola de El-taller-ines. La configuración llega solo por variables de entorno (RNF-34).
+# Arranque de los contenedores web y cola de Puntada. La configuración llega solo por variables de entorno (RNF-34).
 set -eu
 
 cd /var/www/taller/sistema

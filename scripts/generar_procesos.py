@@ -105,13 +105,13 @@ class Diagrama:
 
     @property
     def pool(self) -> str:
-        return "Taller de costura · hoy" if self.proceso == "actual" else "Taller de costura · con El-taller-ines"
+        return "Taller de costura · hoy" if self.proceso == "actual" else "Taller de costura · con Puntada"
 
 
 N, F = Nodo, Flujo
 CLIENTE = ("cliente", "Cliente del taller")
 DUENA = ("duena", "Dueña del taller")
-SISTEMA = ("sistema", "El-taller-ines")
+SISTEMA = ("sistema", "Puntada")
 
 DIAGRAMAS = [
     Diagrama("actual-1-recepcion-y-arreglo", "actual", "Recepción y arreglo", [CLIENTE, DUENA], [
@@ -468,7 +468,7 @@ def generar_bpmn(d: Diagrama, plano: Plano) -> str:
         '<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"'
         ' xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"'
         ' xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI"'
-        f' id="Definiciones_{d.archivo.replace("-", "_")}" targetNamespace="https://github.com/Aryannext/El-taller-ines"'
+        f' id="Definiciones_{d.archivo.replace("-", "_")}" targetNamespace="https://github.com/Aryannext/puntada"'
         ' exporter="scripts/generar_procesos.py" exporterVersion="1.0">',
         '  <bpmn:collaboration id="Colaboracion">',
         f'    <bpmn:participant id="Participante" name="{atributo(d.pool + " · " + d.fase)}" processRef="Proceso" />',
@@ -665,7 +665,7 @@ def generar_pagina(diagramas: list[Diagrama], svgs: dict[str, str]) -> str:
     for numero, (fase, lista) in enumerate(fases.items(), start=1):
         figuras = []
         for d in lista:
-            titulo = "Hoy" if d.proceso == "actual" else "Con El-taller-ines"
+            titulo = "Hoy" if d.proceso == "actual" else "Con Puntada"
             figuras.append(
                 f'<figure class="{"hoy" if d.proceso == "actual" else "propuesto"}">'
                 f"<figcaption><h3>{titulo}</h3>"
@@ -678,14 +678,14 @@ def generar_pagina(diagramas: list[Diagrama], svgs: dict[str, str]) -> str:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Proceso actual y propuesto · El-taller-ines</title>
+<title>Proceso actual y propuesto · Puntada</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,700&display=swap">
 <style>{ESTILO}</style>
 </head>
 <body>
 <div class="pagina">
 <header>
-  <div class="eyebrow">El-taller-ines · Sprint 1 · DOC-11</div>
+  <div class="eyebrow">Puntada · Sprint 1 · DOC-11</div>
   <h1>Proceso actual y proceso propuesto</h1>
   <p class="intro">Cada fase del trabajo del taller, en BPMN 2.0: primero cómo se hace hoy y después cómo se hará con el sistema.
   El detalle de cada paso, las fuentes y lo que no cambia están en <a href="proceso-actual-y-propuesto.md">proceso-actual-y-propuesto.md</a>.</p>

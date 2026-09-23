@@ -29,7 +29,7 @@ sys.path.insert(0, str(RAIZ / "scripts"))
 from comparar_migraciones import buscar_php  # noqa: E402
 from verificar_modelo import ServidorTemporal, buscar_mysqld  # noqa: E402
 
-REGISTRO = Path(tempfile.gettempdir()) / "el-taller-ines-servidor-de-prueba.json"
+REGISTRO = Path(tempfile.gettempdir()) / "puntada-servidor-de-prueba.json"
 CONTRASENA = "clave-de-prueba"
 CLIENTES = [
     ("Marta Rincón", "3104567890"),

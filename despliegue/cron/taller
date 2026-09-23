@@ -1,4 +1,4 @@
-# Respaldos de El-taller-ines (RNF-15, HT-05). Se instala en el servidor con:
+# Respaldos de Puntada (RNF-15, HT-05). Se instala en el servidor con:
 #   docs/04-especificacion-tecnica/07-despliegue-y-operacion.md
 # El registro queda en /var/log/taller-respaldos.log, que ese paso crea a nombre de cristian.
 SHELL=/bin/sh

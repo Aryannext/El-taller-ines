@@ -491,7 +491,7 @@ def generar_html(d: dict, tablas: list[dict], errores: list[str], cobertura: lis
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Matriz de trazabilidad · El-taller-ines</title>
+<title>Matriz de trazabilidad · Puntada</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap">
 <style>{CSS}</style>
@@ -499,7 +499,7 @@ def generar_html(d: dict, tablas: list[dict], errores: list[str], cobertura: lis
 <body>
 <div class="pagina">
   <header>
-    <div class="eyebrow">El-taller-ines · Sprint 1 · Generado desde los documentos</div>
+    <div class="eyebrow">Puntada · Sprint 1 · Generado desde los documentos</div>
     <h1>Matriz de trazabilidad</h1>
     <div class="cadena"><span>Causa</span><i>→</i><span>Medio</span><i>→</i><span>Objetivo</span><i>→</i><span>Requisito</span><i>→</i><span>Regla</span><i>→</i><span>Historia</span><i>→</i><span>Criterios</span><i>→</i><span>Prueba (Sprint 3)</span></div>
   </header>

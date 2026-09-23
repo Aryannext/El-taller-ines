@@ -96,7 +96,7 @@ def git(*args: str) -> str:
 
 
 def repositorio() -> str:
-    remoto = git("remote", "get-url", "origin") or "https://github.com/Aryannext/El-taller-ines.git"
+    remoto = git("remote", "get-url", "origin") or "https://github.com/Aryannext/puntada.git"
     m = re.search(r"github\.com[:/](.+?)(?:\.git)?$", remoto)
     return f"https://github.com/{m.group(1)}" if m else remoto
 
@@ -598,7 +598,7 @@ class Portal:
 
         contenido = f"""
 <section class="portada">
-  <h1>El-taller-ines</h1>
+  <h1>Puntada</h1>
   <p class="bajada">Todo el proyecto en un solo lugar: del problema del taller hasta el código y las pruebas.</p>
   <p>El sistema lleva las órdenes, las entregas y los cobros de un taller de costura. Aquí está todo lo que se hizo para
   construirlo. Cada cosa tiene un <strong>código corto</strong>, como <a href="e/HU-11.html">HU-11</a>: las letras dicen qué es

@@ -1,4 +1,4 @@
-# El-taller-ines
+# Puntada
 
 > Nombre temporal del proyecto, mientras se define el definitivo.
 
@@ -20,7 +20,7 @@ Esta es la segunda versión. La primera, [Costura-app](https://github.com/Aryann
 
 ## Portal del proyecto
 
-**[aryannext.github.io/El-taller-ines](https://aryannext.github.io/El-taller-ines/)** reúne toda la documentación en un sitio navegable: una página por cada causa, requisito, regla, historia, criterio, caso de uso, pantalla, decisión y prueba. Cada una muestra con qué se relaciona, dónde está en el código, cómo se probó y en qué diagramas aparece; cada código es un enlace.
+**[aryannext.github.io/puntada](https://aryannext.github.io/puntada/)** reúne toda la documentación en un sitio navegable: una página por cada causa, requisito, regla, historia, criterio, caso de uso, pantalla, decisión y prueba. Cada una muestra con qué se relaciona, dónde está en el código, cómo se probó y en qué diagramas aparece; cada código es un enlace.
 
 Se genera desde `docs/` y el código, sin editarlo a mano. CI lo publica con cada cambio en `main` y deja una copia que abre sin internet (el artefacto «portal» del flujo). Para verlo en local:
 

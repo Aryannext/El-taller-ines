@@ -1,4 +1,4 @@
-// Trabajador de servicio de El-taller-ines (ADR-006, RNF-35).
+// Trabajador de servicio de Puntada (ADR-006, RNF-35).
 // Solo guarda lo que no cambia y no tiene datos del taller: los estilos, el guion, las fuentes, los íconos y la página sin conexión.
 // Nunca guarda páginas ni fotos: un celular perdido y sin conexión no debe mostrar información de clientes (RNF-25).
 const CACHE = 'taller-v1';

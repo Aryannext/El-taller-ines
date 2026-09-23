@@ -14,8 +14,8 @@ class AppInstalableTest extends TestCase
     {
         $manifiesto = json_decode((string) file_get_contents(public_path('manifest.webmanifest')), true, flags: JSON_THROW_ON_ERROR);
 
-        $this->assertSame('El-taller-ines', $manifiesto['name']);
-        $this->assertSame('Taller', $manifiesto['short_name']);
+        $this->assertSame('Puntada', $manifiesto['name']);
+        $this->assertSame('Puntada', $manifiesto['short_name']);
         $this->assertSame(['es-CO', 'standalone', 'portrait'], [$manifiesto['lang'], $manifiesto['display'], $manifiesto['orientation']]);
         // Relativos al manifiesto: el sistema vive en /taller del portafolio (HT-04)
         $this->assertSame(['./', './'], [$manifiesto['start_url'], $manifiesto['scope']]);

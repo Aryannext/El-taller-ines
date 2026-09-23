@@ -1,10 +1,10 @@
-# Technical and installation manual · El-taller-ines
+# Technical and installation manual · Puntada
 
 **Deliverable:** DOC-23 · **System version:** `main` as of September 22, 2026 · [Versión en español](manual-tecnico.md)
 
 For whoever installs, maintains or operates the system: a developer installing it on their machine, or whoever runs the server. The shop owner has her own [user manual](user-manual.md).
 
-This manual says **how** to do each task. The **why** behind each decision is in the [technical specification](../04-especificacion-tecnica/README.md) and the [architecture decisions](../03-diseno/adr/), both in Spanish. Everything can be browsed, with every code linked, in the **[project portal](https://aryannext.github.io/El-taller-ines/)**.
+This manual says **how** to do each task. The **why** behind each decision is in the [technical specification](../04-especificacion-tecnica/README.md) and the [architecture decisions](../03-diseno/adr/), both in Spanish. Everything can be browsed, with every code linked, in the **[project portal](https://aryannext.github.io/puntada/)**.
 
 The code, the screens and the documentation are in Spanish. File, class and command names are given as they are.
 
@@ -72,8 +72,8 @@ mysql --version
 **1. Get the code.** On Windows, into a folder with a short path, such as `C:\proyectos`: some project files have long names and, inside a deep folder, Git fails with «Filename too long» because Windows limits paths to 260 characters.
 
 ```sh
-git clone https://github.com/Aryannext/El-taller-ines.git el-taller-ines
-cd el-taller-ines/sistema
+git clone https://github.com/Aryannext/puntada.git puntada
+cd puntada/sistema
 ```
 
 **2. Install the PHP dependencies.** The first time it downloads everything and it is the longest step: about 12 minutes in this manual's trial run. After that, Composer uses its cache.
@@ -189,8 +189,8 @@ Every command runs as the `cristian` user in `/home/cristian/proyectos/proyectos
 
 ```sh
 cd /home/cristian/proyectos/proyectosena.online
-git clone https://github.com/Aryannext/El-taller-ines.git el-taller-ines
-cd el-taller-ines
+git clone https://github.com/Aryannext/puntada.git puntada
+cd puntada
 ```
 
 **2. Bring the system up.** It creates `despliegue/.env` with the key and passwords generated on the server (nobody types or sees them), builds the image, starts the containers and waits until it answers.

@@ -369,7 +369,7 @@ def publicar(historias, elementos, hitos, rehacer_cuerpos: bool = False) -> None
 
 # --- Tablero de GitHub Projects -----------------------------------------------------------
 
-PROYECTO = "El-taller-ines · Scrum"
+PROYECTO = "Puntada · Scrum"
 INICIO_DEL_PROYECTO = date(2026, 9, 13)  # plan-de-sprints.md
 # (columna, color, descripción, opción por defecto de GitHub que reemplaza conservando su id)
 COLUMNAS = [
@@ -385,7 +385,7 @@ VISTAS = [  # (nombre, disposición, filtro)
     ("Todo el proyecto", "BOARD_LAYOUT", ""),
 ]
 CAMPOS_VISIBLES = ["Title", "Status", "Sprint", "Prioridad", "Puntos", "Orden", "Labels"]
-README_TABLERO = """Tablero Scrum del proyecto formativo SENA ADSO **El-taller-ines**.
+README_TABLERO = """Tablero Scrum del proyecto formativo SENA ADSO **Puntada**.
 
 - **Backlog:** el orden de las filas es el del [product backlog](https://github.com/{repo}/blob/main/docs/00-scrum/product-backlog.md).
 - **Sprint actual:** el tablero de la semana. Máximo una tarjeta en *En curso*.

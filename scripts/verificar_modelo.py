@@ -40,7 +40,7 @@ CONSULTAS = CARPETA / "consultas-de-referencia.sql"
 DICCIONARIO = CARPETA / "diccionario-de-datos.md"
 LEEME = CARPETA / "README.md"
 REGLAS = RAIZ / "docs" / "02-requisitos" / "reglas-de-negocio.md"
-BASE = "el_taller_ines"
+BASE = "puntada"
 
 # Cada prueba se ejecuta en una transacción que se revierte. «fallar»: la última sentencia debe ser rechazada.
 PRUEBAS = [

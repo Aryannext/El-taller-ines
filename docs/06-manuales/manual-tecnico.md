@@ -1,10 +1,10 @@
-# Manual técnico y de instalación · El-taller-ines
+# Manual técnico y de instalación · Puntada
 
 **Entregable:** DOC-23 · **Versión del sistema:** la de `main` el 22 de septiembre de 2026 · [English version](technical-manual.md)
 
 Para quien instala, mantiene u opera el sistema: un desarrollador que lo instala en su máquina, o quien administra el servidor. La dueña del taller tiene su propio [manual de usuario](manual-de-usuario.md).
 
-Este manual dice **cómo hacer** cada tarea. El **por qué** de cada decisión está en la [especificación técnica](../04-especificacion-tecnica/README.md) y en las [decisiones de arquitectura](../03-diseno/adr/). Todo se puede recorrer, con los códigos enlazados, en el **[portal del proyecto](https://aryannext.github.io/El-taller-ines/)**.
+Este manual dice **cómo hacer** cada tarea. El **por qué** de cada decisión está en la [especificación técnica](../04-especificacion-tecnica/README.md) y en las [decisiones de arquitectura](../03-diseno/adr/). Todo se puede recorrer, con los códigos enlazados, en el **[portal del proyecto](https://aryannext.github.io/puntada/)**.
 
 ## Contenido
 
@@ -70,8 +70,8 @@ mysql --version
 **1. Traer el código.** En Windows, en una carpeta de ruta corta, como `C:\proyectos`: algunos archivos del proyecto tienen nombres largos y, dentro de una carpeta profunda, Git falla con «Filename too long» porque Windows limita las rutas a 260 caracteres.
 
 ```sh
-git clone https://github.com/Aryannext/El-taller-ines.git el-taller-ines
-cd el-taller-ines/sistema
+git clone https://github.com/Aryannext/puntada.git puntada
+cd puntada/sistema
 ```
 
 **2. Instalar las dependencias de PHP.** La primera vez descarga todo y es el paso más largo: unos 12 minutos en el ensayo de este manual. Las siguientes, Composer usa su caché.
@@ -187,8 +187,8 @@ Todos los comandos se ejecutan como el usuario `cristian`, en `/home/cristian/pr
 
 ```sh
 cd /home/cristian/proyectos/proyectosena.online
-git clone https://github.com/Aryannext/El-taller-ines.git el-taller-ines
-cd el-taller-ines
+git clone https://github.com/Aryannext/puntada.git puntada
+cd puntada
 ```
 
 **2. Levantar el sistema.** Crea `despliegue/.env` con la llave y las contraseñas generadas en el servidor (nadie las escribe ni las ve), construye la imagen, levanta los contenedores y espera a que responda.

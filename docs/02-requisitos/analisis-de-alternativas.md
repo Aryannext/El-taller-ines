@@ -74,7 +74,7 @@ Se justifica construir el sistema. No porque falten soluciones en el mercado, si
 
 Revisarlas no solo justifica el proyecto: confirma decisiones y deja ideas.
 
-| Idea observada | Dónde | Cómo se usa en El-taller-ines |
+| Idea observada | Dónde | Cómo se usa en Puntada |
 | --- | --- | --- |
 | Estados recibido, en proceso, listo y entregado | TailorMate, Orderry | Confirma los estados de prenda de RN-12 |
 | Número o folio visible de la orden | tailorbird, GTG Arreglos | Confirma RN-08 y HU-08; sin impresora, el número se escribe a mano en la bolsa |

@@ -3,7 +3,7 @@
 # Corre donde se quiera recuperar la información, no en el VPS: el peor caso es que el VPS ya no exista.
 #
 # Uso: sh restaurar.sh CARPETA_DEL_RESPALDO BASE CARPETA_STORAGE
-#   sh restaurar.sh ~/Descargas/2026-10-05 taller_restaurada ~/el-taller-ines/sistema/storage
+#   sh restaurar.sh ~/Descargas/2026-10-05 taller_restaurada ~/puntada/sistema/storage
 #
 # La contraseña no se pasa por argumento, para que no quede en el historial del shell:
 #   read -r clave; MYSQL_PWD=$clave; export MYSQL_PWD

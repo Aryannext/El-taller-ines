@@ -1,6 +1,6 @@
 # Sistema
 
-Aplicación Laravel de El-taller-ines. Antes de cambiar el código, lee:
+Aplicación Laravel de Puntada. Antes de cambiar el código, lee:
 
 - [Arquitectura](../docs/03-diseno/arquitectura/README.md): en qué clase vive cada regla.
 - [Especificación técnica](../docs/04-especificacion-tecnica/README.md): rutas, validaciones, mensajes, seguridad y despliegue.

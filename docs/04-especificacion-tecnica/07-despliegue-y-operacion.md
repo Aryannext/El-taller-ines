@@ -23,7 +23,7 @@ HT-04 confirmó el servidor: un VPS de Hostinger con Ubuntu 24.04, **compartido*
 
 | Variable | Desarrollo | Producción | Para qué |
 | --- | --- | --- | --- |
-| `APP_NAME` | `El-taller-ines` | `El-taller-ines` | Nombre en los títulos |
+| `APP_NAME` | `Puntada` | `Puntada` | Nombre en los títulos |
 | `APP_ENV` | `local` | `production` | Entorno |
 | `APP_KEY` | Generada con `php artisan key:generate` | Propia del servidor | Cifra la sesión |
 | `APP_DEBUG` | `true` | `false` | Detalles de los errores; nunca en producción (RNF-23) |
@@ -183,7 +183,7 @@ El usuario `cristian`, desde la carpeta del clon:
 
 | Paso | Comando | Qué hace |
 | --- | --- | --- |
-| 1 | `git clone https://github.com/Aryannext/El-taller-ines.git el-taller-ines` | Trae el código |
+| 1 | `git clone https://github.com/Aryannext/puntada.git puntada` | Trae el código |
 | 2 | `sh despliegue/instalar.sh` | Crea `despliegue/.env` con la llave y las contraseñas generadas ahí mismo, construye la imagen, levanta los contenedores y espera a que `/up` responda |
 | 3 | `sh despliegue/crear-usuaria.sh` | Crea el negocio inicial y la usuaria; la contraseña la escribe la dueña o el aprendiz, sin que se muestre |
 | 4 | Agregar la línea `include` al sitio del portafolio, `sudo nginx -t` y `sudo systemctl reload nginx` | Publica `/taller` |
@@ -228,7 +228,7 @@ Implementa ADR-006 y RNF-35.
 
 | Campo | Valor |
 | --- | --- |
-| `name` | El-taller-ines |
+| `name` | Puntada |
 | `short_name` | Taller |
 | `lang` | `es-CO` |
 | `start_url` | `./` |

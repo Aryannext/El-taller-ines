@@ -164,4 +164,4 @@ Del [plan de pruebas](plan-de-pruebas.md#para-entregar):
 - **Registros de cada prueba manual:** en [pruebas-manuales/](pruebas-manuales/), al final de cada protocolo.
 - **Casos de prueba** de cada criterio y regla, con el nombre de su prueba: en [casos-de-prueba/](casos-de-prueba/).
 - **Corridas automáticas:** en GitHub Actions, una por envío.
-- **Trazabilidad completa:** el [portal del proyecto](https://aryannext.github.io/El-taller-ines/) enlaza cada criterio con su prueba y con el código que lo cumple.
+- **Trazabilidad completa:** el [portal del proyecto](https://aryannext.github.io/puntada/) enlaza cada criterio con su prueba y con el código que lo cumple.

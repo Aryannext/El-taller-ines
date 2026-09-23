@@ -1,4 +1,4 @@
-# User manual · El-taller-ines
+# User manual · Puntada
 
 **Deliverable:** DOC-22 · **System version:** deployed on September 22, 2026 · **APK:** 1.0.0 · [Versión en español](manual-de-usuario.md)
 

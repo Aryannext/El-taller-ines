@@ -1,4 +1,4 @@
-# El-taller-ines en el VPS compartido (docs/04-especificacion-tecnica/07-despliegue-y-operacion.md).
+# Puntada en el VPS compartido (docs/04-especificacion-tecnica/07-despliegue-y-operacion.md).
 # Se usa desde esta carpeta. Los secretos están en despliegue/.env, que no se versiona (RNF-24).
 name: taller
 
@@ -7,7 +7,7 @@ services:
     build:
       context: ..
       dockerfile: despliegue/Dockerfile
-    image: el-taller-ines:actual
+    image: puntada:actual
     restart: unless-stopped
     env_file: .env
     environment:
@@ -29,7 +29,7 @@ services:
 
   # Trabajador de la cola de avisos: si se detiene o termina su hora (--max-time), Docker lo vuelve a iniciar (HT-04, RNF-17)
   cola:
-    image: el-taller-ines:actual
+    image: puntada:actual
     pull_policy: never
     restart: always
     env_file: .env
@@ -46,7 +46,7 @@ services:
   # Las tareas de la aplicación (HT-05). Los respaldos no corren aquí sino en el cron del host:
   # mysqldump vive dentro de db y alcanzarlo desde un contenedor exigiría montarle el socket de Docker.
   programador:
-    image: el-taller-ines:actual
+    image: puntada:actual
     pull_policy: never
     restart: unless-stopped
     env_file: .env

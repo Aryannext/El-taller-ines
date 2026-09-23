@@ -169,7 +169,7 @@ Si te pregunta algo que no sabes, no improvises. Anótalo en el acta como pendie
 
 ### Correo de confirmación
 
-> Asunto: Resumen de la validación del Sprint 1 · El-taller-ines
+> Asunto: Resumen de la validación del Sprint 1 · Puntada
 >
 > Instructor Oscar, gracias por la reunión de hoy. Le resumo lo acordado para confirmar que quedó bien registrado:
 >
