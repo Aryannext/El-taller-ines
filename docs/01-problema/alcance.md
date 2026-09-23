@@ -46,6 +46,8 @@ Lo que no cumple alguna de las dos queda fuera con su motivo, aunque estuviera e
 | **Conexión con Nequi u otras pasarelas de pago** | Los pagos por Nequi llegan a la cuenta personal de la dueña, no a una cuenta de negocio; el sistema solo registra el método del pago (RN-25) | F-05 |
 | **Gestión de precios por tipo de arreglo** | Queda como observación por analizar ("cobra muy barato"); fijar precios es decisión del negocio | F-05 |
 | **Varias usuarias con roles** | El taller lo atiende una persona | F-01 |
+| **Entrar con Google y registro abierto** | Se propuso el 23 de septiembre de 2026, con el desarrollo ya cerrado. El botón de Google es pequeño, pero lo que la idea busca —que cualquier taller se una solo— es multi-negocio con registro propio, que ya estaba fuera del alcance ([ADR-002](../03-diseno/adr/ADR-002-un-taller-preparado-para-varios.md)): después del botón falta crearle el negocio a quien entra, sembrarle sus catálogos y probar que no ve los datos de nadie más. Pasa a la fase siguiente | Aprendiz, 23 sep |
+| **Ayuda interactiva dentro de la app** | Se propuso el mismo día: un signo de pregunta en cada pantalla y un recorrido de bienvenida. No se descarta por tamaño sino por orden: se construye después de [PM-01](../05-pruebas/pruebas-manuales/PM-01-usabilidad.md), que mide si el sistema se entiende **sin** ayuda. Agregarla antes dejaría esa prueba sin nada que medir | Aprendiz, 23 sep |
 
 ## Supuestos
 

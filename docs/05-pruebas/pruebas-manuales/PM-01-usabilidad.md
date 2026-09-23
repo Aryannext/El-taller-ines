@@ -15,10 +15,12 @@ Comprobar que alguien que no conoce el sistema registra una orden de 3 prendas e
 
 ## Preparación
 
-1. Cargar los datos de los mockups en el sistema. La cliente Marta Rincón debe estar registrada.
+1. Cargar los datos de los mockups en el sistema. La cliente Marta Rincón debe estar registrada. **Ya está**, desde el 23 de septiembre de 2026, con el celular `300 000 0000`: un número sin asignar, para que ningún aviso de prueba le llegue a un desconocido.
 2. Usar un celular con la sesión ya iniciada. Si es el celular del participante, anotar su modelo.
 3. Imprimir o escribir en papel la tarjeta de la tarea.
 4. Pedir el consentimiento del participante: no se graba su rostro y en el registro va solo con sus iniciales (RNF-26).
+
+**Antes de que llegue el participante:** abrir el sistema en el celular, iniciar sesión y dejarlo en la pantalla **Hoy**. Tener a mano el reloj del celular o un cronómetro.
 
 **Tarjeta de la tarea:**
 

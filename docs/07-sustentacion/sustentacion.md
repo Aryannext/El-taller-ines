@@ -187,11 +187,14 @@ Cada una trae **qué se muestra**, **qué se dice** (no de memoria: la idea) y *
 
 ### 14 · Lo que sigue
 
-**Se muestra:** tres pasos.
+**Se muestra:** cuatro pasos.
 
 1. **Implantación:** la dueña usa el sistema con sus clientes reales, con acompañamiento la primera semana.
 2. **Medir el impacto:** los indicadores no se pueden medir en 30 días; se miden después, con el sistema en uso.
-3. **Sostenerlo:** el sistema es gratuito para la usuaria. El plan de negocio resuelve cómo se cubren el servidor y el costo por mensaje de la API oficial.
+3. **Abrir el registro:** que cualquier taller se una entrando con Google, sin que nadie tenga que crear cuentas a mano. Los datos ya están preparados para varios negocios (ADR-002) y el aislamiento ya está probado; lo que falta es la puerta de entrada.
+4. **Sostenerlo:** el sistema es gratuito para la usuaria. El plan de negocio resuelve cómo se cubren el servidor y el costo por mensaje de la API oficial.
+
+> **Si preguntan por qué el registro con Google no se hizo ya:** porque el botón es la parte fácil. Después del botón hay que crearle el negocio a quien entra, sembrarle sus tipos de prenda y sus métodos de pago, y probar que no ve los datos de nadie más. Es la historia más grande del proyecto, estaba declarada fuera del alcance desde el Sprint 1, y dejarla a medias habría sido peor que no hacerla. La misma respuesta sirve para la **ayuda interactiva dentro de la app**: se construye después de PM-01, que es justamente la prueba que mide si el sistema se entiende **sin** ayuda.
 
 ### 15 · Cierre
 
