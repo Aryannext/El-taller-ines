@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PM-01 · Hoja de observación</title>
+<!--
+  La hoja para llevar a la prueba de usabilidad: se imprime en una página.
+  A la izquierda, lo que hace el observador; a la derecha, la tarjeta que se recorta y se entrega.
+  Abajo, la tabla que se llena mientras se observa. El protocolo completo está en PM-01-usabilidad.md.
+-->
+<style>
+  @page { size: A4 portrait; margin: 10mm; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 10mm;
+    font: 12pt/1.4 "Atkinson Hyperlegible Next", system-ui, "Segoe UI", Roboto, sans-serif;
+    color: #161b2e; background: #fff;
+  }
+  h1 { font-size: 18pt; margin: 0 0 1mm; }
+  h2 { font-size: 12pt; margin: 0 0 1.5mm; text-transform: uppercase; letter-spacing: .06em; color: #2a44a8; }
+  .encabezado { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid #2a44a8; padding-bottom: 2mm; margin-bottom: 3mm; }
+  .encabezado .que { font-size: 10.5pt; color: #4b5470; }
+  .datos { display: flex; gap: 6mm; font-size: 10.5pt; margin-bottom: 3mm; }
+  .datos span { flex: 1; border-bottom: 1px solid #aeb5c7; padding-bottom: 1mm; }
+
+  .dos { display: flex; gap: 5mm; align-items: flex-start; }
+  .col { flex: 1; }
+
+  ol.pasos { margin: 0; padding-left: 5mm; }
+  ol.pasos li { margin-bottom: 1.6mm; }
+  ol.pasos b { color: #161b2e; }
+  .callado { background: #fdf3d3; border-left: 3px solid #f2c23d; padding: 3mm 3.5mm; margin: 3mm 0; font-size: 11pt; }
+
+  .tarjeta {
+    border: 1.5px dashed #4b5470; border-radius: 3mm; padding: 4mm;
+  }
+  .tarjeta h3 { margin: 0 0 2mm; font-size: 14pt; }
+  .tarjeta ul { margin: 0 0 2mm; padding-left: 5mm; font-size: 12.5pt; }
+  .tarjeta li { margin-bottom: 1mm; }
+  .tijera { font-size: 9.5pt; color: #4b5470; margin-bottom: 1mm; }
+
+  table { width: 100%; border-collapse: collapse; margin-top: 5mm; font-size: 10pt; }
+  th, td { border: 1px solid #aeb5c7; padding: 2mm 1.5mm; text-align: left; vertical-align: top; }
+  th { background: #e8ecf9; font-size: 8.5pt; text-transform: uppercase; letter-spacing: .04em; }
+  td { height: 19mm; }
+  td.fila { background: #f8f9fc; font-weight: 700; width: 8mm; text-align: center; }
+
+  .pie { margin-top: 4mm; display: flex; gap: 4mm; font-size: 10pt; }
+  .pie div { flex: 1; border: 1px solid #aeb5c7; border-radius: 2mm; padding: 2.5mm 3mm; }
+  .pie b { display: block; color: #2a44a8; font-size: 9pt; text-transform: uppercase; letter-spacing: .05em; }
+  .perfil { background: #e2f3e9; border-color: #16703f !important; }
+</style>
+</head>
+<body>
+
+<div class="encabezado">
+  <div>
+    <h1>PM-01 · Prueba de usabilidad</h1>
+    <span class="que">Comprobar que alguien que no conoce el sistema registra una orden de 3 prendas en 2 minutos o menos (RNF-12)</span>
+  </div>
+</div>
+
+<div class="datos">
+  <span>Fecha: ____________________</span>
+  <span>Observador: ____________________</span>
+  <span>Versión del sistema: ____________________</span>
+</div>
+
+<div class="dos">
+  <div class="col">
+    <h2>Lo que haces con cada persona</h2>
+    <ol class="pasos">
+      <li><b>Le muestras la app, 5 minutos.</b> Con otra clienta y una sola prenda. No uses los datos de la tarjeta.</li>
+      <li><b>Le entregas la tarjeta y el celular</b>, abierto en la pantalla Hoy.</li>
+      <li><b>Arrancas el cronómetro</b> cuando diga que está lista.</li>
+      <li><b>Paras el cronómetro</b> cuando aparezca el número de la orden en la pantalla.</li>
+      <li>Si a los <b>5 minutos</b> no ha terminado, paras y anotas «no terminó».</li>
+      <li><b>Revisas la orden</b>: 3 prendas, precios y fecha. Si algo quedó mal, se anota, aunque haya sido rápida.</li>
+      <li><b>Dos preguntas</b>, y escribes la respuesta tal como la diga.</li>
+    </ol>
+    <p class="callado"><b>Mientras corre el cronómetro no respondes nada.</b> Si pide ayuda, haces una raya en «Ayudas» y el reloj sigue. Es incómodo, pero si le ayudas la prueba no mide nada.</p>
+  </div>
+
+  <div class="col">
+    <p class="tijera">✂ Recorta y entrega esto</p>
+    <div class="tarjeta">
+      <h3>Marta Rincón llegó al taller</h3>
+      <p>Registra su orden con entrega <b>dentro de 4 días</b>:</p>
+      <ul>
+        <li>Pantalón · subir basta 3 cm · $15.000</li>
+        <li>Camisa · entallar · $8.000</li>
+        <li>Camisa · entallar · $8.000</li>
+      </ul>
+      <p>No hace falta tomar fotos.</p>
+    </div>
+    <p class="tijera" style="margin-top:2mm">Marta ya está registrada en el sistema: no hay que crearla.</p>
+  </div>
+</div>
+
+<table>
+  <tr>
+    <th></th>
+    <th style="width:16mm">Iniciales</th>
+    <th style="width:20mm">Celular que usó</th>
+    <th style="width:14mm">Tiempo</th>
+    <th style="width:14mm">¿Terminó?</th>
+    <th style="width:16mm">Orden correcta</th>
+    <th style="width:12mm">Ayudas</th>
+    <th>Lo más difícil</th>
+    <th>Qué cambiaría</th>
+  </tr>
+  <tr><td class="fila">P1</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td class="fila">P2</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td class="fila">P3</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td class="fila">P4</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+</table>
+
+<div class="pie">
+  <div>
+    <b>Pasa si</b>
+    2 de los 3 compañeros registran la orden completa y correcta en 2 minutos o menos. Todo lo que veas que costó trabajo se anota, aunque pase.
+  </div>
+  <div class="perfil">
+    <b>P4 · la participante del perfil real</b>
+    Una señora con un negocio pequeño, que usa el celular para lo suyo. Su tiempo <b>no cuenta</b> para el criterio: lo que cuenta es dónde se traba y qué dice. Eso es lo que va a resolver el recorrido de bienvenida de la app.
+  </div>
+</div>
+
+<div class="datos" style="margin-top:3mm">
+  <span>Resultado: ____________________</span>
+  <span>Consentimiento pedido a los 4 (solo iniciales, sin fotos): ☐</span>
+</div>
+
+</body>
+</html>

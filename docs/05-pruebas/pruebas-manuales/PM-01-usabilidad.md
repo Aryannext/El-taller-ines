@@ -9,9 +9,12 @@ Comprobar que alguien que no conoce el sistema registra una orden de 3 prendas e
 ## Participantes
 
 - **3 compañeros de formación** que no hayan visto el sistema ni sus mockups.
+- **Una cuarta participante del perfil real** (P4): una mujer mayor con un negocio pequeño, de las que usan el celular para lo suyo y no para trabajar. **Su tiempo no cuenta para el criterio de aprobación**, porque el criterio se fijó para los compañeros; lo que cuenta de ella es *dónde se traba y qué dice*, que es lo que define la ayuda y el recorrido de bienvenida de la app.
 - **Observador:** el aprendiz. Cronometra y anota; no ayuda.
 
-> **Limitación declarada.** Los compañeros de ADSO usan tecnología más que la mayoría de las dueñas de taller. Un buen resultado aquí no garantiza el mismo resultado con la dueña, que no está disponible durante el proyecto (F-04).
+**La hoja para llevar impresa está en [PM-01-hoja.html](PM-01-hoja.html):** una página con los pasos, la tarjeta recortable y la tabla para llenar a mano.
+
+> **Limitación declarada.** Los compañeros de ADSO usan tecnología más que la mayoría de las dueñas de taller. Un buen resultado aquí no garantiza el mismo resultado con la dueña, que no está disponible durante el proyecto (F-04). **Por eso se agregó P4 el 23 de septiembre de 2026:** no para cumplir el criterio, sino para ver el sistema en las manos de alguien del perfil de la usuaria. Sigue sin ser la dueña, y así queda dicho.
 
 ## Preparación
 
@@ -60,5 +63,6 @@ Cada dificultad observada se anota como defecto o mejora, aunque la prueba se ap
 | P1 | | | | | | | |
 | P2 | | | | | | | |
 | P3 | | | | | | | |
+| P4 · perfil real | | | | | | | |
 
 **Resultado:** · **Hallazgos convertidos en issues:**
