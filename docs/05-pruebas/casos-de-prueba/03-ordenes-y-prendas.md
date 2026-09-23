@@ -4,7 +4,7 @@
 
 Cada criterio de aceptación es un caso de prueba con su mismo código. La clase de prueba de cada historia es la del caso de uso que la implementa; cuando un criterio usa otra, aparece junto al método. Las rutas son relativas a `sistema/tests/`.
 
-**Resumen:** 10 historias · 32 casos · 31 automáticos · 1 automáticos y manuales · 0 manuales.
+**Resumen:** 10 historias · 33 casos · 32 automáticos · 1 automáticos y manuales · 0 manuales.
 
 ## HU-07 · Registrar una orden con sus prendas
 
@@ -99,7 +99,7 @@ Cada criterio de aceptación es un caso de prueba con su mismo código. La clase
 | **CA-15.2** Buscar por número | Dado que existe la #0042, cuando busco "42" o "#0042" | se abre la orden #0042 | Funcionalidad | Automática | `test_ca_15_2_buscar_por_numero` |
 | **CA-15.3** Número inexistente | Dado que no existe la orden #9999, cuando busco "#9999" | veo que no hay una orden con ese número | Funcionalidad | Automática | `test_ca_15_3_numero_inexistente` |
 
-## HU-16 · Renombrar o desactivar tipos de prenda
+## HU-16 · Agregar, renombrar o desactivar tipos de prenda
 
 **Prioridad:** Could · **Reglas:** RN-01, RN-10, RN-43 · **Calidad:** — · **Clase de prueba:** `Feature/Configuracion/GestionarTiposDePrendaTest.php`
 
@@ -107,3 +107,4 @@ Cada criterio de aceptación es un caso de prueba con su mismo código. La clase
 | --- | --- | --- | --- | --- | --- |
 | **CA-16.1** Renombrar | Dado que el tipo "Overol" tiene 2 prendas, cuando lo renombro como "Enterizo" | las dos prendas muestran Enterizo | Funcionalidad | Automática | `test_ca_16_1_renombrar` |
 | **CA-16.2** Desactivar | Dado que el tipo "Chaqueta" tiene prendas registradas, cuando lo desactivo | ya no aparece al registrar prendas nuevas y las prendas que ya eran chaqueta lo conservan | Funcionalidad | Automática | `test_ca_16_2_desactivar` |
+| **CA-16.3** Agregar | Dado que arreglo overoles y ese tipo no está en mi lista, cuando lo agrego desde Ajustes | aparece al registrar una prenda nueva, y si escribo un nombre que ya existe el sistema me lo dice | Funcionalidad | Automática | `test_ca_16_3_agregar` |

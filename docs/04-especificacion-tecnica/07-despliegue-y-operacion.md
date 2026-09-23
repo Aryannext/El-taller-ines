@@ -55,7 +55,7 @@ HT-04 confirmó el servidor: un VPS de Hostinger con Ubuntu 24.04, **compartido*
 | `WHATSAPP_TOKEN` | Vacía para probar el envío asistido, o el token de prueba | Secreta | Token de la API de Meta |
 | `WHATSAPP_ID_NUMERO` | El del número de prueba | El del número del negocio | Identificador del número que envía |
 | `WHATSAPP_VERSION_API` | La vigente al hacer HT-01 | La misma | Versión de la API de Meta en la dirección |
-| `WHATSAPP_PLANTILLA` | `orden_lista` | `orden_lista` | Nombre de la plantilla |
+| `WHATSAPP_PLANTILLA` | `orden_lista_v2` | `orden_lista_v2` | Nombre de la plantilla. La v2 lleva el nombre del taller y está pendiente de aprobación de Meta (05) |
 | `WHATSAPP_IDIOMA` | `es` | `es` | Idioma de la plantilla |
 | `EVOLUTION_URL` | Vacía | `http://evolution:8080` | Dirección de Evolution API dentro de Docker (ADR-007) |
 | `EVOLUTION_API_KEY` | Vacía | Secreta, generada por `completar-env.sh` | Clave de Evolution API |

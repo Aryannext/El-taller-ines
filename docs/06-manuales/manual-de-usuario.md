@@ -90,6 +90,13 @@ En iPhone el sistema funciona desde Safari, pero no está probado para instalars
 
 **Cambiar la contraseña:** en **Ajustes**, escribe la **Contraseña actual**, la **Nueva contraseña** (al menos 8 caracteres) y repítela. Toca **Cambiar contraseña**.
 
+**Ponerle a tu taller su nombre, y el tuyo:** en **Ajustes**, la primera sección es **Mi taller**.
+
+- El **nombre del taller** es con el que te presentas: aparece en la pantalla Hoy y, sobre todo, **es el que leen tus clientes** en el aviso de WhatsApp. Si pones «Modistería Inés», el mensaje dirá «le escribimos de Modistería Inés».
+- **Tu nombre** es con el que te saluda el sistema. Según la hora te dirá «Buenos días», «Buenas tardes» o «Buenas noches».
+
+**Agregar un tipo de prenda:** en **Ajustes → Tipos de prenda**, abajo de la lista, escribe el tipo y toca **Agregar**. También puedes renombrar uno o dejar de usarlo. Y si estás registrando una prenda y el tipo no está, escribe «Otro» y el nombre: queda agregado solo.
+
 <br clear="right">
 
 ## 4. La pantalla Hoy

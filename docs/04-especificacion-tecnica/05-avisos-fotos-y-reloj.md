@@ -32,22 +32,26 @@ Estas son las tres partes del sistema que hablan con algo externo, a través de 
 
 | Campo | Valor |
 | --- | --- |
-| **Nombre** | `orden_lista` |
+| **Nombre** | `orden_lista_v2` |
 | **Categoría** | Utilidad: informa sobre una orden del cliente, no es publicidad |
 | **Idioma** | `es` |
-| **Cuerpo** | `Hola {{1}}, tu orden {{2}} del taller está lista para recoger. Prendas listas: {{3}}. Saldo pendiente: {{4}}. Te esperamos.` |
-| **Ejemplo que se envía a Meta** | Marta · #0042 · 3 · $21.000 |
+| **Cuerpo** | `Hola {{1}}, le escribimos de {{2}}. Su orden {{3}} ya está lista 🧵 {{4}} La esperamos cuando pueda pasar.` |
+| **Ejemplo que se envía a Meta** | Marta · Modistería Inés · #0042 · Son 3 prendas, con un saldo de $21.000. |
 
 | Variable | Valor | Sale de |
 | --- | --- | --- |
 | `{{1}}` | Primer nombre del cliente | La primera palabra del nombre registrado |
-| `{{2}}` | Número de la orden | `NumeroDeOrden::formato()` |
-| `{{3}}` | Cantidad de prendas Terminadas | Las prendas de la orden al momento del envío |
-| `{{4}}` | Saldo pendiente | `Dinero::formato()`, al momento del envío (RN-42) |
+| `{{2}}` | Nombre del taller | `negocios.nombre`, que la dueña escribe en Ajustes (HU-38) |
+| `{{3}}` | Número de la orden | `NumeroDeOrden::formato()` |
+| `{{4}}` | Las prendas y el dinero | «Son 3 prendas, con un saldo de $21.000.» o, si está pagada, «Son 3 prendas y ya está pagada: solo pasar a recogerla.» (RN-46) |
 
 `MensajeDeAviso::parametros()` devuelve los cuatro valores en ese orden, y `texto()` devuelve el mismo mensaje ya completo, que es el que se usa en el envío asistido.
 
-**Diferencia con el mockup PT-19:** el mockup dice «3 prendas». La plantilla dice «Prendas listas: 3» para no escribir «1 prendas» cuando hay una sola. El mockup ya advertía que el texto final dependía de la plantilla que aprobara Meta.
+**Por qué la frase del dinero va entera en `{{4}}`.** Una plantilla aprobada no cambia de texto según el caso, y RN-46 pide decir cosas distintas cuando hay saldo y cuando no. Meterla en una variable es la única forma de cumplir la regla con una sola plantilla.
+
+**Diferencia con el mockup PT-19:** el mockup dice «3 prendas» y tutea al cliente. El texto actual es el de RN-46, decidido el 23 de septiembre de 2026 al revisar el sistema pensando en la dueña: trata de usted, dice de qué taller le escriben y no escribe «$0» cuando la orden está pagada. El mockup ya advertía que el texto final dependía de la plantilla que aprobara Meta.
+
+> **Pendiente del canal automático.** La plantilla `orden_lista` aprobada en HT-01 tiene el texto anterior y cuatro variables distintas. **Hay que crear `orden_lista_v2` con este cuerpo y esperar su aprobación de Meta**; hasta entonces el canal automático no debe habilitarse en producción. El nombre cambia a propósito: si alguien activa la API oficial con la plantilla vieja, Meta rechaza el envío en vez de mandar un mensaje con las palabras cambiadas de lugar. El **envío asistido**, que es el que usa el taller hoy, no depende de Meta y ya manda el texto nuevo.
 
 ### Solicitud
 
@@ -114,7 +118,7 @@ Content-Type: application/json
 ```json
 {
   "number": "573104567890",
-  "text": "Hola Marta, tu orden #0042 del taller está lista para recoger. Prendas listas: 3. Saldo pendiente: $21.000. Te esperamos."
+  "text": "Hola Marta, le escribimos de Modistería Inés. Su orden #0042 ya está lista 🧵 Son 3 prendas, con un saldo de $21.000. La esperamos cuando pueda pasar."
 }
 ```
 

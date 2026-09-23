@@ -33,7 +33,7 @@ return [
         'token' => env('WHATSAPP_TOKEN'),
         'id_numero' => env('WHATSAPP_ID_NUMERO'),
         'version_api' => env('WHATSAPP_VERSION_API'),
-        'plantilla' => env('WHATSAPP_PLANTILLA', 'orden_lista'),
+        'plantilla' => env('WHATSAPP_PLANTILLA', 'orden_lista_v2'),
         'idioma' => env('WHATSAPP_IDIOMA', 'es'),
     ],
 

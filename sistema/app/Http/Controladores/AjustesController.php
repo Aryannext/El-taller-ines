@@ -5,6 +5,7 @@ namespace App\Http\Controladores;
 use App\Aplicacion\Configuracion\CambiarContrasena;
 use App\Aplicacion\Configuracion\CambiarPlazoSinReclamar;
 use App\Aplicacion\Configuracion\GestionarTiposDePrenda;
+use App\Aplicacion\Configuracion\PersonalizarTaller;
 use App\Http\Solicitudes\AjustesRequest;
 use App\Http\Solicitudes\ContrasenaRequest;
 use App\Modelos\TipoPrenda;
@@ -20,9 +21,35 @@ class AjustesController
     public function mostrar(Request $solicitud, GestionarTiposDePrenda $tiposDePrenda): View
     {
         return view('pantallas.pt-23-ajustes', [
+            'negocio' => $solicitud->user()->negocio->nombre,
+            'usuaria' => $solicitud->user()->nombre,
             'plazo' => $solicitud->user()->negocio->dias_sin_reclamar,
             'tipos' => $tiposDePrenda->todos(),
         ]);
+    }
+
+    /**
+     * HU-38 · El nombre del taller y el de la usuaria: los ve ella en el saludo y sus clientes en cada aviso.
+     */
+    public function personalizar(AjustesRequest $solicitud, PersonalizarTaller $personalizar): RedirectResponse
+    {
+        $personalizar->ejecutar(
+            $solicitud->user(),
+            $solicitud->validated('nombre_negocio'),
+            $solicitud->validated('nombre_usuaria'),
+        );
+
+        return redirect()->route('ajustes')->with('exito', 'Listo: así se llama tu taller ahora.');
+    }
+
+    /**
+     * HU-16 · Agregar un tipo de prenda sin tener que registrar una prenda con «Otro» (CA-16.3).
+     */
+    public function agregarTipo(AjustesRequest $solicitud, GestionarTiposDePrenda $tiposDePrenda): RedirectResponse
+    {
+        $tipo = $tiposDePrenda->agregar((int) $solicitud->user()->negocio_id, $solicitud->validated('nombre'));
+
+        return redirect()->route('ajustes')->with('exito', "«{$tipo->nombre}» ya aparece al registrar prendas.");
     }
 
     /**

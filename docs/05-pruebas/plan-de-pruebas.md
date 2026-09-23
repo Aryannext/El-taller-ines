@@ -33,23 +33,23 @@ Si una prueba necesita una situación que ningún documento describe, primero se
 
 | Qué se prueba | Casos | Automáticos | Automáticos y manuales | Manuales o por revisión |
 | --- | --- | --- | --- | --- |
-| [Criterios de aceptación](casos-de-prueba/) | 129 | 122 | 5 | 2 |
-| [Reglas de negocio](casos-de-prueba/09-reglas-de-negocio.md) | 45 | 45 | 0 | 0 |
+| [Criterios de aceptación](casos-de-prueba/) | 134 | 127 | 5 | 2 |
+| [Reglas de negocio](casos-de-prueba/09-reglas-de-negocio.md) | 47 | 47 | 0 | 0 |
 | [Requisitos no funcionales](#cómo-se-prueba-cada-requisito-no-funcional) | 35 | 19 | 3 | 13 |
 
-**Pruebas automáticas planeadas:** 172 métodos en 52 clases · **Escritas en `sistema/tests/`:** 166 de 172.
+**Pruebas automáticas planeadas:** 179 métodos en 54 clases · **Escritas en `sistema/tests/`:** 166 de 179.
 
 | Épica | Historias | Casos |
 | --- | --- | --- |
-| [EP-01 · Acceso](casos-de-prueba/01-acceso.md) | 3 | 13 |
+| [EP-01 · Acceso](casos-de-prueba/01-acceso.md) | 4 | 17 |
 | [EP-02 · Clientes](casos-de-prueba/02-clientes.md) | 4 | 14 |
-| [EP-03 · Órdenes y prendas](casos-de-prueba/03-ordenes-y-prendas.md) | 10 | 32 |
+| [EP-03 · Órdenes y prendas](casos-de-prueba/03-ordenes-y-prendas.md) | 10 | 33 |
 | [EP-04 · Identificación de prendas](casos-de-prueba/04-identificacion-de-prendas.md) | 3 | 10 |
 | [EP-05 · Estados y entrega](casos-de-prueba/05-estados-y-entrega.md) | 4 | 19 |
 | [EP-06 · Pagos](casos-de-prueba/06-pagos.md) | 5 | 17 |
 | [EP-07 · Avisos](casos-de-prueba/07-avisos.md) | 4 | 13 |
 | [EP-08 · Seguimiento](casos-de-prueba/08-seguimiento.md) | 4 | 11 |
-| [Reglas de negocio](casos-de-prueba/09-reglas-de-negocio.md) | — | 45 |
+| [Reglas de negocio](casos-de-prueba/09-reglas-de-negocio.md) | — | 47 |
 
 | Prueba manual | Verifica |
 | --- | --- |

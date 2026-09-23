@@ -57,7 +57,7 @@ class AvisosPorEnviar
     public function mensajeDe(Aviso $aviso): ?MensajeDeAviso
     {
         $orden = $aviso->orden;
-        $orden->loadMissing(['cliente', 'prendas', 'pagos']);
+        $orden->loadMissing(['cliente', 'negocio', 'prendas', 'pagos']);
         $estado = EstadoDeOrden::calcular($orden->prendas->map(fn (Prenda $prenda) => $prenda->estado), $orden->cancelada_en !== null);
 
         if ($estado !== EstadoDeOrden::ListaParaEntregar || $orden->lista_en?->getTimestamp() !== $aviso->ciclo_lista_en->getTimestamp()) {
@@ -69,6 +69,8 @@ class AvisosPorEnviar
 
         return MensajeDeAviso::construir(
             $orden->cliente->nombre,
+            // RN-46: el cliente sabe de qué taller le escriben
+            $orden->negocio->nombre,
             NumeroDeOrden::desde($orden->numero),
             $orden->prendas->filter(fn (Prenda $prenda) => $prenda->estado === EstadoDePrenda::Terminada)->count(),
             $valor->restar($pagado),
@@ -76,7 +78,7 @@ class AvisosPorEnviar
     }
 
     /** @var list<string> */
-    private const RELACIONES = ['orden.cliente', 'orden.prendas', 'orden.pagos'];
+    private const RELACIONES = ['orden.cliente', 'orden.negocio', 'orden.prendas', 'orden.pagos'];
 
     /**
      * @return Collection<int, Aviso>

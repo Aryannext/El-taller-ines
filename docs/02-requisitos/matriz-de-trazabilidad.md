@@ -14,7 +14,7 @@ La columna **Prueba** se completa en el Sprint 3, cuando cada criterio de acepta
 
 | Causas | Medios | Objetivos | Requisitos funcionales | Reglas | Historias | Criterios | Requisitos no funcionales |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 11 | 11 | 6 | 42 | 45 | 37 | 129 | 35 |
+| 11 | 11 | 6 | 43 | 47 | 38 | 134 | 35 |
 
 ## Verificación
 
@@ -29,8 +29,8 @@ La columna **Prueba** se completa en el Sprint 3, cuando cada criterio de acepta
 | Reglas de negocio citadas por un requisito funcional | Cumple | — |
 | Reglas de negocio citadas por una historia | Cumple | — |
 | Historias con criterios de aceptación | Cumple | — |
-| Historias que nombran la causa o el efecto del que nacen | No cumple | HU-37 |
-| Requisitos no funcionales exigidos en alguna historia | Informativo | RNF-01, RNF-02, RNF-05, RNF-06, RNF-07, RNF-08, RNF-09, RNF-11, RNF-12, RNF-15, RNF-16, RNF-18, RNF-23, RNF-24, RNF-26, RNF-27, RNF-28, RNF-29, RNF-30, RNF-31, RNF-32, RNF-33, RNF-34, RNF-35 |
+| Historias que nombran la causa o el efecto del que nacen | No cumple | HU-37, HU-38 |
+| Requisitos no funcionales exigidos en alguna historia | Informativo | RNF-01, RNF-02, RNF-05, RNF-06, RNF-07, RNF-08, RNF-11, RNF-15, RNF-16, RNF-18, RNF-23, RNF-24, RNF-26, RNF-27, RNF-28, RNF-29, RNF-30, RNF-31, RNF-32, RNF-33, RNF-34, RNF-35 |
 
 ## 1. Del problema a los objetivos
 
@@ -72,7 +72,7 @@ De qué causa, medio y objetivo nace cada requisito, qué reglas debe cumplir y 
 | RF-14 | Must | C-01, C-01.1, C-01.2, C-02, C-02.1, C-03, C-04, C-04.1, C-05, C-06, C-06.1 | M-01, M-01.1, M-01.2, M-02, M-02.1, M-03, M-04, M-04.1, M-05, M-06, M-06.1 | OE-01, OE-02, OE-03, OE-04, OE-05, OE-06 | RN-18, RN-22, RN-23, RN-26, RN-27, RN-29, RN-41 | HU-14 | 3 | Sprint 3 |
 | RF-15 | Must | C-01, C-01.1, C-01.2 | M-01, M-01.1, M-01.2 | OE-01 | RN-08, RN-18 | HU-15 | 3 | Sprint 3 |
 | RF-16 | Must | C-01, C-01.1, C-01.2 | M-01, M-01.1, M-01.2 | OE-01 | RN-10, RN-43 | HU-07, HU-09 | 9 | Sprint 3 |
-| RF-17 | Could | C-01, C-01.1, C-01.2 | M-01, M-01.1, M-01.2 | OE-01 | RN-01, RN-10, RN-43 | HU-16 | 2 | Sprint 3 |
+| RF-17 | Could | C-01, C-01.1, C-01.2 | M-01, M-01.1, M-01.2 | OE-01 | RN-01, RN-10, RN-43 | HU-16 | 3 | Sprint 3 |
 | RF-18 | Must | C-06, C-06.1 | M-06, M-06.1 | OE-06 | RN-17 | HU-17 | 5 | Sprint 3 |
 | RF-19 | Must | C-06, C-06.1 | M-06, M-06.1 | OE-06 | RN-17 | HU-18 | 3 | Sprint 3 |
 | RF-20 | Should | C-06, C-06.1 | M-06, M-06.1 | OE-06 | RN-17 | HU-19 | 2 | Sprint 3 |
@@ -98,6 +98,7 @@ De qué causa, medio y objetivo nace cada requisito, qué reglas debe cumplir y 
 | RF-40 | Could | C-05 | M-05 | OE-05 | RN-35 | HU-35 | 2 | Sprint 3 |
 | RF-41 | Should | C-02, C-02.1, C-04, C-04.1 | M-02, M-02.1, M-04, M-04.1 | OE-02, OE-04 | RN-12, RN-16, RN-26, RN-44 | HU-36 | 5 | Sprint 3 |
 | RF-42 | Should | — | — | Soporte | RN-01, RN-45 | HU-37 | 4 | Sprint 3 |
+| RF-43 | Should | — | — | Soporte | RN-01, RN-46, RN-47 | HU-38 | 4 | Sprint 3 |
 
 ## 3. Historias de usuario
 
@@ -120,7 +121,7 @@ De qué causa o efecto nace cada historia y qué requisitos, reglas y requisitos
 | HU-13 | Eliminar una prenda registrada por error | EP-03 | Dueña del taller | C-04.1 | RF-13 | RN-06, RN-15, RN-16 | RNF-10 | Should | 2 | 4 | Sprint 3 |
 | HU-14 | Consultar el detalle de una orden | EP-03 | Dueña del taller | C-01.2, C-02 | RF-14 | RN-01, RN-18, RN-22, RN-23, RN-26, RN-27, RN-29, RN-41 | RNF-22 | Must | 3 | 3 | Sprint 3 |
 | HU-15 | Listar y buscar órdenes | EP-03 | Dueña del taller | C-02, C-06 | RF-15 | RN-08, RN-18 | — | Must | 2 | 3 | Sprint 3 |
-| HU-16 | Renombrar o desactivar tipos de prenda | EP-03 | Dueña del taller | C-01.1 | RF-17 | RN-01, RN-10, RN-43 | — | Could | 2 | 2 | Sprint 3 |
+| HU-16 | Agregar, renombrar o desactivar tipos de prenda | EP-03 | Dueña del taller | C-01.1 | RF-17 | RN-01, RN-10, RN-43 | — | Could | 2 | 3 | Sprint 3 |
 | HU-17 | Tomar fotos de las prendas | EP-04 | Dueña del taller | C-06, C-06.1 | RF-18 | RN-17 | RNF-03 | Must | 3 | 5 | Sprint 3 |
 | HU-18 | Ver las fotos de una orden para reconocer las prendas | EP-04 | Dueña del taller | E-06 | RF-19 | RN-17 | RNF-25 | Must | 2 | 3 | Sprint 3 |
 | HU-19 | Eliminar una foto | EP-04 | Dueña del taller | C-06 | RF-20 | RN-17 | RNF-10 | Should | 1 | 2 | Sprint 3 |
@@ -142,6 +143,7 @@ De qué causa o efecto nace cada historia y qué requisitos, reglas y requisitos
 | HU-35 | Cambiar el plazo para considerar una orden sin reclamar | EP-08 | Dueña del taller | C-05 | RF-40 | RN-35 | — | Could | 1 | 2 | Sprint 3 |
 | HU-36 | Devolver una prenda sin arreglar | EP-05 | Dueña del taller | C-04.1, E-01 | RF-41 | RN-12, RN-16, RN-26, RN-44 | RNF-10 | Should | 2 | 5 | Sprint 3 |
 | HU-37 | Entrar con mi correo de Google | EP-01 | Dueña del taller | — | RF-42 | RN-01, RN-45 | RNF-19, RNF-20 | Should | 3 | 4 | Sprint 3 |
+| HU-38 | Ponerle a mi taller su nombre, y el mío | EP-01 | Dueña del taller | — | RF-43 | RN-01, RN-46, RN-47 | RNF-09, RNF-12 | Should | 2 | 4 | Sprint 3 |
 
 ## 4. Reglas de negocio
 
@@ -149,7 +151,7 @@ Origen de cada regla y qué requisitos e historias la hacen cumplir.
 
 | Regla | Nombre | Tipo | Origen | Requisitos | Historias | Prueba |
 | --- | --- | --- | --- | --- | --- | --- |
-| RN-01 | La información pertenece a un negocio | Restricción | ADR-002 | RF-01, RF-05, RF-17, RF-42 | HU-01, HU-04, HU-14, HU-16, HU-37 | Sprint 3 |
+| RN-01 | La información pertenece a un negocio | Restricción | ADR-002 | RF-01, RF-05, RF-17, RF-42, RF-43 | HU-01, HU-04, HU-14, HU-16, HU-37, HU-38 | Sprint 3 |
 | RN-02 | Datos mínimos de un cliente | Restricción | F-01, M-01 | RF-04, RF-07, RF-10 | HU-03, HU-06, HU-10 | Sprint 3 |
 | RN-03 | El teléfono debe poder recibir WhatsApp | Restricción | ADR-003, F-05, M-03 | RF-04, RF-07, RF-10 | HU-03, HU-06, HU-10 | Sprint 3 |
 | RN-04 | El teléfono no es único | Estructural | F-01 | RF-04 | HU-03 | Sprint 3 |
@@ -194,6 +196,8 @@ Origen de cada regla y qué requisitos e historias la hacen cumplir.
 | RN-43 | Tipo de prenda escrito por la usuaria | Desencadenador | F-05, M-01.1 | RF-16, RF-17 | HU-09, HU-16 | Sprint 3 |
 | RN-44 | Devolver una prenda sin arreglar | Restricción | E-01, F-05, M-04.1 | RF-41 | HU-36 | Sprint 3 |
 | RN-45 | Solo entra un correo ya registrado | Restricción | ADR-002, F-05 | RF-42 | HU-37 | Sprint 3 |
+| RN-46 | Lo que dice el aviso | Estructural | F-05, M-03 | RF-43 | HU-38 | Sprint 3 |
+| RN-47 | El saludo cambia con la hora | Derivación | F-05 | RF-43 | HU-38 | Sprint 3 |
 
 ## 5. Requisitos no funcionales
 
@@ -209,10 +213,10 @@ Los que aparecen en historias se prueban con ellas; los demás se verifican sobr
 | RNF-06 | La integración con WhatsApp pasa por un solo adaptador por canal | Compatibilidad | — | Revisión de código, pruebas de cada adaptador con respuestas simuladas y un envío real por Evolution API (ADR-003, ADR-007) |
 | RNF-07 | El diseño es primero para el celular | Usabilidad | — | Revisión de cada pantalla a 360 px |
 | RNF-08 | Los datos se muestran como se leen en Colombia | Usabilidad | — | Pruebas automáticas de formato |
-| RNF-09 | Los errores dicen qué pasó y cómo corregirlo | Usabilidad | — | Revisión de todos los mensajes contra una lista de chequeo |
+| RNF-09 | Los errores dicen qué pasó y cómo corregirlo | Usabilidad | HU-38 | Revisión de todos los mensajes contra una lista de chequeo |
 | RNF-10 | Las acciones que no se pueden deshacer piden confirmación | Usabilidad | HU-13, HU-19, HU-22, HU-25, HU-36 | Pruebas automáticas de cada acción |
 | RNF-11 | El sistema es accesible | Usabilidad | — | Auditoría con Lighthouse en cada pantalla |
-| RNF-12 | Registrar una orden es rápido para alguien que no conoce el sistema | Usabilidad | — | Prueba de usabilidad con 3 compañeros de formación, con su registro |
+| RNF-12 | Registrar una orden es rápido para alguien que no conoce el sistema | Usabilidad | HU-38 | Prueba de usabilidad con 3 compañeros de formación, con su registro |
 | RNF-13 | Las operaciones que tocan varios datos se hacen completas o no se hacen | Fiabilidad | HU-07, HU-24 | Pruebas automáticas que fuerzan un error a mitad de la operación y revisan la base |
 | RNF-14 | Enviar dos veces el mismo formulario no duplica registros | Fiabilidad | HU-23 | Prueba automática que envía dos veces la misma solicitud (F-02) |
 | RNF-15 | La información se respalda y se puede recuperar | Fiabilidad | — | Restauración probada al menos una vez antes de la entrega, con su registro; copia semanal visible en Google Drive |

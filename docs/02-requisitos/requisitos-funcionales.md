@@ -60,7 +60,7 @@ Todos se redactan como "El sistema debe permitir…" o "El sistema debe…", y l
 | **RF-14** | El sistema debe mostrar el detalle de una orden: cliente, número, fechas de recepción, entrega acordada, orden lista y entrega real; prendas con su estado y fotos; valor, pagos, saldo pendiente, estado de avance, estado de pago y avisos. | Must | OE-01 a OE-06 | RN-18, RN-22, RN-23, RN-26, RN-27, RN-29, RN-41 | F-01 |
 | **RF-15** | El sistema debe permitir a la usuaria listar las órdenes filtrando por estado de avance y buscar una orden por su número. | Must | OE-01 | RN-08, RN-18 | F-01 |
 | **RF-16** | El sistema debe permitir a la usuaria elegir el tipo de prenda de la lista del negocio, que inicia con pantalón, camisa, blusa, vestido, falda y chaqueta, o escribir uno nuevo con la opción «Otro». | Must | OE-01 | RN-10, RN-43 | F-01 · F-05 |
-| **RF-17** | El sistema debe permitir a la usuaria renombrar y desactivar los tipos de prenda de su negocio, incluidos los que se agregaron con «Otro». | Could | OE-01 | RN-01, RN-10, RN-43 | ADR-002 · F-05 |
+| **RF-17** | El sistema debe permitir a la usuaria agregar, renombrar y desactivar los tipos de prenda de su negocio, incluidos los que se agregaron con «Otro». | Could | OE-01 | RN-01, RN-10, RN-43 | ADR-002 · F-05 |
 
 ## Identificación de prendas
 
@@ -81,6 +81,7 @@ Todos se redactan como "El sistema debe permitir…" o "El sistema debe…", y l
 | **RF-25** | El sistema debe permitir a la usuaria cancelar una orden que no esté Entregada, previa confirmación. | Must | OE-02 | RN-24 | F-01 |
 | **RF-41** | El sistema debe permitir a la usuaria devolver al cliente sin arreglar una prenda Pendiente o En proceso, previa confirmación, dejando de contar su precio en el valor de la orden. | Should | OE-02 · OE-04 | RN-12, RN-16, RN-26, RN-44 | F-05 |
 | **RF-42** | El sistema debe permitir a la usuaria entrar con su cuenta de Google, si el correo de esa cuenta ya está registrado en el sistema. El inicio de sesión con usuario y contraseña sigue disponible. | Should | Todos | RN-01, RN-45 | F-05 |
+| **RF-43** | El sistema debe permitir a la usuaria cambiar el nombre de su taller y su propio nombre, que se usan en el saludo del panel y en el aviso que reciben los clientes. | Should | Todos | RN-01, RN-46, RN-47 | F-05 |
 
 ## Pagos
 

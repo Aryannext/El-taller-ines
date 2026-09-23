@@ -44,6 +44,8 @@ class GenerarAvisoTest extends TestCase
         parent::setUp();
 
         $this->duena = Usuario::factory()->create();
+        // RN-46: el aviso nombra al taller, así que su nombre no puede ser el que invente la factory
+        $this->duena->negocio->update(['nombre' => 'Modistería Inés']);
         $negocio = ['negocio_id' => $this->duena->negocio_id];
         $marta = Cliente::factory()->create([...$negocio, 'nombre' => 'Marta Rincón', 'celular' => '3104567890']);
         $pantalon = TipoPrenda::factory()->create([...$negocio, 'nombre' => 'Pantalón']);
@@ -70,7 +72,7 @@ class GenerarAvisoTest extends TestCase
 
         $this->assertSame([[
             'destino' => '573104567890',
-            'texto' => 'Hola Marta, tu orden #0042 del taller está lista para recoger. Prendas listas: 3. Saldo pendiente: $21.000. Te esperamos.',
+            'texto' => 'Hola Marta, le escribimos de Modistería Inés. Su orden #0042 ya está lista 🧵 Son 3 prendas, con un saldo de $21.000. La esperamos cuando pueda pasar.',
         ]], $canal->enviados);
         $aviso = Aviso::sole();
         $this->assertSame(
@@ -78,7 +80,7 @@ class GenerarAvisoTest extends TestCase
             [$aviso->estado, $aviso->canal, $aviso->id_mensaje_whatsapp, $aviso->intentos, $aviso->resuelto_en?->format('Y-m-d H:i')],
         );
         $this->get(route('ordenes.detalle', $this->orden42))
-            ->assertSeeInOrder(['Avisos al cliente', '15 sep 2026 · 4:00 p. m.', 'API oficial', 'Hola Marta, tu orden #0042 del taller está lista para recoger.', 'Enviado']);
+            ->assertSeeInOrder(['Avisos al cliente', '15 sep 2026 · 4:00 p. m.', 'API oficial', 'Hola Marta, le escribimos de Modistería Inés. Su orden #0042 ya está lista', 'Enviado']);
     }
 
     public function test_ca_28_2_no_hace_esperar(): void

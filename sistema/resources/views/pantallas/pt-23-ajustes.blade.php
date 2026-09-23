@@ -13,6 +13,38 @@
       <div class="banda banda-exito" role="status"><i class="i i-check"></i><span>{{ session('exito') }}</span></div>
     @endif
 
+    {{-- HU-38: el nombre del taller se ve aquí y les llega a los clientes en cada aviso (RN-46) --}}
+    <section class="seccion">
+      <h2 class="titulo-seccion">Mi taller</h2>
+      <form class="tarjeta pila" method="POST" action="{{ route('ajustes.taller') }}">
+        @csrf
+        @method('PUT')
+        <div @class(['campo', 'con-error' => $errors->has('nombre_negocio')])>
+          <label for="nombre_negocio">Nombre del taller</label>
+          <input class="entrada" id="nombre_negocio" name="nombre_negocio" maxlength="120" required
+            value="{{ old('nombre_negocio', $negocio) }}"
+            @error('nombre_negocio') aria-invalid="true" aria-describedby="error-nombre_negocio" @enderror>
+          @error('nombre_negocio')
+            <span class="mensaje-error" id="error-nombre_negocio"><i class="i i-alerta"></i>{{ $message }}</span>
+          @else
+            <span class="ayuda">Así te nombran los avisos que reciben tus clientes.</span>
+          @enderror
+        </div>
+        <div @class(['campo', 'con-error' => $errors->has('nombre_usuaria')])>
+          <label for="nombre_usuaria">Mi nombre</label>
+          <input class="entrada" id="nombre_usuaria" name="nombre_usuaria" maxlength="120" required
+            value="{{ old('nombre_usuaria', $usuaria) }}"
+            @error('nombre_usuaria') aria-invalid="true" aria-describedby="error-nombre_usuaria" @enderror>
+          @error('nombre_usuaria')
+            <span class="mensaje-error" id="error-nombre_usuaria"><i class="i i-alerta"></i>{{ $message }}</span>
+          @else
+            <span class="ayuda">Con este nombre te saluda la pantalla Hoy.</span>
+          @enderror
+        </div>
+        <button class="btn btn-secundario" type="submit">Guardar</button>
+      </form>
+    </section>
+
     <section class="seccion">
       <h2 class="titulo-seccion">Contraseña</h2>
       <form class="tarjeta" method="POST" action="{{ route('ajustes.contrasena') }}">
@@ -79,6 +111,16 @@
           </li>
         @endforeach
       </ul>
+      {{-- CA-16.3: agregar uno sin tener que registrar una prenda con «Otro» --}}
+      <form class="tarjeta pila pila-junta" method="POST" action="{{ route('ajustes.tipos.agregar') }}">
+        @csrf
+        <label class="etiqueta" for="tipo-nuevo">Agregar un tipo</label>
+        <div class="fila-campo">
+          <input class="entrada crece" id="tipo-nuevo" name="nombre" maxlength="60" required placeholder="Overol, sudadera, cortina…">
+          <button class="btn btn-secundario btn-pequeno" type="submit"><i class="i i-mas i-sm"></i>Agregar</button>
+        </div>
+      </form>
+
       <p class="texto-2 pequeno">Al dejar de usar un tipo, las prendas que ya lo tienen lo conservan; solo deja de ofrecerse al registrar.</p>
     </section>
 

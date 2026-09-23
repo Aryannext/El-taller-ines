@@ -33,6 +33,19 @@ class GestionarTiposDePrenda
     }
 
     /**
+     * CA-16.3: el tipo que la dueña agrega desde Ajustes. El que se escribe con «Otro» al registrar una prenda
+     * lo crea ResolverTipoDePrenda (RN-43): aquí se agrega a propósito, sin tener que registrar nada.
+     */
+    public function agregar(int $negocioId, string $nombre): TipoPrenda
+    {
+        $tipo = new TipoPrenda(['nombre' => trim($nombre), 'activo' => true]);
+        $tipo->negocio_id = $negocioId;
+        $tipo->save();
+
+        return $tipo;
+    }
+
+    /**
      * CA-16.1: renombrarlo cambia el nombre que muestran las prendas que ya lo usan, porque lo comparten.
      */
     public function renombrar(TipoPrenda $tipo, string $nombre): void

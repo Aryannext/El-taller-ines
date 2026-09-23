@@ -72,6 +72,8 @@ class EnviarAviso implements ShouldQueue
 
         $mensaje = MensajeDeAviso::construir(
             $orden->cliente->nombre,
+            // RN-46: el cliente sabe de qué taller le escriben
+            $orden->negocio->nombre,
             NumeroDeOrden::desde($orden->numero),
             $orden->prendas->filter(fn (Prenda $prenda) => $prenda->estado === EstadoDePrenda::Terminada)->count(),
             $detalle['saldo'],

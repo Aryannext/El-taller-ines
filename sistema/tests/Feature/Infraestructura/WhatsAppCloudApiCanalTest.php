@@ -48,9 +48,9 @@ class WhatsAppCloudApiCanalTest extends TestCase
                         'type' => 'body',
                         'parameters' => [
                             ['type' => 'text', 'text' => 'Marta'],
+                            ['type' => 'text', 'text' => 'Modistería Inés'],
                             ['type' => 'text', 'text' => '#0042'],
-                            ['type' => 'text', 'text' => '3'],
-                            ['type' => 'text', 'text' => '$21.000'],
+                            ['type' => 'text', 'text' => 'Son 3 prendas, con un saldo de $21.000.'],
                         ],
                     ]],
                 ],
@@ -118,6 +118,6 @@ class WhatsAppCloudApiCanalTest extends TestCase
 
     private function mensaje(): MensajeDeAviso
     {
-        return MensajeDeAviso::construir('Marta Rincón', NumeroDeOrden::desde(42), 3, Dinero::pesos(21000));
+        return MensajeDeAviso::construir('Marta Rincón', 'Modistería Inés', NumeroDeOrden::desde(42), 3, Dinero::pesos(21000));
     }
 }

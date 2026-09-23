@@ -142,6 +142,7 @@ sistema/
 │   │   │   └── AlmacenDeFotos.php          Interfaz
 │   │   └── Compartido/
 │   │       ├── Reloj.php                   Interfaz: la fecha y hora de Colombia
+│   │       ├── SaludoDelDia.php            Buenos días, tardes o noches según la hora (RN-47)
 │   │       └── ReglaIncumplida.php         Excepción con el mensaje para la usuaria
 │   ├── Aplicacion/                       Una clase por acción de las historias
 │   │   ├── Acceso/
@@ -171,6 +172,7 @@ sistema/
 │   │   │   ├── EnviarAviso.php             Trabajo en cola con reintentos
 │   │   │   └── ConfirmarEnvioAsistido.php
 │   │   ├── Configuracion/
+│   │   │   ├── PersonalizarTaller.php      El nombre del taller y el de la usuaria (HU-38)
 │   │   │   ├── CambiarContrasena.php
 │   │   │   ├── CambiarPlazoSinReclamar.php
 │   │   │   └── GestionarTiposDePrenda.php
@@ -265,6 +267,7 @@ despliegue/                                 Nginx, servicio de la cola y scripts
 | **HU-01** | PT-01, PT-23 | `SesionController` | Autenticación de Laravel con límite de intentos |
 | **HU-02** | PT-23 | `AjustesController` | `CambiarContrasena`, validado por `ContrasenaRequest` |
 | **HU-37** | PT-01 | `SesionController` | `EntrarConGoogle`, con el adaptador `GoogleOAuth` |
+| **HU-38** | PT-02, PT-23 | `AjustesController` | `PersonalizarTaller`; el saludo lo arma `SaludoDelDia` en el panel |
 | **HU-03** | PT-04 | `ClienteController` | `RegistrarCliente` |
 | **HU-04** | PT-03 | `ClienteController` | `BuscarClientes` |
 | **HU-05** | PT-05 | `ClienteController` | `FichaDeCliente` |
@@ -351,6 +354,8 @@ Complementa la tabla del [modelo de datos](../modelo-de-datos/README.md#dónde-s
 | **RN-43** | Aplicación | `ResolverTipoDePrenda` | Busca el tipo sin distinguir mayúsculas ni tildes; si no existe, lo crea en la lista del negocio |
 | **RN-44** | Aplicación | `DevolverPrendaSinArreglar`, `TransicionesDePrenda` | Solo desde Pendiente o En proceso, sin dejar la orden sin prendas por resolver ni lo pagado por encima del valor |
 | **RN-45** | Aplicación | `EntrarConGoogle` | Busca la usuaria por el correo que Google confirmó; si no existe, no entra y no se crea nada |
+| **RN-46** | Dominio | `MensajeDeAviso` | Arma el texto: saluda de usted, nombra el taller de la dueña y solo habla del saldo si lo hay |
+| **RN-47** | Dominio | `SaludoDelDia` | Buenos días, buenas tardes o buenas noches según la hora del reloj de Colombia |
 
 ## Dos recorridos
 

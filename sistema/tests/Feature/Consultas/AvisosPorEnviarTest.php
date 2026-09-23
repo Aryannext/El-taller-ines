@@ -34,6 +34,8 @@ class AvisosPorEnviarTest extends TestCase
         parent::setUp();
 
         $this->duena = Usuario::factory()->create();
+        // RN-46: el aviso nombra al taller, así que su nombre no puede ser el que invente la factory
+        $this->duena->negocio->update(['nombre' => 'Modistería Inés']);
         $negocio = ['negocio_id' => $this->duena->negocio_id];
         $marta = Cliente::factory()->create([...$negocio, 'nombre' => 'Marta Rincón', 'celular' => '3104567890']);
         $camisa = TipoPrenda::factory()->create([...$negocio, 'nombre' => 'Camisa']);
@@ -78,7 +80,7 @@ class AvisosPorEnviarTest extends TestCase
                 '310 456 7890',
                 'Por enviar',
                 'Mensaje',
-                'Hola Marta, tu orden #0042 del taller está lista para recoger. Prendas listas: 3. Saldo pendiente: $21.000. Te esperamos.',
+                'Hola Marta, le escribimos de Modistería Inés. Su orden #0042 ya está lista 🧵 Son 3 prendas, con un saldo de $21.000. La esperamos cuando pueda pasar.',
                 'Abrir WhatsApp y enviar',
                 '¿Ya lo enviaste?',
             ]);
@@ -87,7 +89,7 @@ class AvisosPorEnviarTest extends TestCase
     public function test_ca_29_2_abrir_whatsapp(): void
     {
         $esperado = 'https://wa.me/573104567890?text='.rawurlencode(
-            'Hola Marta, tu orden #0042 del taller está lista para recoger. Prendas listas: 3. Saldo pendiente: $21.000. Te esperamos.',
+            'Hola Marta, le escribimos de Modistería Inés. Su orden #0042 ya está lista 🧵 Son 3 prendas, con un saldo de $21.000. La esperamos cuando pueda pasar.',
         );
 
         $this->get(route('avisos.abrir-whatsapp', $this->aviso))->assertRedirect($esperado);

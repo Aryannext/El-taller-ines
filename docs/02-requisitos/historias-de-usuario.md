@@ -55,7 +55,7 @@ Una historia entra a un sprint de desarrollo cuando tiene: formato completo, ori
 
 | Épica | Historias | Must | Should | Could | Puntos |
 | --- | --- | --- | --- | --- | --- |
-| **EP-01 · Acceso** | HU-01, HU-02 y HU-37 | 2 | 1 | — | 8 |
+| **EP-01 · Acceso** | HU-01, HU-02, HU-37 y HU-38 | 2 | 2 | — | 10 |
 | **EP-02 · Clientes** | HU-03 a HU-06 | 4 | — | — | 8 |
 | **EP-03 · Órdenes y prendas** | HU-07 a HU-16 | 6 | 3 | 1 | 24 |
 | **EP-04 · Identificación de prendas** | HU-17 a HU-19 | 2 | 1 | — | 6 |
@@ -63,9 +63,9 @@ Una historia entra a un sprint de desarrollo cuando tiene: formato completo, ori
 | **EP-06 · Pagos** | HU-23 a HU-27 | 2 | 3 | — | 11 |
 | **EP-07 · Avisos** | HU-28 a HU-31 | 4 | — | — | 11 |
 | **EP-08 · Seguimiento** | HU-32 a HU-35 | 3 | — | 1 | 8 |
-| **Total** | **37** | **26** | **9** | **2** | **88** |
+| **Total** | **38** | **26** | **10** | **2** | **90** |
 
-**Puntos por prioridad:** Must 66 · Should 19 · Could 3.
+**Puntos por prioridad:** Must 66 · Should 21 · Could 3.
 
 > **Riesgo de capacidad.** Los 66 puntos Must se desarrollan en los Sprints 3 y 4 (12 días). Aún no se conoce la velocidad real. Si al cerrar el Sprint 3 no alcanza, se recorta primero lo Could, después lo Should y, si aun así no alcanza, se renegocia el alcance con el instructor antes de sacrificar pruebas o documentación.
 
@@ -90,6 +90,23 @@ Una historia entra a un sprint de desarrollo cuando tiene: formato completo, ori
 | **CA-01.3** Intentos repetidos | que fallé 5 veces en el último minuto | lo intento por sexta vez | el sistema me pide esperar antes de volver a intentarlo, aunque esta vez la contraseña sea correcta |
 | **CA-01.4** Cerrar sesión | que tengo la sesión iniciada | cierro la sesión y uso el botón Atrás del navegador | veo la pantalla de inicio de sesión y ningún dato del taller |
 | **CA-01.5** Sesión abandonada | que dejé la sesión abierta sin usarla durante más de 8 horas | vuelvo a usar el sistema | me pide iniciar sesión de nuevo |
+
+### HU-38 · Ponerle a mi taller su nombre, y el mío
+
+> **Como** dueña del taller, **quiero** escribir el nombre de mi negocio y el mío, **para** que el sistema me hable a mí y mis clientes sepan quién les escribe.
+
+**Nació de:** F-05 y la revisión del 23 de septiembre de 2026. El nombre del taller y el de la usuaria los ponía el instalador con un comando: el sistema saludaba «Hola, Dueña del taller» y los clientes recibían un aviso «del taller», sin saber de cuál. Las dos cosas son de la dueña, no de quien instala.
+
+**Requisitos:** RF-43 · **Reglas:** RN-01, RN-46, RN-47 · **Calidad:** RNF-09, RNF-12
+
+**Prioridad:** Should · **Puntos:** 2
+
+| Criterio | Dado | Cuando | Entonces |
+| --- | --- | --- | --- |
+| **CA-38.1** El nombre de mi taller | que mi negocio se llama «Modistería Inés» | lo escribo en Ajustes y guardo | lo veo en la pantalla Hoy, y los avisos que reciben mis clientes dicen que les escriben de «Modistería Inés» |
+| **CA-38.2** Mi nombre | que el sistema me dice «Dueña del taller» | escribo «Inés» en Ajustes y guardo | el saludo me llama por mi nombre |
+| **CA-38.3** El saludo con la hora | que entro a las 2:30 de la tarde | abro la pantalla Hoy | leo «Buenas tardes, Inés», y sería «Buenos días» antes de mediodía y «Buenas noches» desde las 7 |
+| **CA-38.4** Sin dejarlo en blanco | que borro el nombre del taller y guardo | el sistema no lo acepta | veo que el taller necesita un nombre, y el anterior se conserva |
 
 ### HU-37 · Entrar con mi correo de Google
 
@@ -342,9 +359,9 @@ Una historia entra a un sprint de desarrollo cuando tiene: formato completo, ori
 | **CA-15.2** Buscar por número | que existe la #0042 | busco "42" o "#0042" | se abre la orden #0042 |
 | **CA-15.3** Número inexistente | que no existe la orden #9999 | busco "#9999" | veo que no hay una orden con ese número |
 
-### HU-16 · Renombrar o desactivar tipos de prenda
+### HU-16 · Agregar, renombrar o desactivar tipos de prenda
 
-> **Como** dueña del taller, **quiero** renombrar o dejar de usar un tipo de prenda, **para** mantener ordenada la lista.
+> **Como** dueña del taller, **quiero** agregar un tipo de prenda, renombrarlo o dejar de usarlo, **para** que la lista se parezca a lo que yo arreglo.
 
 **Nació de:** C-01.1. La lista de tipos con la que se registra cada prenda es propia de cada negocio (ADR-002) y crece con lo que se escribe en «Otro» (RN-43, F-05).
 
@@ -356,6 +373,7 @@ Una historia entra a un sprint de desarrollo cuando tiene: formato completo, ori
 | --- | --- | --- | --- |
 | **CA-16.1** Renombrar | que el tipo "Overol" tiene 2 prendas | lo renombro como "Enterizo" | las dos prendas muestran Enterizo |
 | **CA-16.2** Desactivar | que el tipo "Chaqueta" tiene prendas registradas | lo desactivo | ya no aparece al registrar prendas nuevas y las prendas que ya eran chaqueta lo conservan |
+| **CA-16.3** Agregar | que arreglo overoles y ese tipo no está en mi lista | lo agrego desde Ajustes | aparece al registrar una prenda nueva, y si escribo un nombre que ya existe el sistema me lo dice |
 
 ## EP-04 · Identificación de prendas
 

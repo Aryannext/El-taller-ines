@@ -40,7 +40,7 @@ class EvolutionApiCanalTest extends TestCase
             && $solicitud->hasHeader('apikey', 'clave-de-prueba')
             && $solicitud->data() === [
                 'number' => '573104567890',
-                'text' => 'Hola Marta, tu orden #0042 del taller está lista para recoger. Prendas listas: 3. Saldo pendiente: $21.000. Te esperamos.',
+                'text' => 'Hola Marta, le escribimos de Modistería Inés. Su orden #0042 ya está lista 🧵 Son 3 prendas, con un saldo de $21.000. La esperamos cuando pueda pasar.',
             ]);
 
         // Ninguna otra clase del sistema conoce el punto de envío de Evolution API
@@ -105,6 +105,6 @@ class EvolutionApiCanalTest extends TestCase
 
     private function mensaje(): MensajeDeAviso
     {
-        return MensajeDeAviso::construir('Marta Rincón', NumeroDeOrden::desde(42), 3, Dinero::pesos(21000));
+        return MensajeDeAviso::construir('Marta Rincón', 'Modistería Inés', NumeroDeOrden::desde(42), 3, Dinero::pesos(21000));
     }
 }

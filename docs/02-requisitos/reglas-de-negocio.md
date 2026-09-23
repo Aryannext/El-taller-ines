@@ -420,6 +420,24 @@ Cuando una orden pasa a Lista para entregar se genera automáticamente un aviso 
 
 **Ejemplo:** Se marca Terminado el último pantalón de la orden #0042: sin ninguna otra acción, se genera el aviso a Marta.
 
+### RN-46 · Lo que dice el aviso
+
+El aviso saluda al cliente por su nombre, **de usted**, dice de qué taller le escriben —el nombre que la dueña le puso a su negocio—, el número de la orden y cuántas prendas están listas. El saldo se nombra **solo si lo hay**: si la orden ya está pagada, se dice eso y se invita a recogerla.
+
+**Tipo:** Estructural · **Origen:** M-03 · F-05 · revisión del 23 de septiembre de 2026
+
+**Ejemplo:** Marta tiene lista la #0042, con 3 prendas y $21.000 de saldo: «Hola Marta, le escribimos de Modistería Inés. Su orden #0042 ya está lista 🧵 Son 3 prendas, con un saldo de $21.000. La esperamos cuando pueda pasar.» Si la orden estuviera pagada, la frase del dinero sería «y ya está pagada: solo pasar a recogerla».
+
+> El mensaje anterior decía «del taller», sin nombrar cuál, tuteaba al cliente y escribía «Saldo pendiente: $0» en las órdenes pagadas. Se corrigió al revisar la app con la dueña en mente.
+
+### RN-47 · El saludo cambia con la hora
+
+El panel saluda a la usuaria por su nombre y según la hora del taller (RN-09): **buenos días** hasta las 11:59, **buenas tardes** de 12:00 a 18:59 y **buenas noches** desde las 19:00.
+
+**Tipo:** Derivación · **Origen:** F-05 · revisión del 23 de septiembre de 2026
+
+**Ejemplo:** Inés abre el sistema a las 2:30 p. m. y lee «Buenas tardes, Inés».
+
 ### RN-38 · Un solo aviso por cada vez que la orden queda lista
 
 Por cada vez que una orden entra en Lista para entregar se envía como máximo un aviso de orden lista, aunque haya reintentos o toques repetidos.

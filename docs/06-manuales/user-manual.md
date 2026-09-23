@@ -92,6 +92,13 @@ On iPhone the system works in Safari, but installing it as an app has not been t
 
 **Changing your password:** in **Ajustes** (Settings), type your **Contraseña actual** (Current password), the **Nueva contraseña** (New password, at least 8 characters) and repeat it. Tap **Cambiar contraseña** (Change password).
 
+**Naming your shop, and yourself:** in **Ajustes**, the first section is **Mi taller** (My shop).
+
+- The **shop name** is how you introduce yourself: it shows on the Hoy screen and, above all, **it is what your clients read** in the WhatsApp notice. Put «Modistería Inés» and the message says «le escribimos de Modistería Inés».
+- **Your name** is how the system greets you. Depending on the hour it says «Buenos días», «Buenas tardes» or «Buenas noches».
+
+**Adding a garment type:** in **Ajustes → Tipos de prenda**, below the list, type it and tap **Agregar**. You can also rename one or stop using it. And while registering a garment, if the type is missing, pick «Otro» and write the name: it is added on its own.
+
 <br clear="right">
 
 ## 4. The Hoy (Today) screen

@@ -4,13 +4,13 @@
 
 Cada regla tiene al menos una prueba automática que usa su ejemplo (RNF-28). El nivel sale de la capa donde la arquitectura ubica la regla, y la columna de historias dice qué historias dejarían de necesitarla si se recortaran. Las rutas son relativas a `sistema/tests/`.
 
-**Resumen:** 45 reglas · 15 unitarias · 24 de integración · 5 de funcionalidad · 1 de aislamiento.
+**Resumen:** 47 reglas · 17 unitarias · 24 de integración · 5 de funcionalidad · 1 de aislamiento.
 
 ## Negocio
 
 | Regla | Ejemplo que se prueba | Capa | Nivel | Prueba | Historias |
 | --- | --- | --- | --- | --- | --- |
-| **RN-01** La información pertenece a un negocio | El negocio A tiene la cliente Marta. Una usuaria del negocio B busca "Marta" y no obtiene resultados. | Modelos | Aislamiento | `Feature/Aislamiento/AislamientoEntreNegociosTest.php`<br>`test_rn_01_la_informacion_pertenece_a_un_negocio` | HU-01, HU-37, HU-04, HU-14, HU-16 |
+| **RN-01** La información pertenece a un negocio | El negocio A tiene la cliente Marta. Una usuaria del negocio B busca "Marta" y no obtiene resultados. | Modelos | Aislamiento | `Feature/Aislamiento/AislamientoEntreNegociosTest.php`<br>`test_rn_01_la_informacion_pertenece_a_un_negocio` | HU-01, HU-38, HU-37, HU-04, HU-14, HU-16 |
 | **RN-45** Solo entra un correo ya registrado | La dueña del taller entra con `taller@gmail.com`, que quedó registrado al instalar el sistema, y pasa al panel. Alguien más entra con otro correo de Google y el sistema le dice que ese correo no tiene acceso, sin crear nada. | Aplicación | Integración | `Feature/Acceso/EntrarConGoogleTest.php`<br>`test_rn_45_solo_entra_un_correo_ya_registrado` | HU-37 |
 
 ## Clientes
@@ -85,6 +85,8 @@ Cada regla tiene al menos una prueba automática que usa su ejemplo (RNF-28). El
 | Regla | Ejemplo que se prueba | Capa | Nivel | Prueba | Historias |
 | --- | --- | --- | --- | --- | --- |
 | **RN-37** Al quedar lista la orden se genera su aviso | Se marca Terminado el último pantalón de la orden #0042: sin ninguna otra acción, se genera el aviso a Marta. | Aplicación | Integración | `Feature/Ordenes/SincronizarEstadoDeOrdenTest.php`<br>`test_rn_37_al_quedar_lista_la_orden_se_genera_su_aviso` | HU-28 |
+| **RN-46** Lo que dice el aviso | Marta tiene lista la #0042, con 3 prendas y $21.000 de saldo: «Hola Marta, le escribimos de Modistería Inés. Su orden #0042 ya está lista 🧵 Son 3 prendas, con un saldo de $21.000. La esperamos cuando pueda pasar.» Si la orden estuviera pagada, la frase del dinero sería «y ya está pagada: solo pasar a recogerla». | Dominio | Unitaria | `Unit/Dominio/Avisos/MensajeDeAvisoTest.php`<br>`test_rn_46_lo_que_dice_el_aviso` | HU-38 |
+| **RN-47** El saludo cambia con la hora | Inés abre el sistema a las 2:30 p. m. y lee «Buenas tardes, Inés». | Dominio | Unitaria | `Unit/Dominio/Compartido/SaludoDelDiaTest.php`<br>`test_rn_47_el_saludo_cambia_con_la_hora` | HU-38 |
 | **RN-38** Un solo aviso por cada vez que la orden queda lista | El envío falla y se reintenta tres veces hasta salir: Marta recibe un solo mensaje. Si una prenda vuelve a En proceso y la orden queda lista otra vez, sí se genera un aviso nuevo. | Aplicación | Integración | `Feature/Avisos/GenerarAvisoTest.php`<br>`test_rn_38_un_solo_aviso_por_cada_vez_que_la_orden_queda_lista` | HU-28, HU-30 |
 | **RN-39** No se avisa una orden que ya no está lista | El aviso queda en cola y, antes de salir, Marta se mide el pantalón y vuelve a En proceso: el aviso se descarta. | Aplicación | Integración | `Feature/Avisos/EnviarAvisoTest.php`<br>`test_rn_39_no_se_avisa_una_orden_que_ya_no_esta_lista` | HU-30 |
 | **RN-40** Canal del aviso | El negocio no ha configurado la API oficial: el aviso a Marta aparece listo para enviarse con un toque desde el WhatsApp de la usuaria. | Aplicación | Integración | `Feature/Avisos/EnviarAvisoTest.php`<br>`test_rn_40_canal_del_aviso` | HU-28, HU-29, HU-32 |

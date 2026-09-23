@@ -45,6 +45,8 @@ class EnviarAvisoTest extends TestCase
         parent::setUp();
 
         $this->duena = Usuario::factory()->create();
+        // RN-46: el aviso nombra al taller, así que su nombre no puede ser el que invente la factory
+        $this->duena->negocio->update(['nombre' => 'Modistería Inés']);
         $negocio = ['negocio_id' => $this->duena->negocio_id];
         $marta = Cliente::factory()->create([...$negocio, 'nombre' => 'Marta Rincón', 'celular' => '3104567890']);
         $camisa = TipoPrenda::factory()->create([...$negocio, 'nombre' => 'Camisa']);
@@ -74,7 +76,7 @@ class EnviarAvisoTest extends TestCase
         $this->procesarLaCola();
 
         $this->assertCount(1, $canal->enviados);
-        $this->assertStringContainsString('Saldo pendiente: $11.000.', $canal->enviados[0]['texto']);
+        $this->assertStringContainsString('con un saldo de $11.000.', $canal->enviados[0]['texto']);
         $this->assertSame($canal->enviados[0]['texto'], $this->aviso->fresh()->mensaje);
     }
 
@@ -192,11 +194,11 @@ class EnviarAvisoTest extends TestCase
 
         $aviso = $this->aviso->fresh();
         $this->assertSame(
-            ['2026-09-15 16:00', 'api_oficial', 'Hola Marta, tu orden #0042 del taller está lista para recoger. Prendas listas: 3. Saldo pendiente: $21.000. Te esperamos.', 'enviado', '2026-09-15 16:01'],
+            ['2026-09-15 16:00', 'api_oficial', 'Hola Marta, le escribimos de Modistería Inés. Su orden #0042 ya está lista 🧵 Son 3 prendas, con un saldo de $21.000. La esperamos cuando pueda pasar.', 'enviado', '2026-09-15 16:01'],
             [$aviso->generado_en?->format('Y-m-d H:i'), $aviso->canal, $aviso->mensaje, $aviso->estado, $aviso->resuelto_en?->format('Y-m-d H:i')],
         );
         $this->get(route('ordenes.detalle', $this->orden42))
-            ->assertSeeInOrder(['Avisos al cliente', '15 sep 2026 · 4:01 p. m.', 'API oficial', 'Hola Marta, tu orden #0042', 'Enviado']);
+            ->assertSeeInOrder(['Avisos al cliente', '15 sep 2026 · 4:01 p. m.', 'API oficial', 'Hola Marta, le escribimos de Modistería Inés', 'Enviado']);
     }
 
     private function avisoEnCola(string $cicloListaEn): Aviso

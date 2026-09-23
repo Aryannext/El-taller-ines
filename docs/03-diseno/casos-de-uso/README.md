@@ -22,7 +22,7 @@ Complementan las [historias de usuario](../../02-requisitos/historias-de-usuario
 | # | Actor | Área | Casos | Documento |
 | --- | --- | --- | --- | --- |
 | 00 | Todos | Vista general | — | Este documento |
-| 01 | Dueña del taller | Acceso y ajustes | CU-01 a CU-05 y CU-36 | [01-acceso-y-ajustes.md](duena-del-taller/01-acceso-y-ajustes.md) |
+| 01 | Dueña del taller | Acceso y ajustes | CU-01 a CU-05, CU-36 y CU-37 | [01-acceso-y-ajustes.md](duena-del-taller/01-acceso-y-ajustes.md) |
 | 02 | Dueña del taller | Clientes | CU-06 a CU-09 | [02-clientes.md](duena-del-taller/02-clientes.md) |
 | 03 | Dueña del taller | Órdenes y prendas | CU-10 a CU-17 | [03-ordenes-y-prendas.md](duena-del-taller/03-ordenes-y-prendas.md) |
 | 04 | Dueña del taller | Fotos | CU-18 a CU-20 | [04-fotos.md](duena-del-taller/04-fotos.md) |
@@ -36,7 +36,7 @@ Complementan las [historias de usuario](../../02-requisitos/historias-de-usuario
 
 | Actor | Tipo | Quién es | Participa en |
 | --- | --- | --- | --- |
-| **Dueña del taller** | Persona · actor principal | La usuaria del sistema; lo usa todos los días desde el celular | CU-01 a CU-31, CU-33 a CU-35 y CU-36 |
+| **Dueña del taller** | Persona · actor principal | La usuaria del sistema; lo usa todos los días desde el celular | CU-01 a CU-31, CU-33 a CU-35, CU-36 y CU-37 |
 | **Cliente del taller** | Persona que no usa el sistema | Deja prendas y recibe el aviso de que su orden está lista | CU-32 y, como secundario, CU-30 |
 | **WhatsApp Cloud API** | Sistema externo | Entrega el aviso automático al celular del cliente | CU-32 |
 
@@ -125,6 +125,7 @@ Generada desde las especificaciones.
 | [**CU-34** · Ver órdenes atrasadas](duena-del-taller/08-seguimiento.md#cu-34--ver-órdenes-atrasadas) | Dueña del taller | HU-33 | PT-20 | `OrdenesAtrasadas` | 08 |
 | [**CU-35** · Ver órdenes sin reclamar](duena-del-taller/08-seguimiento.md#cu-35--ver-órdenes-sin-reclamar) | Dueña del taller | HU-34 | PT-21 | `OrdenesSinReclamar` | 08 |
 | [**CU-36** · Entrar con Google](duena-del-taller/01-acceso-y-ajustes.md#cu-36--entrar-con-google) | Dueña del taller | HU-37 | PT-01 | `SesionController` | 01 |
+| [**CU-37** · Ponerle nombre al taller](duena-del-taller/01-acceso-y-ajustes.md#cu-37--ponerle-nombre-al-taller) | Dueña del taller | HU-38 | PT-23, PT-02 | `AjustesController` | 01 |
 
 <!-- trazabilidad:fin -->
 

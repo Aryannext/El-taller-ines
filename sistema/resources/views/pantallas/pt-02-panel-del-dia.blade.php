@@ -10,7 +10,7 @@
 
   <main class="contenido">
     <div class="tarjeta pila">
-      <span class="fuerte">Hola, {{ $usuaria }}</span>
+      <span class="fuerte">{{ $saludo }}, {{ $usuaria }}</span>
       <span class="texto-2 pequeno">Aquí verás lo que necesita tu atención hoy: cobros, entregas atrasadas y avisos.</span>
     </div>
 

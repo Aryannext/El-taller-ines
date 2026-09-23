@@ -147,6 +147,8 @@ Agregar una prenda a una orden existente reutiliza el formulario de prenda de PT
 | GET | `/ajustes` | `ajustes` | `AjustesController@mostrar` | PT-23 | HU-02, HU-16, HU-35 |
 | PUT | `/ajustes/contrasena` | `ajustes.contrasena` | `AjustesController@cambiarContrasena` | PT-23 | HU-02 |
 | PUT | `/ajustes/plazo` | `ajustes.plazo` | `AjustesController@cambiarPlazo` | PT-23 | HU-35 |
+| PUT | `/ajustes/taller` | `ajustes.taller` | `AjustesController@personalizar` | PT-23 | HU-38 |
+| POST | `/ajustes/tipos-de-prenda` | `ajustes.tipos.agregar` | `AjustesController@agregarTipo` | PT-23 | HU-16 |
 | PUT | `/ajustes/tipos-de-prenda/{tipo}` | `ajustes.tipos.renombrar` | `AjustesController@renombrarTipo` | PT-23 | HU-16 |
 | PUT | `/ajustes/tipos-de-prenda/{tipo}/activo` | `ajustes.tipos.activo` | `AjustesController@cambiarActivoTipo` | PT-23 | HU-16 |
 

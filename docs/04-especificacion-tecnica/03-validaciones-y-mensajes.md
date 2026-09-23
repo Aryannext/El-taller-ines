@@ -133,6 +133,8 @@ El error de inicio de sesión es uno solo y no dice si falló el usuario o la co
 | Campo | Reglas | Mensajes | Columna | Regla de negocio |
 | --- | --- | --- | --- | --- |
 | `nombre` | `required`, `string`, `max:60`, único entre los tipos del negocio | `required`: Escribe el nombre del tipo de prenda.<br>`max`: El tipo de prenda puede tener hasta 60 caracteres.<br>`unique`: Ya existe un tipo de prenda con ese nombre. | `tipos_prenda.nombre` | RN-43 |
+| `nombre_negocio` | `required`, `string`, `max:120` | `required`: Tu taller necesita un nombre.<br>`max`: El nombre del taller puede tener hasta 120 caracteres. | `negocios.nombre` | RN-46 |
+| `nombre_usuaria` | `required`, `string`, `max:120` | `required`: Escribe tu nombre.<br>`max`: Tu nombre puede tener hasta 120 caracteres. | `usuarios.nombre` | RN-47 |
 
 ### PrendaController@cambiarEstado
 

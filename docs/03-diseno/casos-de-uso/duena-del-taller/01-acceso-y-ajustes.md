@@ -33,6 +33,30 @@ Lo que la dueña hace para entrar al sistema y para ajustarlo a su taller. Son c
 - **3a. Datos incorrectos:** el sistema muestra «Usuario o contraseña incorrectos», sin decir cuál de los dos falló, y no deja entrar (CA-01.2).
 - **3b. Cinco intentos fallidos en el último minuto:** el sistema pide esperar antes de volver a intentarlo, aunque la contraseña sea correcta (CA-01.3).
 
+### CU-37 · Ponerle nombre al taller
+
+| Campo | Detalle |
+| --- | --- |
+| **Actor principal** | Dueña del taller |
+| **Historias** | HU-38 |
+| **Pantallas** | PT-23, PT-02 |
+| **Implementa** | `AjustesController` |
+| **Precondición** | Tiene la sesión iniciada |
+| **Disparador** | Quiere que el sistema la llame por su nombre, o que sus clientes sepan de qué taller les escriben |
+| **Postcondición** | El panel la saluda por su nombre y los avisos nombran su taller |
+| **Relaciones** | — |
+
+**Flujo principal**
+
+1. La dueña abre Ajustes.
+2. Escribe el nombre de su taller y el suyo, y toca «Guardar».
+3. El sistema los guarda y vuelve a Ajustes con la confirmación.
+4. El panel la saluda según la hora y con su nombre (RN-47), y los avisos siguientes nombran su taller (RN-46).
+
+**Flujos alternativos**
+
+- **2a. Deja alguno en blanco:** el sistema no lo acepta, lo dice junto al campo y conserva el nombre anterior (CA-38.4).
+
 ### CU-36 · Entrar con Google
 
 | Campo | Detalle |

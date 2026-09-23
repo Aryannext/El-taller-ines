@@ -1,5 +1,7 @@
 # PM-08 · Aviso real por WhatsApp
 
+> **El texto cambió el 23 de septiembre de 2026** (RN-46): el aviso nombra al taller, trata de usted y no escribe «$0» en las órdenes pagadas. El registro de abajo es el de la corrida anterior, con el texto viejo; se conserva como evidencia de que el canal funcionó. **Al repetir PM-08 con la API oficial hay que usar la plantilla `orden_lista_v2`, que está pendiente de aprobación de Meta**; el envío asistido ya manda el texto nuevo.
+
 **Verifica:** RNF-06, CA-28.1 · **Cuándo:** Sprint 4, con HT-01 y HU-28 · **Entorno:** VPS con Evolution API y el WhatsApp del aprendiz conectado
 
 ## Objetivo
@@ -44,7 +46,7 @@ Si la sesión de WhatsApp está caída, se vuelve a conectar antes de repetir la
 
 **Mensaje recibido (texto exacto):**
 
-> Hola Cristian, tu orden #0001 del taller está lista para recoger. Prendas listas: 2. Saldo pendiente: $11.000. Te esperamos.
+> Hola Cristian, le escribimos de Modistería Inés. Su orden #0001 ya está lista 🧵 Son 2 prendas, con un saldo de $11.000. La esperamos cuando pueda pasar.
 
 > Hola Cristian, tu orden #0002 del taller está lista para recoger. Prendas listas: 1. Saldo pendiente: $10.000. Te esperamos.
 

@@ -26,6 +26,8 @@ class AvisosDeLaOrdenTest extends TestCase
         parent::setUp();
 
         $duena = Usuario::factory()->create();
+        // RN-46: el aviso nombra al taller, así que su nombre no puede ser el que invente la factory
+        $duena->negocio->update(['nombre' => 'Modistería Inés']);
         $negocio = ['negocio_id' => $duena->negocio_id];
         $marta = Cliente::factory()->create([...$negocio, 'nombre' => 'Marta Rincón', 'celular' => '3104567890']);
         $camisa = TipoPrenda::factory()->create([...$negocio, 'nombre' => 'Camisa']);
@@ -61,7 +63,7 @@ class AvisosDeLaOrdenTest extends TestCase
             'ciclo_lista_en' => '2026-09-15 16:00:00',
             'estado' => 'enviado',
             'canal' => 'evolution_api',
-            'mensaje' => 'Hola Marta, tu orden #0042 del taller está lista para recoger.',
+            'mensaje' => 'Hola Marta, le escribimos de Modistería Inés. Su orden #0042 ya está lista',
             'generado_en' => '2026-09-15 16:00:05',
             'resuelto_en' => '2026-09-15 16:00:12',
         ]);
@@ -78,7 +80,7 @@ class AvisosDeLaOrdenTest extends TestCase
                 '15 sep 2026',
                 '4:00 p. m.',
                 'WhatsApp automático',
-                'Hola Marta, tu orden #0042 del taller está lista para recoger.',
+                'Hola Marta, le escribimos de Modistería Inés. Su orden #0042 ya está lista',
                 'Enviado',
             ]);
     }
