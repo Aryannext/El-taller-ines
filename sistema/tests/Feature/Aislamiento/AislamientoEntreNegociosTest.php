@@ -8,6 +8,7 @@ use App\Modelos\Foto;
 use App\Modelos\Orden;
 use App\Modelos\Pago;
 use App\Modelos\Prenda;
+use App\Modelos\TipoPrenda;
 use App\Modelos\Usuario;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -41,6 +42,8 @@ class AislamientoEntreNegociosTest extends TestCase
 
     private Foto $fotoDelNegocioA;
 
+    private TipoPrenda $tipoDelNegocioA;
+
     private Pago $pagoDelNegocioA;
 
     private Aviso $avisoDelNegocioA;
@@ -51,6 +54,7 @@ class AislamientoEntreNegociosTest extends TestCase
 
         $this->martaDelNegocioA = Cliente::factory()->create(['nombre' => 'Marta Rincón', 'celular' => '3104567890']);
         $this->ordenDelNegocioA = Orden::factory()->create(['cliente_id' => $this->martaDelNegocioA->id, 'numero' => 42]);
+        $this->tipoDelNegocioA = TipoPrenda::factory()->create(['negocio_id' => $this->martaDelNegocioA->negocio_id, 'nombre' => 'Overol']);
         $this->prendaDelNegocioA = Prenda::factory()->create(['orden_id' => $this->ordenDelNegocioA->id, 'descripcion_arreglo' => 'Subir basta 3 cm', 'precio' => 15000]);
         $this->fotoDelNegocioA = Foto::factory()->create(['prenda_id' => $this->prendaDelNegocioA->id]);
         $this->pagoDelNegocioA = Pago::factory()->create(['orden_id' => $this->ordenDelNegocioA->id, 'valor' => 10000]);
@@ -136,6 +140,8 @@ class AislamientoEntreNegociosTest extends TestCase
         $this->assertSame('pendiente_asistido', $this->avisoDelNegocioA->fresh()->estado);
         $this->assertSame(1, Pago::count());
         $this->assertSame(1, $this->ordenDelNegocioA->prendas()->count());
+        $this->assertSame('Overol', $this->tipoDelNegocioA->fresh()->nombre);
+        $this->assertTrue($this->tipoDelNegocioA->fresh()->activo);
     }
 
     /**
@@ -167,6 +173,8 @@ class AislamientoEntreNegociosTest extends TestCase
             'prendas.cambiar-estado' => ['POST', route('prendas.cambiar-estado', [$ordenA, $prendaA]), ['estado' => 'terminada']],
             'prendas.editar' => ['GET', route('prendas.editar', [$ordenA, $prendaA]), []],
             'prendas.corregir' => ['PUT', route('prendas.corregir', [$ordenA, $prendaA]), ['descripcion_arreglo' => 'Otro arreglo', 'precio' => '1000']],
+            'ajustes.tipos.renombrar' => ['PUT', route('ajustes.tipos.renombrar', $this->tipoDelNegocioA), ['nombre' => 'Enterizo']],
+            'ajustes.tipos.activo' => ['PUT', route('ajustes.tipos.activo', $this->tipoDelNegocioA), ['activo' => '0']],
             'fotos.eliminar' => ['DELETE', route('fotos.eliminar', $this->fotoDelNegocioA), ['confirmacion' => 'si']],
             'prendas.eliminar' => ['DELETE', route('prendas.eliminar', [$ordenA, $prendaA]), ['confirmacion' => 'si']],
             'prendas.confirmar-devolucion' => ['GET', route('prendas.confirmar-devolucion', [$ordenA, $prendaA]), []],

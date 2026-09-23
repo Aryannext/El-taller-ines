@@ -96,4 +96,8 @@ Route::middleware(['auth', 'auth.session', 'cache.headers:no_store;private'])->g
 
     Route::get('/ajustes', [AjustesController::class, 'mostrar'])->name('ajustes');
     Route::put('/ajustes/contrasena', [AjustesController::class, 'cambiarContrasena'])->name('ajustes.contrasena');
+    // HU-35: el plazo sin reclamar, y HU-16: los tipos de prenda del negocio
+    Route::put('/ajustes/plazo', [AjustesController::class, 'cambiarPlazo'])->name('ajustes.plazo');
+    Route::put('/ajustes/tipos-de-prenda/{tipo}', [AjustesController::class, 'renombrarTipo'])->whereNumber('tipo')->name('ajustes.tipos.renombrar');
+    Route::put('/ajustes/tipos-de-prenda/{tipo}/activo', [AjustesController::class, 'cambiarActivoTipo'])->whereNumber('tipo')->name('ajustes.tipos.activo');
 });

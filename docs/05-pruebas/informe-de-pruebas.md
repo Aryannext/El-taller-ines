@@ -10,12 +10,12 @@ Dice qué se probó, con qué resultado y qué falta. Sigue el [plan de pruebas]
 
 | Qué | Resultado |
 | --- | --- |
-| **Pruebas automáticas** | **261 pruebas, todas pasan** (1.369 comprobaciones), en poco más de un minuto |
+| **Pruebas automáticas** | **286 pruebas, todas pasan** (1.557 comprobaciones), en poco más de un minuto |
 | **Dónde corren** | En cada envío a GitHub, y en la máquina de desarrollo antes de cada commit |
 | **Cobertura** | El flujo exige **80 % o más** de `app/Dominio` y `app/Aplicacion`; si baja, la corrida falla |
-| **Criterios de aceptación** | 125. Los de las historias construidas están verificados; los 14 que faltan son de historias que no se construyeron |
+| **Criterios de aceptación** | **125 de 125 verificados**, desde que se construyeron las siete historias que faltaban |
 | **Reglas de negocio** | **44 de 44 con prueba que pasa**, desde que se construyó HU-36 |
-| **Historias Must** | **26 de 26 verificadas** |
+| **Historias Must** | **26 de 26 verificadas**, y también las 8 *Should* y las 2 *Could*: **las 36 del backlog** |
 | **Pruebas manuales** | 6 de 8 ejecutadas: PM-02, PM-04 y PM-08 aprobadas; PM-05, PM-06 y PM-07 parciales; faltan PM-01 y PM-03 |
 | **Defectos abiertos** | **Ninguno.** Los 10 encontrados se corrigieron; los cuatro últimos los halló PM-07, y uno de ellos lo causó la corrección de otro |
 | **GitHub Actions en `main`** | En verde |
@@ -28,10 +28,10 @@ Cada criterio de aceptación y cada regla de negocio se prueban con el ejemplo e
 
 | Medida | Valor |
 | --- | --- |
-| Pruebas que se ejecutan | 261, todas pasan |
-| Comprobaciones dentro de ellas | 1.369 |
-| Métodos escritos en `sistema/tests` | 247 |
-| Métodos planeados en el plan | 167, de los cuales **152 están escritos**; los 15 que faltan son de las historias no construidas |
+| Pruebas que se ejecutan | 286, todas pasan |
+| Comprobaciones dentro de ellas | 1.557 |
+| Métodos escritos en `sistema/tests` | 275 |
+| Métodos planeados en el plan | 167, **todos escritos**: al construir las siete historias que faltaban se escribieron los 15 que quedaban |
 | Tiempo de la corrida completa | 62 segundos en la máquina de desarrollo |
 
 **Qué más revisa cada envío, además de las pruebas:** secretos en el historial (gitleaks), dependencias con vulnerabilidades conocidas, estilo con Pint, análisis estático con Larastan y las reglas de capas con PHPat, vistas sin escapar, que las migraciones produzcan el esquema documentado, y los verificadores que contrastan los documentos entre sí.
@@ -41,8 +41,8 @@ Cada criterio de aceptación y cada regla de negocio se prueban con el ejemplo e
 | Prioridad | Historias | Con todos sus criterios verificados | Sin construir |
 | --- | --- | --- | --- |
 | **Must** | 26 | **26** | 0 |
-| **Should** | 8 | 4 (HU-11, HU-26, HU-27, HU-36) | 4 |
-| **Could** | 2 | 0 | 2 |
+| **Should** | 8 | **8** | 0 |
+| **Could** | 2 | **2** | 0 |
 
 Dos criterios de historias Must no tienen prueba automática porque **son manuales por diseño**, y quedaron verificados a mano:
 
@@ -51,22 +51,23 @@ Dos criterios de historias Must no tienen prueba automática porque **son manual
 | **CA-17.1** Tomar una foto con la cámara | La cámara solo existe en un celular real | [PM-04](pruebas-manuales/PM-04-app-en-el-celular.md), aprobado |
 | **CA-18.2** Ver una foto ampliada | Es comportamiento del navegador | [PM-05](pruebas-manuales/PM-05-pantallas-y-navegadores.md), sección D, aprobado |
 
-### Historias no construidas, declaradas
+### Ninguna historia quedó sin construir
 
-El plan permite recortar historias *Should* y *Could* si no alcanza la capacidad, y exige declararlas con su motivo junto con las reglas que solo ellas usan.
+El plan permitía recortar historias *Should* y *Could* si no alcanzaba la capacidad, y exigía declararlas con su motivo. Hasta el 22 de septiembre siete estaban declaradas así. El 23 se construyeron las siete, con sus pruebas, en este orden: HU-36, HU-13, HU-19, HU-24, HU-10, HU-35 y HU-16.
 
-| Historia | Prioridad | Criterios sin verificar | Motivo |
-| --- | --- | --- | --- |
-| **HU-10** Registrar un cliente nuevo mientras registro su orden | Should | 2 | Fuera de la capacidad comprometida. Se puede registrar el cliente antes de la orden, como explica el manual de usuario |
-| **HU-13** Eliminar una prenda registrada por error | Should | 4 | Fuera de la capacidad. Se corrige la prenda con HU-12 |
-| **HU-16** Renombrar o desactivar tipos de prenda | Could | 2 | Fuera de la capacidad. Los tipos se agregan solos al escribir «Otro» (RN-43) |
-| **HU-19** Eliminar una foto | Should | 2 | Fuera de la capacidad. Se pueden agregar hasta 3 fotos por prenda |
-| **HU-24** Registrar un abono al recibir la orden | Should | 2 | Fuera de la capacidad. El abono se registra enseguida con HU-23 |
-| **HU-35** Cambiar el plazo para considerar una orden sin reclamar | Could | 2 | Fuera de la capacidad. El plazo queda en 30 días (RN-35) |
+| Historia | Prioridad | Qué agregó |
+| --- | --- | --- |
+| **HU-36** Devolver una prenda sin arreglar | Should | Cerró **RN-44**, la última regla sin prueba, y construyó PT-12, la única pantalla diseñada que faltaba |
+| **HU-13** Eliminar una prenda registrada por error | Should | Con HU-19 completó RNF-10: las cinco acciones irreversibles piden confirmación |
+| **HU-19** Eliminar una foto | Should | La foto borrosa deja libre su lugar para otra |
+| **HU-24** Registrar un abono al recibir la orden | Should | La orden y su abono se guardan juntos, sin dos pasos con el cliente enfrente |
+| **HU-10** Registrar un cliente nuevo desde la orden | Should | Lo escrito en la orden ya no se pierde mientras se registra al cliente |
+| **HU-35** Cambiar el plazo sin reclamar | Could | El plazo de 30 días pasó a ser del negocio |
+| **HU-16** Renombrar o desactivar tipos de prenda | Could | La lista de tipos, que crece sola con «Otro», ahora se puede ordenar |
 
 ## 4. Reglas de negocio
 
-Las 44 reglas tienen su caso de prueba definido con el ejemplo de su documento (RNF-28), y **las 44 tienen prueba escrita y pasa**. La última en cerrarse fue **RN-44** (devolver una prenda sin arreglar): su historia, HU-36, se construyó el 22 de septiembre justamente para no dejar una regla sin comprobar.
+Las 44 reglas tienen su caso de prueba definido con el ejemplo de su documento (RNF-28), y **las 44 tienen prueba escrita y pasa**. La última en cerrarse fue **RN-44** (devolver una prenda sin arreglar): su historia, HU-36, se construyó el 23 de septiembre justamente para no dejar una regla sin comprobar.
 
 Durante este corte se corrigió un desajuste: el plan nombraba pruebas de **RN-32 a RN-36** que no existían con ese nombre. Al escribirlas apareció que RN-34, RN-35 y RN-36 vivían dentro de las consultas y no en el dominio, donde las pone la arquitectura. Se creó `ReglasDeSeguimiento`, las consultas la usan y las tres reglas quedaron con su prueba (`7c58cf6`).
 
@@ -81,7 +82,7 @@ De los 35, **19 se comprueban solos en cada envío** y están en verde: RNF-02, 
 | **RNF-06** Un adaptador por canal de WhatsApp | Pruebas de cada adaptador, más una revisión en [PM-08](pruebas-manuales/PM-08-aviso-real-por-whatsapp.md) | **Cumple** |
 | **RNF-07** Diseño para el celular | PM-05, sección B | **Pendiente** |
 | **RNF-09** Mensajes de error | Pruebas automáticas del texto exacto, más la lista de chequeo de PM-05, sección C | **Parcial.** La parte automática cumple. En esta ronda se agregaron las pantallas de error del sistema —404, 403, 419, 429, 500 y 503—, que antes salían con el texto crudo del servidor; falta la revisión de PM-05 |
-| **RNF-10** Confirmación antes de una acción irreversible | Una prueba por acción | **Parcial.** Cancelar una orden, anular un pago y devolver una prenda sin arreglar están probadas; eliminar prenda y eliminar foto son de historias recortadas |
+| **RNF-10** Confirmación antes de una acción irreversible | Una prueba por acción | **Cumple.** Las cinco acciones tienen su confirmación probada: cancelar una orden, anular un pago, devolver una prenda sin arreglar, eliminar una prenda y eliminar una foto |
 | **RNF-11** Contraste y accesibilidad | PM-05, con Lighthouse | **Pendiente** |
 | **RNF-12** Usabilidad | [PM-01](pruebas-manuales/PM-01-usabilidad.md) con compañeros | **Pendiente** |
 | **RNF-15** Respaldos y restauración | [PM-02](pruebas-manuales/PM-02-restauracion-de-respaldos.md) | **Aprobado.** Restauración en 7 segundos contra un máximo de 60 minutos |
@@ -139,7 +140,7 @@ Del [plan de pruebas](plan-de-pruebas.md#para-entregar):
 | Condición | Meta | Hoy |
 | --- | --- | --- |
 | Criterios de las historias Must | 100 % verificados | **Cumple:** 26 de 26 historias |
-| Criterios de las Should y Could implementadas | 100 %, y las recortadas se declaran | **Cumple:** HU-11, HU-26 y HU-27 verificadas; las 7 recortadas están declaradas arriba con su motivo |
+| Criterios de las Should y Could implementadas | 100 %, y las recortadas se declaran | **Cumple:** las 10 están construidas y verificadas; no quedó ninguna recortada |
 | Reglas de negocio | Todas con una prueba que pasa | **Cumple:** 44 de 44 |
 | Cobertura de `Dominio` y `Aplicacion` | 80 % o más | **Cumple:** el flujo falla si baja |
 | Defectos críticos o altos abiertos | Ninguno | **Cumple** |

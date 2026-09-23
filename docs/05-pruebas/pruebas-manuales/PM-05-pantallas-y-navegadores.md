@@ -137,7 +137,7 @@ Las tablas de las secciones A a D son la hoja de registro.
 **Resultado:** **Parcial.** Se ejecutó solo la sección D, que es la que cierra HU-01 y HU-18.
 
 - **D · aprobada.** CA-01.4 y CA-18.2 pasan en los tres navegadores y también en Brave. CA-10.1 no aplica porque HU-10 es Should y no se construyó.
-- **A, B y C · pendientes.** Faltan el recorrido de las historias Must, las 23 pantallas a 360 px con accesibilidad y los mensajes de validación. Las pantallas PT-12, PT-22 y PT-23 son de historias Should y Could sin construir, así que cuando se corran esas filas tampoco aplican.
+- **A, B y C · pendientes.** Faltan el recorrido de las historias Must, las 23 pantallas a 360 px con accesibilidad y los mensajes de validación. PT-12, PT-22 y PT-23 ya existen —se construyeron el 23 de septiembre con las historias que faltaban—, así que esas filas sí se revisan.
 
 Observaciones de esta corrida:
 
