@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sustentación · El-taller-ines</title>
+<!--
+  DOC-24 · Las diapositivas de la sustentación.
+  Se abre con doble clic: no necesita internet, servidor ni programa aparte. Lo que se dice en cada una
+  está en sustentacion.md y también aquí, en las notas del presentador (tecla N).
+
+  Teclas: → o espacio avanza · ← retrocede · N notas · T cronómetro · G índice · F pantalla completa · Esc cierra
+  Para el PDF: imprimir (Ctrl+P), horizontal, sin márgenes.
+-->
+<style>
+  :root {
+    --fondo: #f3f4f8;
+    --superficie: #ffffff;
+    --tinta: #161b2e;
+    --tinta-2: #4b5470;
+    --borde: #d9dde7;
+    --primario: #2a44a8;
+    --primario-suave: #e8ecf9;
+    --tiza: #f2c23d;
+    --exito: #16703f;
+    --peligro: #b3261e;
+    --fuente: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", system-ui, "Segoe UI", Roboto, sans-serif;
+    --mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0; background: #0f1220; color: var(--tinta);
+    font-family: var(--fuente); overflow: hidden;
+  }
+
+  /* El escenario mide siempre 1280x720 y se escala para caber en la pantalla que haya */
+  #escenario { width: 1280px; height: 720px; position: fixed; left: 50%; top: 50%; transform-origin: center; }
+
+  .lamina {
+    position: absolute; inset: 0; display: none; flex-direction: column;
+    background: var(--fondo); color: var(--tinta);
+    padding: 64px 72px; overflow: hidden;
+  }
+  .lamina.activa { display: flex; }
+  .lamina h2 { font-size: 46px; line-height: 1.1; margin: 0 0 6px; letter-spacing: -.02em; }
+  .lamina h3 { font-size: 26px; margin: 0; font-weight: 700; }
+  .lamina p { font-size: 24px; line-height: 1.45; margin: 0; color: var(--tinta-2); max-width: 30ch; }
+  .rotulo {
+    font: 700 15px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase;
+    color: var(--primario); margin-bottom: 18px;
+  }
+  .cuerpo { flex: 1; display: flex; gap: 40px; align-items: flex-start; margin-top: 26px; }
+  .col { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+
+  .tarjeta { background: var(--superficie); border: 1px solid var(--borde); border-radius: 16px; padding: 20px 22px; }
+  .tarjeta h4 { margin: 0 0 6px; font-size: 21px; }
+  .tarjeta p { font-size: 18px; max-width: none; }
+
+  ul.lista { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  ul.lista li { font-size: 23px; line-height: 1.35; padding-left: 34px; position: relative; }
+  ul.lista li::before {
+    content: ""; position: absolute; left: 0; top: .45em;
+    width: 14px; height: 14px; border-radius: 4px; background: var(--primario);
+  }
+  ul.lista li b { font-weight: 800; }
+  ul.lista.numerada { counter-reset: n; }
+  ul.lista.numerada li::before {
+    counter-increment: n; content: counter(n); background: var(--primario); color: #fff;
+    width: 26px; height: 26px; top: .1em; border-radius: 8px;
+    font: 800 16px/26px var(--fuente); text-align: center;
+  }
+
+  table { border-collapse: collapse; width: 100%; font-size: 19px; }
+  th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--borde); vertical-align: top; }
+  th { font-size: 14px; letter-spacing: .1em; text-transform: uppercase; color: var(--tinta-2); }
+  td b { font-weight: 800; }
+
+  .cifras { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .cifra { background: var(--superficie); border: 1px solid var(--borde); border-radius: 16px; padding: 22px; }
+  .cifra .n { display: block; font: 800 54px/1 var(--fuente); color: var(--primario); letter-spacing: -.03em; }
+  .cifra .q { display: block; margin-top: 8px; font-size: 18px; color: var(--tinta-2); line-height: 1.3; }
+  .cifra.buena .n { color: var(--exito); }
+  .cifra.ojo .n { color: var(--peligro); }
+
+  .pie { position: absolute; left: 72px; right: 72px; bottom: 26px; display: flex; justify-content: space-between;
+         font-size: 15px; color: var(--tinta-2); }
+  .numero { font: 700 15px/1 var(--mono); }
+
+  /* Portada y láminas oscuras */
+  .lamina.oscura { background: #161b2e; color: #fff; justify-content: center; }
+  .lamina.oscura h2, .lamina.oscura h3 { color: #fff; }
+  .lamina.oscura p { color: #c7cbdb; }
+  .lamina.oscura .rotulo { color: var(--tiza); }
+  .lamina.oscura .pie { color: #8e95ad; }
+  .sello {
+    width: 74px; height: 74px; border-radius: 20px; background: var(--primario); color: #fff;
+    display: grid; place-items: center; margin-bottom: 26px;
+  }
+  .sello svg { width: 40px; height: 40px; }
+  .orden-fondo {
+    position: absolute; right: -20px; bottom: -70px; font: 800 340px/1 var(--mono);
+    color: rgba(242,194,61,.13); letter-spacing: -.04em; user-select: none;
+  }
+  .enlaces { display: flex; flex-direction: column; gap: 14px; margin-top: 20px; }
+  .enlaces span { font: 700 30px/1.2 var(--mono); color: #fff; }
+  .enlaces small { display: block; font: 400 17px/1 var(--fuente); color: #8e95ad; margin-bottom: 6px; letter-spacing: .04em; }
+
+  .demo { background: var(--primario); }
+  .demo h2 { font-size: 72px; color: #fff; }
+  .demo p { color: #cdd6f7; font-size: 28px; max-width: 34ch; }
+  .demo .rotulo { color: var(--tiza); }
+
+  .cita { font-size: 30px; line-height: 1.35; color: var(--tinta); max-width: 26ch; font-weight: 700; }
+  .marca-flecha { color: var(--primario); font-weight: 800; }
+
+  /* Barra de avance */
+  #avance { position: fixed; left: 0; top: 0; height: 4px; background: var(--tiza); width: 0; z-index: 30; transition: width .2s; }
+
+  /* Notas del presentador */
+  #notas {
+    position: fixed; left: 0; right: 0; bottom: 0; max-height: 42vh; overflow: auto; z-index: 40;
+    background: #10131f; color: #e7e9f2; border-top: 3px solid var(--tiza);
+    padding: 18px 26px 22px; display: none; font-size: 15.5px; line-height: 1.5;
+  }
+  #notas.visible { display: block; }
+  #notas h5 { margin: 0 0 8px; font: 700 13px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--tiza); }
+  #notas ol { margin: 8px 0 0; padding-left: 20px; }
+  #notas li { margin-bottom: 5px; }
+  #notas b { color: #fff; }
+
+  /* Cronómetro */
+  #reloj {
+    position: fixed; right: 14px; top: 14px; z-index: 45; display: none;
+    background: #10131f; color: #fff; border-radius: 12px; padding: 10px 14px;
+    font: 700 20px/1 var(--mono); border: 1px solid #2b3050;
+  }
+  #reloj.visible { display: block; }
+  #reloj small { display: block; font: 400 11px/1.4 var(--fuente); color: #8e95ad; margin-top: 5px; letter-spacing: .04em; }
+  #reloj.tarde { border-color: var(--peligro); color: #ff9a92; }
+
+  /* Índice */
+  #indice {
+    position: fixed; inset: 0; z-index: 50; display: none; background: rgba(10,12,22,.96);
+    padding: 40px 50px; overflow: auto; color: #fff;
+  }
+  #indice.visible { display: block; }
+  #indice h5 { font: 700 13px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--tiza); margin: 0 0 18px; }
+  #indice ol { columns: 2; gap: 40px; margin: 0; padding-left: 22px; font-size: 19px; line-height: 2; }
+  #indice li { cursor: pointer; }
+  #indice li:hover { color: var(--tiza); }
+
+  #ayuda { position: fixed; left: 14px; bottom: 12px; z-index: 35; font: 400 12.5px/1 var(--fuente); color: #6b7290; }
+
+  /* Para imprimir a PDF: una lámina por página, horizontal */
+  @page { size: 1280px 720px; margin: 0; }
+  @media print {
+    body { display: block; overflow: visible; background: #fff; }
+    #escenario { width: 1280px; height: auto; position: static; transform: none !important; }
+    .lamina { display: flex !important; position: relative; inset: auto; width: 1280px; height: 720px; page-break-after: always; break-after: page; }
+    #avance, #notas, #reloj, #indice, #ayuda { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div id="avance"></div>
+
+<div id="escenario">
+
+  <!-- 1 · Portada -->
+  <section class="lamina oscura" data-notas="Quién soy y qué construí, en una frase: un sistema para que un taller de arreglo de ropa deje de llevar sus órdenes de memoria. No leer la diapositiva.">
+    <div class="orden-fondo">#0042</div>
+    <div class="sello">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="6" cy="7" r="3"/><circle cx="6" cy="17" r="3"/><path d="M8.6 8.6L20 19M8.6 15.4L20 5"/>
+      </svg>
+    </div>
+    <p class="rotulo">Proyecto formativo · SENA</p>
+    <h2 style="font-size:60px">El-taller-ines</h2>
+    <p style="font-size:27px;max-width:36ch;margin-top:14px">Un sistema para que un taller de arreglo de ropa lleve sus órdenes, entregas y cobros sin depender de la memoria.</p>
+    <div class="pie"><span>Cristian Melo · Aprendiz</span><span>Septiembre de 2026</span></div>
+  </section>
+
+  <!-- 2 · El problema -->
+  <section class="lamina" data-notas="El taller recibe prendas, las arregla y las entrega. Nada queda anotado: ni qué prenda es de quién, ni qué arreglo se pidió, ni cuánto se acordó, ni quién ya pagó. De ahí salen tres consecuencias reales. Las causas están levantadas en el árbol de problemas: C-01.1 a C-06.">
+    <p class="rotulo">El problema</p>
+    <h2>Todo vive en la memoria de una sola persona</h2>
+    <div class="cuerpo">
+      <div class="col">
+        <ul class="lista">
+          <li><b>Las prendas se confunden.</b> Bolsas sin marcar en un rincón: ¿de quién es esto y qué había que hacerle?</li>
+          <li><b>Los cobros se olvidan.</b> Nadie sabe con certeza quién abonó y cuánto falta.</li>
+          <li><b>El cliente no sabe cuándo volver.</b> Y la ropa lista se queda meses sin que nadie la reclame.</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="tarjeta">
+          <h4>De dónde sale esto</h4>
+          <p>Del árbol de problemas levantado con la dueña del taller: seis causas, con sus efectos. Ninguna función del sistema se inventó: cada una responde a una de ellas.</p>
+        </div>
+      </div>
+    </div>
+    <div class="pie"><span>Árbol de problemas · C-01.1 a C-06</span><span class="numero">2</span></div>
+  </section>
+
+  <!-- 3 · Objetivos -->
+  <section class="lamina" data-notas="Cada causa se convirtió en un medio, y cada medio en un objetivo específico con su indicador. Son seis, todos SMART, todos con plazo. No se inventó ninguna función.">
+    <p class="rotulo">Del problema a los objetivos</p>
+    <h2>Seis objetivos, uno por causa</h2>
+    <div class="cuerpo">
+      <div class="col">
+        <table>
+          <tr><td><b>OE-01</b></td><td>Registrar cada prenda con su cliente, arreglo, precio y fecha, y poder consultarlo</td></tr>
+          <tr><td><b>OE-02</b></td><td>Saber en qué va cada prenda</td></tr>
+          <tr><td><b>OE-03</b></td><td>Avisarle al cliente cuando su ropa está lista</td></tr>
+          <tr><td><b>OE-04</b></td><td>Saber quién debe cuánto</td></tr>
+          <tr><td><b>OE-05</b></td><td>Ver lo atrasado y lo que nadie reclama</td></tr>
+          <tr><td><b>OE-06</b></td><td>Reconocer de quién es cada prenda</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="pie"><span>Objetivos específicos · SMART, con indicador y plazo</span><span class="numero">3</span></div>
+  </section>
+
+  <!-- 4 · Qué se entrega -->
+  <section class="lamina" data-notas="Esto es lo que está construido, desplegado y probado: nueve módulos y una app instalable. Señalar que Dinero y la app en el celular son lo último que entró.">
+    <p class="rotulo">Qué se entrega</p>
+    <h2>Nueve módulos, funcionando en producción</h2>
+    <div class="cuerpo">
+      <div class="col">
+        <ul class="lista">
+          <li><b>Clientes</b> · registrar, buscar, corregir</li>
+          <li><b>Órdenes y prendas</b> · con su arreglo, precio y fecha</li>
+          <li><b>Fotos</b> · hasta tres por prenda, desde la cámara</li>
+          <li><b>Estados</b> · de la prenda y de la orden, calculados</li>
+        </ul>
+      </div>
+      <div class="col">
+        <ul class="lista">
+          <li><b>Pagos</b> · abonos, saldo y anulación sin borrar</li>
+          <li><b>Avisos</b> · WhatsApp cuando la orden queda lista</li>
+          <li><b>Seguimiento</b> · atrasadas y sin reclamar</li>
+          <li><b>Dinero</b> · quién debe y cuánto entró</li>
+          <li><b>App en el celular</b> · APK firmado e instalable</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pie"><span>Alcance · cada módulo nace de un medio del árbol de objetivos</span><span class="numero">4</span></div>
+  </section>
+
+  <!-- 5 · Cómo se trabajó -->
+  <section class="lamina" data-notas="Scrum adaptado a un equipo de una persona: sprints de una semana, backlog priorizado con MoSCoW, estimación en puntos. Nada se programó sin su historia, sus criterios y su mockup. Más de 120 commits, cada uno explicando el porqué.">
+    <p class="rotulo">Cómo se trabajó</p>
+    <h2>Scrum, con una semana por sprint</h2>
+    <div class="cuerpo">
+      <div class="col">
+        <table>
+          <tr><th>Sprint</th><th>Qué salió de ahí</th></tr>
+          <tr><td><b>0</b></td><td>Repositorio, tablero, backlog, definición de terminado</td></tr>
+          <tr><td><b>1</b></td><td>Problema, objetivos, reglas, requisitos, historias, trazabilidad</td></tr>
+          <tr><td><b>2</b></td><td>Mockups, casos de uso, arquitectura, modelo de datos, plan de pruebas</td></tr>
+          <tr><td><b>3 y 4</b></td><td>El sistema construido, desplegado y probado</td></tr>
+          <tr><td><b>Cierre</b></td><td>Manuales, informe de pruebas, sustentación</td></tr>
+        </table>
+      </div>
+      <div class="col" style="flex:0 0 330px">
+        <div class="tarjeta">
+          <h4>Terminado quiere decir</h4>
+          <p>Cumple sus criterios, tiene pruebas que pasan, está integrado en <b>main</b>… y el aprendiz puede explicarlo sin leer.</p>
+        </div>
+      </div>
+    </div>
+    <div class="pie"><span>Plan de sprints y product backlog</span><span class="numero">5</span></div>
+  </section>
+
+  <!-- 6 · Demostración -->
+  <section class="lamina demo" data-notas="8 minutos. Desde el celular, con la sesión ya iniciada y la app abierta en Hoy.&#10;PASOS: 1) Hoy. 2) Registrar cliente: solo nombre y celular. 3) Nueva orden: prenda, arreglo, precio, fecha — RN-07 no deja fecha anterior a la recepción. 4) Foto con la cámara. 5) El número de orden que se escribe en la bolsa. 6) Registrar un abono: el saldo se calcula solo. 7) Prenda En proceso y luego Terminada: la orden pasa a Lista sola. 8) El aviso en Hoy, abrirlo en WhatsApp. 9) Entregar con saldo: el sistema pregunta. 10) Dinero: quién me debe y cuánto he recibido. 11) Atrasadas y sin reclamar. 12) Volver a Hoy.&#10;NO se demuestra el envío automático con el número real: requiere verificación ante Meta y tiene costo. Está declarado fuera del alcance.">
+    <p class="rotulo">Ahora, el sistema</p>
+    <h2>Demostración</h2>
+    <p>De recibir la prenda a cobrarla y avisar que está lista.</p>
+    <div class="pie" style="color:#cdd6f7"><span>proyectosena.online/taller</span><span class="numero">6</span></div>
+  </section>
+
+  <!-- 7 · Arquitectura -->
+  <section class="lamina" data-notas="Las reglas del negocio viven en el dominio, aisladas del framework; los casos de uso las orquestan; los controladores solo reciben y responden. Y no es una promesa: hay pruebas que fallan si alguien cruza una capa o consulta la base de datos desde un controlador.">
+    <p class="rotulo">Cómo está hecho</p>
+    <h2>Las reglas del negocio, aparte del framework</h2>
+    <div class="cuerpo">
+      <div class="col">
+        <ul class="lista numerada">
+          <li><b>Dominio</b> · las reglas del negocio, sin saber que existe internet</li>
+          <li><b>Aplicación</b> · los casos de uso, que orquestan</li>
+          <li><b>Http e Infraestructura</b> · reciben, responden y hablan con el mundo</li>
+        </ul>
+        <p style="margin-top:8px">Las flechas apuntan siempre hacia adentro: <span class="marca-flecha">Http → Aplicación → Dominio</span>.</p>
+      </div>
+      <div class="col" style="flex:0 0 380px">
+        <div class="tarjeta">
+          <h4>La separación se hace cumplir</h4>
+          <p>Una prueba recorre las capas y falla si alguien las cruza. Otra falla si un controlador consulta la base de datos. Laravel 13, PHP 8.4 y MySQL 8.4.</p>
+        </div>
+      </div>
+    </div>
+    <div class="pie"><span>Arquitectura · ADR-005 · pruebas de arquitectura con PHPat</span><span class="numero">7</span></div>
+  </section>
+
+  <!-- 8 · Decisiones -->
+  <section class="lamina" data-notas="Cada decisión está escrita con su contexto, sus opciones y sus consecuencias, el día que se tomó. La de WhatsApp es la más importante: era más fácil usar una API no oficial y habría funcionado en la demostración, pero pone en riesgo el número de la dueña, que es su herramienta de trabajo.">
+    <p class="rotulo">Las decisiones</p>
+    <h2>Lo que se escogió, y lo que se descartó</h2>
+    <div class="cuerpo">
+      <div class="col">
+        <table>
+          <tr><th>Decisión</th><th>Se escogió</th><th>Se descartó, y por qué</th></tr>
+          <tr><td><b>ADR-003</b><br>Avisos</td><td>API oficial de WhatsApp, con envío asistido de respaldo</td><td>Las APIs no oficiales: violan los términos y exponen el número de la dueña a que se lo bloqueen</td></tr>
+          <tr><td><b>ADR-002</b><br>Un taller o varios</td><td>Un taller, con los datos preparados para varios</td><td>Multi-negocio completo: no cabía en el plazo, y a medias es peor</td></tr>
+          <tr><td><b>ADR-006</b><br>El celular</td><td>Web instalable más un APK firmado</td><td>App nativa: otro lenguaje, otra base de código, mismo resultado</td></tr>
+          <tr><td><b>ADR-000</b><br>El prototipo</td><td>Rehacer desde el análisis</td><td>Seguirlo: no tenía requisitos ni pruebas detrás</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="pie"><span>Ocho decisiones de arquitectura, escritas el día que se tomaron</span><span class="numero">8</span></div>
+  </section>
+
+  <!-- 9 · Datos -->
+  <section class="lamina" data-notas="Diez tablas normalizadas hasta tercera forma normal, con su diccionario y una sola excepción documentada (ADR-004). De los clientes solo se guarda nombre y celular: nada más hace falta. La política de tratamiento de datos está publicada y se lee sin iniciar sesión, por la Ley 1581 de 2012. Y una prueba comprueba que pedir el dato de otro negocio responde «no existe».">
+    <p class="rotulo">Los datos y su cuidado</p>
+    <h2>Lo mínimo, y bien guardado</h2>
+    <div class="cuerpo">
+      <div class="col">
+        <div class="tarjeta"><h4>Solo nombre y celular</h4><p>Del cliente no se pide documento, ni dirección, ni correo: nada que el taller no necesite.</p></div>
+        <div class="tarjeta"><h4>Política publicada</h4><p>Se lee sin iniciar sesión, como exige la Ley 1581 de 2012.</p></div>
+      </div>
+      <div class="col">
+        <div class="tarjeta"><h4>Cada dato tiene dueño</h4><p>El filtro por negocio está en el modelo, no en cada consulta: no se puede olvidar. Una prueba recorre todas las rutas y comprueba que el dato ajeno responde «no existe».</p></div>
+        <div class="tarjeta"><h4>Diez tablas, en tercera forma normal</h4><p>Con su diccionario de datos y una excepción documentada.</p></div>
+      </div>
+    </div>
+    <div class="pie"><span>Modelo de datos · especificación de seguridad · ADR-004</span><span class="numero">9</span></div>
+  </section>
+
+  <!-- 10 · Despliegue -->
+  <section class="lamina" data-notas="Corre en un servidor propio con dominio y HTTPS. Seis contenedores: el sistema, el trabajador de avisos, el programador de tareas, la base de datos y el canal de WhatsApp. Respaldo diario, con restauración probada en 7 segundos contra un máximo de una hora. Si el trabajador de avisos se cae, el servicio lo levanta solo: se probó tumbándolo a propósito, volvió en menos de veinte segundos y ningún aviso se perdió.">
+    <p class="rotulo">Dónde vive</p>
+    <h2>En producción, no en mi computador</h2>
+    <div class="cuerpo">
+      <div class="col">
+        <ul class="lista">
+          <li><b>Dominio propio y HTTPS</b>, con certificado válido</li>
+          <li><b>Seis contenedores</b>: sistema, cola de avisos, programador, base de datos y canal de WhatsApp</li>
+          <li><b>Respaldo diario automático</b>, guardado fuera del servidor</li>
+          <li><b>Restauración probada: 7 segundos</b>, contra un máximo de una hora</li>
+        </ul>
+      </div>
+      <div class="col" style="flex:0 0 360px">
+        <div class="tarjeta">
+          <h4>Se cae y se levanta solo</h4>
+          <p>Se tumbó el trabajador de avisos a propósito: volvió en menos de <b>veinte segundos</b>, y los avisos en espera no se perdieron, porque la cola vive en la base de datos.</p>
+        </div>
+      </div>
+    </div>
+    <div class="pie"><span>Despliegue y operación · PM-02 y PM-07</span><span class="numero">10</span></div>
+  </section>
+
+  <!-- 11 · Calidad -->
+  <section class="lamina" data-notas="Las pruebas no se escribieron al final: cada historia se dio por terminada solo con ellas. Corren en cada envío al repositorio, junto con el análisis estático, el estilo, la revisión de dependencias vulnerables y la búsqueda de secretos en el historial. Si algo falla, el cambio no entra. Y los diez defectos están anotados con su causa: dos los encontró la prueba de seguridad a mano, y uno lo causó la corrección de otro. Por eso las pruebas manuales existen.">
+    <p class="rotulo">Cómo se sabe que funciona</p>
+    <h2>Se prueba solo, en cada cambio</h2>
+    <div class="cuerpo">
+      <div class="col">
+        <div class="cifras">
+          <div class="cifra"><span class="n">254</span><span class="q">pruebas automáticas, todas pasan</span></div>
+          <div class="cifra"><span class="n">1.309</span><span class="q">comprobaciones dentro de ellas</span></div>
+          <div class="cifra buena"><span class="n">26/26</span><span class="q">historias obligatorias verificadas</span></div>
+          <div class="cifra"><span class="n">43/44</span><span class="q">reglas de negocio con prueba</span></div>
+          <div class="cifra"><span class="n">8</span><span class="q">protocolos de prueba manual</span></div>
+          <div class="cifra ojo"><span class="n">10 · 0</span><span class="q">defectos encontrados · abiertos</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="pie"><span>Informe de pruebas · cada envío corre además estilo, análisis estático y revisión de dependencias</span><span class="numero">11</span></div>
+  </section>
+
+  <!-- 12 · Documentación navegable -->
+  <section class="lamina" data-notas="La documentación no son veinte archivos sueltos. Es un sitio donde cada causa, requisito, regla, historia, criterio, caso de uso, pantalla, decisión y prueba tiene su página, y cada código es un enlace: de la historia a su regla, de la regla a la línea de código que la hace cumplir, y de ahí a la prueba. Si alcanza el tiempo, mostrar el recorrido guiado en vivo.">
+    <p class="rotulo">La documentación</p>
+    <h2>Navegable, no una pila de archivos</h2>
+    <div class="cuerpo">
+      <div class="col">
+        <p style="max-width:34ch">Cada código es un enlace. De una historia se llega a su regla; de la regla, a la línea del código que la hace cumplir; de ahí, a la prueba que lo comprueba. Y al revés.</p>
+        <p style="max-width:34ch;font-size:21px">Incluye un <b>recorrido guiado</b> que va del problema a la prueba en once pasos, y un glosario para las abreviaturas.</p>
+      </div>
+      <div class="col">
+        <div class="cifras" style="grid-template-columns:repeat(2,1fr)">
+          <div class="cifra"><span class="n">44</span><span class="q">reglas de negocio</span></div>
+          <div class="cifra"><span class="n">125</span><span class="q">criterios de aceptación</span></div>
+          <div class="cifra"><span class="n">35</span><span class="q">casos de uso</span></div>
+          <div class="cifra"><span class="n">32</span><span class="q">diagramas</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="pie"><span>aryannext.github.io/El-taller-ines</span><span class="numero">12</span></div>
+  </section>
+
+  <!-- 13 · Lo que quedó fuera -->
+  <section class="lamina" data-notas="El plan permitía recortar historias Should y Could si no alcanzaba la capacidad, con la condición de declararlas. Siete quedaron fuera; ninguna es obligatoria, y de cada una se explica cómo se resuelve entre tanto. Una sola regla quedó sin prueba, RN-44, porque pertenece a una de ellas. Decirlo sin que lo pregunten: faltan dos pruebas manuales que necesitan a otras personas, y están agendadas.">
+    <p class="rotulo">Lo que quedó fuera</p>
+    <h2>Siete historias, declaradas con su motivo</h2>
+    <div class="cuerpo">
+      <div class="col">
+        <ul class="lista">
+          <li>Ninguna es <b>obligatoria</b>: todas son <i>Should</i> o <i>Could</i></li>
+          <li>De cada una se explica <b>cómo se resuelve entre tanto</b></li>
+          <li>Dejan <b>una sola regla sin prueba</b>, RN-44</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="tarjeta">
+          <h4>Y lo que falta por probar</h4>
+          <p>Dos pruebas manuales necesitan a otras personas: la de usabilidad con compañeros y la de instalación hecha por alguien más. Están agendadas, y el informe las marca como pendientes.</p>
+        </div>
+      </div>
+    </div>
+    <div class="pie"><span>Informe de pruebas · sección de historias no construidas</span><span class="numero">13</span></div>
+  </section>
+
+  <!-- 14 · Lo que sigue -->
+  <section class="lamina" data-notas="Tres pasos: implantación con acompañamiento la primera semana; medir el impacto después, con el sistema en uso; y sostenerlo, que es lo que resuelve el plan de negocio. El sistema es gratuito para la usuaria.">
+    <p class="rotulo">Lo que sigue</p>
+    <h2>El sistema está listo; el impacto se mide después</h2>
+    <div class="cuerpo">
+      <div class="col">
+        <ul class="lista numerada">
+          <li><b>Implantación.</b> La dueña lo usa con sus clientes reales, con acompañamiento la primera semana.</li>
+          <li><b>Medir el impacto.</b> Menos prendas perdidas y menos cobros olvidados no se pueden medir en 30 días: se miden con el sistema en uso.</li>
+          <li><b>Sostenerlo.</b> Es gratuito para la usuaria; el plan de negocio resuelve el servidor y el costo por mensaje.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pie"><span>Indicadores de impacto definidos, medibles después de la implantación</span><span class="numero">14</span></div>
+  </section>
+
+  <!-- 15 · Cierre -->
+  <section class="lamina oscura" data-notas="La frase de cierre, mirando al jurado, sin leer: del árbol de problemas a la línea de código, y de vuelta, todo está trazado y probado. Y gracias.">
+    <div class="orden-fondo">#0042</div>
+    <p class="rotulo">Gracias</p>
+    <h2 style="max-width:22ch">Del árbol de problemas a la línea de código, y de vuelta.</h2>
+    <div class="enlaces">
+      <div><small>El sistema</small><span>proyectosena.online/taller</span></div>
+      <div><small>La documentación</small><span>aryannext.github.io/El-taller-ines</span></div>
+      <div><small>El código</small><span>github.com/Aryannext/El-taller-ines</span></div>
+    </div>
+    <div class="pie"><span>Cristian Melo</span><span class="numero">15</span></div>
+  </section>
+
+</div>
+
+<div id="reloj">00:00<small id="plan">Plan: 20 minutos</small></div>
+
+<div id="notas"><h5>Lo que se dice · tecla N para ocultar</h5><div id="notas-texto"></div></div>
+
+<div id="indice"><h5>Índice · toca una para ir · tecla G para cerrar</h5><ol id="indice-lista"></ol></div>
+
+<div id="ayuda">→ avanza · ← vuelve · N notas · T cronómetro · G índice · F pantalla completa</div>
+
+<script>
+  const laminas = Array.from(document.querySelectorAll('.lamina'));
+  const escenario = document.getElementById('escenario');
+  const avance = document.getElementById('avance');
+  const notas = document.getElementById('notas');
+  const notasTexto = document.getElementById('notas-texto');
+  const indice = document.getElementById('indice');
+  const reloj = document.getElementById('reloj');
+  let actual = 0, cronometro = null, segundos = 0;
+
+  // Los minutos previstos para cada lámina, del reparto de tiempo de sustentacion.md
+  const MINUTO_PREVISTO = [0, 0.5, 1.5, 3, 4, 5, 13, 14, 15, 16, 16.5, 17.5, 18, 19, 19.5];
+
+  function ajustar() {
+    const escala = Math.min(window.innerWidth / 1280, (window.innerHeight - (notas.classList.contains('visible') ? window.innerHeight * 0.42 : 0)) / 720);
+    escenario.style.transform = 'translate(-50%, -50%) scale(' + escala + ')';
+  }
+
+  function mostrar(i) {
+    actual = Math.max(0, Math.min(laminas.length - 1, i));
+    laminas.forEach((l, n) => l.classList.toggle('activa', n === actual));
+    avance.style.width = ((actual + 1) / laminas.length * 100) + '%';
+    notasTexto.innerHTML = (laminas[actual].dataset.notas || '')
+      .split('\n').map(p => '<p style="margin:0 0 6px">' + p + '</p>').join('');
+    marcarTiempo();
+    // replaceState y no location.hash: así la tecla Atrás no recorre lámina por lámina
+    try { history.replaceState(null, '', '#' + (actual + 1)); } catch (e) {}
+  }
+
+  function marcarTiempo() {
+    const previsto = MINUTO_PREVISTO[actual] ?? 0;
+    const minutos = segundos / 60;
+    document.getElementById('plan').textContent =
+      'Lámina ' + (actual + 1) + ' · prevista en el minuto ' + previsto;
+    reloj.classList.toggle('tarde', cronometro !== null && minutos > previsto + 2);
+  }
+
+  function pintarReloj() {
+    const m = String(Math.floor(segundos / 60)).padStart(2, '0');
+    const s = String(segundos % 60).padStart(2, '0');
+    reloj.childNodes[0].nodeValue = m + ':' + s;
+    marcarTiempo();
+  }
+
+  document.addEventListener('keydown', e => {
+    const t = e.key;
+    if (t === 'ArrowRight' || t === ' ' || t === 'PageDown') { mostrar(actual + 1); e.preventDefault(); }
+    else if (t === 'ArrowLeft' || t === 'PageUp') { mostrar(actual - 1); e.preventDefault(); }
+    else if (t === 'Home') mostrar(0);
+    else if (t === 'End') mostrar(laminas.length - 1);
+    else if (t === 'n' || t === 'N') { notas.classList.toggle('visible'); ajustar(); }
+    else if (t === 'g' || t === 'G') indice.classList.toggle('visible');
+    else if (t === 'f' || t === 'F') {
+      if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen();
+    }
+    else if (t === 't' || t === 'T') {
+      reloj.classList.add('visible');
+      if (cronometro) { clearInterval(cronometro); cronometro = null; }
+      else { cronometro = setInterval(() => { segundos++; pintarReloj(); }, 1000); }
+    }
+    else if (t === 'r' || t === 'R') { segundos = 0; pintarReloj(); }
+    else if (t === 'Escape') { indice.classList.remove('visible'); notas.classList.remove('visible'); ajustar(); }
+  });
+
+  // Tocar o hacer clic: mitad derecha avanza, mitad izquierda vuelve
+  escenario.addEventListener('click', e => {
+    const x = e.clientX / window.innerWidth;
+    mostrar(x > 0.35 ? actual + 1 : actual - 1);
+  });
+
+  // Deslizar en pantalla táctil
+  let inicioX = null;
+  document.addEventListener('touchstart', e => { inicioX = e.touches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend', e => {
+    if (inicioX === null) return;
+    const dx = e.changedTouches[0].clientX - inicioX;
+    if (Math.abs(dx) > 50) mostrar(actual + (dx < 0 ? 1 : -1));
+    inicioX = null;
+  }, { passive: true });
+
+  // Índice
+  document.getElementById('indice-lista').innerHTML = laminas
+    .map((l, i) => '<li data-i="' + i + '">' + (l.querySelector('h2')?.textContent || 'Lámina ' + (i + 1)) + '</li>').join('');
+  document.getElementById('indice-lista').addEventListener('click', e => {
+    const li = e.target.closest('li');
+    if (li) { mostrar(Number(li.dataset.i)); indice.classList.remove('visible'); }
+  });
+
+  window.addEventListener('resize', ajustar);
+  ajustar();
+  mostrar(Number(location.hash.replace('#', '')) - 1 || 0);
+</script>
+</body>
+</html>

@@ -4,6 +4,20 @@
 
 Este documento es todo lo que se necesita para sustentar: qué se dice, en qué orden, con qué tiempo, qué se muestra en vivo, qué hacer si algo falla y qué responder cuando pregunten. No hay que leer ningún otro documento el día de la sustentación.
 
+**Las diapositivas están en [presentacion.html](presentacion.html).** Se abre con doble clic: no necesita internet, ni servidor, ni programa aparte, y se proyecta desde cualquier computador.
+
+| Tecla | Qué hace |
+| --- | --- |
+| **→** o espacio | Avanza · **←** vuelve |
+| **N** | Muestra u oculta **lo que se dice** en esa lámina, debajo de la diapositiva. Para ensayar, no para proyectar |
+| **T** | Cronómetro. Avisa en rojo si la lámina va más de dos minutos tarde respecto al plan · **R** lo reinicia |
+| **G** | Índice, para saltar a cualquier lámina si preguntan por algo |
+| **F** | Pantalla completa |
+
+Para el PDF de respaldo: imprimir con `Ctrl+P`, hoja horizontal y sin márgenes; cada lámina sale en su página.
+
+> Son **15 láminas**, numeradas igual aquí y allá. La 6 es la de «Demostración»: queda en pantalla mientras se muestra el sistema, y sus notas traen los doce pasos por si se pierde el hilo.
+
 ## Contenido
 
 1. [Las tres ideas que tienen que quedar](#1-las-tres-ideas-que-tienen-que-quedar)
@@ -33,10 +47,10 @@ Para una sustentación de **20 minutos** más preguntas. Si dan 30, se alarga la
 | --- | --- | --- |
 | 0 – 3 | El problema y de dónde salió | 1 – 3 |
 | 3 – 5 | Qué se entrega | 4 – 5 |
-| 5 – 13 | **Demostración en vivo** | pantalla del sistema |
-| 13 – 16 | Cómo está hecho y por qué | 6 – 9 |
-| 16 – 18 | Cómo se sabe que funciona | 10 – 11 |
-| 18 – 20 | Lo que quedó fuera, lo que sigue y el cierre | 12 – 14 |
+| 5 – 13 | **Demostración en vivo** | 6, y el sistema en pantalla |
+| 13 – 16 | Cómo está hecho y por qué | 7 – 10 |
+| 16 – 18 | Cómo se sabe que funciona | 11 – 12 |
+| 18 – 20 | Lo que quedó fuera, lo que sigue y el cierre | 13 – 15 |
 
 **La demostración es el corazón: ocupa casi la mitad.** El resto sostiene lo que ahí se ve.
 
@@ -91,9 +105,13 @@ Cada una trae **qué se muestra**, **qué se dice** (no de memoria: la idea) y *
 
 **De dónde sale:** [plan de sprints](../00-scrum/plan-de-sprints.md) y [product backlog](../00-scrum/product-backlog.md).
 
-> **Aquí empieza la demostración.** No se vuelve a las diapositivas hasta que termine.
+### 6 · Demostración
 
-### 6 · Cómo está hecho
+**Se muestra:** una lámina azul que solo dice «Demostración», para que el proyector no quede con algo viejo en pantalla mientras se muestra el sistema. Sus notas traen los doce pasos del guion.
+
+**Se dice:** «Ahora el sistema, desde el celular, tal como lo usa la dueña.» Y se pasa al guion de la sección 4. No se vuelve a las diapositivas hasta que termine.
+
+### 7 · Cómo está hecho
 
 **Se muestra:** el diagrama de la arquitectura en capas: Dominio ← Aplicación ← Http / Infraestructura.
 
@@ -101,7 +119,7 @@ Cada una trae **qué se muestra**, **qué se dice** (no de memoria: la idea) y *
 
 **De dónde sale:** [arquitectura](../03-diseno/arquitectura/README.md), [ADR-005](../03-diseno/adr/ADR-005-arquitectura-en-capas.md), y las pruebas `ControladoresSinConsultasTest` y las reglas de capas con PHPat.
 
-### 7 · Las decisiones que hubo que tomar
+### 8 · Las decisiones que hubo que tomar
 
 **Se muestra:** cuatro decisiones con su alternativa descartada.
 
@@ -114,7 +132,7 @@ Cada una trae **qué se muestra**, **qué se dice** (no de memoria: la idea) y *
 
 **Se dice:** cada una está escrita con su contexto, sus opciones y sus consecuencias, el día que se tomó. La de WhatsApp es la más importante: era más fácil usar una API no oficial y habría funcionado en la demostración, pero pone en riesgo el número de la dueña, que es su herramienta de trabajo.
 
-### 8 · Los datos y su cuidado
+### 9 · Los datos y su cuidado
 
 **Se muestra:** el modelo de datos resumido y las tres medidas de protección.
 
@@ -122,7 +140,7 @@ Cada una trae **qué se muestra**, **qué se dice** (no de memoria: la idea) y *
 
 **De dónde sale:** [modelo de datos](../03-diseno/modelo-de-datos/README.md), [seguridad](../04-especificacion-tecnica/06-seguridad.md), `AislamientoEntreNegociosTest`.
 
-### 9 · Dónde vive el sistema
+### 10 · Dónde vive el sistema
 
 **Se muestra:** el diagrama de despliegue: el servidor, los contenedores y el celular.
 
@@ -130,7 +148,7 @@ Cada una trae **qué se muestra**, **qué se dice** (no de memoria: la idea) y *
 
 **De dónde sale:** [despliegue y operación](../04-especificacion-tecnica/07-despliegue-y-operacion.md), PM-02 y PM-07.
 
-### 10 · Cómo se sabe que funciona
+### 11 · Cómo se sabe que funciona
 
 **Se muestra:** los números, grandes y pocos.
 
@@ -149,7 +167,7 @@ Cada una trae **qué se muestra**, **qué se dice** (no de memoria: la idea) y *
 
 **De dónde sale:** [informe de pruebas](../05-pruebas/informe-de-pruebas.md).
 
-### 11 · La documentación es navegable
+### 12 · La documentación es navegable
 
 **Se muestra:** el portal abierto, en la página de una historia de usuario, señalando cómo cada código es un enlace.
 
@@ -159,7 +177,7 @@ Cada una trae **qué se muestra**, **qué se dice** (no de memoria: la idea) y *
 
 **De dónde sale:** [aryannext.github.io/El-taller-ines](https://aryannext.github.io/El-taller-ines/).
 
-### 12 · Lo que quedó fuera, y por qué
+### 13 · Lo que quedó fuera, y por qué
 
 **Se muestra:** las siete historias no construidas, con su motivo en una línea.
 
@@ -167,7 +185,7 @@ Cada una trae **qué se muestra**, **qué se dice** (no de memoria: la idea) y *
 
 **Se dice también, sin que lo pregunten:** faltan dos pruebas manuales que necesitan a otras personas —la de usabilidad con compañeros y la de instalación por alguien más—, y están agendadas.
 
-### 13 · Lo que sigue
+### 14 · Lo que sigue
 
 **Se muestra:** tres pasos.
 
@@ -175,7 +193,7 @@ Cada una trae **qué se muestra**, **qué se dice** (no de memoria: la idea) y *
 2. **Medir el impacto:** los indicadores no se pueden medir en 30 días; se miden después, con el sistema en uso.
 3. **Sostenerlo:** el sistema es gratuito para la usuaria. El plan de negocio resuelve cómo se cubren el servidor y el costo por mensaje de la API oficial.
 
-### 14 · Cierre
+### 15 · Cierre
 
 **Se muestra:** las tres direcciones, grandes y legibles desde el fondo del salón.
 
@@ -285,7 +303,7 @@ Ejecutar las pruebas manuales antes, no al final. Las dos últimas encontraron d
 - [ ] La app del celular abre y la sesión está iniciada
 - [ ] El celular queda cargado, sin modo avión y sin notificaciones privadas a la vista
 - [ ] El portal de documentación abre: probar el recorrido guiado
-- [ ] Las diapositivas están exportadas también a PDF, por si el computador del salón no abre el formato original
+- [ ] `presentacion.html` abre bien en el computador que se va a usar, y está exportada a PDF por si acaso
 - [ ] Las tres direcciones del cierre, escritas en un papel por si falla todo
 
 ### El día
