@@ -38,6 +38,8 @@ Route::middleware(['auth', 'auth.session', 'cache.headers:no_store;private'])->g
     Route::get('/clientes', [ClienteController::class, 'buscar'])->name('clientes.buscar');
     Route::get('/clientes/nuevo', [ClienteController::class, 'nuevo'])->name('clientes.nuevo');
     Route::post('/clientes', [ClienteController::class, 'guardar'])->name('clientes.guardar');
+    // HU-10: registrar al cliente nuevo sin perder lo escrito en la orden
+    Route::post('/clientes/desde-orden', [ClienteController::class, 'desdeOrden'])->name('clientes.desde-orden');
     Route::get('/clientes/{cliente}', [ClienteController::class, 'ficha'])->whereNumber('cliente')->name('clientes.ficha');
     Route::get('/clientes/{cliente}/editar', [ClienteController::class, 'editar'])->whereNumber('cliente')->name('clientes.editar');
     Route::put('/clientes/{cliente}', [ClienteController::class, 'corregir'])->whereNumber('cliente')->name('clientes.corregir');

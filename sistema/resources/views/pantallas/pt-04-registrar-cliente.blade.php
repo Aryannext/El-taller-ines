@@ -20,7 +20,15 @@
     @if ($corrigiendo)
       @method('PUT')
     @endif
+    @if ($desdeLaOrden ?? false)
+      {{-- HU-10: se llegó desde una orden a medio llenar --}}
+      <input type="hidden" name="desde" value="orden">
+    @endif
     <main class="contenido">
+      @if ($desdeLaOrden ?? false)
+        <div class="banda banda-info" role="status"><i class="i i-check"></i><span>Lo que escribiste en la orden se conserva.</span></div>
+      @endif
+
       <x-campo nombre="nombre" etiqueta="Nombre" :valor="$cliente?->nombre" autocomplete="name" maxlength="120" required />
       <x-campo nombre="celular" etiqueta="Celular" :valor="$cliente?->celular" inputmode="numeric" autocomplete="tel-national" required
         ayuda="A este número le llegan los avisos por WhatsApp." />

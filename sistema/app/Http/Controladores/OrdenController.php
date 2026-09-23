@@ -66,6 +66,12 @@ class OrdenController
     {
         $cliente = $solicitud->query('cliente');
 
+        // HU-10: se volvió de registrar al cliente nuevo; lo que estaba escrito vuelve al formulario (CA-10.1)
+        $borrador = $solicitud->session()->get(ClienteController::ORDEN_EN_CURSO);
+        if (is_array($borrador) && $solicitud->old() === []) {
+            $solicitud->session()->flashInput($borrador);
+        }
+
         return view('pantallas.pt-06-nueva-orden', [
             'clientes' => $buscarClientes->listar(''),
             'clienteElegido' => is_string($cliente) && ctype_digit($cliente) ? (int) $cliente : null,
@@ -75,6 +81,7 @@ class OrdenController
             'hoy' => $reloj->hoy(),
             // Identifica este envío: dos toques seguidos no registran dos órdenes (RNF-14)
             'token' => (string) Str::uuid(),
+            'vengoDeRegistrarCliente' => is_array($borrador),
         ]);
     }
 
@@ -92,6 +99,9 @@ class OrdenController
             // RN-28: el abono supera el valor de la orden. No queda ni la orden ni el pago (CA-24.2)
             return back()->withInput()->withErrors([$regla->campo ?? 'abono' => $regla->mensajeParaUsuaria]);
         }
+
+        // Lo escrito ya está guardado en la orden: la sesión no tiene por qué seguir guardándolo (HU-10)
+        $solicitud->session()->forget(ClienteController::ORDEN_EN_CURSO);
 
         return redirect()->route('ordenes.guardada', $orden);
     }

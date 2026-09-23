@@ -32,7 +32,8 @@
             <span class="mensaje-error" id="error-cliente_id"><i class="i i-alerta"></i>{{ $message }}</span>
           @enderror
         </div>
-        <a class="btn btn-texto alinear-inicio" href="{{ route('clientes.nuevo') }}"><i class="i i-mas i-sm"></i>El cliente es nuevo</a>
+        {{-- HU-10: manda lo que ya se escribió en la orden, para no perderlo mientras se registra al cliente (02-rutas) --}}
+        <button class="btn btn-texto alinear-inicio" type="submit" formaction="{{ route('clientes.desde-orden') }}" formnovalidate><i class="i i-mas i-sm"></i>El cliente es nuevo</button>
       </section>
 
       <x-campo nombre="fecha_entrega_acordada" etiqueta="Fecha de entrega acordada" tipo="date"
@@ -50,6 +51,11 @@
           @include('pantallas.partes.prenda', ['indice' => '__INDICE__', 'prenda' => []])
         </template>
       </section>
+
+      @if ($vengoDeRegistrarCliente)
+        {{-- Las fotos no caben en la sesión: es lo único que hay que volver a tomar (02-rutas) --}}
+        <p class="texto-2 pequeno">Lo que habías escrito se conservó. Las fotos sí hay que volver a tomarlas.</p>
+      @endif
 
       {{-- HU-24: el abono que dan al dejar la ropa, en el mismo registro, para no hacer dos pasos con el cliente enfrente --}}
       @if ($metodos->isNotEmpty())
